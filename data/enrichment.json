@@ -1,0 +1,40 @@
+{
+  "_instrucoes": {
+    "descricao": "Enriquecimento manual dos produtos: gênero, famílias olfativas, ocasiões e intensidade NÃO existem no Bling e devem ser preenchidos aqui. Este arquivo NUNCA é sobrescrito pelo sync.",
+    "comoUsar": "Adicione uma entrada em 'produtos' usando como chave o ID do produto no Bling (recomendado) OU o código/SKU. Produtos sem entrada aqui continuam visíveis no catálogo, mas ficam fora dos filtros de família/ocasião/gênero, do quiz e das recomendações do consultor.",
+    "camposValidos": {
+      "genero": ["F", "M", "U"],
+      "familias": ["floral", "citrico", "amadeirado", "doce", "oriental", "fresco"],
+      "ocasioes": ["trabalho", "dia", "noite", "esporte"],
+      "intensidade": "1 (leve) | 2 (moderada) | 3 (marcante)"
+    },
+    "exemplo": {
+      "12345678901": {
+        "genero": "F",
+        "familias": ["floral", "doce"],
+        "ocasioes": ["dia", "noite"],
+        "intensidade": 2
+      }
+    }
+  },
+  "produtos": {
+    "demo-01": { "genero": "F", "familias": ["floral"], "ocasioes": ["dia", "trabalho"], "intensidade": 2 },
+    "demo-02": { "genero": "F", "familias": ["oriental"], "ocasioes": ["noite"], "intensidade": 3 },
+    "demo-03": { "genero": "M", "familias": ["amadeirado"], "ocasioes": ["trabalho", "noite"], "intensidade": 2 },
+    "demo-04": { "genero": "U", "familias": ["citrico"], "ocasioes": ["dia", "esporte"], "intensidade": 1 },
+    "demo-05": { "genero": "F", "familias": ["doce"], "ocasioes": ["dia", "noite"], "intensidade": 2 },
+    "demo-06": { "genero": "M", "familias": ["amadeirado"], "ocasioes": ["noite"], "intensidade": 3 },
+    "demo-07": { "genero": "F", "familias": ["floral"], "ocasioes": ["dia", "trabalho"], "intensidade": 1 },
+    "demo-08": { "genero": "U", "familias": ["oriental"], "ocasioes": ["noite"], "intensidade": 3 },
+    "demo-09": { "genero": "U", "familias": ["fresco"], "ocasioes": ["esporte", "dia"], "intensidade": 1 },
+    "demo-10": { "genero": "M", "familias": ["amadeirado"], "ocasioes": ["noite", "trabalho"], "intensidade": 3 },
+    "demo-11": { "genero": "F", "familias": ["floral"], "ocasioes": ["dia"], "intensidade": 1 },
+    "demo-12": { "genero": "F", "familias": ["doce"], "ocasioes": ["noite", "dia"], "intensidade": 2 },
+    "demo-13": { "genero": "U", "familias": ["citrico"], "ocasioes": ["dia", "trabalho"], "intensidade": 1 },
+    "demo-14": { "genero": "U", "familias": ["amadeirado"], "ocasioes": ["trabalho", "noite"], "intensidade": 2 },
+    "demo-15": { "genero": "F", "familias": ["floral"], "ocasioes": ["noite"], "intensidade": 2 },
+    "demo-16": { "genero": "M", "familias": ["fresco"], "ocasioes": ["esporte", "trabalho"], "intensidade": 1 },
+    "demo-17": { "genero": "U", "familias": ["oriental"], "ocasioes": ["noite", "trabalho"], "intensidade": 2 },
+    "demo-18": { "genero": "U", "familias": ["doce"], "ocasioes": ["noite"], "intensidade": 3 }
+  }
+}

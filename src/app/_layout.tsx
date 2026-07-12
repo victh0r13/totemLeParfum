@@ -1,18 +1,74 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from 'expo-router';
+import {
+  CormorantGaramond_500Medium,
+  CormorantGaramond_500Medium_Italic,
+  CormorantGaramond_600SemiBold,
+} from '@expo-google-fonts/cormorant-garamond';
+import {
+  Manrope_400Regular,
+  Manrope_500Medium,
+  Manrope_600SemiBold,
+  Manrope_700Bold,
+  useFonts,
+} from '@expo-google-fonts/manrope';
+import { Stack } from 'expo-router';
+import * as ScreenOrientation from 'expo-screen-orientation';
 import * as SplashScreen from 'expo-splash-screen';
-import { useColorScheme } from 'react-native';
+import { StatusBar } from 'expo-status-bar';
+import { useKeepAwake } from 'expo-keep-awake';
+import React, { useEffect } from 'react';
+import { Platform } from 'react-native';
 
-import { AnimatedSplashOverlay } from '@/components/animated-icon';
-import AppTabs from '@/components/app-tabs';
+import { RestartButton } from '@/components/RestartButton';
+import { ToastProvider } from '@/components/ToastProvider';
+import { CatalogProvider } from '@/data/catalogStore';
+import { KioskProvider } from '@/kiosk/KioskProvider';
+import { colors } from '@/theme/theme';
 
 SplashScreen.preventAutoHideAsync();
 
-export default function TabLayout() {
-  const colorScheme = useColorScheme();
+export default function RootLayout() {
+  // Totem: a tela nunca dorme enquanto o app está aberto.
+  useKeepAwake();
+
+  const [fontsLoaded] = useFonts({
+    CormorantGaramond_500Medium,
+    CormorantGaramond_500Medium_Italic,
+    CormorantGaramond_600SemiBold,
+    Manrope_400Regular,
+    Manrope_500Medium,
+    Manrope_600SemiBold,
+    Manrope_700Bold,
+  });
+
+  useEffect(() => {
+    // Trava a orientação em retrato (modo quiosque).
+    if (Platform.OS !== 'web') {
+      ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT_UP).catch(() => {});
+    }
+  }, []);
+
+  useEffect(() => {
+    if (fontsLoaded) SplashScreen.hideAsync();
+  }, [fontsLoaded]);
+
+  if (!fontsLoaded) return null;
+
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <AnimatedSplashOverlay />
-      <AppTabs />
-    </ThemeProvider>
+    <CatalogProvider>
+      <ToastProvider>
+        <KioskProvider>
+          <StatusBar style="dark" hidden />
+          <Stack
+            screenOptions={{
+              headerShown: false,
+              contentStyle: { backgroundColor: colors.bg },
+              animation: 'fade_from_bottom',
+              animationDuration: 300,
+            }}
+          />
+          <RestartButton />
+        </KioskProvider>
+      </ToastProvider>
+    </CatalogProvider>
   );
 }

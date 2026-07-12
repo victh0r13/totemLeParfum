@@ -1,0 +1,187 @@
+{
+  "generatedAt": "2026-07-12T00:00:00.000Z",
+  "source": "demo",
+  "aviso": "Catálogo de demonstração. Rode `npm run sync` na pasta /sync para substituí-lo pelos produtos reais do Bling.",
+  "produtos": [
+    {
+      "id": "demo-01",
+      "codigo": "DEMO-AURORE",
+      "nome": "Aurore",
+      "marca": "Maison Lumière",
+      "preco": 289,
+      "estoque": 8,
+      "imagem": null,
+      "descricao": "Um floral luminoso que abre com pétalas de peônia e jasmim, sobre um fundo cremoso de almíscar branco. Elegante e versátil, acompanha do café da manhã à reunião importante."
+    },
+    {
+      "id": "demo-02",
+      "codigo": "DEMO-NUIT-AMBREE",
+      "nome": "Nuit Ambrée",
+      "marca": "Maison Lumière",
+      "preco": 459,
+      "estoque": 2,
+      "imagem": null,
+      "descricao": "Âmbar profundo, baunilha negra e um toque de incenso. Uma fragrância noturna, envolvente e inesquecível — feita para grandes ocasiões."
+    },
+    {
+      "id": "demo-03",
+      "codigo": "DEMO-VETIVER",
+      "nome": "Vétiver Sauvage",
+      "marca": "Atelier Brumes",
+      "preco": 379,
+      "estoque": 6,
+      "imagem": null,
+      "descricao": "Vetiver haitiano cru encontra cedro seco e pimenta rosa. Sofisticado sem esforço, é a assinatura de quem prefere falar baixo e ser lembrado."
+    },
+    {
+      "id": "demo-04",
+      "codigo": "DEMO-CITRUS-RIVIERA",
+      "nome": "Citrus Riviera",
+      "marca": "Casa Solana",
+      "preco": 219,
+      "estoque": 12,
+      "imagem": null,
+      "descricao": "Bergamota, limão siciliano e flor de laranjeira em uma explosão solar. Leve como uma manhã à beira-mar, perfeito para o calor."
+    },
+    {
+      "id": "demo-05",
+      "codigo": "DEMO-DOCE-VANILLE",
+      "nome": "Doce Vanille",
+      "marca": "Casa Solana",
+      "preco": 249,
+      "estoque": 9,
+      "imagem": null,
+      "descricao": "Baunilha de Madagascar, caramelo salgado e fava tonka. Um abraço em forma de perfume — aconchegante, doce na medida."
+    },
+    {
+      "id": "demo-06",
+      "codigo": "DEMO-BOIS-NOIR",
+      "nome": "Bois Noir",
+      "marca": "Atelier Brumes",
+      "preco": 529,
+      "estoque": 5,
+      "imagem": null,
+      "descricao": "Madeiras escuras, couro e um fio de fumaça. Intenso, magnético, para noites em que a discrição não é o objetivo."
+    },
+    {
+      "id": "demo-07",
+      "codigo": "DEMO-FLOR-DE-MAIO",
+      "nome": "Flor de Maio",
+      "marca": "Jardim Real",
+      "preco": 199,
+      "estoque": 14,
+      "imagem": null,
+      "descricao": "Um buquê fresco de lírio do vale e frésia com folhas verdes. Delicado e limpo, como roupa de cama ao sol."
+    },
+    {
+      "id": "demo-08",
+      "codigo": "DEMO-OUD-IMPERIAL",
+      "nome": "Oud Impérial",
+      "marca": "Maison Lumière",
+      "preco": 689,
+      "estoque": 1,
+      "imagem": null,
+      "descricao": "Oud autêntico, rosa damascena e açafrão. Opulento e raro — a peça mais preciosa da nossa coleção."
+    },
+    {
+      "id": "demo-09",
+      "codigo": "DEMO-BRISA-MARINHA",
+      "nome": "Brisa Marinha",
+      "marca": "Casa Solana",
+      "preco": 189,
+      "estoque": 11,
+      "imagem": null,
+      "descricao": "Notas aquáticas, sal marinho e menta gelada. Energia pura para o treino, o passeio ou qualquer dia quente."
+    },
+    {
+      "id": "demo-10",
+      "codigo": "DEMO-CUIR-ELEGANT",
+      "nome": "Cuir Élégant",
+      "marca": "Atelier Brumes",
+      "preco": 549,
+      "estoque": 4,
+      "imagem": null,
+      "descricao": "Couro macio, tabaco e sândalo cremoso. Um clássico masculino reinventado com acabamento impecável."
+    },
+    {
+      "id": "demo-11",
+      "codigo": "DEMO-PETALA-BRANCA",
+      "nome": "Pétala Branca",
+      "marca": "Jardim Real",
+      "preco": 259,
+      "estoque": 7,
+      "imagem": null,
+      "descricao": "Gardênia, flor de algodão e almíscar suave. Pura leveza floral, quase uma segunda pele."
+    },
+    {
+      "id": "demo-12",
+      "codigo": "DEMO-AMBAR-MEL",
+      "nome": "Âmbar & Mel",
+      "marca": "Jardim Real",
+      "preco": 329,
+      "estoque": 6,
+      "imagem": null,
+      "descricao": "Mel silvestre, âmbar dourado e flor de laranjeira cristalizada. Doçura sofisticada que aquece qualquer fim de tarde."
+    },
+    {
+      "id": "demo-13",
+      "codigo": "DEMO-LIMONE",
+      "nome": "Limone di Capri",
+      "marca": "Casa Solana",
+      "preco": 209,
+      "estoque": 10,
+      "imagem": null,
+      "descricao": "Limão de Capri, manjericão e vetiver claro. Um cítrico aromático com alma italiana — fresco e polido."
+    },
+    {
+      "id": "demo-14",
+      "codigo": "DEMO-SANTAL-CREME",
+      "nome": "Santal Crème",
+      "marca": "Maison Lumière",
+      "preco": 479,
+      "estoque": 5,
+      "imagem": null,
+      "descricao": "Sândalo australiano, leite de amêndoas e íris. Amadeirado cremoso, minimalista e profundamente reconfortante."
+    },
+    {
+      "id": "demo-15",
+      "codigo": "DEMO-ROSA-ABSOLUTA",
+      "nome": "Rosa Absoluta",
+      "marca": "Jardim Real",
+      "preco": 399,
+      "estoque": 2,
+      "imagem": null,
+      "descricao": "Rosa búlgara absoluta, lichia e patchouli leve. A rosa em sua forma mais moderna — romântica sem ser antiquada."
+    },
+    {
+      "id": "demo-16",
+      "codigo": "DEMO-MENTA-CEDRO",
+      "nome": "Menta & Cedro",
+      "marca": "Atelier Brumes",
+      "preco": 229,
+      "estoque": 13,
+      "imagem": null,
+      "descricao": "Menta gelada, cedro do Atlas e gengibre. Frescor cortante com fundo amadeirado — desperta e sustenta o dia."
+    },
+    {
+      "id": "demo-17",
+      "codigo": "DEMO-EPICES",
+      "nome": "Épices d'Orient",
+      "marca": "Maison Lumière",
+      "preco": 419,
+      "estoque": 8,
+      "imagem": null,
+      "descricao": "Cardamomo, canela e âmbar seco. Especiado e elegante, com presença calorosa que não pesa."
+    },
+    {
+      "id": "demo-18",
+      "codigo": "DEMO-CARAMEL-FUME",
+      "nome": "Caramel Fumé",
+      "marca": "Atelier Brumes",
+      "preco": 359,
+      "estoque": 7,
+      "imagem": null,
+      "descricao": "Caramelo queimado, sal defumado e baunilha bourbon. Um gourmand adulto, escuro e viciante."
+    }
+  ]
+}

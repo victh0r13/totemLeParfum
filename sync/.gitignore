@@ -1,0 +1,5 @@
+# Segredos e tokens — nunca commitar
+.env
+.tokens.json
+
+node_modules/
