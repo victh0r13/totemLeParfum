@@ -1,4 +1,5 @@
 import { PRICE_BUCKETS } from '@/config';
+import { effectivePrice } from '@/logic/format';
 import type { Familia, Genero, Ocasiao, Perfume } from '@/types/catalog';
 
 export interface CatalogFilters {
@@ -32,7 +33,9 @@ export function applyFilters(perfumes: Perfume[], f: CatalogFilters): Perfume[] 
     if (f.priceBucket !== null) {
       const bucket = PRICE_BUCKETS[f.priceBucket];
       if (!bucket) return false;
-      if (p.preco < bucket.min || p.preco >= bucket.max) return false;
+      // Em oferta, vale o preço promocional (ex.: filtro "Até R$ 250").
+      const preco = effectivePrice(p);
+      if (preco < bucket.min || preco >= bucket.max) return false;
     }
     return true;
   });

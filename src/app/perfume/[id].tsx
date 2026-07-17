@@ -1,5 +1,5 @@
 import { useLocalSearchParams, useRouter } from 'expo-router';
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -7,13 +7,33 @@ import { Chip } from '@/components/Chip';
 import { CtaButton } from '@/components/CtaButton';
 import { GenderBadge } from '@/components/GenderBadge';
 import { MiniCard } from '@/components/MiniCard';
+import { PinModal } from '@/components/PinModal';
+import { PressableScale } from '@/components/PressableScale';
 import { ProductImage } from '@/components/ProductImage';
+import { PromoModal } from '@/components/PromoModal';
 import { useToast } from '@/components/ToastProvider';
 import { TopBar } from '@/components/TopBar';
 import { useCatalog, usePerfume } from '@/data/catalogStore';
 import { similarTo } from '@/logic/filters';
 import { formatPrice, stockLabel } from '@/logic/format';
+import { trackAmostraPedida, trackAtendenteChamado, trackProdutoVisto } from '@/logic/metrics';
+import { splitNotes, type OlfactoryNotes } from '@/logic/notes';
 import { colors, familyLabels, fonts, intensityLabels } from '@/theme/theme';
+
+const NOTE_LABELS: Record<keyof OlfactoryNotes, string> = {
+  topo: 'TOPO',
+  coracao: 'CORAÇÃO',
+  fundo: 'FUNDO',
+};
+
+function NoteRow({ section, items }: { section: keyof OlfactoryNotes; items: string[] }) {
+  return (
+    <View style={styles.noteRow}>
+      <Text style={styles.noteLabel}>{NOTE_LABELS[section]}</Text>
+      <Text style={styles.noteItems}>{items.join('  ·  ')}</Text>
+    </View>
+  );
+}
 
 export default function PerfumeDetailScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
@@ -21,11 +41,19 @@ export default function PerfumeDetailScreen() {
   const { perfumes } = useCatalog();
   const perfume = usePerfume(id);
   const { showToast } = useToast();
+  const [pinVisible, setPinVisible] = useState(false);
+  const [promoVisible, setPromoVisible] = useState(false);
 
   const similares = useMemo(
     () => (perfume ? similarTo(perfume, perfumes) : []),
     [perfume, perfumes],
   );
+
+  const { notas, resto } = useMemo(() => splitNotes(perfume?.descricao), [perfume?.descricao]);
+
+  useEffect(() => {
+    if (perfume?.id) trackProdutoVisto(perfume.id);
+  }, [perfume?.id]);
 
   if (!perfume) {
     return (
@@ -62,7 +90,21 @@ export default function PerfumeDetailScreen() {
           </View>
 
           <View style={styles.priceRow}>
-            <Text style={styles.price}>{formatPrice(perfume.preco)}</Text>
+            {perfume.precoPromocional !== null ? (
+              <View style={styles.promoCol}>
+                <Text style={styles.priceOld}>{formatPrice(perfume.preco)}</Text>
+                <View style={styles.promoRow}>
+                  <Text style={[styles.price, { color: colors.gold }]}>
+                    {formatPrice(perfume.precoPromocional)}
+                  </Text>
+                  <View style={styles.offerPill}>
+                    <Text style={styles.offerPillText}>OFERTA</Text>
+                  </View>
+                </View>
+              </View>
+            ) : (
+              <Text style={styles.price}>{formatPrice(perfume.preco)}</Text>
+            )}
             <View style={styles.stockRow}>
               <View
                 style={[styles.dot, { backgroundColor: stock.low ? colors.stockLow : colors.stockOk }]}
@@ -71,6 +113,13 @@ export default function PerfumeDetailScreen() {
                 {stock.label}
               </Text>
             </View>
+            <PressableScale
+              scaleTo={0.9}
+              onPress={() => setPinVisible(true)}
+              style={styles.editButton}
+            >
+              <Text style={styles.editButtonLabel}>✎</Text>
+            </PressableScale>
           </View>
 
           <View style={styles.hairline} />
@@ -86,7 +135,16 @@ export default function PerfumeDetailScreen() {
             </View>
           )}
 
-          {!!perfume.descricao && <Text style={styles.description}>{perfume.descricao}</Text>}
+          {notas && (
+            <View style={styles.pyramid}>
+              <Text style={styles.pyramidLabel}>PIRÂMIDE OLFATIVA</Text>
+              {(['topo', 'coracao', 'fundo'] as const).map(
+                (s) => notas[s] && <NoteRow key={s} section={s} items={notas[s]} />,
+              )}
+            </View>
+          )}
+
+          {!!resto && <Text style={styles.description}>{resto}</Text>}
 
           {similares.length > 0 && (
             <>
@@ -116,15 +174,36 @@ export default function PerfumeDetailScreen() {
         <CtaButton
           label="Quero experimentar"
           style={styles.ctaButton}
-          onPress={() => showToast('Um atendente foi avisado e já traz uma amostra para você.')}
+          onPress={() => {
+            trackAmostraPedida(perfume.id);
+            showToast('Um atendente foi avisado e já traz uma amostra para você.');
+          }}
         />
         <CtaButton
           label="Chamar atendente"
           variant="secondary"
           style={styles.ctaButton}
-          onPress={() => showToast('Um atendente vem falar com você em instantes.')}
+          onPress={() => {
+            trackAtendenteChamado();
+            showToast('Um atendente vem falar com você em instantes.');
+          }}
         />
       </View>
+
+      <PinModal
+        visible={pinVisible}
+        title="Editar oferta"
+        onClose={() => setPinVisible(false)}
+        onSuccess={() => {
+          setPinVisible(false);
+          setPromoVisible(true);
+        }}
+      />
+      <PromoModal
+        visible={promoVisible}
+        perfume={perfume}
+        onClose={() => setPromoVisible(false)}
+      />
     </SafeAreaView>
   );
 }
@@ -150,6 +229,61 @@ const styles = StyleSheet.create({
   },
   priceRow: { flexDirection: 'row', alignItems: 'center', gap: 16, marginTop: 18 },
   price: { fontFamily: fonts.sansBold, fontSize: 30, color: colors.ink },
+  promoCol: {},
+  promoRow: { flexDirection: 'row', alignItems: 'center', gap: 12 },
+  priceOld: {
+    fontFamily: fonts.sans,
+    fontSize: 16,
+    color: colors.muted,
+    textDecorationLine: 'line-through',
+  },
+  offerPill: {
+    backgroundColor: colors.gold,
+    borderRadius: 999,
+    paddingVertical: 5,
+    paddingHorizontal: 12,
+  },
+  offerPillText: {
+    fontFamily: fonts.sansBold,
+    fontSize: 11,
+    letterSpacing: 1.8,
+    color: '#ffffff',
+  },
+  editButton: {
+    marginLeft: 'auto',
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    borderWidth: 1,
+    borderColor: 'rgba(33,29,24,0.14)',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  editButtonLabel: { fontSize: 16, color: colors.muted },
+  pyramid: { marginTop: 26 },
+  pyramidLabel: {
+    fontFamily: fonts.sansSemiBold,
+    fontSize: 11.5,
+    letterSpacing: 2.4,
+    color: colors.muted,
+    marginBottom: 12,
+  },
+  noteRow: { flexDirection: 'row', alignItems: 'flex-start', gap: 14, marginTop: 8 },
+  noteLabel: {
+    width: 86,
+    fontFamily: fonts.sansSemiBold,
+    fontSize: 11,
+    letterSpacing: 2,
+    color: colors.gold,
+    marginTop: 3,
+  },
+  noteItems: {
+    flex: 1,
+    fontFamily: fonts.sans,
+    fontSize: 16.5,
+    lineHeight: 26,
+    color: colors.inkSoft,
+  },
   stockRow: { flexDirection: 'row', alignItems: 'center', gap: 6 },
   dot: { width: 6, height: 6, borderRadius: 3 },
   stockText: { fontFamily: fonts.sans, fontSize: 14, color: colors.muted },

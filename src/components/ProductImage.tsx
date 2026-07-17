@@ -21,13 +21,28 @@ interface Props {
 }
 
 /**
- * Foto do produto (do Bling) sobre fundo com o degradê da família olfativa.
- * Sem foto, exibe a garrafa minimalista do design.
+ * Foto do produto (do Bling) preenchendo todo o quadro sobre fundo branco —
+ * as fotos do Bling já vêm com fundo branco, então o "contain" funde sem
+ * emenda com o fundo. Sem foto, mantém o degradê da família olfativa com a
+ * garrafa minimalista do design.
  */
 export function ProductImage({ perfume, height, bottle = 'md' }: Props) {
   const family = perfume.familias[0];
   const tint = family ? familyTints[family] : neutralTint;
   const b = bottleSizes[bottle];
+
+  if (perfume.imagem) {
+    return (
+      <View style={[styles.container, styles.photo, { height }]}>
+        <Image
+          source={{ uri: perfume.imagem }}
+          style={styles.photoImage}
+          contentFit="contain"
+          transition={200}
+        />
+      </View>
+    );
+  }
 
   return (
     <LinearGradient
@@ -36,25 +51,19 @@ export function ProductImage({ perfume, height, bottle = 'md' }: Props) {
       end={{ x: 0.85, y: 1 }}
       style={[styles.container, { height }]}
     >
-      {perfume.imagem ? (
-        <Image
-          source={{ uri: perfume.imagem }}
-          style={{ width: '70%', height: height * 0.82 }}
-          contentFit="contain"
-          transition={200}
-        />
-      ) : (
-        <View style={styles.bottle}>
-          <View style={[styles.cap, { width: b.capW, height: b.capH }]} />
-          <View style={[styles.body, { width: b.bodyW, height: b.bodyH }]} />
-        </View>
-      )}
+      <View style={styles.bottle}>
+        <View style={[styles.cap, { width: b.capW, height: b.capH }]} />
+        <View style={[styles.body, { width: b.bodyW, height: b.bodyH }]} />
+      </View>
     </LinearGradient>
   );
 }
 
 const styles = StyleSheet.create({
   container: { alignItems: 'center', justifyContent: 'center' },
+  // Respiro interno para a foto não encostar nas bordas do card.
+  photo: { backgroundColor: '#ffffff', width: '100%', paddingVertical: 12, paddingHorizontal: 12 },
+  photoImage: { width: '100%', height: '100%' },
   bottle: { alignItems: 'center' },
   cap: { backgroundColor: 'rgba(33,29,24,0.75)', borderRadius: 2 },
   body: {

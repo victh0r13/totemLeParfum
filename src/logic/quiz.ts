@@ -125,8 +125,3 @@ export function rankPerfumes(perfumes: Perfume[], answers: QuizAnswers): Perfume
   }
   return results;
 }
-
-/** Respostas de quem → intensidade etc. também alimentam o quiz por chips no chat. */
-export function answersFromEntries(entries: Partial<QuizAnswers>): QuizAnswers {
-  return { ...emptyAnswers, ...entries };
-}

@@ -69,6 +69,21 @@ export async function listAllProducts() {
   return all;
 }
 
+/** Lista todas as categorias de produtos, percorrendo a paginação completa. */
+export async function listAllCategories() {
+  const all = [];
+  let page = 1;
+  for (;;) {
+    const { data } = await blingGet('/categorias/produtos', { pagina: page, limite: 100 });
+    const items = Array.isArray(data) ? data : [];
+    all.push(...items);
+    if (items.length < 100) break;
+    page += 1;
+  }
+  console.log(`[bling] ${all.length} categorias.`);
+  return all;
+}
+
 /** Detalhes completos de um produto (marca, descrição, imagens). */
 export async function getProductDetails(id) {
   const { data } = await blingGet(`/produtos/${id}`);

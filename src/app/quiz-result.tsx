@@ -24,7 +24,7 @@ export default function QuizResultScreen() {
 
   return (
     <SafeAreaView style={styles.screen}>
-      <TopBar title="Sua seleção" onBack={() => router.replace('/experience')} />
+      <TopBar title="Sua seleção" onBack={() => router.replace('/')} />
 
       <View style={styles.header}>
         <Text style={styles.eyebrow}>SELEÇÃO PARA VOCÊ</Text>
@@ -40,7 +40,7 @@ export default function QuizResultScreen() {
             Ainda não temos sugestões suficientes para essas respostas
           </Text>
           <Text style={styles.emptySubtitle}>
-            Explore o catálogo completo ou converse com nosso consultor virtual.
+            Explore o catálogo completo ou refaça o quiz com outras respostas.
           </Text>
         </View>
       ) : (

@@ -9,6 +9,11 @@ export function formatPrice(value: number): string {
   })}`;
 }
 
+/** Preço que vale hoje: o promocional quando há oferta ativa. */
+export function effectivePrice(p: Perfume): number {
+  return p.precoPromocional ?? p.preco;
+}
+
 export function stockLabel(p: Perfume): { label: string; low: boolean } {
   if (p.estoque <= LOW_STOCK_THRESHOLD) return { label: 'Últimas unidades', low: true };
   return { label: 'Disponível', low: false };

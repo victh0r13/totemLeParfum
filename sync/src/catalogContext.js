@@ -1,18 +1,6 @@
 import fs from 'node:fs';
 import { CATALOG_PATH, ENRICHMENT_PATH } from './env.js';
 
-const familyLabels = {
-  floral: 'floral',
-  citrico: 'cítrico',
-  amadeirado: 'amadeirado',
-  doce: 'doce',
-  oriental: 'oriental',
-  fresco: 'fresco',
-};
-const generoLabels = { F: 'feminino', M: 'masculino', U: 'unissex' };
-const intensidadeLabels = { 1: 'leve', 2: 'moderada', 3: 'marcante' };
-const LOW_STOCK = 3;
-
 let cache = null;
 
 function fileMtime(p) {
@@ -32,8 +20,9 @@ function readJson(p, fallback) {
 }
 
 /**
- * Catálogo real combinado com o enrichment, em memória (recarrega quando os
- * arquivos mudam). Usado para montar o contexto do consultor e validar ids.
+ * Curadoria do totem em memória (recarrega quando os arquivos mudam):
+ * produtos com estoque E entrada no enrichment.json — o mesmo recorte
+ * que o app exibe.
  */
 export function getCatalog() {
   const stamp = `${fileMtime(CATALOG_PATH)}:${fileMtime(ENRICHMENT_PATH)}`;
@@ -45,43 +34,11 @@ export function getCatalog() {
 
   const produtos = (catalogFile.produtos ?? [])
     .filter((p) => Number(p.estoque) > 0)
-    .map((p) => {
-      const e = entries[p.id] ?? (p.codigo ? entries[p.codigo] : undefined) ?? null;
-      return { ...p, enrichment: e };
-    });
-
-  const validIds = new Set(produtos.map((p) => String(p.id)));
-
-  const lines = produtos.map((p) => {
-    const parts = [
-      `id=${p.id}`,
-      `nome="${p.nome}"`,
-      `marca="${p.marca ?? 'Le Parfum'}"`,
-      `preço=R$${Number(p.preco).toFixed(2)}`,
-      Number(p.estoque) <= LOW_STOCK ? 'estoque=últimas unidades' : 'estoque=disponível',
-    ];
-    if (p.enrichment) {
-      const e = p.enrichment;
-      if (e.genero) parts.push(`gênero=${generoLabels[e.genero] ?? e.genero}`);
-      if (e.familias?.length) {
-        parts.push(`famílias=${e.familias.map((f) => familyLabels[f] ?? f).join('/')}`);
-      }
-      if (e.ocasioes?.length) parts.push(`ocasiões=${e.ocasioes.join('/')}`);
-      if (e.intensidade) {
-        parts.push(`intensidade=${intensidadeLabels[e.intensidade] ?? e.intensidade}`);
-      }
-    } else {
-      parts.push('SEM_DADOS_OLFATIVOS');
-    }
-    if (p.descricao) parts.push(`descrição="${String(p.descricao).slice(0, 220)}"`);
-    return `- ${parts.join(' | ')}`;
-  });
+    .filter((p) => entries[p.id] ?? (p.codigo ? entries[p.codigo] : undefined));
 
   cache = {
     stamp,
     produtos,
-    validIds,
-    summary: lines.join('\n'),
     generatedAt: catalogFile.generatedAt ?? null,
   };
   return cache;

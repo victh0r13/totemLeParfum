@@ -14,7 +14,7 @@ interface Props {
   showBrand?: boolean;
 }
 
-/** Card compacto: similares no detalhe e recomendações inline no chat. */
+/** Card compacto: perfumes similares na tela de detalhe. */
 export function MiniCard({ perfume, onPress, width = 180, showBrand = false }: Props) {
   return (
     <PressableScale onPress={onPress} scaleTo={0.96} style={[styles.card, { width }]}>
@@ -28,7 +28,16 @@ export function MiniCard({ perfume, onPress, width = 180, showBrand = false }: P
         <Text style={styles.name} numberOfLines={2}>
           {perfume.nome}
         </Text>
-        <Text style={styles.price}>{formatPrice(perfume.preco)}</Text>
+        {perfume.precoPromocional !== null ? (
+          <View style={styles.priceRow}>
+            <Text style={[styles.price, styles.pricePromo]}>
+              {formatPrice(perfume.precoPromocional)}
+            </Text>
+            <Text style={styles.priceOld}>{formatPrice(perfume.preco)}</Text>
+          </View>
+        ) : (
+          <Text style={styles.price}>{formatPrice(perfume.preco)}</Text>
+        )}
       </View>
     </PressableScale>
   );
@@ -52,4 +61,12 @@ const styles = StyleSheet.create({
     marginTop: 3,
   },
   price: { fontFamily: fonts.sansBold, fontSize: 14, color: colors.inkSoft, marginTop: 5 },
+  priceRow: { flexDirection: 'row', alignItems: 'baseline', gap: 6 },
+  pricePromo: { color: colors.gold },
+  priceOld: {
+    fontFamily: fonts.sans,
+    fontSize: 11,
+    color: colors.muted,
+    textDecorationLine: 'line-through',
+  },
 });

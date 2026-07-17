@@ -8,7 +8,8 @@ import React, {
   useState,
 } from 'react';
 
-import { API_URL } from '@/config';
+import { API_URL, CATALOG_REFRESH_MS } from '@/config';
+import { usePromotions } from '@/data/promotionsStore';
 import type {
   CatalogFile,
   CatalogProduct,
@@ -35,13 +36,22 @@ interface CatalogState {
 
 const CatalogContext = createContext<CatalogState | null>(null);
 
-function mergeCatalog(catalog: CatalogFile, enrichment: EnrichmentFile): Perfume[] {
+function mergeCatalog(
+  catalog: CatalogFile,
+  enrichment: EnrichmentFile,
+  promocoes: Record<string, number>,
+): Perfume[] {
   const entries = enrichment.produtos ?? {};
   return catalog.produtos
     .filter((p) => p.estoque > 0)
-    .map((p: CatalogProduct): Perfume => {
-      const entry: EnrichmentEntry | undefined =
-        entries[p.id] ?? (p.codigo ? entries[p.codigo] : undefined);
+    .map((p: CatalogProduct) => ({
+      p,
+      entry: entries[p.id] ?? (p.codigo ? entries[p.codigo] : undefined),
+    }))
+    // O totem exibe apenas a curadoria: produtos com entrada no enrichment.json.
+    .filter((x): x is { p: CatalogProduct; entry: EnrichmentEntry } => !!x.entry)
+    .map(({ p, entry }): Perfume => {
+      const promo = promocoes[p.id];
       return {
         id: p.id,
         codigo: p.codigo ?? null,
@@ -51,6 +61,8 @@ function mergeCatalog(catalog: CatalogFile, enrichment: EnrichmentFile): Perfume
         estoque: p.estoque,
         imagem: p.imagem ?? null,
         descricao: p.descricao?.trim() || '',
+        precoPromocional:
+          typeof promo === 'number' && promo > 0 && promo < p.preco ? promo : null,
         enriquecido: !!entry,
         genero: entry?.genero ?? null,
         familias: entry?.familias ?? [],
@@ -73,6 +85,7 @@ async function fetchJson<T>(url: string): Promise<T> {
 }
 
 export function CatalogProvider({ children }: { children: React.ReactNode }) {
+  const { promocoes } = usePromotions();
   const [catalog, setCatalog] = useState<CatalogFile>(bundledCatalog as CatalogFile);
   const [enrichment, setEnrichment] = useState<EnrichmentFile>(
     bundledEnrichment as unknown as EnrichmentFile,
@@ -117,12 +130,18 @@ export function CatalogProvider({ children }: { children: React.ReactNode }) {
       }
       await refresh();
     })();
+    // O totem fica ligado o dia todo: busca o catálogo novo periodicamente.
+    const interval = setInterval(refresh, CATALOG_REFRESH_MS);
     return () => {
       cancelled = true;
+      clearInterval(interval);
     };
   }, [refresh]);
 
-  const perfumes = useMemo(() => mergeCatalog(catalog, enrichment), [catalog, enrichment]);
+  const perfumes = useMemo(
+    () => mergeCatalog(catalog, enrichment, promocoes),
+    [catalog, enrichment, promocoes],
+  );
 
   const value = useMemo<CatalogState>(
     () => ({ perfumes, loading, generatedAt: catalog.generatedAt ?? null, refresh }),

@@ -21,7 +21,14 @@ export function PerfumeCard({ perfume, onPress, delay = 0 }: Props) {
   return (
     <FadeUp delay={delay} style={styles.wrapper}>
       <PressableScale onPress={onPress} scaleTo={0.97} style={styles.card}>
-        <ProductImage perfume={perfume} height={190} bottle="md" />
+        <View>
+          <ProductImage perfume={perfume} height={190} bottle="md" />
+          {perfume.precoPromocional !== null && (
+            <View style={styles.offerBadge}>
+              <Text style={styles.offerBadgeText}>OFERTA</Text>
+            </View>
+          )}
+        </View>
         <View style={styles.body}>
           <View style={styles.titleRow}>
             <View style={styles.titleCol}>
@@ -35,7 +42,16 @@ export function PerfumeCard({ perfume, onPress, delay = 0 }: Props) {
             <GenderBadge genero={perfume.genero} />
           </View>
           <View style={styles.footer}>
-            <Text style={styles.price}>{formatPrice(perfume.preco)}</Text>
+            {perfume.precoPromocional !== null ? (
+              <View>
+                <Text style={styles.priceOld}>{formatPrice(perfume.preco)}</Text>
+                <Text style={[styles.price, styles.pricePromo]}>
+                  {formatPrice(perfume.precoPromocional)}
+                </Text>
+              </View>
+            ) : (
+              <Text style={styles.price}>{formatPrice(perfume.preco)}</Text>
+            )}
             <View style={styles.stockRow}>
               <View
                 style={[styles.dot, { backgroundColor: stock.low ? colors.stockLow : colors.stockOk }]}
@@ -84,6 +100,28 @@ const styles = StyleSheet.create({
     marginTop: 14,
   },
   price: { fontFamily: fonts.sansBold, fontSize: 19, color: colors.ink },
+  priceOld: {
+    fontFamily: fonts.sans,
+    fontSize: 13,
+    color: colors.muted,
+    textDecorationLine: 'line-through',
+  },
+  pricePromo: { color: colors.gold },
+  offerBadge: {
+    position: 'absolute',
+    top: 14,
+    left: 14,
+    backgroundColor: colors.gold,
+    borderRadius: 999,
+    paddingVertical: 6,
+    paddingHorizontal: 14,
+  },
+  offerBadgeText: {
+    fontFamily: fonts.sansBold,
+    fontSize: 11,
+    letterSpacing: 1.8,
+    color: '#ffffff',
+  },
   stockRow: { flexDirection: 'row', alignItems: 'center', gap: 6 },
   dot: { width: 6, height: 6, borderRadius: 3 },
   stockText: { fontFamily: fonts.sans, fontSize: 12.5, color: colors.muted },

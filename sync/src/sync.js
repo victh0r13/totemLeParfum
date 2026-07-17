@@ -5,12 +5,17 @@
  *
  * - Busca todos os produtos (paginação completa, máx. 3 req/s).
  * - Busca os saldos de estoque (endpoint /estoques/saldos).
- * - Com SYNC_FETCH_DETAILS=true, busca marca/descrição/imagem de cada produto.
+ * - Com SYNC_FETCH_DETAILS=true, busca marca/descrição/imagem/categoria de cada produto.
  * - Nunca toca em data/enrichment.json (preenchimento manual).
  */
 import fs from 'node:fs';
 
-import { getProductDetails, getStockBalances, listAllProducts } from './bling.js';
+import {
+  getProductDetails,
+  getStockBalances,
+  listAllCategories,
+  listAllProducts,
+} from './bling.js';
 import { CATALOG_PATH, ENRICHMENT_PATH } from './env.js';
 
 const fetchDetails = (process.env.SYNC_FETCH_DETAILS ?? 'true').toLowerCase() !== 'false';
@@ -27,6 +32,32 @@ function pickImage(detail, listingItem) {
   );
 }
 
+/**
+ * Índice das categorias do Bling. O detalhe do produto traz somente
+ * `categoria.id`, então o nome e o caminho completo ("Perfumes & Colônias >
+ * Lattafa Árabia > Perfume Feminino") são resolvidos pela árvore.
+ */
+function buildCategoryIndex(categories) {
+  const byId = new Map(categories.map((c) => [String(c.id), c]));
+  const caminhoDe = (id) => {
+    const partes = [];
+    let cur = byId.get(String(id));
+    let guard = 0;
+    while (cur && guard++ < 8) {
+      partes.unshift(cur.descricao);
+      const paiId = cur.categoriaPai?.id;
+      cur = paiId ? byId.get(String(paiId)) : null;
+    }
+    return partes;
+  };
+  return (id) => {
+    if (id === undefined || id === null) return null;
+    const cat = byId.get(String(id));
+    if (!cat) return null;
+    return { id: String(id), nome: cat.descricao, caminho: caminhoDe(id).join(' > ') };
+  };
+}
+
 function cleanText(value) {
   if (!value) return null;
   return String(value)
@@ -39,6 +70,7 @@ function cleanText(value) {
 async function main() {
   console.log('[sync] Iniciando sincronização com o Bling...\n');
 
+  const resolveCategoria = buildCategoryIndex(await listAllCategories());
   const listing = await listAllProducts();
 
   // Somente produtos ativos e do tipo "produto" (ignora serviços).
@@ -78,6 +110,7 @@ async function main() {
       marca: cleanText(detail?.marca) || null,
       preco: Number(detail?.preco ?? item.preco ?? 0),
       estoque: Number.isFinite(estoque) ? estoque : 0,
+      categoria: resolveCategoria(detail?.categoria?.id ?? item?.categoria?.id),
       imagem: pickImage(detail, item),
       descricao:
         cleanText(detail?.descricaoComplementar) ||
@@ -106,7 +139,7 @@ async function main() {
     if (missing.length > 0) {
       console.log(
         `\n[atenção] ${missing.length} produto(s) com estoque ainda SEM enriquecimento ` +
-          '(fora dos filtros de família/ocasião, do quiz e do consultor):',
+          '(sem entrada no enrichment.json, eles NÃO aparecem no totem):',
       );
       for (const p of missing.slice(0, 30)) {
         console.log(`  - id ${p.id}${p.codigo ? ` | SKU ${p.codigo}` : ''} | ${p.nome}`);

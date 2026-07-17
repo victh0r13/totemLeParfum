@@ -1,7 +1,8 @@
 import { useRouter } from "expo-router";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   Animated,
+  Pressable,
   ScrollView,
   StyleSheet,
   Text,
@@ -11,6 +12,7 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import { FadeUp } from "@/components/FadeUp";
+import { PinModal } from "@/components/PinModal";
 import { PressableScale } from "@/components/PressableScale";
 import { colors, fonts } from "@/theme/theme";
 
@@ -99,6 +101,7 @@ function OptionCard({
 export default function HomeScreen() {
   const router = useRouter();
   const { height, width } = useWindowDimensions();
+  const [pinVisible, setPinVisible] = useState(false);
   // Telas mais baixas (janela de navegador, tablets menores) usam o layout compacto
   // para as duas opções continuarem visíveis sem rolar.
   const compact = height < 1000;
@@ -113,9 +116,12 @@ export default function HomeScreen() {
       >
         <View style={[styles.hero, compact && { paddingTop: 36 }]}>
           <Text style={styles.eyebrow}>PERFUMARIA</Text>
-          <Text style={[styles.logo, compact && styles.logoCompact]}>
-            Le Parfum
-          </Text>
+          {/* Toque longo (equipe): abre o painel da loja, protegido por PIN. */}
+          <Pressable delayLongPress={1200} onLongPress={() => setPinVisible(true)}>
+            <Text style={[styles.logo, compact && styles.logoCompact]}>
+              Le Parfum
+            </Text>
+          </Pressable>
           <View style={[styles.hairline, compact && { marginTop: 16 }]} />
           <Text style={[styles.tagline, compact && styles.taglineCompact]}>
             Encontre a fragrância perfeita para você ou para presentear.
@@ -140,11 +146,11 @@ export default function HomeScreen() {
           />
           <OptionCard
             title="Quero descobrir meu gosto"
-            subtitle="Um quiz de 1 minuto ou uma conversa com nosso consultor virtual."
+            subtitle="Cinco perguntas visuais sobre ocasião, intensidade e aromas — e uma seleção feita para você."
             gold
             delay={220}
             compact={compact}
-            onPress={() => router.push("/experience")}
+            onPress={() => router.push("/quiz")}
           />
         </View>
 
@@ -157,6 +163,16 @@ export default function HomeScreen() {
           TOQUE PARA COMEÇAR
         </Text>
       </ScrollView>
+
+      <PinModal
+        visible={pinVisible}
+        title="Painel da loja"
+        onClose={() => setPinVisible(false)}
+        onSuccess={() => {
+          setPinVisible(false);
+          router.push("/admin");
+        }}
+      />
     </SafeAreaView>
   );
 }

@@ -6,11 +6,24 @@ interface Props {
   disabled?: boolean;
   scaleTo?: number;
   style?: StyleProp<ViewStyle>;
+  /**
+   * Estilo do Pressable EXTERNO — é ele que participa do layout do pai.
+   * Necessário para flex/width em containers de linha (ex.: teclado numérico),
+   * já que o `style` é aplicado no Animated.View interno.
+   */
+  containerStyle?: StyleProp<ViewStyle>;
   children: React.ReactNode;
 }
 
 /** Feedback de toque padrão do totem: leve escala ao pressionar. */
-export function PressableScale({ onPress, disabled, scaleTo = 0.96, style, children }: Props) {
+export function PressableScale({
+  onPress,
+  disabled,
+  scaleTo = 0.96,
+  style,
+  containerStyle,
+  children,
+}: Props) {
   const scale = useRef(new Animated.Value(1)).current;
 
   const animateTo = (value: number) =>
@@ -25,6 +38,7 @@ export function PressableScale({ onPress, disabled, scaleTo = 0.96, style, child
     <Pressable
       onPress={onPress}
       disabled={disabled}
+      style={containerStyle}
       onPressIn={() => animateTo(scaleTo)}
       onPressOut={() => animateTo(1)}
     >

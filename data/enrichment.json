@@ -1,40 +1,2198 @@
 {
   "_instrucoes": {
     "descricao": "Enriquecimento manual dos produtos: gênero, famílias olfativas, ocasiões e intensidade NÃO existem no Bling e devem ser preenchidos aqui. Este arquivo NUNCA é sobrescrito pelo sync.",
-    "comoUsar": "Adicione uma entrada em 'produtos' usando como chave o ID do produto no Bling (recomendado) OU o código/SKU. Produtos sem entrada aqui continuam visíveis no catálogo, mas ficam fora dos filtros de família/ocasião/gênero, do quiz e das recomendações do consultor.",
+    "comoUsar": "A chave é o ID do produto no Bling (recomendado) OU o código/SKU. IMPORTANTE: o totem exibe SOMENTE os produtos que têm entrada aqui — esta lista é a curadoria dos perfumes da loja física. Para incluir um perfume, adicione a entrada; para tirá-lo do totem, remova. O gênero segue a categoria do Bling; as famílias foram derivadas das notas olfativas da descrição de cada produto.",
     "camposValidos": {
-      "genero": ["F", "M", "U"],
-      "familias": ["floral", "citrico", "amadeirado", "doce", "oriental", "fresco"],
-      "ocasioes": ["trabalho", "dia", "noite", "esporte"],
-      "intensidade": "1 (leve) | 2 (moderada) | 3 (marcante)"
+      "genero": [
+        "F",
+        "M",
+        "U"
+      ],
+      "familias": [
+        "floral",
+        "citrico",
+        "amadeirado",
+        "doce",
+        "oriental",
+        "fresco"
+      ],
+      "ocasioes": [
+        "trabalho",
+        "dia",
+        "noite",
+        "esporte"
+      ],
+      "intensidade": "1 (leve) | 2 (moderada) | 3 (marcante)",
+      "nome": "somente para leitura humana (identifica o produto ao editar este arquivo) — o app ignora"
     },
     "exemplo": {
       "12345678901": {
         "genero": "F",
-        "familias": ["floral", "doce"],
-        "ocasioes": ["dia", "noite"],
+        "familias": [
+          "floral",
+          "doce"
+        ],
+        "ocasioes": [
+          "dia",
+          "noite"
+        ],
         "intensidade": 2
       }
+    },
+    "observacoes": {
+      "16314998642": "Club de Nuit Intense Man (Armaf): a descrição no Bling está trocada (texto da versão feminina). Enriquecido pelo perfil masculino real (cítrico/frutado amadeirado)."
     }
   },
   "produtos": {
-    "demo-01": { "genero": "F", "familias": ["floral"], "ocasioes": ["dia", "trabalho"], "intensidade": 2 },
-    "demo-02": { "genero": "F", "familias": ["oriental"], "ocasioes": ["noite"], "intensidade": 3 },
-    "demo-03": { "genero": "M", "familias": ["amadeirado"], "ocasioes": ["trabalho", "noite"], "intensidade": 2 },
-    "demo-04": { "genero": "U", "familias": ["citrico"], "ocasioes": ["dia", "esporte"], "intensidade": 1 },
-    "demo-05": { "genero": "F", "familias": ["doce"], "ocasioes": ["dia", "noite"], "intensidade": 2 },
-    "demo-06": { "genero": "M", "familias": ["amadeirado"], "ocasioes": ["noite"], "intensidade": 3 },
-    "demo-07": { "genero": "F", "familias": ["floral"], "ocasioes": ["dia", "trabalho"], "intensidade": 1 },
-    "demo-08": { "genero": "U", "familias": ["oriental"], "ocasioes": ["noite"], "intensidade": 3 },
-    "demo-09": { "genero": "U", "familias": ["fresco"], "ocasioes": ["esporte", "dia"], "intensidade": 1 },
-    "demo-10": { "genero": "M", "familias": ["amadeirado"], "ocasioes": ["noite", "trabalho"], "intensidade": 3 },
-    "demo-11": { "genero": "F", "familias": ["floral"], "ocasioes": ["dia"], "intensidade": 1 },
-    "demo-12": { "genero": "F", "familias": ["doce"], "ocasioes": ["noite", "dia"], "intensidade": 2 },
-    "demo-13": { "genero": "U", "familias": ["citrico"], "ocasioes": ["dia", "trabalho"], "intensidade": 1 },
-    "demo-14": { "genero": "U", "familias": ["amadeirado"], "ocasioes": ["trabalho", "noite"], "intensidade": 2 },
-    "demo-15": { "genero": "F", "familias": ["floral"], "ocasioes": ["noite"], "intensidade": 2 },
-    "demo-16": { "genero": "M", "familias": ["fresco"], "ocasioes": ["esporte", "trabalho"], "intensidade": 1 },
-    "demo-17": { "genero": "U", "familias": ["oriental"], "ocasioes": ["noite", "trabalho"], "intensidade": 2 },
-    "demo-18": { "genero": "U", "familias": ["doce"], "ocasioes": ["noite"], "intensidade": 3 }
+    "16581658772": {
+      "nome": "212 Vip Black - Carolina Herrera Eau De Parfum 100ml",
+      "genero": "M",
+      "familias": [
+        "oriental",
+        "fresco"
+      ],
+      "intensidade": 2,
+      "ocasioes": [
+        "noite",
+        "dia"
+      ]
+    },
+    "16581635714": {
+      "nome": "212 Vip Men - Carolina Herrera Eau De Toilette 100ml",
+      "genero": "M",
+      "familias": [
+        "amadeirado",
+        "fresco"
+      ],
+      "ocasioes": [
+        "noite"
+      ],
+      "intensidade": 2
+    },
+    "16582442019": {
+      "nome": "212 Vip Rosê - Carolina Herrera 80ml",
+      "genero": "F",
+      "intensidade": 2,
+      "ocasioes": [
+        "dia",
+        "noite"
+      ]
+    },
+    "16150133537": {
+      "nome": "315 Prestige Black - La Rive Eau de Toilette 100ml Original",
+      "intensidade": 1,
+      "ocasioes": [
+        "dia"
+      ]
+    },
+    "16187853630": {
+      "nome": "315 Prestige La Rive - Perfume Masculino - Edt - 100ml",
+      "intensidade": 1,
+      "ocasioes": [
+        "dia"
+      ]
+    },
+    "16495521654": {
+      "nome": "315 Prestige Pink - La Rive Eau de Toilette 100ml Original",
+      "intensidade": 1,
+      "ocasioes": [
+        "dia"
+      ]
+    },
+    "16150142058": {
+      "nome": "Absolute Sport - La Rive Perfume Masculino Eau de Toilette 100ml Original",
+      "intensidade": 1,
+      "ocasioes": [
+        "dia"
+      ]
+    },
+    "16599548679": {
+      "nome": "Acqua Di Gio - Armani Eau De Parfum 100ml",
+      "genero": "M",
+      "intensidade": 2,
+      "ocasioes": [
+        "dia",
+        "noite"
+      ]
+    },
+    "16349336051": {
+      "nome": "Ajwad - Lattafa Eau De Parfum Feminino 100ml",
+      "genero": "F",
+      "familias": [
+        "amadeirado",
+        "oriental"
+      ],
+      "intensidade": 2,
+      "ocasioes": [
+        "noite"
+      ]
+    },
+    "16580784302": {
+      "nome": "Al absar - Bint Al Amaal Eau De Parfum",
+      "genero": "F",
+      "familias": [
+        "doce",
+        "oriental"
+      ],
+      "intensidade": 2,
+      "ocasioes": [
+        "dia",
+        "noite"
+      ]
+    },
+    "16641092192": {
+      "nome": "Al Absar - Freya Eau De Parfum 100ml",
+      "intensidade": 2,
+      "ocasioes": [
+        "dia",
+        "noite"
+      ]
+    },
+    "16314993034": {
+      "nome": "Al Wataniah Shagaf Al Ward Edp 100ml",
+      "genero": "F",
+      "familias": [
+        "floral",
+        "oriental"
+      ],
+      "intensidade": 2,
+      "ocasioes": [
+        "dia",
+        "noite"
+      ]
+    },
+    "16371366434": {
+      "nome": "Amber Rouge - Orientica Eau de Parfum Feminino 80ml",
+      "intensidade": 2,
+      "ocasioes": [
+        "dia",
+        "noite"
+      ]
+    },
+    "16299284817": {
+      "nome": "Ameer Al Oud Arabian Nights Manasik Edp Feminino 100ml",
+      "genero": "M",
+      "familias": [
+        "oriental"
+      ],
+      "intensidade": 2,
+      "ocasioes": [
+        "dia",
+        "noite"
+      ]
+    },
+    "16370481417": {
+      "nome": "Ameerat Al Arab Imperium - Asdaaf Eau De Parfum 100ml",
+      "familias": [
+        "oriental",
+        "amadeirado"
+      ],
+      "intensidade": 2,
+      "ocasioes": [
+        "dia"
+      ]
+    },
+    "16370482421": {
+      "nome": "Ameerat Al Arab Rosê - Asdaaf Eau De Parfum 100ml",
+      "familias": [
+        "floral",
+        "amadeirado"
+      ],
+      "intensidade": 3,
+      "ocasioes": [
+        "dia"
+      ]
+    },
+    "16580766000": {
+      "nome": "Ameerati - Al Wataniah Eau De Parfum 100ml",
+      "genero": "F",
+      "intensidade": 2,
+      "ocasioes": [
+        "dia",
+        "noite"
+      ]
+    },
+    "16452760946": {
+      "nome": "Ameeri - Al Wataniah Eau De Parfum 100ml",
+      "genero": "M",
+      "familias": [
+        "floral",
+        "doce"
+      ],
+      "intensidade": 2,
+      "ocasioes": [
+        "dia",
+        "noite"
+      ]
+    },
+    "16356026051": {
+      "nome": "Animale - Animale Eau De Toilette 100ml",
+      "genero": "M",
+      "familias": [
+        "amadeirado",
+        "oriental"
+      ],
+      "intensidade": 1,
+      "ocasioes": [
+        "noite",
+        "dia"
+      ]
+    },
+    "16187850576": {
+      "nome": "Aqua Man - La Rive Eau De Toilette 90ml Original",
+      "intensidade": 1,
+      "ocasioes": [
+        "dia"
+      ]
+    },
+    "16625038451": {
+      "nome": "Aqua Woman - La Rive Eau De Parfum 100ml",
+      "genero": "F",
+      "intensidade": 2,
+      "ocasioes": [
+        "dia",
+        "noite"
+      ]
+    },
+    "16563845996": {
+      "nome": "Areebah Eau De Parfum Unissex - Riiffs 100ml",
+      "genero": "F",
+      "familias": [
+        "oriental",
+        "amadeirado"
+      ],
+      "ocasioes": [
+        "noite"
+      ],
+      "intensidade": 3
+    },
+    "16609219695": {
+      "nome": "Armani Code - Armani Eau De Toilette 125ml",
+      "genero": "M",
+      "intensidade": 1,
+      "ocasioes": [
+        "dia"
+      ]
+    },
+    "16416481056": {
+      "nome": "Asad Bourbon - Lattafa Eau De Parfum 100ml",
+      "genero": "M",
+      "intensidade": 2,
+      "ocasioes": [
+        "dia",
+        "noite"
+      ]
+    },
+    "16590671121": {
+      "nome": "Asad Elixir - Lattafa Eau De Parfum 100ml",
+      "intensidade": 3,
+      "ocasioes": [
+        "noite"
+      ]
+    },
+    "16150250509": {
+      "nome": "Athina Deo Colônia Lata 100ml - Ciclo Cosméticos Original",
+      "intensidade": 1,
+      "ocasioes": [
+        "dia"
+      ]
+    },
+    "16416489199": {
+      "nome": "Azarro Pour Homme - Azarro Eau De Toilette 100ml",
+      "genero": "M",
+      "intensidade": 1,
+      "ocasioes": [
+        "dia"
+      ]
+    },
+    "16349339727": {
+      "nome": "Bade'e Al Oud Oud for Glory - Lattafa Eau De Parfum Unissex 100ml",
+      "genero": "U",
+      "familias": [
+        "oriental",
+        "amadeirado"
+      ],
+      "intensidade": 3,
+      "ocasioes": [
+        "noite"
+      ]
+    },
+    "16371327611": {
+      "nome": "Bade'e Al Oud Oud Honor & Glory - Lattafa Eau De Parfum Unissex 100ml",
+      "genero": "U",
+      "familias": [
+        "oriental"
+      ],
+      "intensidade": 2,
+      "ocasioes": [
+        "dia",
+        "noite"
+      ]
+    },
+    "16349326591": {
+      "nome": "Bareeq Al Dhahab - Al Wataniah Eau De Parfum 100ml",
+      "genero": "M",
+      "familias": [
+        "oriental",
+        "amadeirado"
+      ],
+      "intensidade": 2,
+      "ocasioes": [
+        "noite"
+      ]
+    },
+    "16580795415": {
+      "nome": "Baroque Rouge Amarelo - Maison Alhambra Eau de Parfum 100ml",
+      "genero": "F",
+      "familias": [
+        "floral",
+        "oriental"
+      ],
+      "intensidade": 2,
+      "ocasioes": [
+        "dia",
+        "noite"
+      ]
+    },
+    "16345974338": {
+      "nome": "Baroque Rouge Extrait - Maison Alhambra Eau de Parfum 100ml",
+      "genero": "F",
+      "intensidade": 3,
+      "ocasioes": [
+        "noite"
+      ]
+    },
+    "16613587583": {
+      "nome": "Baunilha  - Deo Colônia Jardin Ciclo Cosméticos 100ml",
+      "familias": [
+        "doce"
+      ],
+      "intensidade": 1,
+      "ocasioes": [
+        "dia"
+      ]
+    },
+    "16151835403": {
+      "nome": "Beé Ciclo Mini Baby Ciclo Cosméticos Água de Colônia - Perfume Infantil 100ml",
+      "intensidade": 1,
+      "ocasioes": [
+        "dia"
+      ]
+    },
+    "16369600660": {
+      "nome": "Belle Colônia Lata 100ml - Pokoloka",
+      "intensidade": 1,
+      "ocasioes": [
+        "dia"
+      ]
+    },
+    "16359332365": {
+      "nome": "Bergamota Calábria - Deo Colônia Jardin Ciclo Cosméticos 100ml",
+      "familias": [
+        "citrico",
+        "floral"
+      ],
+      "intensidade": 1,
+      "ocasioes": [
+        "trabalho"
+      ]
+    },
+    "16664094180": {
+      "nome": "Billion Casino Royal - Paris Elysees Eau De Toilette 100ml",
+      "genero": "M",
+      "familias": [
+        "fresco",
+        "oriental"
+      ],
+      "intensidade": 1,
+      "ocasioes": [
+        "noite",
+        "dia"
+      ]
+    },
+    "16663938736": {
+      "nome": "Billion Exclusive Edition - Paris Elysees Eau De Toilette 100ml",
+      "genero": "M",
+      "familias": [
+        "amadeirado",
+        "doce"
+      ],
+      "intensidade": 1,
+      "ocasioes": [
+        "noite"
+      ]
+    },
+    "16664092655": {
+      "nome": "Billion For Men - Paris Elysees Eau De Toilette 100ml",
+      "genero": "M",
+      "familias": [
+        "oriental",
+        "citrico"
+      ],
+      "intensidade": 1,
+      "ocasioes": [
+        "noite"
+      ]
+    },
+    "16187857775": {
+      "nome": "Black Creek - La Rive Eau De Toilette 100ml",
+      "intensidade": 1,
+      "ocasioes": [
+        "dia"
+      ]
+    },
+    "16150145065": {
+      "nome": "Black Fury - La Rive Perfume Masculino Eau de Toilette 75ml Original",
+      "intensidade": 1,
+      "ocasioes": [
+        "dia"
+      ]
+    },
+    "16381966602": {
+      "nome": "Bloody Mary - Paris Elysees Eau De Toilette 100ml Original",
+      "genero": "F",
+      "intensidade": 1,
+      "ocasioes": [
+        "dia"
+      ]
+    },
+    "16375931987": {
+      "nome": "Blue Ocean - Brand Collection N° 070 Eau De Parfum 30ml Original",
+      "genero": "M",
+      "intensidade": 2,
+      "ocasioes": [
+        "dia",
+        "noite"
+      ]
+    },
+    "16186462205": {
+      "nome": "Body Splash 200ML Ciclo Cosméticos Deo Colônia Spray Original Variação:Kiss",
+      "familias": [
+        "floral"
+      ],
+      "intensidade": 1,
+      "ocasioes": [
+        "dia"
+      ]
+    },
+    "16277645823": {
+      "nome": "Brand Collection Beauty Girl Edp 30ml Para Feminino",
+      "genero": "F",
+      "intensidade": 2,
+      "ocasioes": [
+        "noite"
+      ]
+    },
+    "16187852361": {
+      "nome": "Brave - La Rive Eau De Toilette 100ml Original",
+      "intensidade": 1,
+      "ocasioes": [
+        "dia"
+      ]
+    },
+    "16299283434": {
+      "nome": "Cash Oud - Manasik Eau de Parfum 100ml Perfume Árabe Original",
+      "genero": "M",
+      "familias": [
+        "oriental",
+        "floral"
+      ],
+      "intensidade": 3,
+      "ocasioes": [
+        "noite"
+      ]
+    },
+    "16599559265": {
+      "nome": "Ch Carolina Herrera - Eau De Parfum 100ml",
+      "genero": "F",
+      "intensidade": 2,
+      "ocasioes": [
+        "dia",
+        "noite"
+      ]
+    },
+    "16416484295": {
+      "nome": "Chants Tenderina - Maison Alhambra Eau De Parfum 100ml",
+      "genero": "F",
+      "intensidade": 2,
+      "ocasioes": [
+        "dia",
+        "noite"
+      ]
+    },
+    "16381929187": {
+      "nome": "Charisme -  La Rive Eau De Parfum 90ml Original",
+      "genero": "F",
+      "intensidade": 2,
+      "ocasioes": [
+        "dia",
+        "noite"
+      ]
+    },
+    "16150235607": {
+      "nome": "Cici Mel Ciclo Mini Ciclo Cosméticos Deo Colônia - Perfume Infantil 100ml",
+      "familias": [
+        "doce"
+      ],
+      "intensidade": 1,
+      "ocasioes": [
+        "dia"
+      ]
+    },
+    "16150238761": {
+      "nome": "Cici Zoe Ciclo Mini Ciclo Cosméticos Deo Colônia - Perfume Infantil 100ml",
+      "intensidade": 1,
+      "ocasioes": [
+        "dia"
+      ]
+    },
+    "16186462209": {
+      "nome": "Ciclo Body Splash Kiss Me More 200ml",
+      "familias": [
+        "floral"
+      ],
+      "intensidade": 1,
+      "ocasioes": [
+        "dia"
+      ]
+    },
+    "16579454805": {
+      "nome": "Ciclo Cosméticos Jardin - Body Splash Flor de Laranjeira 250ml",
+      "familias": [
+        "floral"
+      ],
+      "intensidade": 1,
+      "ocasioes": [
+        "dia"
+      ]
+    },
+    "16314998642": {
+      "nome": "Club de Nuit Intense Man - Armaf Eau de Toilette 105ml",
+      "genero": "M",
+      "familias": [
+        "amadeirado",
+        "citrico"
+      ],
+      "ocasioes": [
+        "noite",
+        "trabalho"
+      ],
+      "intensidade": 3
+    },
+    "16436575607": {
+      "nome": "Club de Nuit Intense Woman Feminino - Armaf Eau de Toilette 105ml",
+      "genero": "F",
+      "intensidade": 3,
+      "ocasioes": [
+        "noite"
+      ]
+    },
+    "16187853074": {
+      "nome": "Cute - La Rive Eau De Parfum 100ml Original",
+      "genero": "F",
+      "intensidade": 2,
+      "ocasioes": [
+        "dia",
+        "noite"
+      ]
+    },
+    "16145297953": {
+      "nome": "Cuté La Rive Eau De Parfum - Perfume Feminino 30ml Original",
+      "genero": "F",
+      "intensidade": 2,
+      "ocasioes": [
+        "dia",
+        "noite"
+      ]
+    },
+    "16345984780": {
+      "nome": "Delilah - Maison Alhambra Eau de Parfum 100ml",
+      "genero": "F",
+      "familias": [
+        "floral",
+        "doce"
+      ],
+      "intensidade": 2,
+      "ocasioes": [
+        "dia",
+        "trabalho"
+      ]
+    },
+    "16580799748": {
+      "nome": "Delilah Blanc - Maison Alhambra Eau De Parfum 100ml",
+      "genero": "F",
+      "intensidade": 2,
+      "ocasioes": [
+        "dia",
+        "noite"
+      ]
+    },
+    "16187852685": {
+      "nome": "Destinee - La Rive Eau De Parfum 90ml Original",
+      "genero": "F",
+      "intensidade": 2,
+      "ocasioes": [
+        "dia",
+        "noite"
+      ]
+    },
+    "16187850179": {
+      "nome": "Donna La Rive - Perfume Feminino - Eau De Parfum - 90ml",
+      "genero": "F",
+      "intensidade": 2,
+      "ocasioes": [
+        "dia",
+        "noite"
+      ]
+    },
+    "16150248092": {
+      "nome": "Dream Ciclo Cosméticos Deo Colônia Lata 100ml Original",
+      "intensidade": 1,
+      "ocasioes": [
+        "dia"
+      ]
+    },
+    "16314987999": {
+      "nome": "Durrat Al Aroos - Al Wataniah Eau De Parfum 85ml Original",
+      "genero": "F",
+      "familias": [
+        "oriental",
+        "amadeirado"
+      ],
+      "ocasioes": [
+        "noite"
+      ],
+      "intensidade": 3
+    },
+    "16572155668": {
+      "nome": "Eclaire Pistache Eau De Parfum - Lattafa 100ml",
+      "genero": "F",
+      "intensidade": 2,
+      "ocasioes": [
+        "dia",
+        "noite"
+      ]
+    },
+    "16278966265": {
+      "nome": "Eftinam - Style & Scents Eau De Parfum 100ml Original",
+      "genero": "M",
+      "familias": [
+        "amadeirado",
+        "fresco"
+      ],
+      "intensidade": 3,
+      "ocasioes": [
+        "noite",
+        "dia"
+      ]
+    },
+    "16278968756": {
+      "nome": "Ejlal- Style & Scents Eau De Parfum 100ml Original",
+      "genero": "F",
+      "familias": [
+        "oriental",
+        "doce"
+      ],
+      "ocasioes": [
+        "noite"
+      ],
+      "intensidade": 3
+    },
+    "16185881900": {
+      "nome": "Elegant Woman - La Rive Eau De Parfum 100ml",
+      "genero": "F",
+      "intensidade": 2,
+      "ocasioes": [
+        "dia",
+        "noite"
+      ]
+    },
+    "16277644058": {
+      "nome": "Escandal - Brand Collection N° 136 Eau De Parfum 30ml Original",
+      "genero": "F",
+      "familias": [
+        "floral",
+        "doce"
+      ],
+      "ocasioes": [
+        "dia",
+        "noite"
+      ],
+      "intensidade": 2
+    },
+    "16187158262": {
+      "nome": "Eternal Kiss - La Rive Eau De Parfum 90ml Original",
+      "genero": "F",
+      "intensidade": 2,
+      "ocasioes": [
+        "dia",
+        "noite"
+      ]
+    },
+    "16314994937": {
+      "nome": "Fakhar Black - Lattafa Eau De Parfum Masculino 100ml",
+      "genero": "M",
+      "familias": [
+        "amadeirado",
+        "oriental"
+      ],
+      "ocasioes": [
+        "noite"
+      ],
+      "intensidade": 3
+    },
+    "16349340699": {
+      "nome": "Fakhar Gold - Lattafa Eau De Parfum Masculino 100ml",
+      "genero": "M",
+      "familias": [
+        "floral",
+        "oriental"
+      ],
+      "intensidade": 3,
+      "ocasioes": [
+        "noite"
+      ]
+    },
+    "16314996349": {
+      "nome": "Fakhar Rosê - Lattafa Eau De Parfum Femino 100ml",
+      "genero": "F",
+      "familias": [
+        "floral",
+        "oriental"
+      ],
+      "intensidade": 2,
+      "ocasioes": [
+        "dia"
+      ]
+    },
+    "16395334862": {
+      "nome": "Fantasy - Britney Spears Eau De Toilette 100ml Original",
+      "genero": "F",
+      "familias": [
+        "doce",
+        "floral"
+      ],
+      "ocasioes": [
+        "dia",
+        "noite"
+      ],
+      "intensidade": 2
+    },
+    "16581177987": {
+      "nome": "Fearless Man - La Rive Eau De Toilette 90ml Original",
+      "genero": "M",
+      "intensidade": 1,
+      "ocasioes": [
+        "dia"
+      ]
+    },
+    "16581173405": {
+      "nome": "Fleur Antique - La Rive Eau De Parfum 90ml Lançamento Original",
+      "genero": "F",
+      "intensidade": 2,
+      "ocasioes": [
+        "dia",
+        "noite"
+      ]
+    },
+    "16359331503": {
+      "nome": "Flor De Laranjeira - Deo Colônia Jardin Ciclo Cosméticos 100ml",
+      "familias": [
+        "floral",
+        "citrico"
+      ],
+      "intensidade": 1,
+      "ocasioes": [
+        "dia"
+      ]
+    },
+    "16151832925": {
+      "nome": "Forever Ciclo Cosméticos Deo Colônia Lata 100ml Original",
+      "intensidade": 1,
+      "ocasioes": [
+        "dia"
+      ]
+    },
+    "16416493074": {
+      "nome": "Gabriela Sabatini - Gabriela Sabatini Eau De Toilette 60ml",
+      "genero": "F",
+      "familias": [
+        "floral",
+        "amadeirado"
+      ],
+      "ocasioes": [
+        "dia",
+        "trabalho",
+        "noite"
+      ],
+      "intensidade": 2
+    },
+    "16069026890": {
+      "nome": "Givenchy - Linterdit Eau De Parfum 80ml",
+      "genero": "F",
+      "familias": [
+        "floral",
+        "amadeirado"
+      ],
+      "ocasioes": [
+        "noite",
+        "trabalho"
+      ],
+      "intensidade": 2
+    },
+    "16345986511": {
+      "nome": "Glacier Bella- Maison Alhambra Eau de Parfum 100ml",
+      "genero": "F",
+      "familias": [
+        "doce",
+        "floral"
+      ],
+      "ocasioes": [
+        "dia",
+        "noite"
+      ],
+      "intensidade": 2
+    },
+    "16345987553": {
+      "nome": "Glacier Bold - Maison Alhambra Eau de Parfum 100ml",
+      "genero": "M",
+      "familias": [
+        "amadeirado",
+        "citrico"
+      ],
+      "intensidade": 2,
+      "ocasioes": [
+        "noite"
+      ]
+    },
+    "16375931285": {
+      "nome": "Gold - Brand Collection N° 999.9 Eau De Parfum 30ml Original",
+      "genero": "M",
+      "familias": [
+        "floral",
+        "citrico"
+      ],
+      "intensidade": 2,
+      "ocasioes": [
+        "noite",
+        "dia"
+      ]
+    },
+    "16278969522": {
+      "nome": "Hannah Al Nashwa - Style & Scents Eau De Parfum 100ml Original",
+      "genero": "F",
+      "intensidade": 2,
+      "ocasioes": [
+        "dia",
+        "noite"
+      ]
+    },
+    "16579531474": {
+      "nome": "Harmah Eau De Parfum - Orygens Fragrances 100ml",
+      "genero": "M",
+      "familias": [
+        "doce",
+        "oriental"
+      ],
+      "intensidade": 2,
+      "ocasioes": [
+        "noite"
+      ]
+    },
+    "16355997472": {
+      "nome": "Hatim - Al Absar Eau De Parfum 100ml",
+      "genero": "M",
+      "intensidade": 2,
+      "ocasioes": [
+        "dia",
+        "noite"
+      ]
+    },
+    "16412879391": {
+      "nome": "Haya - Lattafa Eau de Parfum 100ml",
+      "genero": "F",
+      "intensidade": 2,
+      "ocasioes": [
+        "dia",
+        "noite"
+      ]
+    },
+    "16416482396": {
+      "nome": "Hayaati - Lattafa Eau De Parfum 100ml",
+      "genero": "M",
+      "intensidade": 2,
+      "ocasioes": [
+        "dia",
+        "noite"
+      ]
+    },
+    "16375928694": {
+      "nome": "Heaven - Brand Collection N° 168 Eau De Parfum 30ml Original",
+      "genero": "F",
+      "intensidade": 2,
+      "ocasioes": [
+        "dia",
+        "noite"
+      ]
+    },
+    "16348452102": {
+      "nome": "Hello Hello! Nah Cardoso Ciclo Cosméticos Deo Colônia Lata - Perfume Feminino 100ml Nova Embalagem",
+      "intensidade": 1,
+      "ocasioes": [
+        "dia"
+      ]
+    },
+    "16145307978": {
+      "nome": "Her Choice La Rive Eau De Parfum - Perfume Feminino 30ml",
+      "genero": "F",
+      "intensidade": 2,
+      "ocasioes": [
+        "dia",
+        "noite"
+      ]
+    },
+    "16187855688": {
+      "nome": "In Flames - La Rive Eau De Parfum 90ml Original",
+      "genero": "F",
+      "intensidade": 2,
+      "ocasioes": [
+        "dia",
+        "noite"
+      ]
+    },
+    "16449849280": {
+      "nome": "In Love - La Rive Eau De Parfum 90ml",
+      "genero": "F",
+      "intensidade": 2,
+      "ocasioes": [
+        "dia",
+        "noite"
+      ]
+    },
+    "16204914363": {
+      "nome": "In Woman - La Rive 30ml Eau de Parfum Original",
+      "genero": "F",
+      "intensidade": 2,
+      "ocasioes": [
+        "dia",
+        "noite"
+      ]
+    },
+    "16204915040": {
+      "nome": "In Woman - La Rive Eau de Parfum 90ml Original",
+      "genero": "F",
+      "intensidade": 2,
+      "ocasioes": [
+        "dia",
+        "noite"
+      ]
+    },
+    "16381970033": {
+      "nome": "Indala - Paris Elysees Eau De Toilette 100ml Original",
+      "genero": "F",
+      "intensidade": 1,
+      "ocasioes": [
+        "dia"
+      ]
+    },
+    "16384880268": {
+      "nome": "Indalo - Paris Elysees Eau De Toilette 100ml Original",
+      "intensidade": 1,
+      "ocasioes": [
+        "dia"
+      ]
+    },
+    "16597357039": {
+      "nome": "Intense - Body Splash Ciclo Cosméticos Youly By Kéfera 200ml",
+      "familias": [
+        "oriental",
+        "amadeirado"
+      ],
+      "intensidade": 3,
+      "ocasioes": [
+        "dia"
+      ]
+    },
+    "16599841031": {
+      "nome": "Intense - Body Splash Ciclo Cosméticos Youly By Kéfera 30ml + Chaveiro",
+      "familias": [
+        "oriental",
+        "amadeirado"
+      ],
+      "intensidade": 3,
+      "ocasioes": [
+        "dia",
+        "esporte"
+      ]
+    },
+    "16613589311": {
+      "nome": "Íris - Deo Colônia Jardin Ciclo Cosméticos 100ml",
+      "familias": [
+        "floral"
+      ],
+      "intensidade": 1,
+      "ocasioes": [
+        "dia"
+      ]
+    },
+    "16187857273": {
+      "nome": "Ironstone Edt 100ml Para Masculino",
+      "intensidade": 1,
+      "ocasioes": [
+        "dia"
+      ]
+    },
+    "16359386749": {
+      "nome": "Jardin Nectarina - Deo Colônia Jardin Ciclo Cosméticos 100ml",
+      "intensidade": 1,
+      "ocasioes": [
+        "dia"
+      ]
+    },
+    "16359330269": {
+      "nome": "Jasmim Sambac - Deo Colônia Jardin Ciclo Cosméticos 100ml",
+      "familias": [
+        "floral",
+        "fresco"
+      ],
+      "intensidade": 1,
+      "ocasioes": [
+        "dia"
+      ]
+    },
+    "16469462036": {
+      "nome": "Jasmim Sambac - Hidratante Ciclo Cosméticos Jardin 250ml",
+      "familias": [
+        "floral"
+      ],
+      "intensidade": 2,
+      "ocasioes": [
+        "dia"
+      ]
+    },
+    "16412961136": {
+      "nome": "Joop Homme - Joop Eau De Toilette 125ml",
+      "genero": "M",
+      "familias": [
+        "oriental",
+        "citrico"
+      ],
+      "intensidade": 1,
+      "ocasioes": [
+        "dia"
+      ]
+    },
+    "16151833453": {
+      "nome": "Kiss Ciclo Cosméticos Deo Colônia Lata 100ml Original",
+      "intensidade": 1,
+      "ocasioes": [
+        "dia"
+      ]
+    },
+    "16620094662": {
+      "nome": "Kiss Me More Ciclo Cosméticos (Conjunto) Volume:100ml",
+      "intensidade": 2,
+      "ocasioes": [
+        "dia",
+        "noite"
+      ]
+    },
+    "16620094663": {
+      "nome": "Kiss Me More Ciclo Cosméticos (Conjunto) Volume:50ml",
+      "intensidade": 2,
+      "ocasioes": [
+        "dia",
+        "noite"
+      ]
+    },
+    "16151834276": {
+      "nome": "Kiss Me More Ciclo Cosméticos Com Lata - Perfume Feminino 100ml",
+      "intensidade": 2,
+      "ocasioes": [
+        "dia",
+        "noite"
+      ]
+    },
+    "16585235876": {
+      "nome": "Kiss Me More Ciclo Cosméticos Deo Colônia Lata 50ml Original",
+      "intensidade": 1,
+      "ocasioes": [
+        "dia"
+      ]
+    },
+    "16620743971": {
+      "nome": "Kit 3 Body Splashes Ciclo Cosméticos Youly By Kefera 200ml",
+      "intensidade": 1,
+      "ocasioes": [
+        "dia"
+      ]
+    },
+    "16151839791": {
+      "nome": "Kit Colônia 30ml + Loção Hidratante Corporal 240ml Ciclo",
+      "intensidade": 1,
+      "ocasioes": [
+        "dia"
+      ]
+    },
+    "16664095230": {
+      "nome": "La Petite Fleur Blanche - Paris Elysees Eau De Toilette 100ml",
+      "genero": "F",
+      "familias": [
+        "floral",
+        "doce"
+      ],
+      "intensidade": 1,
+      "ocasioes": [
+        "dia"
+      ]
+    },
+    "16615950709": {
+      "nome": "La Vida Ciclo Cosméticos Deo Colônia Lata - Perfume Feminino 100ML",
+      "familias": [
+        "doce",
+        "amadeirado"
+      ],
+      "intensidade": 1,
+      "ocasioes": [
+        "dia"
+      ]
+    },
+    "16582442686": {
+      "nome": "La Vie Est Belle - Lancôme Eau De Parfum 100ml",
+      "genero": "F",
+      "intensidade": 2,
+      "ocasioes": [
+        "dia",
+        "noite"
+      ]
+    },
+    "16345989215": {
+      "nome": "La Voie - Maison Alhambra Eau de Parfum 100ml",
+      "genero": "F",
+      "familias": [
+        "floral",
+        "amadeirado"
+      ],
+      "ocasioes": [
+        "noite",
+        "trabalho"
+      ],
+      "intensidade": 2
+    },
+    "16187190916": {
+      "nome": "Laguna Salvador Dalí Eau de Toilette - Perfume Feminino 30ml",
+      "intensidade": 1,
+      "ocasioes": [
+        "dia"
+      ]
+    },
+    "16466438461": {
+      "nome": "Lattafa - La Collection D' Antiquites Pride 1910 Eau De Parfum 100ml",
+      "intensidade": 2,
+      "ocasioes": [
+        "dia",
+        "noite"
+      ]
+    },
+    "16069021529": {
+      "nome": "Le Male - Jean Paul Gaultier Eau de toilette 125ml",
+      "genero": "M",
+      "familias": [
+        "fresco",
+        "amadeirado"
+      ],
+      "ocasioes": [
+        "noite",
+        "trabalho"
+      ],
+      "intensidade": 2
+    },
+    "16069027565": {
+      "nome": "Le Male Le Parfum - Jean Paul Gaultier Eau De Parfum 125ml",
+      "genero": "M",
+      "intensidade": 3,
+      "ocasioes": [
+        "noite"
+      ]
+    },
+    "16345990968": {
+      "nome": "Leonie - Maison Alhambra Eau de Parfum 100ml",
+      "genero": "F",
+      "familias": [
+        "floral",
+        "citrico"
+      ],
+      "intensidade": 2,
+      "ocasioes": [
+        "dia",
+        "trabalho"
+      ]
+    },
+    "16069026320": {
+      "nome": "Libre - Yves Saint Laurent Eau De Parfum 90ml",
+      "genero": "F",
+      "intensidade": 2,
+      "ocasioes": [
+        "dia",
+        "noite"
+      ]
+    },
+    "16375369428": {
+      "nome": "Lilac - Manasik Eau De Parfum 100ml",
+      "genero": "F",
+      "familias": [
+        "floral",
+        "fresco"
+      ],
+      "ocasioes": [
+        "dia",
+        "trabalho"
+      ],
+      "intensidade": 2
+    },
+    "16369606432": {
+      "nome": "Loka Sugar Creme Hidratante - Pokoloka 240ml",
+      "intensidade": 2,
+      "ocasioes": [
+        "dia",
+        "noite"
+      ]
+    },
+    "16150157542": {
+      "nome": "Look Of Woman - La Rive Eau de Parfum 75ML Original",
+      "genero": "F",
+      "intensidade": 2,
+      "ocasioes": [
+        "dia",
+        "noite"
+      ]
+    },
+    "16187857028": {
+      "nome": "LR Password - La Rive Eau de Toilette 75ml Original",
+      "intensidade": 1,
+      "ocasioes": [
+        "dia"
+      ]
+    },
+    "16384775608": {
+      "nome": "Lumina Gold - Stella Dustin Eau De Parfum 100ml",
+      "genero": "M",
+      "intensidade": 2,
+      "ocasioes": [
+        "dia",
+        "noite"
+      ]
+    },
+    "16384786869": {
+      "nome": "Lumina Rose - Stella Dustin Eau De Parfum 100ml",
+      "genero": "F",
+      "intensidade": 2,
+      "ocasioes": [
+        "dia",
+        "noite"
+      ]
+    },
+    "16187851104": {
+      "nome": "Madame Isabelle - La Rive Eau De Parfum 90ml Original",
+      "genero": "F",
+      "intensidade": 2,
+      "ocasioes": [
+        "dia",
+        "noite"
+      ]
+    },
+    "16567907370": {
+      "nome": "Maitre De Blue - Maison Alhambra Eau De Parfum 100ml",
+      "genero": "M",
+      "intensidade": 2,
+      "ocasioes": [
+        "dia",
+        "noite"
+      ]
+    },
+    "16299280938": {
+      "nome": "Malikat Al Arab Manasik Edp Unissex 100ml",
+      "genero": "F",
+      "intensidade": 2,
+      "ocasioes": [
+        "dia",
+        "noite"
+      ]
+    },
+    "16299282804": {
+      "nome": "Manasik Al Noble Safeer Edp - Perfume Hombre 100ml",
+      "genero": "M",
+      "familias": [
+        "amadeirado",
+        "fresco"
+      ],
+      "ocasioes": [
+        "trabalho",
+        "noite"
+      ],
+      "intensidade": 2
+    },
+    "16299281472": {
+      "nome": "Manasik Makhsouse Edp - Perfume Masculino 100ml Volume Da Unidade 100 Ml",
+      "genero": "M",
+      "intensidade": 2,
+      "ocasioes": [
+        "dia",
+        "noite"
+      ]
+    },
+    "16299275919": {
+      "nome": "Manasik Malikat Al Arab Rose Edp - Perfume Feminino 100ml Volume Da Unidade 100 Ml",
+      "genero": "F",
+      "intensidade": 2,
+      "ocasioes": [
+        "dia",
+        "noite"
+      ]
+    },
+    "16382035200": {
+      "nome": "Metamen - Paris Elysees Eau De Toilette 100ml Original",
+      "genero": "M",
+      "intensidade": 1,
+      "ocasioes": [
+        "dia"
+      ]
+    },
+    "16253516117": {
+      "nome": "Metaphor - La Rive Eau De Parfum 90ml Original",
+      "genero": "F",
+      "intensidade": 2,
+      "ocasioes": [
+        "dia",
+        "noite"
+      ]
+    },
+    "16187856745": {
+      "nome": "Miss Dream La Rive Eau De Parfum - Perfume Feminino 100ml",
+      "genero": "F",
+      "intensidade": 2,
+      "ocasioes": [
+        "dia",
+        "noite"
+      ]
+    },
+    "16597357517": {
+      "nome": "Move - Body Splash Ciclo Cosméticos Youly By Kéfera 200ml",
+      "familias": [
+        "doce",
+        "oriental"
+      ],
+      "intensidade": 1,
+      "ocasioes": [
+        "esporte"
+      ]
+    },
+    "16599843556": {
+      "nome": "Move - Body Splash Ciclo Cosmeticos Youly By Kéfera 30ml + Chaveiro",
+      "familias": [
+        "doce",
+        "oriental"
+      ],
+      "intensidade": 1,
+      "ocasioes": [
+        "esporte"
+      ]
+    },
+    "16359561100": {
+      "nome": "Move On - La Rive Eau De Toilette 100ml Original",
+      "genero": "M",
+      "intensidade": 1,
+      "ocasioes": [
+        "dia"
+      ]
+    },
+    "16187858037": {
+      "nome": "Mr Sharp - La Rive Eau de Toilette 100ml Original",
+      "intensidade": 1,
+      "ocasioes": [
+        "dia"
+      ]
+    },
+    "16355999390": {
+      "nome": "Mudiyah - Al Absar Eau De Parfum 100ml",
+      "genero": "F",
+      "intensidade": 2,
+      "ocasioes": [
+        "dia",
+        "noite"
+      ]
+    },
+    "16380508609": {
+      "nome": "Musk Abiyad - Manasik Eau De Parfum 100ml Perfume Árabe",
+      "genero": "F",
+      "intensidade": 2,
+      "ocasioes": [
+        "dia",
+        "noite"
+      ]
+    },
+    "16579531072": {
+      "nome": "Muyaza Eau De Parfum - Orygens Fragrances 100ml",
+      "genero": "M",
+      "familias": [
+        "oriental",
+        "amadeirado"
+      ],
+      "ocasioes": [
+        "noite"
+      ],
+      "intensidade": 3
+    },
+    "16579532564": {
+      "nome": "Namal Eau De Parfum - Orygens Fragrances 100ml",
+      "genero": "F",
+      "familias": [
+        "doce",
+        "floral"
+      ],
+      "ocasioes": [
+        "dia",
+        "noite"
+      ],
+      "intensidade": 2
+    },
+    "16457130036": {
+      "nome": "Nautica - Voyage Eau De Toilette 100ml",
+      "genero": "M",
+      "familias": [
+        "fresco",
+        "amadeirado"
+      ],
+      "ocasioes": [
+        "dia",
+        "esporte"
+      ],
+      "intensidade": 1
+    },
+    "16544812132": {
+      "nome": "Noor Extrait De Parfum - Riiffs 100ml",
+      "genero": "F",
+      "familias": [
+        "doce",
+        "oriental"
+      ],
+      "intensidade": 3,
+      "ocasioes": [
+        "noite"
+      ]
+    },
+    "16069024529": {
+      "nome": "One - Calvin Klein Eau De Toilette 100ml",
+      "genero": "M",
+      "intensidade": 1,
+      "ocasioes": [
+        "dia"
+      ]
+    },
+    "16382055410": {
+      "nome": "One Night Las Vegas - Paris Elysees Eau De Toilette 100ml",
+      "genero": "M",
+      "intensidade": 1,
+      "ocasioes": [
+        "dia"
+      ]
+    },
+    "16613588645": {
+      "nome": "Orquídea  - Deo Colônia Jardin Ciclo Cosméticos 100ml",
+      "familias": [
+        "floral"
+      ],
+      "intensidade": 1,
+      "ocasioes": [
+        "dia"
+      ]
+    },
+    "16278963101": {
+      "nome": "Oud Al Aroos - Style & Scents Eau De Parfum 100ml Original",
+      "genero": "M",
+      "familias": [
+        "oriental",
+        "amadeirado"
+      ],
+      "ocasioes": [
+        "noite"
+      ],
+      "intensidade": 3
+    },
+    "16356001822": {
+      "nome": "Oud Al Samaawat - Al absar Eau De Parfum 100ml",
+      "genero": "F",
+      "familias": [
+        "oriental",
+        "amadeirado"
+      ],
+      "intensidade": 2,
+      "ocasioes": [
+        "noite",
+        "dia"
+      ]
+    },
+    "16375370762": {
+      "nome": "Oud Lilab - Manasik Eau De Parfum 100ml",
+      "genero": "M",
+      "familias": [
+        "oriental"
+      ],
+      "intensidade": 2,
+      "ocasioes": [
+        "dia",
+        "noite"
+      ]
+    },
+    "16277645280": {
+      "nome": "Perfume 012 Tubete 30ml Brand Collection Volume Da Unidade 30 Ml",
+      "genero": "F",
+      "intensidade": 2,
+      "ocasioes": [
+        "dia",
+        "noite"
+      ]
+    },
+    "16349323556": {
+      "nome": "Perfume Al Wataniah Attar Al Wesal Masculino Eau De Parfum 100ml",
+      "genero": "M",
+      "familias": [
+        "fresco",
+        "doce"
+      ],
+      "intensidade": 2,
+      "ocasioes": [
+        "dia",
+        "noite"
+      ]
+    },
+    "16314991807": {
+      "nome": "Perfume Al Wataniah Watani Edp 100ml Feminino",
+      "genero": "F",
+      "intensidade": 2,
+      "ocasioes": [
+        "dia",
+        "noite"
+      ]
+    },
+    "16286445613": {
+      "nome": "Perfume Arabe Al Luli Abiyedh Sahari Edp 100ml Volume Da Unidade 100 Ml",
+      "genero": "F",
+      "intensidade": 2,
+      "ocasioes": [
+        "dia",
+        "noite"
+      ]
+    },
+    "16278965666": {
+      "nome": "Perfume Árabe Al Shuruq 100ml - Style & Scents Masculino Forte, Marcante, Aromático. Alta Fixação",
+      "genero": "M",
+      "intensidade": 1,
+      "ocasioes": [
+        "noite"
+      ]
+    },
+    "16314985846": {
+      "nome": "Perfume Árabe Feminino Al Wataniah Sabah Al Ward Edp 100ml",
+      "genero": "F",
+      "familias": [
+        "floral",
+        "fresco"
+      ],
+      "intensidade": 2,
+      "ocasioes": [
+        "dia"
+      ]
+    },
+    "16314994084": {
+      "nome": "Perfume Árabe Masculino Lattafa Asad Eau De Parfum Edp 100ml",
+      "genero": "M",
+      "familias": [
+        "oriental",
+        "fresco"
+      ],
+      "intensidade": 3,
+      "ocasioes": [
+        "noite"
+      ]
+    },
+    "16279974886": {
+      "nome": "Perfume Árabe Masculino Namir 100ml Style & Scents Eau De Parfum",
+      "genero": "M",
+      "intensidade": 2,
+      "ocasioes": [
+        "noite"
+      ]
+    },
+    "16605310469": {
+      "nome": "Perfume Eau De Toilette La Rive Brave Masculino Cítrico 30ml",
+      "familias": [
+        "citrico"
+      ],
+      "intensidade": 1,
+      "ocasioes": [
+        "dia"
+      ]
+    },
+    "16145304836": {
+      "nome": "Perfume Masculino Extreme Story Eau De Toilette 30ml La Rive",
+      "genero": "F",
+      "intensidade": 2,
+      "ocasioes": [
+        "dia",
+        "noite"
+      ]
+    },
+    "16286446459": {
+      "nome": "Perfume Sahari Al Mas The Diamond Eau De Parfum 100ml",
+      "genero": "F",
+      "intensidade": 2,
+      "ocasioes": [
+        "noite"
+      ]
+    },
+    "16286445156": {
+      "nome": "Perfume Sahari Sultana Halima Eau De Parfum 100ml Volume Da Unidade 100 Ml",
+      "genero": "F",
+      "intensidade": 2,
+      "ocasioes": [
+        "noite"
+      ]
+    },
+    "16345992249": {
+      "nome": "Perseus - Maison Alhambra Eau de Parfum 100ml",
+      "genero": "M",
+      "familias": [
+        "amadeirado",
+        "oriental"
+      ],
+      "ocasioes": [
+        "noite",
+        "trabalho"
+      ],
+      "intensidade": 2
+    },
+    "16069027563": {
+      "nome": "Phantom Edt 100ml Masculino Original",
+      "intensidade": 1,
+      "ocasioes": [
+        "dia"
+      ]
+    },
+    "16369599240": {
+      "nome": "PLOC Colônia Lata 100ml - Pokoloka",
+      "intensidade": 1,
+      "ocasioes": [
+        "dia"
+      ]
+    },
+    "16381933290": {
+      "nome": "Poetique -  La Rive Eau De Parfum 90ml Original",
+      "genero": "F",
+      "intensidade": 2,
+      "ocasioes": [
+        "dia",
+        "noite"
+      ]
+    },
+    "16609201119": {
+      "nome": "Polo Blue - Ralph Laurent Eau De Parfum 125ml",
+      "genero": "M",
+      "intensidade": 2,
+      "ocasioes": [
+        "dia",
+        "noite"
+      ]
+    },
+    "16597357983": {
+      "nome": "Power - Body Splash Ciclo Cosméticos Youly By Kéfera 200ml",
+      "familias": [
+        "amadeirado",
+        "oriental"
+      ],
+      "intensidade": 1,
+      "ocasioes": [
+        "dia"
+      ]
+    },
+    "16599838827": {
+      "nome": "Power - Body Splash Ciclo Cosmeticos Youly By Kéfera 30ml + Chaveiro",
+      "familias": [
+        "amadeirado",
+        "fresco"
+      ],
+      "intensidade": 1,
+      "ocasioes": [
+        "esporte"
+      ]
+    },
+    "16187848315": {
+      "nome": "Queen of Life - La Rive Eau de Parfum 75ml Original",
+      "genero": "F",
+      "intensidade": 2,
+      "ocasioes": [
+        "dia",
+        "noite"
+      ]
+    },
+    "16624842695": {
+      "nome": "Raposete Ciclo Mini Ciclo Cosméticos Deo Colônia - Perfume Infantil 100ml",
+      "familias": [
+        "doce",
+        "floral"
+      ],
+      "intensidade": 1,
+      "ocasioes": [
+        "dia"
+      ]
+    },
+    "16579533174": {
+      "nome": "Red Eau De Parfum - Orygens Fragrances 100ml",
+      "genero": "F",
+      "familias": [
+        "oriental",
+        "doce"
+      ],
+      "intensidade": 3,
+      "ocasioes": [
+        "noite"
+      ]
+    },
+    "16194608674": {
+      "nome": "Red Shine - Giverny Colônia Feminina 100ml Original",
+      "intensidade": 1,
+      "ocasioes": [
+        "dia"
+      ]
+    },
+    "16150210543": {
+      "nome": "River Of Love - La Rive Perfume Feminino Eau De Parfum 100ml Original",
+      "genero": "F",
+      "familias": [
+        "floral",
+        "doce"
+      ],
+      "ocasioes": [
+        "dia",
+        "noite"
+      ],
+      "intensidade": 2
+    },
+    "16384870216": {
+      "nome": "Rouge Absolu - Paris Elysees Eau De Toilette 100ml Original",
+      "genero": "F",
+      "intensidade": 1,
+      "ocasioes": [
+        "dia"
+      ]
+    },
+    "16187191158": {
+      "nome": "Rubylips - Salvador Dalí Eau de Toilette 30ml",
+      "intensidade": 1,
+      "ocasioes": [
+        "dia"
+      ]
+    },
+    "16345962514": {
+      "nome": "Saffira -  La Rive Eau De Parfum 90ml Original",
+      "genero": "F",
+      "intensidade": 2,
+      "ocasioes": [
+        "dia",
+        "noite"
+      ]
+    },
+    "16356003357": {
+      "nome": "Saher Rosê - Al Absar Eau De Parfum 100ml",
+      "genero": "F",
+      "familias": [
+        "floral",
+        "amadeirado"
+      ],
+      "ocasioes": [
+        "dia",
+        "noite"
+      ],
+      "intensidade": 2
+    },
+    "16345994616": {
+      "nome": "Salvo - Maison Alhambra Eau de Parfum 100ml",
+      "genero": "M",
+      "familias": [
+        "oriental",
+        "amadeirado"
+      ],
+      "intensidade": 3,
+      "ocasioes": [
+        "noite",
+        "dia"
+      ]
+    },
+    "16579532756": {
+      "nome": "Sama Eau De Parfum - Orygens Fragrances 100ml",
+      "genero": "F",
+      "familias": [
+        "floral",
+        "citrico"
+      ],
+      "intensidade": 2,
+      "ocasioes": [
+        "dia"
+      ]
+    },
+    "16356003675": {
+      "nome": "Saqar Platinum - Al Absar Eau De Parfum 100ml",
+      "genero": "M",
+      "familias": [
+        "amadeirado",
+        "oriental"
+      ],
+      "ocasioes": [
+        "noite"
+      ],
+      "intensidade": 3
+    },
+    "16579533009": {
+      "nome": "Sarath Eau De Parfum - Orygens Fragragrances 100ml",
+      "genero": "F",
+      "familias": [
+        "floral",
+        "doce"
+      ],
+      "intensidade": 2,
+      "ocasioes": [
+        "dia",
+        "noite"
+      ]
+    },
+    "16369602446": {
+      "nome": "Scandy Colônia Lata 100ml - Pokoloka",
+      "intensidade": 1,
+      "ocasioes": [
+        "dia"
+      ]
+    },
+    "16663937321": {
+      "nome": "Sexy Woman Love - Paris Elysees Eau De Toilette 100ml",
+      "genero": "F",
+      "familias": [
+        "doce",
+        "floral"
+      ],
+      "intensidade": 3,
+      "ocasioes": [
+        "noite"
+      ]
+    },
+    "16356018928": {
+      "nome": "Silver Scent -  Jacques Bogart Eau De Toilette 100ml Original",
+      "genero": "M",
+      "familias": [
+        "amadeirado",
+        "citrico"
+      ],
+      "ocasioes": [
+        "trabalho",
+        "noite"
+      ],
+      "intensidade": 2
+    },
+    "16069021467": {
+      "nome": "Silver Scent - Eau De Toilette 100ml Masculino Original",
+      "intensidade": 1,
+      "ocasioes": [
+        "dia"
+      ]
+    },
+    "16194620072": {
+      "nome": "Solar - Giverny Colônia Feminina 100ml Original",
+      "intensidade": 1,
+      "ocasioes": [
+        "dia"
+      ]
+    },
+    "16349332119": {
+      "nome": "Special Oud - Al Wataniah Eau De Parfum 100ml Original",
+      "genero": "M",
+      "familias": [
+        "oriental",
+        "amadeirado"
+      ],
+      "ocasioes": [
+        "noite"
+      ],
+      "intensidade": 3
+    },
+    "16590620489": {
+      "nome": "Spectre Ghost - French Avenue Eau De Parfum 100ml",
+      "intensidade": 2,
+      "ocasioes": [
+        "dia",
+        "noite"
+      ]
+    },
+    "16399877157": {
+      "nome": "Stella Dustin - Fleurs Black Dahlia Eau De Parfum 100ml",
+      "genero": "F",
+      "intensidade": 2,
+      "ocasioes": [
+        "dia",
+        "noite"
+      ]
+    },
+    "16399872450": {
+      "nome": "Stella Dustin - Fleurs Brunnera Eau De Parfum 100ml",
+      "genero": "F",
+      "intensidade": 2,
+      "ocasioes": [
+        "dia",
+        "noite"
+      ]
+    },
+    "16399875030": {
+      "nome": "Stella Dustin - Fleurs Camellia Eau De Parfum 100ml",
+      "genero": "F",
+      "familias": [
+        "floral",
+        "doce"
+      ],
+      "ocasioes": [
+        "dia",
+        "noite"
+      ],
+      "intensidade": 2
+    },
+    "16399880432": {
+      "nome": "Stella Dustin - Ikario Eau De Parfum 100ml",
+      "genero": "M",
+      "intensidade": 2,
+      "ocasioes": [
+        "dia",
+        "noite"
+      ]
+    },
+    "16349334853": {
+      "nome": "Sultan Al Lail - Al Wataniah Eau De Parfum 100ml",
+      "genero": "M",
+      "familias": [
+        "amadeirado",
+        "fresco"
+      ],
+      "ocasioes": [
+        "trabalho",
+        "noite"
+      ],
+      "intensidade": 2
+    },
+    "16381962729": {
+      "nome": "Sweet Mambo - Paris Elysees Eau De Toilette 100ml Original",
+      "genero": "F",
+      "intensidade": 1,
+      "ocasioes": [
+        "dia"
+      ]
+    },
+    "16416489856": {
+      "nome": "The Golden Secret  - Antonio Banderas Eau De Toilette 100ml",
+      "genero": "M",
+      "familias": [
+        "fresco",
+        "oriental"
+      ],
+      "intensidade": 1,
+      "ocasioes": [
+        "dia"
+      ]
+    },
+    "16356023227": {
+      "nome": "The Icon - Antonio Banderas Eau De Toilette 100ml",
+      "genero": "M",
+      "familias": [
+        "amadeirado",
+        "fresco"
+      ],
+      "ocasioes": [
+        "dia",
+        "trabalho"
+      ],
+      "intensidade": 2
+    },
+    "16069023857": {
+      "nome": "The Icon - Antonio Banderas Eau De Toilette 100ml Original",
+      "genero": "M",
+      "familias": [
+        "amadeirado",
+        "citrico"
+      ],
+      "intensidade": 1,
+      "ocasioes": [
+        "trabalho"
+      ]
+    },
+    "16582708476": {
+      "nome": "The Icon Woman - Antonio Banderas Eau De Parfum 100ml",
+      "genero": "F",
+      "intensidade": 2,
+      "ocasioes": [
+        "dia",
+        "noite"
+      ]
+    },
+    "16580787218": {
+      "nome": "The Rosê - Al Absar Eau De Parfum 100ml",
+      "genero": "F",
+      "familias": [
+        "floral",
+        "citrico"
+      ],
+      "intensidade": 2,
+      "ocasioes": [
+        "dia"
+      ]
+    },
+    "16580755998": {
+      "nome": "Tibya Eau De Parfum - Al Wataniah 100ml",
+      "genero": "F",
+      "familias": [
+        "floral",
+        "amadeirado"
+      ],
+      "intensidade": 2,
+      "ocasioes": [
+        "dia",
+        "noite"
+      ]
+    },
+    "16375373413": {
+      "nome": "Umri Black - Manasik Eau De Parfum 100ml",
+      "genero": "M",
+      "intensidade": 2,
+      "ocasioes": [
+        "dia",
+        "noite"
+      ]
+    },
+    "16627541776": {
+      "nome": "Velvety Deo Colônia Lata 100ml - Ciclo Cosméticos Original",
+      "intensidade": 1,
+      "ocasioes": [
+        "dia"
+      ]
+    },
+    "16664094294": {
+      "nome": "Vodka Brasil Azul (Blue) - Paris Elysees Eau De Toilette 100ml",
+      "genero": "M",
+      "familias": [
+        "amadeirado",
+        "citrico"
+      ],
+      "intensidade": 1,
+      "ocasioes": [
+        "noite",
+        "dia"
+      ]
+    },
+    "16663936035": {
+      "nome": "Vodka Brasil Yellow (Amarelo) - Paris Elysees Eau De Toilette 100ml",
+      "genero": "M",
+      "familias": [
+        "fresco",
+        "amadeirado"
+      ],
+      "ocasioes": [
+        "dia",
+        "esporte",
+        "trabalho"
+      ],
+      "intensidade": 2
+    },
+    "16663938465": {
+      "nome": "Vodka Limited Edition - Paris Elysees Eau De Toilette 100ml",
+      "genero": "M",
+      "familias": [
+        "oriental",
+        "amadeirado"
+      ],
+      "intensidade": 1,
+      "ocasioes": [
+        "dia"
+      ]
+    },
+    "16663936862": {
+      "nome": "Vodka Love - Paris Elysees Eau De Toilette 100ml",
+      "genero": "M",
+      "familias": [
+        "doce",
+        "floral"
+      ],
+      "intensidade": 1,
+      "ocasioes": [
+        "noite",
+        "dia"
+      ]
+    },
+    "16664094431": {
+      "nome": "Vodka Wild - Paris Elysees Eau De Toilette 100ml",
+      "genero": "M",
+      "familias": [
+        "amadeirado",
+        "citrico"
+      ],
+      "intensidade": 1,
+      "ocasioes": [
+        "dia"
+      ]
+    },
+    "16384860707": {
+      "nome": "Woody Mambo - Paris Elysees Eau De Toilette 100ml Original",
+      "genero": "M",
+      "intensidade": 1,
+      "ocasioes": [
+        "dia"
+      ]
+    },
+    "16667462918": {
+      "nome": "World Cup - Zakat Perfume Unissex Eau De Parfum 100ml",
+      "genero": "U",
+      "intensidade": 2,
+      "ocasioes": [
+        "dia",
+        "noite"
+      ]
+    },
+    "16667463611": {
+      "nome": "World Cup Vip - Zakat Perfume Unissex Eau De Parfum 100ml",
+      "genero": "U",
+      "intensidade": 2,
+      "ocasioes": [
+        "dia",
+        "noite"
+      ]
+    },
+    "16349342008": {
+      "nome": "Yara - Lattafa Eau De Parfum Feminino 100ml",
+      "genero": "F",
+      "familias": [
+        "doce",
+        "floral"
+      ],
+      "ocasioes": [
+        "dia",
+        "noite"
+      ],
+      "intensidade": 2
+    },
+    "16345995901": {
+      "nome": "Yeah - Maison Alhambra Eau de Parfum 100ml",
+      "genero": "M",
+      "familias": [
+        "fresco",
+        "citrico"
+      ],
+      "intensidade": 2,
+      "ocasioes": [
+        "dia"
+      ]
+    }
   }
 }

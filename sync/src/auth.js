@@ -23,7 +23,6 @@ const redirectUri = process.env.BLING_REDIRECT_URI || 'http://localhost:3000/cal
 
 const redirect = new URL(redirectUri);
 const port = Number(redirect.port || 80);
-const callbackPath = redirect.pathname || '/callback';
 const state = crypto.randomBytes(16).toString('hex');
 
 const authUrl = new URL(AUTHORIZE_URL);
@@ -33,8 +32,11 @@ authUrl.searchParams.set('state', state);
 
 const app = express();
 
-app.get(callbackPath, async (req, res) => {
+// O callback é aceito em qualquer rota: o Bling redireciona para a URI
+// cadastrada no app (raiz ou /callback), e as duas devem funcionar.
+app.get('*', async (req, res, next) => {
   const { code, state: returnedState, error } = req.query;
+  if (!code && !error) return next();
   if (error) {
     res.status(400).send(`<h2>Autorização negada: ${error}</h2>`);
     console.error(`\n[erro] Autorização negada pelo Bling: ${error}`);
@@ -62,7 +64,7 @@ app.get(callbackPath, async (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`\n[auth] Aguardando callback do Bling em ${redirectUri} ...`);
+  console.log(`\n[auth] Aguardando callback do Bling na porta ${port} (qualquer rota) ...`);
   console.log('\nAbra esta URL no navegador (tentando abrir automaticamente):\n');
   console.log(`  ${authUrl.toString()}\n`);
   const opener =

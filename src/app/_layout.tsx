@@ -21,6 +21,7 @@ import { Platform } from 'react-native';
 import { RestartButton } from '@/components/RestartButton';
 import { ToastProvider } from '@/components/ToastProvider';
 import { CatalogProvider } from '@/data/catalogStore';
+import { PromotionsProvider } from '@/data/promotionsStore';
 import { KioskProvider } from '@/kiosk/KioskProvider';
 import { colors } from '@/theme/theme';
 
@@ -54,21 +55,23 @@ export default function RootLayout() {
   if (!fontsLoaded) return null;
 
   return (
-    <CatalogProvider>
-      <ToastProvider>
-        <KioskProvider>
-          <StatusBar style="dark" hidden />
-          <Stack
-            screenOptions={{
-              headerShown: false,
-              contentStyle: { backgroundColor: colors.bg },
-              animation: 'fade_from_bottom',
-              animationDuration: 300,
-            }}
-          />
-          <RestartButton />
-        </KioskProvider>
-      </ToastProvider>
-    </CatalogProvider>
+    <PromotionsProvider>
+      <CatalogProvider>
+        <ToastProvider>
+          <KioskProvider>
+            <StatusBar style="dark" hidden />
+            <Stack
+              screenOptions={{
+                headerShown: false,
+                contentStyle: { backgroundColor: colors.bg },
+                animation: 'fade_from_bottom',
+                animationDuration: 300,
+              }}
+            />
+            <RestartButton />
+          </KioskProvider>
+        </ToastProvider>
+      </CatalogProvider>
+    </PromotionsProvider>
   );
 }

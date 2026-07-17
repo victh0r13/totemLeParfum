@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "description": "Sincronização do catálogo Le Parfum com o Bling (API v3) + servidor do consultor virtual (IA)",
+  "description": "Sincronização do catálogo Le Parfum com o Bling (API v3) + servidor local do catálogo",
   "engines": {
     "node": ">=18"
   },
@@ -13,7 +13,6 @@
     "server": "node src/server.js"
   },
   "dependencies": {
-    "@anthropic-ai/sdk": "^0.72.0",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.21.0"

@@ -23,6 +23,8 @@ export interface CatalogFile {
 
 /** Entrada manual em data/enrichment.json (chave = id do Bling ou SKU). */
 export interface EnrichmentEntry {
+  /** Nome do produto, somente para leitura humana ao editar o JSON — o app ignora. */
+  nome?: string;
   genero?: Genero;
   familias?: Familia[];
   ocasioes?: Ocasiao[];
@@ -43,6 +45,8 @@ export interface Perfume {
   estoque: number;
   imagem: string | null;
   descricao: string;
+  /** Preço de oferta definido pela equipe no totem (menor que `preco`). */
+  precoPromocional: number | null;
   /** true quando existe entrada no enrichment.json */
   enriquecido: boolean;
   genero: Genero | null;

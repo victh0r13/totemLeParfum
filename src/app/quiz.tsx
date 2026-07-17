@@ -8,6 +8,7 @@ import { FadeUp } from '@/components/FadeUp';
 import { PressableScale } from '@/components/PressableScale';
 import { TopBar } from '@/components/TopBar';
 import { useCatalog } from '@/data/catalogStore';
+import { trackQuizConcluido } from '@/logic/metrics';
 import { QUIZ_QUESTIONS, emptyAnswers, rankPerfumes, type QuizOption } from '@/logic/quiz';
 import { colors, fonts } from '@/theme/theme';
 import type { Familia, QuizAnswers } from '@/types/catalog';
@@ -36,6 +37,7 @@ export default function QuizScreen() {
   }, []);
 
   const finish = (finalAnswers: QuizAnswers) => {
+    trackQuizConcluido(finalAnswers);
     const results = rankPerfumes(perfumes, finalAnswers);
     router.replace({
       pathname: '/quiz-result',
