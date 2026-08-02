@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-02T01:17:54.328Z",
+  "generatedAt": "2026-08-02T20:57:02.072Z",
   "source": "bling",
   "produtos": [
     {
@@ -2007,7 +2007,7 @@
       "nome": "Velvety Deo Colônia Lata 100ml - Ciclo Cosméticos Original",
       "marca": "Ciclo Cosméticos",
       "preco": 99.9,
-      "estoque": 9,
+      "estoque": 8,
       "categoria": {
         "id": "9021515",
         "nome": "Perfumes Lata",
@@ -2294,7 +2294,7 @@
       "nome": "Loção Hidratante - Ciclo Cosméticos (Conjunto) Fragância:Hello Hello",
       "marca": null,
       "preco": 0,
-      "estoque": 3,
+      "estoque": 2,
       "categoria": null,
       "imagem": "https://orgbling.s3.amazonaws.com/986e1ae50c3c169d984d565cc6145aac/fe91487563a8ba61124a530ef097646a?AWSAccessKeyId=AKIATCLMSGFXTAGX6WUM&Expires=1786089699&Signature=IiuSbrBo1P8UXbL1%2B33eK%2F7yR6k%3D",
       "descricao": null
@@ -3229,7 +3229,7 @@
       "nome": "Hello Hello! Nah Cardoso Deo Colônia Lata 100ml + Body Splash 200ml + Loção Corporal 240ml",
       "marca": null,
       "preco": 0,
-      "estoque": 3,
+      "estoque": 2,
       "categoria": null,
       "imagem": "https://orgbling.s3.amazonaws.com/986e1ae50c3c169d984d565cc6145aac/66cbc2e02effc6c81d6fe0213fc8699e?AWSAccessKeyId=AKIATCLMSGFXTAGX6WUM&Expires=1786089735&Signature=8NcaKIinWO8tqgB%2BPBZTJAhE%2FME%3D",
       "descricao": null
@@ -3240,7 +3240,7 @@
       "nome": "Hello Hello! Nah Cardoso Deo Colônia Lata 100ml + Hello Hello Loção Hidratante Corporal 240ml",
       "marca": null,
       "preco": 0,
-      "estoque": 3,
+      "estoque": 2,
       "categoria": null,
       "imagem": "https://orgbling.s3.amazonaws.com/986e1ae50c3c169d984d565cc6145aac/b0bdcd1299512d958da9ab0b1551e2b2?AWSAccessKeyId=AKIATCLMSGFXTAGX6WUM&Expires=1786089736&Signature=V91YMnDP6VjnnObpkSM44U9wN3s%3D",
       "descricao": null
@@ -3824,7 +3824,7 @@
       "nome": "Kiss Me More Ciclo Cosméticos (Conjunto) Volume:100ml",
       "marca": null,
       "preco": 0,
-      "estoque": 22,
+      "estoque": 21,
       "categoria": {
         "id": "9021515",
         "nome": "Perfumes Lata",
@@ -3887,7 +3887,7 @@
       "nome": "Conjunto Cuté Volume:KIT",
       "marca": null,
       "preco": 0,
-      "estoque": 1,
+      "estoque": 0,
       "categoria": null,
       "imagem": null,
       "descricao": null
@@ -3997,7 +3997,7 @@
       "nome": "Deo Colônia Nah Cardoso By Ciclo Hello Hello 50ml Volume:100",
       "marca": null,
       "preco": 55.9,
-      "estoque": 7,
+      "estoque": 4,
       "categoria": null,
       "imagem": null,
       "descricao": null
@@ -4008,7 +4008,7 @@
       "nome": "Deo Colônia Nah Cardoso By Ciclo Hello Hello 50ml Volume:50",
       "marca": null,
       "preco": 55.9,
-      "estoque": 20,
+      "estoque": 19,
       "categoria": null,
       "imagem": null,
       "descricao": null
@@ -6163,7 +6163,7 @@
       "nome": "Sarath Eau De Parfum - Orygens Fragragrances 100ml",
       "marca": "Orygens Fragrances",
       "preco": 99.9,
-      "estoque": 9,
+      "estoque": 8,
       "categoria": {
         "id": "12786557",
         "nome": "Perfume Feminino",
@@ -6582,7 +6582,7 @@
       "nome": "Deo Colônia Nah Cardoso By Ciclo Hello Hello 50ml",
       "marca": null,
       "preco": 55.9,
-      "estoque": 20,
+      "estoque": 19,
       "categoria": null,
       "imagem": "https://orgbling.s3.amazonaws.com/986e1ae50c3c169d984d565cc6145aac/6a8902c1d4fd3789f329cd4da2a1d2d5?AWSAccessKeyId=AKIATCLMSGFXTAGX6WUM&Expires=1786089848&Signature=NY8V2lH9y667b84LK94A4l%2FDgsg%3D",
       "descricao": null
@@ -12762,7 +12762,7 @@
       "nome": "Hello Hello! Nah Cardoso Ciclo Cosméticos Deo Colônia Lata - Perfume Feminino 100ml Nova Embalagem",
       "marca": "Ciclo Cosméticos",
       "preco": 99.9,
-      "estoque": 7,
+      "estoque": 4,
       "categoria": {
         "id": "9021515",
         "nome": "Perfumes Lata",
@@ -14508,7 +14508,7 @@
       "nome": "Granado Pink Caneta Hidratante Sos Cutículas Perfeitas 3,5g",
       "marca": "Granado",
       "preco": 39.9,
-      "estoque": 21,
+      "estoque": 20,
       "categoria": {
         "id": "9021499",
         "nome": "Granado",
@@ -14598,7 +14598,7 @@
       "nome": "Body Spray Silver Scent 200ml Original",
       "marca": "jacques bogart",
       "preco": 72,
-      "estoque": 12,
+      "estoque": 10,
       "categoria": {
         "id": "8409521",
         "nome": "Desodorantes",
@@ -14669,7 +14669,7 @@
       "nome": "Kit Kiss Ciclo Estojo - Conjunto Colônia 30ml + Loção Hidratante Corporal 240ml",
       "marca": "Ciclo Cosméticos",
       "preco": 99.9,
-      "estoque": 3,
+      "estoque": 2,
       "categoria": {
         "id": "8755836",
         "nome": "Kit's",
@@ -14714,7 +14714,7 @@
       "nome": "Hello Hello! Nah Cardoso by Ciclo Hidratante Corporal 240ml",
       "marca": "Ciclo Cosméticos",
       "preco": 49.9,
-      "estoque": 3,
+      "estoque": 2,
       "categoria": {
         "id": "8954469",
         "nome": "Ciclo Cosméticos",
@@ -14759,7 +14759,7 @@
       "nome": "Beé Ciclo Mini Baby Ciclo Cosméticos Água de Colônia - Perfume Infantil 100ml",
       "marca": "Ciclo Cosméticos",
       "preco": 89.9,
-      "estoque": 1,
+      "estoque": 0,
       "categoria": {
         "id": "9021515",
         "nome": "Perfumes Lata",
@@ -14774,7 +14774,7 @@
       "nome": "Kiss Me More Lata 100ml + Kiss Me More Loção Corporal 240ml",
       "marca": "Ciclo Cosméticos",
       "preco": 110.9,
-      "estoque": 22,
+      "estoque": 21,
       "categoria": {
         "id": "8755836",
         "nome": "Kit's",
@@ -14789,7 +14789,7 @@
       "nome": "Kiss Me More Ciclo Cosméticos Com Lata - Perfume Feminino 100ml",
       "marca": "Ciclo Cosméticos",
       "preco": 99.9,
-      "estoque": 22,
+      "estoque": 21,
       "categoria": {
         "id": "9021515",
         "nome": "Perfumes Lata",
@@ -14954,7 +14954,7 @@
       "nome": "Kit Cuté La Rive - Perfume 100ml + Desodorante 150ml",
       "marca": "La Rive",
       "preco": 119.9,
-      "estoque": 1,
+      "estoque": 0,
       "categoria": {
         "id": "8755836",
         "nome": "Kit's",
