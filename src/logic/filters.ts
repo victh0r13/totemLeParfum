@@ -1,35 +1,67 @@
 import { PRICE_BUCKETS } from '@/config';
 import { effectivePrice } from '@/logic/format';
-import type { Familia, Genero, Ocasiao, Perfume } from '@/types/catalog';
+import type { Familia, Genero, Perfume } from '@/types/catalog';
 
 export interface CatalogFilters {
   familias: Familia[];
   genero: Genero | null;
-  ocasiao: Ocasiao | null;
   priceBucket: number | null;
+  /** Texto livre da lupa: casa com nome E marca. */
+  busca: string;
 }
 
 export const emptyFilters: CatalogFilters = {
   familias: [],
   genero: null,
-  ocasiao: null,
   priceBucket: null,
+  busca: '',
 };
 
 export function hasActiveFilters(f: CatalogFilters): boolean {
-  return f.familias.length > 0 || f.genero !== null || f.ocasiao !== null || f.priceBucket !== null;
+  return (
+    f.familias.length > 0 ||
+    f.genero !== null ||
+    f.priceBucket !== null ||
+    f.busca.trim() !== ''
+  );
 }
 
 /**
- * Filtros combináveis do catálogo. Produtos sem enriquecimento permanecem
- * visíveis sem filtros, mas saem do resultado quando um filtro de família,
- * gênero ou ocasião está ativo (nunca deduzimos esses dados).
+ * Texto comparável: sem acento, sem caixa, sem pontuação. O cliente digita
+ * "lattafa" ou "HAYAATI" no teclado do tablet e precisa achar do mesmo jeito.
+ */
+function comparavel(texto: string): string {
+  return texto
+    .normalize('NFD')
+    .replace(/[̀-ͯ]/g, '')
+    .toLowerCase()
+    .replace(/[^a-z0-9\s]/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+/**
+ * Busca por nome e marca. Cada palavra digitada precisa aparecer em algum
+ * lugar — "lattafa haya" acha "Haya - Lattafa Eau de Parfum" mesmo com a
+ * ordem trocada, que é como as pessoas realmente digitam.
+ */
+export function matchesSearch(p: Perfume, termo: string): boolean {
+  const busca = comparavel(termo);
+  if (!busca) return true;
+  const alvo = comparavel(`${p.nome} ${p.marca ?? ''}`);
+  return busca.split(' ').every((palavra) => alvo.includes(palavra));
+}
+
+/**
+ * Filtros combináveis do catálogo. Um produto sem família/gênero registrado
+ * na curadoria continua visível na listagem completa, mas sai do resultado
+ * quando o filtro correspondente está ativo — nunca deduzimos o dado aqui.
  */
 export function applyFilters(perfumes: Perfume[], f: CatalogFilters): Perfume[] {
   return perfumes.filter((p) => {
     if (f.familias.length > 0 && !f.familias.some((fam) => p.familias.includes(fam))) return false;
     if (f.genero !== null && p.genero !== f.genero) return false;
-    if (f.ocasiao !== null && !p.ocasioes.includes(f.ocasiao)) return false;
+    if (!matchesSearch(p, f.busca)) return false;
     if (f.priceBucket !== null) {
       const bucket = PRICE_BUCKETS[f.priceBucket];
       if (!bucket) return false;

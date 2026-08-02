@@ -16,6 +16,7 @@ import {
   listAllCategories,
   listAllProducts,
 } from './bling.js';
+import { chamadoDireto, comoScript } from './cli.js';
 import { CATALOG_PATH, ENRICHMENT_PATH } from './env.js';
 
 const fetchDetails = (process.env.SYNC_FETCH_DETAILS ?? 'true').toLowerCase() !== 'false';
@@ -67,7 +68,11 @@ function cleanText(value) {
     .trim();
 }
 
-async function main() {
+/**
+ * Sync completo: percorre todo o catálogo do Bling e regrava data/catalog.json.
+ * @returns {Promise<{produtos: number, comEstoque: number}>}
+ */
+export async function runSync() {
   console.log('[sync] Iniciando sincronização com o Bling...\n');
 
   const resolveCategoria = buildCategoryIndex(await listAllCategories());
@@ -152,9 +157,8 @@ async function main() {
   } catch {
     console.warn('[aviso] Não foi possível ler data/enrichment.json para o relatório.');
   }
+
+  return { produtos: produtos.length, comEstoque: inStock.length };
 }
 
-main().catch((err) => {
-  console.error(`\n[erro] Sincronização falhou: ${err.message}`);
-  process.exit(1);
-});
+if (chamadoDireto(import.meta.url)) comoScript(runSync);

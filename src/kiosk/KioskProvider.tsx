@@ -16,6 +16,17 @@ import { colors, fonts } from '@/theme/theme';
 interface KioskState {
   /** Volta à tela inicial e limpa a sessão atual. */
   resetSession: () => void;
+  /**
+   * Pausa o relógio de inatividade enquanto a equipe usa uma tela de trabalho.
+   *
+   * Existe porque digitar NÃO conta como toque: o teclado do Android é uma
+   * janela nativa, fora da árvore de views do app, então o
+   * `onStartShouldSetResponderCapture` abaixo nunca dispara enquanto alguém
+   * preenche um formulário. Sem esta pausa, um cadastro que leve mais de 90s
+   * seria interrompido pelo aviso "Ainda está aí?" e perderia o que foi
+   * digitado.
+   */
+  suspender: (pausado: boolean) => void;
 }
 
 const KioskContext = createContext<KioskState | null>(null);
@@ -28,16 +39,28 @@ const KioskContext = createContext<KioskState | null>(null);
 export function KioskProvider({ children }: { children: React.ReactNode }) {
   const router = useRouter();
   const pathname = usePathname();
-  const lastTouch = useRef(Date.now());
+  const lastTouch = useRef(0);
+  const suspenso = useRef(false);
   const [countdown, setCountdown] = useState<number | null>(null);
+  // Espelho do countdown para o intervalo ler sem se reinscrever a cada segundo.
   const countdownRef = useRef<number | null>(null);
-  countdownRef.current = countdown;
+  useEffect(() => {
+    countdownRef.current = countdown;
+  }, [countdown]);
 
   const isHome = pathname === '/';
 
   const registerTouch = useCallback(() => {
     lastTouch.current = Date.now();
     if (countdownRef.current !== null) setCountdown(null);
+  }, []);
+
+  const suspender = useCallback((pausado: boolean) => {
+    suspenso.current = pausado;
+    // Ao voltar, o relógio recomeça do zero: quem acabou de sair do formulário
+    // ganha os 90s inteiros, não o resto de uma contagem antiga.
+    lastTouch.current = Date.now();
+    setCountdown(null);
   }, []);
 
   const resetSession = useCallback(() => {
@@ -52,8 +75,10 @@ export function KioskProvider({ children }: { children: React.ReactNode }) {
   }, [router]);
 
   useEffect(() => {
+    // O relógio de inatividade começa a contar quando a tela aparece.
+    if (lastTouch.current === 0) lastTouch.current = Date.now();
     const timer = setInterval(() => {
-      if (isHome) {
+      if (isHome || suspenso.current) {
         if (countdownRef.current !== null) setCountdown(null);
         return;
       }
@@ -75,7 +100,7 @@ export function KioskProvider({ children }: { children: React.ReactNode }) {
   }, [isHome, resetSession]);
 
   return (
-    <KioskContext.Provider value={{ resetSession }}>
+    <KioskContext.Provider value={{ resetSession, suspender }}>
       <View
         style={styles.root}
         onStartShouldSetResponderCapture={() => {

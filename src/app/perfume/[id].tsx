@@ -76,14 +76,16 @@ export default function PerfumeDetailScreen() {
 
   return (
     <SafeAreaView style={styles.screen}>
-      <TopBar title={perfume.marca} />
+      <TopBar title={perfume.marca ?? 'Perfume'} />
       <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.scroll}>
         <ProductImage perfume={perfume} height={360} bottle="lg" />
 
         <View style={styles.body}>
           <View style={styles.titleRow}>
             <View style={styles.titleCol}>
-              <Text style={styles.eyebrow}>{perfume.marca.toUpperCase()}</Text>
+              {!!perfume.marca && (
+                <Text style={styles.eyebrow}>{perfume.marca.toUpperCase()}</Text>
+              )}
               <Text style={styles.name}>{perfume.nome}</Text>
             </View>
             <GenderBadge genero={perfume.genero} size={44} />
@@ -124,7 +126,7 @@ export default function PerfumeDetailScreen() {
 
           <View style={styles.hairline} />
 
-          {perfume.enriquecido && (
+          {(perfume.familias.length > 0 || perfume.intensidade !== null) && (
             <View style={styles.tagRow}>
               {perfume.familias.map((f) => (
                 <Chip key={f} label={familyLabels[f]} />

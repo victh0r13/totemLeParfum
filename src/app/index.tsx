@@ -1,5 +1,5 @@
 import { useRouter } from "expo-router";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import {
   Animated,
   Pressable,
@@ -12,7 +12,6 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import { FadeUp } from "@/components/FadeUp";
-import { PinModal } from "@/components/PinModal";
 import { PressableScale } from "@/components/PressableScale";
 import { colors, fonts } from "@/theme/theme";
 
@@ -101,7 +100,6 @@ function OptionCard({
 export default function HomeScreen() {
   const router = useRouter();
   const { height, width } = useWindowDimensions();
-  const [pinVisible, setPinVisible] = useState(false);
   // Telas mais baixas (janela de navegador, tablets menores) usam o layout compacto
   // para as duas opções continuarem visíveis sem rolar.
   const compact = height < 1000;
@@ -116,8 +114,8 @@ export default function HomeScreen() {
       >
         <View style={[styles.hero, compact && { paddingTop: 36 }]}>
           <Text style={styles.eyebrow}>PERFUMARIA</Text>
-          {/* Toque longo (equipe): abre o painel da loja, protegido por PIN. */}
-          <Pressable delayLongPress={1200} onLongPress={() => setPinVisible(true)}>
+          {/* Toque longo (equipe): o PIN é pedido pela própria tela do painel. */}
+          <Pressable delayLongPress={1200} onLongPress={() => router.push('/admin')}>
             <Text style={[styles.logo, compact && styles.logoCompact]}>
               Le Parfum
             </Text>
@@ -146,7 +144,7 @@ export default function HomeScreen() {
           />
           <OptionCard
             title="Quero descobrir meu gosto"
-            subtitle="Cinco perguntas visuais sobre ocasião, intensidade e aromas — e uma seleção feita para você."
+            subtitle="Seis perguntas visuais sobre estilo, ocasião e aromas — e uma seleção feita para você."
             gold
             delay={220}
             compact={compact}
@@ -164,15 +162,6 @@ export default function HomeScreen() {
         </Text>
       </ScrollView>
 
-      <PinModal
-        visible={pinVisible}
-        title="Painel da loja"
-        onClose={() => setPinVisible(false)}
-        onSuccess={() => {
-          setPinVisible(false);
-          router.push("/admin");
-        }}
-      />
     </SafeAreaView>
   );
 }

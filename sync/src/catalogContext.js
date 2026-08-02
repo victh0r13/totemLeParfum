@@ -22,7 +22,7 @@ function readJson(p, fallback) {
 /**
  * Curadoria do totem em memória (recarrega quando os arquivos mudam):
  * produtos com estoque E entrada no enrichment.json — o mesmo recorte
- * que o app exibe.
+ * que o app exibe, no mesmo formato do bundle do APK (TotemPayload).
  */
 export function getCatalog() {
   const stamp = `${fileMtime(CATALOG_PATH)}:${fileMtime(ENRICHMENT_PATH)}`;
@@ -34,12 +34,21 @@ export function getCatalog() {
 
   const produtos = (catalogFile.produtos ?? [])
     .filter((p) => Number(p.estoque) > 0)
-    .filter((p) => entries[p.id] ?? (p.codigo ? entries[p.codigo] : undefined));
+    .filter((p) => entries[p.id] ?? (p.codigo ? entries[p.codigo] : undefined))
+    .map(({ categoria, ...p }) => p);
+
+  const enrichment = {};
+  for (const p of produtos) {
+    const { nome, ...entry } = entries[p.id] ?? entries[p.codigo] ?? {};
+    enrichment[p.id] = entry;
+  }
 
   cache = {
     stamp,
     produtos,
+    enrichment,
     generatedAt: catalogFile.generatedAt ?? null,
+    source: catalogFile.source ?? 'bling',
   };
   return cache;
 }

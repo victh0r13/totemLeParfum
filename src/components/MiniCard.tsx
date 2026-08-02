@@ -20,7 +20,7 @@ export function MiniCard({ perfume, onPress, width = 180, showBrand = false }: P
     <PressableScale onPress={onPress} scaleTo={0.96} style={[styles.card, { width }]}>
       <ProductImage perfume={perfume} height={116} bottle="sm" />
       <View style={styles.body}>
-        {showBrand && (
+        {showBrand && !!perfume.marca && (
           <Text style={styles.brand} numberOfLines={1}>
             {perfume.marca.toUpperCase()}
           </Text>

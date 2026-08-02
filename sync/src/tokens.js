@@ -68,23 +68,21 @@ export async function refreshTokens(refreshToken) {
 export async function getAccessToken() {
   let tokens = loadTokens();
   if (!tokens?.refresh_token) {
-    console.error(
-      '\n[erro] Nenhum token do Bling encontrado.\n' +
-        'Rode primeiro a autorização inicial:  cd sync && npm run auth\n',
+    // Lança em vez de encerrar: o servidor roda o sync dentro do próprio
+    // processo e não pode morrer porque uma rodada falhou.
+    throw new Error(
+      'Nenhum token do Bling encontrado. Rode a autorização inicial: cd sync && npm run auth',
     );
-    process.exit(1);
   }
   if (Date.now() >= (tokens.expires_at ?? 0) - EXPIRY_MARGIN_MS) {
     console.log('[bling] access_token expirado — renovando via refresh_token...');
     try {
       tokens = await refreshTokens(tokens.refresh_token);
     } catch (err) {
-      console.error(
-        `\n[erro] Falha ao renovar o token (${err.message}).\n` +
-          'O refresh_token pode ter expirado (validade de ~30 dias sem uso).\n' +
-          'Refaça a autorização:  cd sync && npm run auth\n',
+      throw new Error(
+        `Falha ao renovar o token do Bling (${err.message}). ` +
+          'O refresh_token expira com ~30 dias sem uso — refaça: cd sync && npm run auth',
       );
-      process.exit(1);
     }
   }
   return tokens.access_token;

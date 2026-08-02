@@ -21,6 +21,7 @@ import { Platform } from 'react-native';
 import { RestartButton } from '@/components/RestartButton';
 import { ToastProvider } from '@/components/ToastProvider';
 import { CatalogProvider } from '@/data/catalogStore';
+import { LocalProductsProvider } from '@/data/localProductsStore';
 import { PromotionsProvider } from '@/data/promotionsStore';
 import { KioskProvider } from '@/kiosk/KioskProvider';
 import { colors } from '@/theme/theme';
@@ -31,7 +32,7 @@ export default function RootLayout() {
   // Totem: a tela nunca dorme enquanto o app está aberto.
   useKeepAwake();
 
-  const [fontsLoaded] = useFonts({
+  const [fontsLoaded, fontError] = useFonts({
     CormorantGaramond_500Medium,
     CormorantGaramond_500Medium_Italic,
     CormorantGaramond_600SemiBold,
@@ -56,22 +57,26 @@ export default function RootLayout() {
 
   return (
     <PromotionsProvider>
-      <CatalogProvider>
-        <ToastProvider>
-          <KioskProvider>
-            <StatusBar style="dark" hidden />
-            <Stack
-              screenOptions={{
-                headerShown: false,
-                contentStyle: { backgroundColor: colors.bg },
-                animation: 'fade_from_bottom',
-                animationDuration: 300,
-              }}
-            />
-            <RestartButton />
-          </KioskProvider>
-        </ToastProvider>
-      </CatalogProvider>
+      {/* Envolve o CatalogProvider: a vitrine soma o catálogo do Bling aos
+          produtos cadastrados na própria loja. */}
+      <LocalProductsProvider>
+        <CatalogProvider>
+          <ToastProvider>
+            <KioskProvider>
+              <StatusBar style="dark" hidden />
+              <Stack
+                screenOptions={{
+                  headerShown: false,
+                  contentStyle: { backgroundColor: colors.bg },
+                  animation: 'fade_from_bottom',
+                  animationDuration: 300,
+                }}
+              />
+              <RestartButton />
+            </KioskProvider>
+          </ToastProvider>
+        </CatalogProvider>
+      </LocalProductsProvider>
     </PromotionsProvider>
   );
 }

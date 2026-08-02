@@ -1,4 +1,4 @@
-import type { Familia, Intensidade, Ocasiao, Perfume, QuizAnswers } from '@/types/catalog';
+import type { Familia, Genero, Perfume, QuizAnswers } from '@/types/catalog';
 
 export interface QuizOption {
   value: string | number;
@@ -24,6 +24,16 @@ export const QUIZ_QUESTIONS: QuizQuestion[] = [
     options: [
       { value: 'mim', label: 'Para mim', sublabel: 'Minha próxima assinatura' },
       { value: 'presente', label: 'É um presente', sublabel: 'Para surpreender alguém especial' },
+    ],
+  },
+  {
+    key: 'genero',
+    title: 'Perfume feminino ou masculino?',
+    columns: 1,
+    options: [
+      { value: 'F', label: 'Feminino', sublabel: 'Fragrâncias femininas e unissex' },
+      { value: 'M', label: 'Masculino', sublabel: 'Fragrâncias masculinas e unissex' },
+      { value: 'U', label: 'Tanto faz', sublabel: 'Quero ver todas as opções' },
     ],
   },
   {
@@ -77,11 +87,22 @@ export const QUIZ_QUESTIONS: QuizQuestion[] = [
 
 export const emptyAnswers: QuizAnswers = {
   quem: null,
+  genero: null,
   ocasiao: null,
   intensidade: null,
   familias: [],
   estilo: null,
 };
+
+/**
+ * Gênero pedido no quiz. 'U' é a opção "tanto faz" — não restringe nada.
+ * Produto unissex serve para qualquer resposta; produto sem gênero na
+ * curadoria não é descartado (só pontua menos).
+ */
+function matchesGender(p: Perfume, pedido: Genero | null): boolean {
+  if (!pedido || pedido === 'U') return true;
+  return p.genero === pedido || p.genero === 'U' || p.genero === null;
+}
 
 const styleFamilies: Record<NonNullable<QuizAnswers['estilo']>, Familia[]> = {
   classico: ['floral', 'amadeirado'],
@@ -90,11 +111,10 @@ const styleFamilies: Record<NonNullable<QuizAnswers['estilo']>, Familia[]> = {
 };
 
 /**
- * Pontua um perfume contra as respostas. Usa somente dados do enrichment.json —
- * produtos não enriquecidos não pontuam e ficam fora das sugestões.
+ * Pontua um perfume contra as respostas. Só pontua o que a curadoria afirma:
+ * produto sem família/ocasião registrada simplesmente não ganha aquele ponto.
  */
 export function scorePerfume(p: Perfume, a: QuizAnswers): number {
-  if (!p.enriquecido) return 0;
   let score = 0;
   if (a.familias.length > 0 && p.familias.some((f) => a.familias.includes(f))) score += 3;
   if (a.ocasiao && p.ocasioes.includes(a.ocasiao)) score += 2;
@@ -103,12 +123,19 @@ export function scorePerfume(p: Perfume, a: QuizAnswers): number {
   }
   if (a.estilo && p.familias.some((f) => styleFamilies[a.estilo!].includes(f))) score += 1;
   if (a.quem === 'presente' && p.genero === 'U') score += 1;
+  // Gênero exato na frente do unissex, e este na frente do não classificado.
+  if (a.genero && a.genero !== 'U') {
+    if (p.genero === a.genero) score += 2;
+    else if (p.genero === 'U') score += 1;
+  }
   return score;
 }
 
 /** Ranqueia o catálogo (apenas itens com estoque) e retorna 3–5 sugestões reais. */
 export function rankPerfumes(perfumes: Perfume[], answers: QuizAnswers): Perfume[] {
-  const inStock = perfumes.filter((p) => p.estoque > 0);
+  const inStock = perfumes
+    .filter((p) => p.estoque > 0)
+    .filter((p) => matchesGender(p, answers.genero));
   const scored = inStock
     .map((p) => ({ p, score: scorePerfume(p, answers) }))
     .filter(({ score }) => score > 0)
@@ -116,11 +143,11 @@ export function rankPerfumes(perfumes: Perfume[], answers: QuizAnswers): Perfume
 
   const results = scored.slice(0, 5).map(({ p }) => p);
 
-  // Garante ao menos 3 sugestões preenchendo com enriquecidos disponíveis.
+  // Garante ao menos 3 sugestões — `inStock` já respeita o gênero pedido.
   if (results.length < 3) {
     for (const p of inStock) {
       if (results.length >= 3) break;
-      if (p.enriquecido && !results.some((r) => r.id === p.id)) results.push(p);
+      if (!results.some((r) => r.id === p.id)) results.push(p);
     }
   }
   return results;

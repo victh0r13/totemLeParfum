@@ -5,72 +5,42 @@ import React, {
   useContext,
   useEffect,
   useMemo,
+  useRef,
   useState,
 } from 'react';
 
 import { API_URL, CATALOG_REFRESH_MS } from '@/config';
+import { prefetchPhotos } from '@/data/images';
+import { useLocalProducts } from '@/data/localProductsStore';
 import { usePromotions } from '@/data/promotionsStore';
-import type {
-  CatalogFile,
-  CatalogProduct,
-  EnrichmentEntry,
-  EnrichmentFile,
-  Perfume,
-} from '@/types/catalog';
+import { mergeCatalog } from '@/logic/catalog';
+import type { Perfume, TotemPayload } from '@/types/catalog';
 
-import bundledCatalog from '../../data/catalog.json';
-import bundledEnrichment from '../../data/enrichment.json';
+import bundledCatalog from '../../data/catalog.bundle.json';
 
-const CATALOG_KEY = 'leparfum:catalog:v1';
-const ENRICHMENT_KEY = 'leparfum:enrichment:v1';
+const PAYLOAD_KEY = 'leparfum:totem:v2';
+const LAST_SYNC_KEY = 'leparfum:ultimoSync:v1';
 const FETCH_TIMEOUT_MS = 6000;
 
+/** De onde vieram os dados que estão na tela agora. */
+export type CatalogOrigin = 'bundle' | 'cache' | 'servidor';
+
 interface CatalogState {
-  /** Produtos com estoque disponível, já enriquecidos. */
+  /** Curadoria do totem, já enriquecida e com ofertas aplicadas. */
   perfumes: Perfume[];
   loading: boolean;
-  /** Data de geração do catálogo em uso (para diagnóstico). */
+  /** Data em que o catálogo em uso foi gerado pelo sync com o Bling. */
   generatedAt: string | null;
+  origem: CatalogOrigin;
+  /** Última vez que o app conseguiu falar com o servidor da loja (ISO). */
+  ultimoSync: string | null;
+  /** false depois de uma tentativa de atualização que falhou. */
+  online: boolean;
+  atualizando: boolean;
   refresh: () => Promise<void>;
 }
 
 const CatalogContext = createContext<CatalogState | null>(null);
-
-function mergeCatalog(
-  catalog: CatalogFile,
-  enrichment: EnrichmentFile,
-  promocoes: Record<string, number>,
-): Perfume[] {
-  const entries = enrichment.produtos ?? {};
-  return catalog.produtos
-    .filter((p) => p.estoque > 0)
-    .map((p: CatalogProduct) => ({
-      p,
-      entry: entries[p.id] ?? (p.codigo ? entries[p.codigo] : undefined),
-    }))
-    // O totem exibe apenas a curadoria: produtos com entrada no enrichment.json.
-    .filter((x): x is { p: CatalogProduct; entry: EnrichmentEntry } => !!x.entry)
-    .map(({ p, entry }): Perfume => {
-      const promo = promocoes[p.id];
-      return {
-        id: p.id,
-        codigo: p.codigo ?? null,
-        nome: p.nome,
-        marca: p.marca?.trim() || 'Le Parfum',
-        preco: p.preco,
-        estoque: p.estoque,
-        imagem: p.imagem ?? null,
-        descricao: p.descricao?.trim() || '',
-        precoPromocional:
-          typeof promo === 'number' && promo > 0 && promo < p.preco ? promo : null,
-        enriquecido: !!entry,
-        genero: entry?.genero ?? null,
-        familias: entry?.familias ?? [],
-        ocasioes: entry?.ocasioes ?? [],
-        intensidade: entry?.intensidade ?? null,
-      };
-    });
-}
 
 async function fetchJson<T>(url: string): Promise<T> {
   const controller = new AbortController();
@@ -84,31 +54,49 @@ async function fetchJson<T>(url: string): Promise<T> {
   }
 }
 
+/**
+ * Catálogo offline-first em três camadas, sempre nesta ordem:
+ *
+ *   1. bundle    — vai dentro do APK; garante que o totem abre com catálogo
+ *                  e fotos mesmo num tablet recém-formatado e sem rede;
+ *   2. cache     — última versão que o aparelho baixou do servidor da loja;
+ *   3. servidor  — atualização em segundo plano, de hora em hora.
+ *
+ * A rede nunca bloqueia a interface: falha de atualização só muda o indicador
+ * de status no painel da loja.
+ */
 export function CatalogProvider({ children }: { children: React.ReactNode }) {
   const { promocoes } = usePromotions();
-  const [catalog, setCatalog] = useState<CatalogFile>(bundledCatalog as CatalogFile);
-  const [enrichment, setEnrichment] = useState<EnrichmentFile>(
-    bundledEnrichment as unknown as EnrichmentFile,
-  );
+  const { produtos: produtosLocais } = useLocalProducts();
+  const [payload, setPayload] = useState<TotemPayload>(bundledCatalog as TotemPayload);
+  const [origem, setOrigem] = useState<CatalogOrigin>('bundle');
+  const [ultimoSync, setUltimoSync] = useState<string | null>(null);
+  const [online, setOnline] = useState(true);
+  const [atualizando, setAtualizando] = useState(false);
   const [loading, setLoading] = useState(true);
+  const prefetched = useRef(false);
 
   const refresh = useCallback(async () => {
     if (!API_URL) return;
+    setAtualizando(true);
     try {
-      const [remoteCatalog, remoteEnrichment] = await Promise.all([
-        fetchJson<CatalogFile>(`${API_URL}/api/catalog`),
-        fetchJson<EnrichmentFile>(`${API_URL}/api/enrichment`).catch(() => null),
-      ]);
-      if (remoteCatalog?.produtos) {
-        setCatalog(remoteCatalog);
-        await AsyncStorage.setItem(CATALOG_KEY, JSON.stringify(remoteCatalog));
-      }
-      if (remoteEnrichment?.produtos) {
-        setEnrichment(remoteEnrichment);
-        await AsyncStorage.setItem(ENRICHMENT_KEY, JSON.stringify(remoteEnrichment));
+      const remoto = await fetchJson<TotemPayload>(`${API_URL}/api/totem`);
+      if (remoto?.produtos?.length) {
+        const agora = new Date().toISOString();
+        setPayload(remoto);
+        setOrigem('servidor');
+        setUltimoSync(agora);
+        setOnline(true);
+        await AsyncStorage.multiSet([
+          [PAYLOAD_KEY, JSON.stringify(remoto)],
+          [LAST_SYNC_KEY, agora],
+        ]);
       }
     } catch {
-      // Sem rede ou servidor fora do ar: segue com cache/bundle (modo offline).
+      // Sem rede ou servidor fora do ar: segue com cache/bundle.
+      setOnline(false);
+    } finally {
+      setAtualizando(false);
     }
   }, []);
 
@@ -116,13 +104,19 @@ export function CatalogProvider({ children }: { children: React.ReactNode }) {
     let cancelled = false;
     (async () => {
       try {
-        const [cachedCatalog, cachedEnrichment] = await Promise.all([
-          AsyncStorage.getItem(CATALOG_KEY),
-          AsyncStorage.getItem(ENRICHMENT_KEY),
+        const [[, cached], [, lastSync]] = await AsyncStorage.multiGet([
+          PAYLOAD_KEY,
+          LAST_SYNC_KEY,
         ]);
         if (cancelled) return;
-        if (cachedCatalog) setCatalog(JSON.parse(cachedCatalog) as CatalogFile);
-        if (cachedEnrichment) setEnrichment(JSON.parse(cachedEnrichment) as EnrichmentFile);
+        if (cached) {
+          const parsed = JSON.parse(cached) as TotemPayload;
+          if (parsed?.produtos?.length) {
+            setPayload(parsed);
+            setOrigem('cache');
+          }
+        }
+        if (lastSync) setUltimoSync(lastSync);
       } catch {
         // Cache corrompido: segue com o bundle.
       } finally {
@@ -138,14 +132,73 @@ export function CatalogProvider({ children }: { children: React.ReactNode }) {
     };
   }, [refresh]);
 
+  // Tempo real: o servidor avisa quando o catálogo muda, em vez de o totem
+  // ficar perguntando. A janela de 1 hora abaixo vira só uma rede de segurança
+  // para o caso de a conexão cair sem o app perceber.
+  useEffect(() => {
+    if (!API_URL) return;
+    const url = `${API_URL.replace(/^http/, 'ws')}/ws`;
+    let socket: WebSocket | null = null;
+    let reconnect: ReturnType<typeof setTimeout> | null = null;
+    let tentativas = 0;
+    let encerrado = false;
+
+    const conectar = () => {
+      if (encerrado) return;
+      socket = new WebSocket(url);
+
+      socket.onopen = () => {
+        tentativas = 0;
+        setOnline(true);
+      };
+      socket.onmessage = (evento) => {
+        try {
+          if (JSON.parse(String(evento.data))?.tipo === 'catalogo-atualizado') refresh();
+        } catch {
+          // Mensagem fora do formato: ignora.
+        }
+      };
+      socket.onerror = () => socket?.close();
+      socket.onclose = () => {
+        if (encerrado) return;
+        // Backoff até 30s: o PC da loja pode estar desligado a noite toda.
+        const espera = Math.min(30000, 1000 * 2 ** tentativas++);
+        reconnect = setTimeout(conectar, espera);
+      };
+    };
+
+    conectar();
+    return () => {
+      encerrado = true;
+      if (reconnect) clearTimeout(reconnect);
+      socket?.close();
+    };
+  }, [refresh]);
+
   const perfumes = useMemo(
-    () => mergeCatalog(catalog, enrichment, promocoes),
-    [catalog, enrichment, promocoes],
+    () => mergeCatalog(payload, promocoes, produtosLocais),
+    [payload, promocoes, produtosLocais],
   );
 
+  // Uma vez por sessão, guarda em disco as fotos que não vieram no APK.
+  useEffect(() => {
+    if (loading || prefetched.current || perfumes.length === 0) return;
+    prefetched.current = true;
+    prefetchPhotos(perfumes).catch(() => {});
+  }, [loading, perfumes]);
+
   const value = useMemo<CatalogState>(
-    () => ({ perfumes, loading, generatedAt: catalog.generatedAt ?? null, refresh }),
-    [perfumes, loading, catalog.generatedAt, refresh],
+    () => ({
+      perfumes,
+      loading,
+      generatedAt: payload.generatedAt ?? null,
+      origem,
+      ultimoSync,
+      online,
+      atualizando,
+      refresh,
+    }),
+    [perfumes, loading, payload.generatedAt, origem, ultimoSync, online, atualizando, refresh],
   );
 
   return <CatalogContext.Provider value={value}>{children}</CatalogContext.Provider>;

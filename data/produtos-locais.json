@@ -1,0 +1,29 @@
+{
+  "produtos": {
+    "local:ms9yczetkpp4ui": {
+      "id": "local:ms9yczetkpp4ui",
+      "nome": "Silver Scent",
+      "marca": null,
+      "preco": 349.9,
+      "estoque": 4,
+      "descricao": "",
+      "genero": "M",
+      "familias": [
+        "amadeirado"
+      ],
+      "ocasioes": [],
+      "intensidade": null,
+      "fotoLocal": null,
+      "fotoAtualizadaEm": "2026-08-01T05:50:23.813Z",
+      "criadoEm": "2026-08-01T05:50:23.813Z",
+      "atualizadoEm": "2026-08-01T05:50:23.813Z"
+    }
+  },
+  "removidos": {
+    "local:foto1": "2026-08-01T18:07:05.695Z",
+    "local:ms9zdaq1fc0zqm": "2026-08-01T21:23:26.733Z",
+    "local:ms9zl9pe84m2hj": "2026-08-01T21:25:44.084Z",
+    "local:ms9zsart14qb0h": "2026-08-01T21:41:24.179Z"
+  },
+  "atualizadoEm": "2026-08-01T21:41:24.179Z"
+}

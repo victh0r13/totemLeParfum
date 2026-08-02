@@ -21,6 +21,7 @@ export interface MetricsData {
   /** Distribuição das respostas do quiz, por pergunta. */
   quiz: {
     quem: Record<string, number>;
+    genero: Record<string, number>;
     ocasiao: Record<string, number>;
     intensidade: Record<string, number>;
     familias: Record<string, number>;
@@ -34,16 +35,41 @@ const emptyMetrics = (): MetricsData => ({
   atendenteChamado: 0,
   produtoVisto: {},
   amostraPedida: {},
-  quiz: { quem: {}, ocasiao: {}, intensidade: {}, familias: {}, estilo: {} },
+  quiz: { quem: {}, genero: {}, ocasiao: {}, intensidade: {}, familias: {}, estilo: {} },
 });
 
 let cache: MetricsData | null = null;
+
+/**
+ * Merge com o formato atual: dados gravados por versões anteriores podem não
+ * ter todas as chaves (principalmente dentro de `quiz`), e um merge raso
+ * deixaria os contadores `undefined`.
+ */
+function migrate(stored: Partial<MetricsData> | null): MetricsData {
+  const base = emptyMetrics();
+  if (!stored || typeof stored !== 'object') return base;
+  const quiz = (stored.quiz ?? {}) as Partial<MetricsData['quiz']>;
+  return {
+    ...base,
+    ...stored,
+    produtoVisto: stored.produtoVisto ?? base.produtoVisto,
+    amostraPedida: stored.amostraPedida ?? base.amostraPedida,
+    quiz: {
+      quem: quiz.quem ?? base.quiz.quem,
+      genero: quiz.genero ?? base.quiz.genero,
+      ocasiao: quiz.ocasiao ?? base.quiz.ocasiao,
+      intensidade: quiz.intensidade ?? base.quiz.intensidade,
+      familias: quiz.familias ?? base.quiz.familias,
+      estilo: quiz.estilo ?? base.quiz.estilo,
+    },
+  };
+}
 
 async function load(): Promise<MetricsData> {
   if (cache) return cache;
   try {
     const raw = await AsyncStorage.getItem(KEY);
-    cache = raw ? { ...emptyMetrics(), ...(JSON.parse(raw) as MetricsData) } : emptyMetrics();
+    cache = migrate(raw ? (JSON.parse(raw) as Partial<MetricsData>) : null);
   } catch {
     cache = emptyMetrics();
   }
@@ -59,8 +85,9 @@ async function persist(): Promise<void> {
   }
 }
 
-function bump(record: Record<string, number>, key: string | null | undefined): void {
-  if (!key) return;
+function bump(record: Record<string, number> | undefined, key: string | null | undefined): void {
+  // Métricas são melhor-esforço: nunca deixe um contador ausente quebrar o quiz.
+  if (!record || !key) return;
   record[key] = (record[key] ?? 0) + 1;
 }
 
@@ -86,6 +113,7 @@ export async function trackQuizConcluido(answers: QuizAnswers): Promise<void> {
   const m = await load();
   m.quizConcluidos += 1;
   bump(m.quiz.quem, answers.quem);
+  bump(m.quiz.genero, answers.genero);
   bump(m.quiz.ocasiao, answers.ocasiao);
   bump(m.quiz.intensidade, answers.intensidade !== null ? String(answers.intensidade) : null);
   for (const f of answers.familias) bump(m.quiz.familias, f);

@@ -4,14 +4,54 @@ import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { CtaButton } from '@/components/CtaButton';
+import { PinGate } from '@/components/PinGate';
 import { PressableScale } from '@/components/PressableScale';
 import { TopBar } from '@/components/TopBar';
+import { API_URL } from '@/config';
+import { bundledImage } from '@/data/bundledImages';
 import { useCatalog } from '@/data/catalogStore';
+import { useLocalProducts } from '@/data/localProductsStore';
 import { usePromotions } from '@/data/promotionsStore';
-import { formatPrice } from '@/logic/format';
+import { daysSince, formatAge, formatPrice } from '@/logic/format';
 import { getMetrics, resetMetrics, type MetricsData } from '@/logic/metrics';
 import { colors, familyLabels, fonts } from '@/theme/theme';
 import type { Perfume } from '@/types/catalog';
+
+const ORIGEM_LABELS: Record<string, string> = {
+  bundle: 'Catálogo de fábrica (dentro do app)',
+  cache: 'Última cópia salva neste tablet',
+  servidor: 'Servidor da loja',
+};
+
+/** Linha "rótulo → valor" do bloco de status, com bolinha de estado opcional. */
+function StatusRow({
+  label,
+  value,
+  tone = 'ok',
+}: {
+  label: string;
+  value: string;
+  tone?: 'ok' | 'atencao' | 'neutro';
+}) {
+  return (
+    <View style={styles.statusRow}>
+      <Text style={styles.statusLabel}>{label}</Text>
+      <View style={styles.statusValueRow}>
+        {tone !== 'neutro' && (
+          <View
+            style={[
+              styles.statusDot,
+              { backgroundColor: tone === 'ok' ? colors.stockOk : colors.stockLow },
+            ]}
+          />
+        )}
+        <Text style={[styles.statusValue, tone === 'atencao' && { color: colors.gold }]}>
+          {value}
+        </Text>
+      </View>
+    </View>
+  );
+}
 
 const QUEM_LABELS: Record<string, string> = { mim: 'Para mim', presente: 'Presente' };
 const OCASIAO_LABELS: Record<string, string> = {
@@ -29,6 +69,11 @@ const ESTILO_LABELS: Record<string, string> = {
   classico: 'Clássico',
   moderno: 'Moderno',
   natural: 'Natural',
+};
+const GENERO_LABELS: Record<string, string> = {
+  F: 'Feminino',
+  M: 'Masculino',
+  U: 'Tanto faz',
 };
 
 function topEntries(record: Record<string, number>, limit: number): [string, number][] {
@@ -56,11 +101,25 @@ function CountRow({ label, count, max }: { label: string; count: number; max: nu
   );
 }
 
-/** Painel da loja: ofertas ativas + métricas de uso do totem (atrás do PIN). */
+/**
+ * Painel da loja: status do catálogo, ofertas ativas e métricas de uso.
+ *
+ * O PIN é aplicado aqui dentro (`PinGate`), e não só no toque longo do logo
+ * que leva até aqui — senão um deep link `leparfum://admin` entraria direto.
+ */
 export default function AdminScreen() {
+  return (
+    <PinGate title="Painel da loja">
+      <AdminPanel />
+    </PinGate>
+  );
+}
+
+function AdminPanel() {
   const router = useRouter();
-  const { perfumes } = useCatalog();
+  const { perfumes, generatedAt, origem, ultimoSync, online, atualizando, refresh } = useCatalog();
   const { promocoes, setPromocao } = usePromotions();
+  const { produtos: produtosLocais, pendencias } = useLocalProducts();
   const [metrics, setMetrics] = useState<MetricsData | null>(null);
   const [confirmReset, setConfirmReset] = useState(false);
 
@@ -86,6 +145,12 @@ export default function AdminScreen() {
     [promocoes, byId],
   );
 
+  // Quantos perfumes exibem foto sem depender de rede alguma.
+  const fotosNoApp = useMemo(
+    () => perfumes.filter((p) => bundledImage(p.id) !== undefined).length,
+    [perfumes],
+  );
+
   const nomeDe = (id: string) => byId.get(id)?.nome ?? `(fora do catálogo: ${id})`;
   const desde = metrics ? new Date(metrics.desde).toLocaleDateString('pt-BR') : '';
 
@@ -100,6 +165,76 @@ export default function AdminScreen() {
       <ScrollView contentContainerStyle={styles.scroll} showsVerticalScrollIndicator={false}>
         <Text style={styles.title}>Painel da loja</Text>
         {!!desde && <Text style={styles.subtitle}>Dados coletados neste totem desde {desde}.</Text>}
+
+        <SectionTitle>Catálogo</SectionTitle>
+        <View style={styles.statusCard}>
+          <StatusRow label="Perfumes no totem" value={`${perfumes.length}`} tone="neutro" />
+          <StatusRow
+            label="Preços e estoque de"
+            value={
+              generatedAt
+                ? `${new Date(generatedAt).toLocaleDateString('pt-BR')} (${formatAge(generatedAt)})`
+                : 'desconhecido'
+            }
+            tone={(daysSince(generatedAt) ?? 99) >= 2 ? 'atencao' : 'ok'}
+          />
+          <StatusRow label="Origem dos dados" value={ORIGEM_LABELS[origem] ?? origem} tone="neutro" />
+          <StatusRow
+            label="Servidor da loja"
+            value={
+              !API_URL
+                ? 'não configurado (modo offline)'
+                : online
+                  ? `conectado · ${formatAge(ultimoSync)}`
+                  : `sem conexão · última ${formatAge(ultimoSync)}`
+            }
+            tone={!API_URL ? 'neutro' : online ? 'ok' : 'atencao'}
+          />
+          <StatusRow
+            label="Fotos dentro do app"
+            value={`${fotosNoApp} de ${perfumes.length}`}
+            tone={fotosNoApp >= perfumes.length - 10 ? 'ok' : 'atencao'}
+          />
+        </View>
+        {(daysSince(generatedAt) ?? 0) >= 2 && (
+          <Text style={styles.statusAviso}>
+            O catálogo está sendo exibido com dados de {formatAge(generatedAt)}. Confira se o PC da
+            loja está ligado, com o servidor rodando, e se o tablet está na mesma rede Wi-Fi.
+          </Text>
+        )}
+        <CtaButton
+          label={atualizando ? 'Atualizando...' : 'Atualizar agora'}
+          variant="secondary"
+          disabled={atualizando || !API_URL}
+          onPress={() => {
+            refresh();
+          }}
+          style={styles.atualizarButton}
+        />
+
+        <SectionTitle>Produtos da loja</SectionTitle>
+        <View style={styles.statusCard}>
+          <StatusRow
+            label="Cadastrados neste totem"
+            value={`${produtosLocais.length}`}
+            tone="neutro"
+          />
+          <StatusRow
+            label="Aguardando envio ao servidor"
+            value={
+              pendencias.length === 0
+                ? 'nada pendente'
+                : `${pendencias.length} alteração${pendencias.length === 1 ? '' : 'ões'}`
+            }
+            tone={pendencias.length === 0 ? 'ok' : 'atencao'}
+          />
+        </View>
+        <CtaButton
+          label="Gerenciar produtos"
+          variant="secondary"
+          onPress={() => router.push('/produtos')}
+          style={styles.atualizarButton}
+        />
 
         <SectionTitle>Ofertas ativas</SectionTitle>
         {ofertas.length === 0 ? (
@@ -159,6 +294,7 @@ export default function AdminScreen() {
                 {(
                   [
                     ['Para quem', metrics.quiz.quem, QUEM_LABELS],
+                    ['Gênero', metrics.quiz.genero, GENERO_LABELS],
                     ['Ocasião', metrics.quiz.ocasiao, OCASIAO_LABELS],
                     ['Intensidade', metrics.quiz.intensidade, INTENSIDADE_LABELS],
                     ['Famílias', metrics.quiz.familias, familyLabels as Record<string, string>],
@@ -231,6 +367,39 @@ const styles = StyleSheet.create({
     marginBottom: 12,
   },
   empty: { fontFamily: fonts.sans, fontSize: 15, lineHeight: 23, color: colors.muted },
+  statusCard: {
+    backgroundColor: colors.surface,
+    borderWidth: 1,
+    borderColor: colors.borderSoft,
+    borderRadius: 14,
+    paddingVertical: 6,
+    paddingHorizontal: 18,
+  },
+  statusRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    gap: 16,
+    paddingVertical: 11,
+  },
+  statusLabel: { fontFamily: fonts.sans, fontSize: 14.5, color: colors.muted },
+  statusValueRow: { flexDirection: 'row', alignItems: 'center', gap: 8, flexShrink: 1 },
+  statusDot: { width: 7, height: 7, borderRadius: 4 },
+  statusValue: {
+    fontFamily: fonts.sansSemiBold,
+    fontSize: 14.5,
+    color: colors.ink,
+    textAlign: 'right',
+    flexShrink: 1,
+  },
+  statusAviso: {
+    fontFamily: fonts.sans,
+    fontSize: 14,
+    lineHeight: 21,
+    color: colors.gold,
+    marginTop: 12,
+  },
+  atualizarButton: { marginTop: 14, alignSelf: 'flex-start', paddingHorizontal: 34 },
   offerRow: {
     flexDirection: 'row',
     alignItems: 'center',

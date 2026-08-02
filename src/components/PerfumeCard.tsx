@@ -32,9 +32,11 @@ export function PerfumeCard({ perfume, onPress, delay = 0 }: Props) {
         <View style={styles.body}>
           <View style={styles.titleRow}>
             <View style={styles.titleCol}>
-              <Text style={styles.brand} numberOfLines={1}>
-                {perfume.marca.toUpperCase()}
-              </Text>
+              {!!perfume.marca && (
+                <Text style={styles.brand} numberOfLines={1}>
+                  {perfume.marca.toUpperCase()}
+                </Text>
+              )}
               <Text style={styles.name} numberOfLines={2}>
                 {perfume.nome}
               </Text>

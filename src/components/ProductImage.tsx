@@ -1,8 +1,9 @@
 import { Image } from 'expo-image';
 import { LinearGradient } from 'expo-linear-gradient';
-import React from 'react';
+import React, { useMemo, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 
+import { photoSources } from '@/data/images';
 import { familyTints, neutralTint } from '@/theme/theme';
 import type { Perfume } from '@/types/catalog';
 
@@ -21,24 +22,34 @@ interface Props {
 }
 
 /**
- * Foto do produto (do Bling) preenchendo todo o quadro sobre fundo branco —
- * as fotos do Bling já vêm com fundo branco, então o "contain" funde sem
- * emenda com o fundo. Sem foto, mantém o degradê da família olfativa com a
- * garrafa minimalista do design.
+ * Foto do produto preenchendo todo o quadro sobre fundo branco — as fotos do
+ * Bling já vêm com fundo branco, então o "contain" funde sem emenda.
+ *
+ * As origens são tentadas em ordem (APK → servidor da loja → URL do Bling);
+ * se todas falharem, mantém o degradê da família olfativa com a garrafa
+ * minimalista do design, que é o estado offline aceitável.
  */
 export function ProductImage({ perfume, height, bottle = 'md' }: Props) {
+  const sources = useMemo(() => photoSources(perfume), [perfume]);
+  const [failed, setFailed] = useState(0);
+
   const family = perfume.familias[0];
   const tint = family ? familyTints[family] : neutralTint;
   const b = bottleSizes[bottle];
+  const source = sources[failed];
 
-  if (perfume.imagem) {
+  if (source !== undefined) {
     return (
       <View style={[styles.container, styles.photo, { height }]}>
         <Image
-          source={{ uri: perfume.imagem }}
+          // Ao trocar de produto numa lista reciclada, limpa a imagem anterior.
+          recyclingKey={perfume.id}
+          source={source}
           style={styles.photoImage}
           contentFit="contain"
+          cachePolicy="disk"
           transition={200}
+          onError={() => setFailed((i) => i + 1)}
         />
       </View>
     );
