@@ -4,6 +4,20 @@ App de totem para tablet (modo quiosque, orientação retrato) da perfumaria **L
 
 O app é **offline-first**: ele abre completo — catálogo, preços e fotos — sem nenhuma rede. O servidor da loja é uma atualização em segundo plano, nunca um requisito. Veja [docs/OFFLINE-FIRST.md](docs/OFFLINE-FIRST.md) para a receita completa.
 
+## Funcionalidades concluídas
+
+- **Catálogo** — 201 perfumes curados (de 1.163 produtos no Bling), com busca por nome/marca e filtros combinados de gênero, família olfativa, ocasião e faixa de preço.
+- **Detalhe do perfume** — foto, preço, estoque, descrição e pirâmide olfativa (topo/coração/fundo) extraída automaticamente da descrição do Bling.
+- **Quiz de recomendação** — 6 perguntas, pontuação ponderada; devolve de 3 a 5 perfumes reais com estoque.
+- **Sincronização com o Bling (API v3 / OAuth 2.0)** — sync rápido a cada 5 min (preço e estoque) e sync completo diário (descrições, fotos, produtos novos, curadoria).
+- **Tempo real** — push por WebSocket quando o catálogo muda, sem botão de atualizar.
+- **Offline-first** — o app abre completo (catálogo, preços e 197 fotos) sem nenhuma rede.
+- **Cadastro de produtos da loja** — CRUD no próprio totem, com fila de pendências offline e resolução de conflito por *last-write-wins*.
+- **Ofertas** — preço promocional definido pela equipe no tablet, sem alterar o Bling.
+- **Painel da loja** (PIN) — status e frescor do catálogo, origem dos dados (app/cache/servidor), saúde das rotinas de sync, perfumes mais vistos, pedidos de amostra e respostas do quiz.
+- **Modo quiosque** — orientação travada em retrato, tela sempre acesa, timeout de inatividade de 90s com retorno ao início.
+- **121 testes automatizados** (Vitest) sobre a lógica de negócio pura.
+
 ## Arquitetura
 
 ```
@@ -29,6 +43,23 @@ App/
     ├── src/bundle.js             # Gera o recorte que vai dentro do APK
     └── src/server.js             # Servidor local: /api/totem e /images/:id
 ```
+
+## Tecnologias e bibliotecas
+
+| Camada | Tecnologia |
+| ------ | ---------- |
+| App | React Native 0.86 · React 19 · TypeScript · **Expo SDK 57** |
+| Navegação | `expo-router` (roteamento por arquivos, com deep links) |
+| Armazenamento | `@react-native-async-storage/async-storage` · `expo-file-system` |
+| Imagens | `expo-image` · `expo-image-picker` · `expo-image-manipulator` |
+| Animação e gestos | `react-native-reanimated` · `react-native-gesture-handler` · `react-native-screens` |
+| Modo quiosque | `expo-screen-orientation` · `expo-keep-awake` |
+| Tipografia | `@expo-google-fonts/cormorant-garamond` · `@expo-google-fonts/manrope` |
+| Servidor (`/sync`) | Node.js · Express · `ws` (WebSocket) · `sharp` (redimensionamento) |
+| Integração | Bling API v3 (REST, OAuth 2.0) |
+| Testes | Vitest — 121 testes sobre a lógica pura |
+| Qualidade | TypeScript estrito · ESLint (`eslint-config-expo`) |
+| Build Android | Expo CNG (`expo prebuild`) + Gradle, JDK 17 |
 
 ## Como rodar o app
 
@@ -208,3 +239,15 @@ A tela de detalhe extrai as notas de **topo/coração/fundo** quando a descriç�
 - `.env`, `sync/.env` e `sync/.tokens.json` estão no `.gitignore` — **nunca** commite credenciais.
 - As credenciais do Bling existem apenas no servidor (`/sync`); o tablet fala somente com o servidor local.
 - O `ADMIN_PIN` vai dentro do bundle do app: é uma trava de conveniência contra o cliente curioso, **não** um controle de acesso de verdade.
+
+## Limitações conhecidas e pendências
+
+- **O PIN da equipe (`ADMIN_PIN`) fica no bundle do app.** É trava de conveniência contra o cliente curioso, não controle de acesso — qualquer APK é extraível. Uma área administrativa de verdade exigiria autenticação no servidor.
+- **O servidor local não tem autenticação.** Roda na rede da loja, atrás do roteador. Exposto à internet, as rotas de escrita precisariam de token.
+- **Ofertas e métricas são por aparelho.** Com mais de um totem, cada um tem as suas; ainda não sincronizam entre si.
+- **O totem não vende.** Ele informa e chama o atendente. Pagamento é o próximo passo natural — o Bling já tem API de pedidos.
+- **A classificação olfativa é semiautomática.** O `npm run curar` deduz o que dá para deduzir com segurança e nunca sobrescreve valor curado à mão, mas produtos novos podem entrar sem família ou ocasião até alguém revisar.
+- **A pirâmide olfativa depende da descrição do Bling.** Só aparece quando as notas vêm estruturadas ("Notas de topo: ..."); as demais seguem como texto normal.
+- **As URLs de imagem do Bling gravadas em `data/catalog.json` expiram em ~7 dias.** Elas são apenas o último elo da cadeia de fallback — as fotos exibidas vêm do APK ou do servidor local.
+- **Validado apenas em Android.** O código é multiplataforma (Expo), mas não houve build nem teste em iOS.
+- **Histórico de commits enxuto.** O desenvolvimento foi commitado por sessão de trabalho, não por unidade lógica — o commit de 01/08 concentra boa parte das mudanças, o que dificulta a revisão granular.
