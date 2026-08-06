@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-02T20:57:02.072Z",
+  "generatedAt": "2026-08-06T00:07:21.572Z",
   "source": "bling",
   "produtos": [
     {
@@ -41,7 +41,7 @@
       "nome": "Pokoloka - Supremo Edition Body Splash",
       "marca": "Pokoloka",
       "preco": 89.9,
-      "estoque": 5,
+      "estoque": 2,
       "categoria": null,
       "imagem": "https://orgbling.s3.amazonaws.com/986e1ae50c3c169d984d565cc6145aac/77f6ae05b0b7b7623760f6e4a9bf1231?AWSAccessKeyId=AKIATCLMSGFXTAGX6WUM&Expires=1786089625&Signature=KVLubUUNcUCXmzVEF9MbgAZW540%3D",
       "descricao": "Body Splash Masculino Pokoloka, linha Supremo Edition, 200ml. Perfumed spray de alta fixacao, ideal para uso diario. Produto vegano e cruelty-free."
@@ -107,7 +107,7 @@
       "nome": "Pokoloka - Zaarad Elixir Body Splash",
       "marca": "Pokoloka",
       "preco": 89.9,
-      "estoque": 5,
+      "estoque": 4,
       "categoria": null,
       "imagem": "https://orgbling.s3.amazonaws.com/986e1ae50c3c169d984d565cc6145aac/f92d8fae5ce42e1bc77ca2d4d957271f?AWSAccessKeyId=AKIATCLMSGFXTAGX6WUM&Expires=1786089627&Signature=iqYpiA%2FhPxjxY%2FJW8UPc9YGIsVM%3D",
       "descricao": "Body Splash Masculino Pokoloka, linha Zaarad Elixir, 200ml. Perfumed spray de alta fixacao, ideal para uso diario."
@@ -129,7 +129,7 @@
       "nome": "Lattafa - Queen of Arabia Eau de Parfum",
       "marca": "Lattafa",
       "preco": 459.9,
-      "estoque": 0,
+      "estoque": -1,
       "categoria": null,
       "imagem": "https://orgbling.s3.amazonaws.com/986e1ae50c3c169d984d565cc6145aac/8880448c0c05802ee5a7b16ad23722e9?AWSAccessKeyId=AKIATCLMSGFXTAGX6WUM&Expires=1786089628&Signature=FMGYoAQh2a0Tt1EiMKgCKbK%2Ff9Y%3D",
       "descricao": "Queen of Arabia, da Lattafa Pride, e uma fragrancia oriental floral feminina. Topo de coco e sal; coracao de sandalo e heliotropio; fundo de baunilha e ambar seco. Frasco 100ml."
@@ -184,7 +184,7 @@
       "nome": "Maison Alhambra - Athena Eau de Parfum",
       "marca": "Maison Alhambra",
       "preco": 259.9,
-      "estoque": -2,
+      "estoque": -3,
       "categoria": null,
       "imagem": "https://orgbling.s3.amazonaws.com/986e1ae50c3c169d984d565cc6145aac/1d12036ca8f3719fda3d3f610a16d8a9?AWSAccessKeyId=AKIATCLMSGFXTAGX6WUM&Expires=1786089630&Signature=vvKTt9bbmvK4gm24rdom4DSD5Dw%3D",
       "descricao": "Athena Eau de Parfum, da Maison Alhambra, e uma fragrancia floral amadeirada almiscarada inspirada em Burberry Goddess. Topo de mate, cipreste, tomilho e acafrao; coracao floral de jasmim, iris e rosa; fundo de ambar, couro, baunilha, almiscar, vetiver e cedro. Frasco 100ml."
@@ -251,7 +251,7 @@
       "nome": "World Cup Vip - Zakat Perfume Unissex Eau De Parfum 100ml",
       "marca": "Zakat",
       "preco": 759.9,
-      "estoque": 0,
+      "estoque": -1,
       "categoria": {
         "id": "7384239",
         "nome": "Perfumes & Colônias",
@@ -356,7 +356,7 @@
       "nome": "Billion Exclusive Edition - Paris Elysees Eau De Toilette 100ml",
       "marca": "Paris Elysees",
       "preco": 78.9,
-      "estoque": 0,
+      "estoque": 2,
       "categoria": {
         "id": "10972815",
         "nome": "Perfume Masculino",
@@ -476,7 +476,7 @@
       "nome": "Cor 30 Corretivo Vegano para olhos - Ruby Kisses 10ml",
       "marca": "Ruby Kisses",
       "preco": 49.9,
-      "estoque": 6,
+      "estoque": 5,
       "categoria": {
         "id": "13041980",
         "nome": "Ruby Kisses",
@@ -1592,7 +1592,7 @@
       "nome": "Trio de Sombras (Conjunto) Cor:Hazel",
       "marca": null,
       "preco": 0,
-      "estoque": 1,
+      "estoque": 0,
       "categoria": null,
       "imagem": "https://orgbling.s3.amazonaws.com/986e1ae50c3c169d984d565cc6145aac/bb013d60c8e0fd54b444a1cc3852a7d0?AWSAccessKeyId=AKIATCLMSGFXTAGX6WUM&Expires=1786089674&Signature=llXsB3gbj7ceIW7aNpOU5OdOaow%3D",
       "descricao": null
@@ -1966,7 +1966,7 @@
       "nome": "Her Choice (Conjunto) Volume:30ml",
       "marca": null,
       "preco": 0,
-      "estoque": 2,
+      "estoque": 1,
       "categoria": null,
       "imagem": null,
       "descricao": null
@@ -2007,7 +2007,7 @@
       "nome": "Velvety Deo Colônia Lata 100ml - Ciclo Cosméticos Original",
       "marca": "Ciclo Cosméticos",
       "preco": 99.9,
-      "estoque": 8,
+      "estoque": 5,
       "categoria": {
         "id": "9021515",
         "nome": "Perfumes Lata",
@@ -2022,7 +2022,7 @@
       "nome": "Aqua Woman - La Rive Eau De Parfum 100ml",
       "marca": "La Rive",
       "preco": 99.9,
-      "estoque": 1,
+      "estoque": 0,
       "categoria": {
         "id": "9021518",
         "nome": "Perfumes Feminino",
@@ -2261,7 +2261,7 @@
       "nome": "Loção Hidratante - Ciclo Cosméticos (Conjunto) Fragância:Kiss",
       "marca": null,
       "preco": 0,
-      "estoque": 1,
+      "estoque": 0,
       "categoria": null,
       "imagem": "https://orgbling.s3.amazonaws.com/986e1ae50c3c169d984d565cc6145aac/fe91487563a8ba61124a530ef097646a?AWSAccessKeyId=AKIATCLMSGFXTAGX6WUM&Expires=1786089698&Signature=bg%2Fq3HT1tbyg0Pg3bn7carXvMxU%3D",
       "descricao": null
@@ -2283,7 +2283,7 @@
       "nome": "Loção Hidratante - Ciclo Cosméticos (Conjunto) Fragância:La Vida",
       "marca": null,
       "preco": 0,
-      "estoque": 12,
+      "estoque": 11,
       "categoria": null,
       "imagem": "https://orgbling.s3.amazonaws.com/986e1ae50c3c169d984d565cc6145aac/fe91487563a8ba61124a530ef097646a?AWSAccessKeyId=AKIATCLMSGFXTAGX6WUM&Expires=1786089699&Signature=IiuSbrBo1P8UXbL1%2B33eK%2F7yR6k%3D",
       "descricao": null
@@ -2294,7 +2294,7 @@
       "nome": "Loção Hidratante - Ciclo Cosméticos (Conjunto) Fragância:Hello Hello",
       "marca": null,
       "preco": 0,
-      "estoque": 2,
+      "estoque": 0,
       "categoria": null,
       "imagem": "https://orgbling.s3.amazonaws.com/986e1ae50c3c169d984d565cc6145aac/fe91487563a8ba61124a530ef097646a?AWSAccessKeyId=AKIATCLMSGFXTAGX6WUM&Expires=1786089699&Signature=IiuSbrBo1P8UXbL1%2B33eK%2F7yR6k%3D",
       "descricao": null
@@ -3108,7 +3108,7 @@
       "nome": "Body Splash - Ciclo Cosméticos (Conjunto) Fragância:Kiss me More",
       "marca": null,
       "preco": 0,
-      "estoque": 14,
+      "estoque": 12,
       "categoria": null,
       "imagem": "https://orgbling.s3.amazonaws.com/986e1ae50c3c169d984d565cc6145aac/442404e9657cc48f6acecdf8542c5b0f?AWSAccessKeyId=AKIATCLMSGFXTAGX6WUM&Expires=1786089730&Signature=xEx04YnFk1yNaiPWB2BGrVeLokw%3D",
       "descricao": null
@@ -3119,7 +3119,7 @@
       "nome": "Body Splash - Ciclo Cosméticos (Conjunto) Fragância:Kiss",
       "marca": null,
       "preco": 0,
-      "estoque": 3,
+      "estoque": 2,
       "categoria": null,
       "imagem": "https://orgbling.s3.amazonaws.com/986e1ae50c3c169d984d565cc6145aac/442404e9657cc48f6acecdf8542c5b0f?AWSAccessKeyId=AKIATCLMSGFXTAGX6WUM&Expires=1786089731&Signature=uAjnsKNy4HT8hTk5FprE2b3S2RE%3D",
       "descricao": null
@@ -3229,7 +3229,7 @@
       "nome": "Hello Hello! Nah Cardoso Deo Colônia Lata 100ml + Body Splash 200ml + Loção Corporal 240ml",
       "marca": null,
       "preco": 0,
-      "estoque": 2,
+      "estoque": -1,
       "categoria": null,
       "imagem": "https://orgbling.s3.amazonaws.com/986e1ae50c3c169d984d565cc6145aac/66cbc2e02effc6c81d6fe0213fc8699e?AWSAccessKeyId=AKIATCLMSGFXTAGX6WUM&Expires=1786089735&Signature=8NcaKIinWO8tqgB%2BPBZTJAhE%2FME%3D",
       "descricao": null
@@ -3240,7 +3240,7 @@
       "nome": "Hello Hello! Nah Cardoso Deo Colônia Lata 100ml + Hello Hello Loção Hidratante Corporal 240ml",
       "marca": null,
       "preco": 0,
-      "estoque": 2,
+      "estoque": -1,
       "categoria": null,
       "imagem": "https://orgbling.s3.amazonaws.com/986e1ae50c3c169d984d565cc6145aac/b0bdcd1299512d958da9ab0b1551e2b2?AWSAccessKeyId=AKIATCLMSGFXTAGX6WUM&Expires=1786089736&Signature=V91YMnDP6VjnnObpkSM44U9wN3s%3D",
       "descricao": null
@@ -3398,7 +3398,7 @@
       "nome": "Queen of Life - La Rive (Conjunto) Volume:KIT",
       "marca": null,
       "preco": 0,
-      "estoque": 2,
+      "estoque": 0,
       "categoria": null,
       "imagem": null,
       "descricao": null
@@ -3409,7 +3409,7 @@
       "nome": "Queen of Life - La Rive (Conjunto) Volume:75ml",
       "marca": null,
       "preco": 0,
-      "estoque": 10,
+      "estoque": 9,
       "categoria": null,
       "imagem": null,
       "descricao": null
@@ -3453,7 +3453,7 @@
       "nome": "Extreme Story La Rive (Conjunto) Volume:75ml",
       "marca": null,
       "preco": 0,
-      "estoque": 8,
+      "estoque": 7,
       "categoria": null,
       "imagem": null,
       "descricao": null
@@ -3497,7 +3497,7 @@
       "nome": "La Rive Brave (Conjunto) Volume:30ml",
       "marca": null,
       "preco": 0,
-      "estoque": 1,
+      "estoque": 0,
       "categoria": null,
       "imagem": null,
       "descricao": null
@@ -3530,7 +3530,7 @@
       "nome": "Her Choice (Conjunto) Volume:100ml",
       "marca": null,
       "preco": 0,
-      "estoque": 6,
+      "estoque": 3,
       "categoria": null,
       "imagem": null,
       "descricao": null
@@ -3618,7 +3618,7 @@
       "nome": "Miss Dream (Conjunto) Volume:30ml",
       "marca": null,
       "preco": 0,
-      "estoque": 5,
+      "estoque": 4,
       "categoria": null,
       "imagem": null,
       "descricao": null
@@ -3824,7 +3824,7 @@
       "nome": "Kiss Me More Ciclo Cosméticos (Conjunto) Volume:100ml",
       "marca": null,
       "preco": 0,
-      "estoque": 21,
+      "estoque": 20,
       "categoria": {
         "id": "9021515",
         "nome": "Perfumes Lata",
@@ -3997,7 +3997,7 @@
       "nome": "Deo Colônia Nah Cardoso By Ciclo Hello Hello 50ml Volume:100",
       "marca": null,
       "preco": 55.9,
-      "estoque": 4,
+      "estoque": -1,
       "categoria": null,
       "imagem": null,
       "descricao": null
@@ -4008,7 +4008,7 @@
       "nome": "Deo Colônia Nah Cardoso By Ciclo Hello Hello 50ml Volume:50",
       "marca": null,
       "preco": 55.9,
-      "estoque": 19,
+      "estoque": 18,
       "categoria": null,
       "imagem": null,
       "descricao": null
@@ -4206,7 +4206,7 @@
       "nome": "Yara - Lattafa Body Splash Lattafa 250ml",
       "marca": "Lattafa",
       "preco": 129.9,
-      "estoque": -2,
+      "estoque": 0,
       "categoria": {
         "id": "13147909",
         "nome": "Lattafa",
@@ -4266,7 +4266,7 @@
       "nome": "Fakhar Woman - Lattafa Body Splash Lattafa 250ml",
       "marca": "Lattafa",
       "preco": 129.9,
-      "estoque": -10,
+      "estoque": 0,
       "categoria": {
         "id": "13147909",
         "nome": "Lattafa",
@@ -4296,7 +4296,7 @@
       "nome": "Angham - Lattafa Body Splash Lattafa 250ml",
       "marca": "Lattafa",
       "preco": 129.9,
-      "estoque": -1,
+      "estoque": 0,
       "categoria": {
         "id": "13147909",
         "nome": "Lattafa",
@@ -4322,7 +4322,7 @@
       "nome": "Perfume Eau De Toilette La Rive Brave Masculino Cítrico 30ml",
       "marca": null,
       "preco": 45.9,
-      "estoque": 1,
+      "estoque": 0,
       "categoria": {
         "id": "10730557",
         "nome": "Al Absar Arábia",
@@ -4954,7 +4954,7 @@
       "nome": "Vulcan Feu - French Avenue Eau De Parfum 100ml",
       "marca": "French Avenue",
       "preco": 459.9,
-      "estoque": 0,
+      "estoque": -1,
       "categoria": {
         "id": "12940278",
         "nome": "French Avenue",
@@ -5325,7 +5325,7 @@
       "nome": "Good Girl - Carolina Herrera Eau De Parfum 80ml",
       "marca": "Carolina Herrera",
       "preco": 799.9,
-      "estoque": 0,
+      "estoque": -1,
       "categoria": {
         "id": "8954477",
         "nome": "Femininos",
@@ -5475,7 +5475,7 @@
       "nome": "Fleur Antique - La Rive Eau De Parfum 90ml Lançamento Original",
       "marca": "La Rive",
       "preco": 99.9,
-      "estoque": 2,
+      "estoque": 1,
       "categoria": {
         "id": "9021518",
         "nome": "Perfumes Feminino",
@@ -6178,7 +6178,7 @@
       "nome": "Sama Eau De Parfum - Orygens Fragrances 100ml",
       "marca": "Orygens Fragrances",
       "preco": 99.9,
-      "estoque": 3,
+      "estoque": 2,
       "categoria": {
         "id": "12786557",
         "nome": "Perfume Feminino",
@@ -6352,7 +6352,7 @@
       "nome": "Perfume Tubete Dream Brand Collection 012 C'est La Vie 30ml",
       "marca": null,
       "preco": 59.9,
-      "estoque": -4,
+      "estoque": -7,
       "categoria": null,
       "imagem": null,
       "descricao": null
@@ -6582,7 +6582,7 @@
       "nome": "Deo Colônia Nah Cardoso By Ciclo Hello Hello 50ml",
       "marca": null,
       "preco": 55.9,
-      "estoque": 19,
+      "estoque": 18,
       "categoria": null,
       "imagem": "https://orgbling.s3.amazonaws.com/986e1ae50c3c169d984d565cc6145aac/6a8902c1d4fd3789f329cd4da2a1d2d5?AWSAccessKeyId=AKIATCLMSGFXTAGX6WUM&Expires=1786089848&Signature=NY8V2lH9y667b84LK94A4l%2FDgsg%3D",
       "descricao": null
@@ -6641,7 +6641,7 @@
       "nome": "Miss Dream La Rive Eau De Parfum - Perfume Feminino 30ml Original",
       "marca": null,
       "preco": 49.9,
-      "estoque": 5,
+      "estoque": 4,
       "categoria": null,
       "imagem": null,
       "descricao": null
@@ -6763,7 +6763,7 @@
       "nome": "Noor Extrait De Parfum - Riiffs 100ml",
       "marca": "Riiffs",
       "preco": 459.9,
-      "estoque": 2,
+      "estoque": 1,
       "categoria": {
         "id": "12788560",
         "nome": "Perfume Feminino",
@@ -7211,7 +7211,7 @@
       "nome": "Nautica - Voyage Eau De Toilette 100ml",
       "marca": "Nautica",
       "preco": 189.9,
-      "estoque": 3,
+      "estoque": 0,
       "categoria": {
         "id": "8954478",
         "nome": "Masculinos",
@@ -7889,7 +7889,7 @@
       "nome": "Asad Bourbon - Lattafa Eau De Parfum 100ml",
       "marca": "Lattafa",
       "preco": 359.9,
-      "estoque": 1,
+      "estoque": 0,
       "categoria": {
         "id": "10292925",
         "nome": "Perfume Masculino",
@@ -8705,7 +8705,7 @@
       "nome": "Indala - Paris Elysees Eau De Toilette 100ml Original",
       "marca": "Parys Elysees",
       "preco": 109.9,
-      "estoque": 2,
+      "estoque": 1,
       "categoria": {
         "id": "10972787",
         "nome": "Perfume Feminino",
@@ -8720,7 +8720,7 @@
       "nome": "Bloody Mary - Paris Elysees Eau De Toilette 100ml Original",
       "marca": "Parys Elysees",
       "preco": 109.9,
-      "estoque": 0,
+      "estoque": -1,
       "categoria": {
         "id": "10972787",
         "nome": "Perfume Feminino",
@@ -8821,7 +8821,7 @@
       "nome": "Winner - Brand Collection N° 116 Eau De Parfum 30ml Original",
       "marca": "Brand Collection",
       "preco": 59.9,
-      "estoque": -2,
+      "estoque": -3,
       "categoria": {
         "id": "10902941",
         "nome": "Perfumes Masculinos",
@@ -8941,7 +8941,7 @@
       "nome": "Lilac - Manasik Eau De Parfum 100ml",
       "marca": "Manasik",
       "preco": 129.9,
-      "estoque": 4,
+      "estoque": 0,
       "categoria": {
         "id": "10106474",
         "nome": "Perfume Feminino",
@@ -10021,7 +10021,7 @@
       "nome": "Bare Vanilla Shimmer Victoria's Secret - Body Splash - 250ml",
       "marca": "Victoria's Secret",
       "preco": 179.9,
-      "estoque": -5,
+      "estoque": -6,
       "categoria": {
         "id": "9066929",
         "nome": "Victoria 's Secret",
@@ -10436,7 +10436,7 @@
       "nome": "Nadia Tambasco - Trio de Sombras To Go Hazel 7,8g",
       "marca": null,
       "preco": 69.9,
-      "estoque": 1,
+      "estoque": 0,
       "categoria": {
         "id": "10787011",
         "nome": "Nadia Tambasco",
@@ -10882,7 +10882,7 @@
       "nome": "Oceane - Contorno Stick Dark 13.5g",
       "marca": null,
       "preco": 79.9,
-      "estoque": 0,
+      "estoque": -1,
       "categoria": {
         "id": "10787014",
         "nome": "Oceane Edition",
@@ -10897,7 +10897,7 @@
       "nome": "Oceane - Contorno Stick Medium 13.5",
       "marca": null,
       "preco": 79.9,
-      "estoque": 0,
+      "estoque": -1,
       "categoria": {
         "id": "10787014",
         "nome": "Oceane Edition",
@@ -12522,7 +12522,7 @@
       "nome": "Saqar Platinum - Al Absar Eau De Parfum 100ml",
       "marca": "Al Absar",
       "preco": 279.9,
-      "estoque": 21,
+      "estoque": 20,
       "categoria": {
         "id": "10292925",
         "nome": "Perfume Masculino",
@@ -12762,7 +12762,7 @@
       "nome": "Hello Hello! Nah Cardoso Ciclo Cosméticos Deo Colônia Lata - Perfume Feminino 100ml Nova Embalagem",
       "marca": "Ciclo Cosméticos",
       "preco": 99.9,
-      "estoque": 4,
+      "estoque": -1,
       "categoria": {
         "id": "9021515",
         "nome": "Perfumes Lata",
@@ -12792,7 +12792,7 @@
       "nome": "Salvo - Maison Alhambra Eau de Parfum 100ml",
       "marca": "Maison Alhambra",
       "preco": 259.9,
-      "estoque": 1,
+      "estoque": 0,
       "categoria": {
         "id": "10644595",
         "nome": "Perfume Masculino",
@@ -12822,7 +12822,7 @@
       "nome": "Leonie - Maison Alhambra Eau de Parfum 100ml",
       "marca": "Maison Alhambra",
       "preco": 259.9,
-      "estoque": -1,
+      "estoque": -2,
       "categoria": {
         "id": "10644594",
         "nome": "Perfume Feminino",
@@ -13032,7 +13032,7 @@
       "nome": "Fakhar Black - Lattafa Eau De Parfum Masculino 100ml",
       "marca": "Lattafa",
       "preco": 359.9,
-      "estoque": 22,
+      "estoque": 21,
       "categoria": {
         "id": "10292925",
         "nome": "Perfume Masculino",
@@ -13047,7 +13047,7 @@
       "nome": "Perfume Árabe Masculino Lattafa Asad Eau De Parfum Edp 100ml",
       "marca": "Lattafa",
       "preco": 359.9,
-      "estoque": 1,
+      "estoque": 0,
       "categoria": {
         "id": "10292925",
         "nome": "Perfume Masculino",
@@ -13137,7 +13137,7 @@
       "nome": "Ameer Al Oud Arabian Nights Manasik Edp Feminino 100ml",
       "marca": "Manasik",
       "preco": 129.9,
-      "estoque": 7,
+      "estoque": 6,
       "categoria": {
         "id": "10106476",
         "nome": "Perfume Masculino",
@@ -13152,7 +13152,7 @@
       "nome": "Cash Oud - Manasik Eau de Parfum 100ml Perfume Árabe Original",
       "marca": "Manasik",
       "preco": 129.9,
-      "estoque": 4,
+      "estoque": 2,
       "categoria": {
         "id": "10106476",
         "nome": "Perfume Masculino",
@@ -13182,7 +13182,7 @@
       "nome": "Manasik Makhsouse Edp - Perfume Masculino 100ml Volume Da Unidade 100 Ml",
       "marca": "Manasik",
       "preco": 129.9,
-      "estoque": 8,
+      "estoque": 6,
       "categoria": {
         "id": "10106476",
         "nome": "Perfume Masculino",
@@ -13362,7 +13362,7 @@
       "nome": "Ejlal- Style & Scents Eau De Parfum 100ml Original",
       "marca": "Style & Scents",
       "preco": 279.9,
-      "estoque": 10,
+      "estoque": 7,
       "categoria": {
         "id": "9890084",
         "nome": "Perfumes Femininos",
@@ -13797,7 +13797,7 @@
       "nome": "Bare Vanilla Victoria's Secret - Body Splash - 250ml",
       "marca": "Victoria's Secret",
       "preco": 159.9,
-      "estoque": 8,
+      "estoque": 7,
       "categoria": {
         "id": "9066929",
         "nome": "Victoria 's Secret",
@@ -14032,7 +14032,7 @@
       "nome": "Extreme Story La Rive Eau De Toilette - Perfume Masculino 75ml",
       "marca": "La Rive",
       "preco": 99.9,
-      "estoque": 8,
+      "estoque": 7,
       "categoria": {
         "id": "9021518",
         "nome": "Perfumes Feminino",
@@ -14212,7 +14212,7 @@
       "nome": "Aqua Man - La Rive Eau De Toilette 90ml Original",
       "marca": "La Rive",
       "preco": 99.9,
-      "estoque": 12,
+      "estoque": 11,
       "categoria": {
         "id": "7384239",
         "nome": "Perfumes & Colônias",
@@ -14242,7 +14242,7 @@
       "nome": "Queen of Life - La Rive Eau de Parfum 75ml Original",
       "marca": "La Rive",
       "preco": 99.9,
-      "estoque": 10,
+      "estoque": 9,
       "categoria": {
         "id": "9021518",
         "nome": "Perfumes Feminino",
@@ -14302,7 +14302,7 @@
       "nome": "Her Choice - La Rive 100ml Eau De Parfum",
       "marca": "La Rive",
       "preco": 99.9,
-      "estoque": 6,
+      "estoque": 3,
       "categoria": null,
       "imagem": "https://orgbling.s3.amazonaws.com/986e1ae50c3c169d984d565cc6145aac/9d84749dd80c2367557b790f8e4553b5?AWSAccessKeyId=AKIATCLMSGFXTAGX6WUM&Expires=1786090042&Signature=9cR1M4HkBl0y6f8zJZhRvqc4U5M%3D",
       "descricao": "Her Choice - La Rive 100ml Eau De Parfum"
@@ -14313,7 +14313,7 @@
       "nome": "Ciclo Body Splash Kiss Me More 200ml",
       "marca": "Ciclo Cosméticos",
       "preco": 49.9,
-      "estoque": 14,
+      "estoque": 12,
       "categoria": {
         "id": "7384239",
         "nome": "Perfumes & Colônias",
@@ -14463,7 +14463,7 @@
       "nome": "Kit Queen Of Life La Rive Feminino Conjunto - Eau De Parfum 75ml + Desodorante 150ml",
       "marca": "La Rive",
       "preco": 119.9,
-      "estoque": 2,
+      "estoque": 0,
       "categoria": {
         "id": "9021511",
         "nome": "La Rive",
@@ -14508,7 +14508,7 @@
       "nome": "Granado Pink Caneta Hidratante Sos Cutículas Perfeitas 3,5g",
       "marca": "Granado",
       "preco": 39.9,
-      "estoque": 20,
+      "estoque": 21,
       "categoria": {
         "id": "9021499",
         "nome": "Granado",
@@ -14583,7 +14583,7 @@
       "nome": "Body Spray Silver Scent Intense 200 Ml - Original",
       "marca": "jacques bogart",
       "preco": 72,
-      "estoque": 4,
+      "estoque": 3,
       "categoria": {
         "id": "8409521",
         "nome": "Desodorantes",
@@ -14598,7 +14598,7 @@
       "nome": "Body Spray Silver Scent 200ml Original",
       "marca": "jacques bogart",
       "preco": 72,
-      "estoque": 10,
+      "estoque": 8,
       "categoria": {
         "id": "8409521",
         "nome": "Desodorantes",
@@ -14684,7 +14684,7 @@
       "nome": "Kiss Body Splash - Ciclo Cosméticos 200ml",
       "marca": "Ciclo Cosméticos",
       "preco": 49.9,
-      "estoque": 3,
+      "estoque": 2,
       "categoria": {
         "id": "8408638",
         "nome": "Hidratantes",
@@ -14699,7 +14699,7 @@
       "nome": "La Vida Loção Hidratante Corporal 240ml - Ciclo Cosméticos",
       "marca": "Ciclo Cosméticos",
       "preco": 49.9,
-      "estoque": 12,
+      "estoque": 11,
       "categoria": {
         "id": "8408638",
         "nome": "Hidratantes",
@@ -14714,7 +14714,7 @@
       "nome": "Hello Hello! Nah Cardoso by Ciclo Hidratante Corporal 240ml",
       "marca": "Ciclo Cosméticos",
       "preco": 49.9,
-      "estoque": 2,
+      "estoque": 0,
       "categoria": {
         "id": "8954469",
         "nome": "Ciclo Cosméticos",
@@ -14729,7 +14729,7 @@
       "nome": "Kiss - Loção Hidratante Ciclo Cosméticos Cosméticos 240ml",
       "marca": "Ciclo Cosméticos",
       "preco": 49.9,
-      "estoque": 1,
+      "estoque": 0,
       "categoria": {
         "id": "8408638",
         "nome": "Hidratantes",
@@ -14774,7 +14774,7 @@
       "nome": "Kiss Me More Lata 100ml + Kiss Me More Loção Corporal 240ml",
       "marca": "Ciclo Cosméticos",
       "preco": 110.9,
-      "estoque": 21,
+      "estoque": 20,
       "categoria": {
         "id": "8755836",
         "nome": "Kit's",
@@ -14789,7 +14789,7 @@
       "nome": "Kiss Me More Ciclo Cosméticos Com Lata - Perfume Feminino 100ml",
       "marca": "Ciclo Cosméticos",
       "preco": 99.9,
-      "estoque": 21,
+      "estoque": 20,
       "categoria": {
         "id": "9021515",
         "nome": "Perfumes Lata",
@@ -15029,7 +15029,7 @@
       "nome": "Her Choice La Rive Eau De Parfum - Perfume Feminino 30ml",
       "marca": "La Rive",
       "preco": 49.9,
-      "estoque": 2,
+      "estoque": 1,
       "categoria": {
         "id": "9021518",
         "nome": "Perfumes Feminino",
