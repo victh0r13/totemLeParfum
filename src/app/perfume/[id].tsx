@@ -11,12 +11,11 @@ import { PinModal } from '@/components/PinModal';
 import { PressableScale } from '@/components/PressableScale';
 import { ProductImage } from '@/components/ProductImage';
 import { PromoModal } from '@/components/PromoModal';
-import { useToast } from '@/components/ToastProvider';
 import { TopBar } from '@/components/TopBar';
 import { useCatalog, usePerfume } from '@/data/catalogStore';
 import { similarTo } from '@/logic/filters';
 import { formatPrice, stockLabel } from '@/logic/format';
-import { trackAmostraPedida, trackAtendenteChamado, trackProdutoVisto } from '@/logic/metrics';
+import { trackProdutoVisto } from '@/logic/metrics';
 import { splitNotes, type OlfactoryNotes } from '@/logic/notes';
 import { colors, familyLabels, fonts, intensityLabels } from '@/theme/theme';
 
@@ -40,7 +39,6 @@ export default function PerfumeDetailScreen() {
   const router = useRouter();
   const { perfumes } = useCatalog();
   const perfume = usePerfume(id);
-  const { showToast } = useToast();
   const [pinVisible, setPinVisible] = useState(false);
   const [promoVisible, setPromoVisible] = useState(false);
 
@@ -172,26 +170,6 @@ export default function PerfumeDetailScreen() {
         </View>
       </ScrollView>
 
-      <View style={styles.ctaBar}>
-        <CtaButton
-          label="Quero experimentar"
-          style={styles.ctaButton}
-          onPress={() => {
-            trackAmostraPedida(perfume.id);
-            showToast('Um atendente foi avisado e já traz uma amostra para você.');
-          }}
-        />
-        <CtaButton
-          label="Chamar atendente"
-          variant="secondary"
-          style={styles.ctaButton}
-          onPress={() => {
-            trackAtendenteChamado();
-            showToast('Um atendente vem falar com você em instantes.');
-          }}
-        />
-      </View>
-
       <PinModal
         visible={pinVisible}
         title="Editar oferta"
@@ -308,17 +286,6 @@ const styles = StyleSheet.create({
     marginBottom: 12,
   },
   similarRow: { gap: 14, paddingBottom: 8 },
-  ctaBar: {
-    flexDirection: 'row',
-    gap: 14,
-    paddingHorizontal: 36,
-    paddingTop: 20,
-    paddingBottom: 28,
-    borderTopWidth: 1,
-    borderTopColor: colors.borderSoft,
-    backgroundColor: colors.bg,
-  },
-  ctaButton: { flex: 1 },
   notFound: { alignItems: 'center', paddingTop: 120, paddingHorizontal: 40 },
   notFoundTitle: {
     fontFamily: fonts.serif,
