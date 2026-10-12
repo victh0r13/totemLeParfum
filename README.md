@@ -1,22 +1,23 @@
 # Le Parfum — Totem de Loja
 
-App de totem para tablet (modo quiosque, orientação retrato) da perfumaria **Le Parfum**, com catálogo sincronizado do **Bling (API v3)** e quiz de perfumes.
+App de totem para tablet (modo quiosque, orientação retrato) da perfumaria **Le Parfum**, com catálogo sincronizado do **Bling (API v3)** — perfumes, body splash, corpo & banho e kits — e quiz de perfumes.
 
 O app é **offline-first**: ele abre completo — catálogo, preços e fotos — sem nenhuma rede. O servidor da loja é uma atualização em segundo plano, nunca um requisito. Veja [docs/OFFLINE-FIRST.md](docs/OFFLINE-FIRST.md) para a receita completa.
 
 ## Funcionalidades concluídas
 
-- **Catálogo** — 201 perfumes curados (de 1.163 produtos no Bling), com busca por nome/marca e filtros combinados de gênero, família olfativa, ocasião e faixa de preço.
-- **Detalhe do perfume** — foto, preço, estoque, descrição e pirâmide olfativa (topo/coração/fundo) extraída automaticamente da descrição do Bling.
-- **Quiz de recomendação** — 6 perguntas, pontuação ponderada; devolve de 3 a 5 perfumes reais com estoque.
+- **Tela inicial** — vitrine de destaques com troca automática (ofertas primeiro), navegação por categoria e por marca, e **modo atração** em tela cheia depois de 45s parado.
+- **Catálogo multiproduto** — 423 produtos à venda (de 1.224 no Bling) em quatro abas: perfumes, body splash, corpo & banho e kits. Busca por nome/marca e filtros combinados de marca, gênero, família olfativa e faixa de preço.
+- **Detalhe do produto** — foto, preço, descrição, pirâmide olfativa (topo/coração/fundo) extraída da descrição do Bling, similares do mesmo tipo e **"Combina com"**: o body splash, o hidratante e o kit da mesma linha.
+- **Quiz de recomendação** — 6 perguntas visuais, pontuação ponderada; devolve de 3 a 5 perfumes reais, destaca a melhor escolha, explica **por que** cada um apareceu e sugere produtos da mesma linha para completar.
 - **Sincronização com o Bling (API v3 / OAuth 2.0)** — sync rápido a cada 5 min (preço e estoque) e sync completo diário (descrições, fotos, produtos novos, curadoria).
 - **Tempo real** — push por WebSocket quando o catálogo muda, sem botão de atualizar.
-- **Offline-first** — o app abre completo (catálogo, preços e 197 fotos) sem nenhuma rede.
+- **Offline-first** — o app abre completo (catálogo, preços e 407 fotos) sem nenhuma rede. Também roda **sem servidor nenhum**: o APK sozinho é o catálogo (veja [Tablet sem servidor](#tablet-sem-servidor)).
 - **Cadastro de produtos da loja** — CRUD no próprio totem, com fila de pendências offline e resolução de conflito por *last-write-wins*.
 - **Ofertas** — preço promocional definido pela equipe no tablet, sem alterar o Bling.
-- **Painel da loja** (PIN) — status e frescor do catálogo, origem dos dados (app/cache/servidor), saúde das rotinas de sync, perfumes mais vistos, pedidos de amostra e respostas do quiz.
-- **Modo quiosque** — orientação travada em retrato, tela sempre acesa, timeout de inatividade de 90s com retorno ao início.
-- **121 testes automatizados** (Vitest) sobre a lógica de negócio pura.
+- **Painel da loja** (PIN) — status e frescor do catálogo, produtos por tipo, origem dos dados (app/cache/servidor), saúde das rotinas de sync, mais vistos e respostas do quiz.
+- **Modo quiosque** — orientação travada em retrato, tela sempre acesa, timeout de inatividade de 90s com retorno ao início, modo atração na tela inicial.
+- **162 testes automatizados** (Vitest) sobre a lógica de negócio pura, incluindo o classificador de tipo de produto do sync.
 
 ## Arquitetura
 
@@ -29,16 +30,17 @@ App/
 │   ├── data/images.ts            # Cadeia de origens da foto + prefetch para disco
 │   ├── data/bundledImages.ts     # GERADO: mapa id → require() das fotos no APK
 │   ├── kiosk/                    # Timeout de inatividade (90s) + "Ainda está aí?"
-│   └── logic/                    # Filtros, pontuação do quiz, notas, métricas
+│   └── logic/                    # Filtros, quiz, vitrine, notas, marcas, métricas
 ├── data/
 │   ├── catalog.json              # Catálogo bruto do Bling (gerado pelo sync)
-│   ├── enrichment.json           # Curadoria: gênero/famílias/ocasiões/intensidade
+│   ├── enrichment.json           # Curadoria: tipo/gênero/famílias/ocasiões/intensidade
 │   ├── catalog.bundle.json       # GERADO: curadoria empacotada no APK
-│   └── images/                   # GERADO: fotos baixadas do Bling (~5,6 MB)
+│   └── images/                   # GERADO: fotos baixadas do Bling (~11 MB)
 └── sync/                         # Backend Node.js (independente do app)
     ├── src/auth.js               # Autorização OAuth 2.0 do Bling (roda uma vez)
     ├── src/sync.js               # Bling → data/catalog.json
-    ├── src/curate.js             # Completa lacunas da curadoria + inclui perfumes novos
+    ├── src/curate.js             # Completa lacunas da curadoria + inclui produtos novos
+    ├── src/tipos.js              # Deduz o tipo (perfume, body splash...) pelo nome/categoria
     ├── src/images.js             # Baixa e redimensiona as fotos → data/images/
     ├── src/bundle.js             # Gera o recorte que vai dentro do APK
     └── src/server.js             # Servidor local: /api/totem e /images/:id
@@ -57,7 +59,7 @@ App/
 | Tipografia | `@expo-google-fonts/cormorant-garamond` · `@expo-google-fonts/manrope` |
 | Servidor (`/sync`) | Node.js · Express · `ws` (WebSocket) · `sharp` (redimensionamento) |
 | Integração | Bling API v3 (REST, OAuth 2.0) |
-| Testes | Vitest — 121 testes sobre a lógica pura |
+| Testes | Vitest — 162 testes sobre a lógica pura |
 | Qualidade | TypeScript estrito · ESLint (`eslint-config-expo`) |
 | Build Android | Expo CNG (`expo prebuild`) + Gradle, JDK 17 |
 
@@ -76,6 +78,16 @@ $env:EXPO_PUBLIC_API_URL = "http://192.168.0.10:3001"; npx expo start
 ```
 
 > Sem `EXPO_PUBLIC_API_URL`, o app funciona 100% offline com o catálogo e as fotos empacotados.
+
+### Tablet sem servidor
+
+O APK gerado **sem** `EXPO_PUBLIC_API_URL` é autossuficiente: catálogo, preços e fotos vão dentro dele, e ofertas e cadastros da loja ficam salvos no próprio tablet. É o modo para um tablet avulso, sem PC na loja. Nesse modo:
+
+- o catálogo é o do dia do build — para atualizar preços e produtos, rode `npm run atualizar`, gere um APK novo e instale **por cima** (os dados do tablet são mantidos);
+- o indicador de estoque ("Últimas unidades") some, porque o número congelado no build enganaria a cliente;
+- o painel da loja explica isso no lugar do status do servidor.
+
+Ao instalar um APK novo, o catálogo empacotado vence qualquer cópia antiga guardada no tablet.
 
 ### No emulador: `dev.ps1`
 
@@ -135,13 +147,13 @@ O WebSocket **não substitui o offline-first**: se o servidor cair, o app recone
 Um comando faz tudo:
 
 ```bash
-npm run atualizar     # = sync → images → bundle
+npm run atualizar     # = sync → curar → images → bundle
 ```
 
 | Etapa            | Comando            | O que faz                                                        |
 | ---------------- | ------------------ | ---------------------------------------------------------------- |
 | 1. Sync          | `npm run sync`     | Bling → `data/catalog.json` (preços, estoque, categoria, descrição) |
-| 2. Curadoria     | `npm run curar`    | Inclui perfumes novos e completa gênero/família que faltam        |
+| 2. Curadoria     | `npm run curar`    | Inclui produtos novos, classifica o tipo e completa gênero/família |
 | 3. Fotos         | `npm run images`   | Baixa as fotos novas, redimensiona p/ 800px → `data/images/`      |
 | 4. Bundle        | `npm run bundle`   | Gera `catalog.bundle.json` + `bundledImages.ts` (só p/ novo APK)  |
 
@@ -185,6 +197,7 @@ Teste: `http://localhost:3001/health` deve responder `{"ok":true, ...}`.
   "produtos": {
     "12345678901": {                        // ID do produto no Bling (ou o SKU/código)
       "nome": "Yara - Lattafa EDP 100ml",   // só para você se localizar — o app ignora
+      "tipo": "perfume",                    // perfume | body-splash | corpo | kit
       "genero": "F",                        // F | M | U
       "familias": ["floral", "doce"],       // floral|citrico|amadeirado|doce|oriental|fresco
       "ocasioes": ["dia", "noite"],         // trabalho|dia|noite|esporte
@@ -196,8 +209,10 @@ Teste: `http://localhost:3001/health` deve responder `{"ok":true, ...}`.
 ```
 
 - **Para tirar um produto do totem:** apague o bloco dele (ache pelo nome com Ctrl+F). O `curar` respeita a remoção e não o traz de volta — é para isso que serve o `_autoIncluidos`.
-- **`npm run curar`** inclui automaticamente todo produto com estoque cuja categoria do Bling contenha "perfume", e preenche o que der para deduzir com segurança (categoria, nome, notas da descrição). **Nunca sobrescreve** um valor já existente.
-- Produtos com estoque zero somem do totem sozinhos, mesmo com entrada aqui.
+- **`npm run curar`** inclui automaticamente todo produto à venda (estoque e preço) cujo **tipo** entra no totem, e preenche o que der para deduzir com segurança (categoria, nome, notas da descrição). **Nunca sobrescreve** um valor já existente.
+- **O tipo** é deduzido pelo nome primeiro e pela categoria do Bling depois ([sync/src/tipos.js](sync/src/tipos.js)) — as categorias do Bling misturam tipo com marca e um terço dos produtos não tem categoria. Maquiagem, capilar e vale-presente ficam de fora (`TIPOS_NO_TOTEM`).
+- Produtos com estoque zero ou **preço zero** somem do totem sozinhos, mesmo com entrada aqui. Preço zero no Bling costuma ser uma variação "com composição", um atalho para o produto real, que já entra por conta própria.
+- Variações do Bling ("Body Splash Lattafa (Escolha o seu) Fragrância:Yara") aparecem no totem como **"Yara · Body Splash Lattafa"**, e herdam a marca citada no nome quando chegam sem marca.
 
 ## Sync automático (Windows)
 
@@ -223,15 +238,15 @@ O mesmo aparece no painel da loja, dentro do totem.
 
 O PIN da equipe está em `src/config.ts` (`ADMIN_PIN`).
 
-- **Ofertas**: na página do perfume, toque no ícone **✎** ao lado do preço → PIN → defina o preço promocional (ou remova). O produto ganha o badge **OFERTA**, preço riscado, e o promocional passa a valer nos filtros de preço. As ofertas ficam salvas no próprio tablet (não alteram o Bling).
+- **Ofertas**: na página do produto, toque no ícone **✎** ao lado do preço → PIN → defina o preço promocional (ou remova). O produto ganha o badge **OFERTA**, preço riscado, e o promocional passa a valer nos filtros de preço. As ofertas ficam salvas no próprio tablet (não alteram o Bling).
 - **Painel da loja**: na tela inicial, **segure o logo "Le Parfum" por ~1,5s** → PIN. Mostra:
-  - **Status do catálogo** — quantos perfumes, de quando são os preços, de onde vieram os dados (app / cache / servidor), se o servidor está alcançável, quantas fotos estão dentro do app, e um botão **Atualizar agora**;
-  - ofertas ativas, perfumes mais vistos, pedidos de amostra, respostas do quiz e o botão de zerar métricas.
+  - **Status do catálogo** — quantos produtos (e de que tipo), de quando são os preços, de onde vieram os dados (app / cache / servidor), se o servidor está alcançável, quantas fotos estão dentro do app, e um botão **Atualizar agora** (só com servidor);
+  - ofertas ativas, mais vistos, respostas do quiz e o botão de zerar métricas.
 - As métricas são 100% locais (AsyncStorage) — nada sai do aparelho.
 
 ## Quiz
 
-Cinco perguntas: para quem, **gênero**, ocasião, intensidade, famílias (até 2) e estilo. O gênero **filtra** o resultado (unissex sempre entra; produto sem gênero na curadoria não é descartado, só pontua menos) — as demais respostas pontuam. O resultado mostra de 3 a 5 perfumes reais, com estoque, do mais para o menos aderente.
+Seis perguntas: para quem, **gênero**, ocasião, intensidade, famílias (até 2) e estilo. O quiz recomenda só **perfume** — body splash e hidratante têm outra lógica de compra e aparecem em "Para completar". O gênero **filtra** o resultado (unissex sempre entra; produto sem gênero na curadoria não é descartado, só pontua menos) — as demais respostas pontuam, e bater as duas famílias pedidas vale mais que bater uma. O resultado mostra de 3 a 5 perfumes reais, com estoque: a melhor escolha em destaque, os motivos de cada sugestão ("Doce e Oriental · Para a noite · Marcante") e os produtos da mesma linha da melhor escolha.
 
 ## Pirâmide olfativa
 
@@ -241,7 +256,8 @@ A tela de detalhe extrai as notas de **topo/coração/fundo** quando a descriç�
 
 - Orientação **travada em retrato** (app.json + expo-screen-orientation).
 - Tela **nunca dorme** (expo-keep-awake).
-- **90s de inatividade** → overlay "Ainda está aí?" com contagem de 15s → volta ao início e limpa a sessão.
+- **Modo atração**: 45s parado na tela inicial → vitrine em tela cheia, fundo escuro, produtos se revezando; qualquer toque volta.
+- **90s de inatividade** fora da tela inicial → overlay "Ainda está aí?" com contagem de 15s → volta ao início e limpa a sessão.
 - Botão **Recomeçar** discreto no canto superior direito de todas as telas.
 - No Android, ative a **Fixação de tela** para prender o app (veja [docs/BUILD-ANDROID.md](docs/BUILD-ANDROID.md)).
 
@@ -253,7 +269,7 @@ A tela de detalhe extrai as notas de **topo/coração/fundo** quando a descriç�
 | `npm run typecheck`  | Verifica os tipos (tsc)                              |
 | `npm run lint`       | ESLint                                               |
 | `npm run auth`       | Autorização OAuth do Bling                           |
-| `npm run atualizar`  | **sync + images + bundle** (pipeline completo)       |
+| `npm run atualizar`  | **sync + curar + images + bundle** (pipeline completo) |
 | `npm run quick`      | Só preço e estoque (~18s)                            |
 | `npm run test`       | Suíte de testes (vitest)                             |
 | `npm run sync`       | Só o catálogo do Bling                               |
@@ -272,7 +288,8 @@ A tela de detalhe extrai as notas de **topo/coração/fundo** quando a descriç�
 - **O PIN da equipe (`ADMIN_PIN`) fica no bundle do app.** É trava de conveniência contra o cliente curioso, não controle de acesso — qualquer APK é extraível. Uma área administrativa de verdade exigiria autenticação no servidor.
 - **O servidor local não tem autenticação.** Roda na rede da loja, atrás do roteador. Exposto à internet, as rotas de escrita precisariam de token.
 - **Ofertas e métricas são por aparelho.** Com mais de um totem, cada um tem as suas; ainda não sincronizam entre si.
-- **O totem não vende.** Ele informa e chama o atendente. Pagamento é o próximo passo natural — o Bling já tem API de pedidos.
+- **O totem não vende nem chama o atendente.** Os botões "Quero experimentar" e "Chamar atendente" foram retirados porque só exibiam um aviso, sem notificar ninguém. Um chamado de verdade precisa de um destino (celular da equipe, tela no balcão) e, portanto, de servidor.
+- **No tablet sem servidor, o catálogo envelhece.** Preço e produtos são os do dia do APK; atualizar exige gerar e instalar um APK novo.
 - **A classificação olfativa é semiautomática.** O `npm run curar` deduz o que dá para deduzir com segurança e nunca sobrescreve valor curado à mão, mas produtos novos podem entrar sem família ou ocasião até alguém revisar.
 - **A pirâmide olfativa depende da descrição do Bling.** Só aparece quando as notas vêm estruturadas ("Notas de topo: ..."); as demais seguem como texto normal.
 - **As URLs de imagem do Bling gravadas em `data/catalog.json` expiram em ~7 dias.** Elas são apenas o último elo da cadeia de fallback — as fotos exibidas vêm do APK ou do servidor local.

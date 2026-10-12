@@ -157,6 +157,34 @@ cd android
 
 > ⚠️ O APK gerado por `expo run:android --variant release` / `assembleRelease` sem configurar assinatura usa uma **chave de debug**. Serve para testar e para uso interno; **não** serve para a Play Store. Para assinar de verdade, o caminho simples é o EAS Build (seção 2).
 
+### 3.4 APK de release neste PC (Windows): a receita que funciona
+
+O release local tem duas armadilhas no Windows, e as duas derrubam o build **depois** de minutos de compilação:
+
+1. **Espaço no caminho.** A pasta do projeto é `...\Le Parfum\App`. No passo `createBundleReleaseJsAndAssets`, o Gradle chama o compilador Hermes por um `cmd` sem aspas e falha com `'C:\Users\...\Le' não é reconhecido como um comando`. O debug não passa por esse passo, por isso o `expo run:android` funciona e o release não.
+2. **`NODE_ENV` ausente.** O `expo-constants` exige `NODE_ENV` no release. No PowerShell 5.1, o aviso que ele escreve no stderr ainda é tratado como erro e aborta o build.
+
+A saída é buildar a partir de uma **cópia limpa do commit** num caminho sem espaços. Isso também garante que o APK leve exatamente o que está commitado:
+
+```bash
+# Git Bash, na raiz do projeto
+git worktree add --detach /c/dev/lp-build HEAD
+cd /c/dev/lp-build && npm ci
+export JAVA_HOME="/c/Program Files/Microsoft/jdk-17.0.20.8-hotspot"
+export ANDROID_HOME="$LOCALAPPDATA/Android/Sdk" NODE_ENV=production
+unset EXPO_PUBLIC_API_URL            # APK sem servidor (tablet avulso)
+npx expo prebuild -p android --no-install
+rm -f android/gradle/gradle-daemon-jvm.properties   # pin do JDK, ver nota abaixo
+cd android && ./gradlew.bat assembleRelease
+# APK em /c/dev/lp-build/android/app/build/outputs/apk/release/app-release.apk
+```
+
+Para gerar o próximo APK, basta atualizar a cópia: `git -C /c/dev/lp-build checkout --detach <commit>` e repetir a partir do `npm ci`. Para apagá-la, use `git worktree remove /c/dev/lp-build`.
+
+- **JDK 17, sempre.** O `gradle-daemon-jvm.properties` gerado pelo prebuild pode fixar outro JDK e passar por cima do `JAVA_HOME`; o JBR 25 do Android Studio quebra o CMake. Apagar o arquivo faz o Gradle usar o `JAVA_HOME`.
+- **O primeiro build leva ~18 min**, porque compila o C++ do React Native para as 4 arquiteturas. Os seguintes reaproveitam o cache.
+- **Atualizar por cima.** Todo APK deste caminho é assinado com a mesma chave de debug do template do React Native, então o Android aceita instalar uma versão nova sobre a antiga e mantém os dados do tablet (ofertas, produtos cadastrados, métricas). Um APK do EAS tem **outra** chave: trocar de caminho exige desinstalar antes, e os dados se perdem.
+
 ---
 
 ## 4. iPhone / iPad (Expo Go)
