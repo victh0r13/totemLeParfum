@@ -55,7 +55,8 @@
       "ocasioes": [
         "noite",
         "dia"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16581635714": {
       "nome": "212 Vip Men - Carolina Herrera Eau De Toilette 100ml",
@@ -67,7 +68,8 @@
       "ocasioes": [
         "noite"
       ],
-      "intensidade": 2
+      "intensidade": 2,
+      "tipo": "perfume"
     },
     "16582442019": {
       "nome": "212 Vip Rosê - Carolina Herrera 80ml",
@@ -80,7 +82,8 @@
       "familias": [
         "floral",
         "amadeirado"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16150133537": {
       "nome": "315 Prestige Black - La Rive Eau de Toilette 100ml Original",
@@ -91,7 +94,8 @@
       "familias": [
         "oriental",
         "doce"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16187853630": {
       "nome": "315 Prestige La Rive - Perfume Masculino - Edt - 100ml",
@@ -103,7 +107,8 @@
       "familias": [
         "oriental",
         "doce"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16495521654": {
       "nome": "315 Prestige Pink - La Rive Eau de Toilette 100ml Original",
@@ -114,7 +119,8 @@
       "familias": [
         "doce",
         "floral"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16150142058": {
       "nome": "Absolute Sport - La Rive Perfume Masculino Eau de Toilette 100ml Original",
@@ -126,7 +132,8 @@
       "familias": [
         "fresco",
         "citrico"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16599548679": {
       "nome": "Acqua Di Gio - Armani Eau De Parfum 100ml",
@@ -139,7 +146,8 @@
       "familias": [
         "fresco",
         "citrico"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16349336051": {
       "nome": "Ajwad - Lattafa Eau De Parfum Feminino 100ml",
@@ -151,7 +159,8 @@
       "intensidade": 2,
       "ocasioes": [
         "noite"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16580784302": {
       "nome": "Al absar - Bint Al Amaal Eau De Parfum",
@@ -164,7 +173,8 @@
       "ocasioes": [
         "dia",
         "noite"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16641092192": {
       "nome": "Al Absar - Freya Eau De Parfum 100ml",
@@ -185,7 +195,8 @@
       "ocasioes": [
         "dia",
         "noite"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16371366434": {
       "nome": "Amber Rouge - Orientica Eau de Parfum Feminino 80ml",
@@ -198,7 +209,8 @@
       "familias": [
         "oriental",
         "doce"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16299284817": {
       "nome": "Ameer Al Oud Arabian Nights Manasik Edp Feminino 100ml",
@@ -210,7 +222,8 @@
       "ocasioes": [
         "dia",
         "noite"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16370481417": {
       "nome": "Ameerat Al Arab Imperium - Asdaaf Eau De Parfum 100ml",
@@ -221,7 +234,8 @@
       "intensidade": 2,
       "ocasioes": [
         "dia"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16370482421": {
       "nome": "Ameerat Al Arab Rosê - Asdaaf Eau De Parfum 100ml",
@@ -233,7 +247,8 @@
       "ocasioes": [
         "dia"
       ],
-      "genero": "F"
+      "genero": "F",
+      "tipo": "perfume"
     },
     "16580766000": {
       "nome": "Ameerati - Al Wataniah Eau De Parfum 100ml",
@@ -246,7 +261,8 @@
       "familias": [
         "floral",
         "doce"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16452760946": {
       "nome": "Ameeri - Al Wataniah Eau De Parfum 100ml",
@@ -259,7 +275,8 @@
       "ocasioes": [
         "dia",
         "noite"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16356026051": {
       "nome": "Animale - Animale Eau De Toilette 100ml",
@@ -272,7 +289,8 @@
       "ocasioes": [
         "noite",
         "dia"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16187850576": {
       "nome": "Aqua Man - La Rive Eau De Toilette 90ml Original",
@@ -283,7 +301,8 @@
       "genero": "M",
       "familias": [
         "fresco"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16625038451": {
       "nome": "Aqua Woman - La Rive Eau De Parfum 100ml",
@@ -307,7 +326,8 @@
       "ocasioes": [
         "noite"
       ],
-      "intensidade": 3
+      "intensidade": 3,
+      "tipo": "perfume"
     },
     "16609219695": {
       "nome": "Armani Code - Armani Eau De Toilette 125ml",
@@ -319,7 +339,8 @@
       "familias": [
         "oriental",
         "amadeirado"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16416481056": {
       "nome": "Asad Bourbon - Lattafa Eau De Parfum 100ml",
@@ -332,13 +353,18 @@
       "familias": [
         "doce",
         "oriental"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16590671121": {
       "nome": "Asad Elixir - Lattafa Eau De Parfum 100ml",
       "intensidade": 3,
       "ocasioes": [
         "noite"
+      ],
+      "tipo": "perfume",
+      "familias": [
+        "oriental"
       ]
     },
     "16150250509": {
@@ -346,7 +372,8 @@
       "intensidade": 1,
       "ocasioes": [
         "dia"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16416489199": {
       "nome": "Azarro Pour Homme - Azarro Eau De Toilette 100ml",
@@ -358,7 +385,8 @@
       "familias": [
         "fresco",
         "amadeirado"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16349339727": {
       "nome": "Bade'e Al Oud Oud for Glory - Lattafa Eau De Parfum Unissex 100ml",
@@ -370,7 +398,8 @@
       "intensidade": 3,
       "ocasioes": [
         "noite"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16371327611": {
       "nome": "Bade'e Al Oud Oud Honor & Glory - Lattafa Eau De Parfum Unissex 100ml",
@@ -382,7 +411,8 @@
       "ocasioes": [
         "dia",
         "noite"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16349326591": {
       "nome": "Bareeq Al Dhahab - Al Wataniah Eau De Parfum 100ml",
@@ -394,7 +424,8 @@
       "intensidade": 2,
       "ocasioes": [
         "noite"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16580795415": {
       "nome": "Baroque Rouge Amarelo - Maison Alhambra Eau de Parfum 100ml",
@@ -407,7 +438,8 @@
       "ocasioes": [
         "dia",
         "noite"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16345974338": {
       "nome": "Baroque Rouge Extrait - Maison Alhambra Eau de Parfum 100ml",
@@ -419,7 +451,8 @@
       "familias": [
         "doce",
         "oriental"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16613587583": {
       "nome": "Baunilha  - Deo Colônia Jardin Ciclo Cosméticos 100ml",
@@ -439,14 +472,16 @@
       ],
       "familias": [
         "fresco"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16369600660": {
       "nome": "Belle Colônia Lata 100ml - Pokoloka",
       "intensidade": 1,
       "ocasioes": [
         "dia"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16359332365": {
       "nome": "Bergamota Calábria - Deo Colônia Jardin Ciclo Cosméticos 100ml",
@@ -457,7 +492,8 @@
       "intensidade": 1,
       "ocasioes": [
         "trabalho"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16664094180": {
       "nome": "Billion Casino Royal - Paris Elysees Eau De Toilette 100ml",
@@ -470,7 +506,8 @@
       "ocasioes": [
         "noite",
         "dia"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16663938736": {
       "nome": "Billion Exclusive Edition - Paris Elysees Eau De Toilette 100ml",
@@ -482,7 +519,8 @@
       "intensidade": 1,
       "ocasioes": [
         "noite"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16664092655": {
       "nome": "Billion For Men - Paris Elysees Eau De Toilette 100ml",
@@ -494,7 +532,8 @@
       "intensidade": 1,
       "ocasioes": [
         "noite"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16187857775": {
       "nome": "Black Creek - La Rive Eau De Toilette 100ml",
@@ -504,7 +543,8 @@
       ],
       "familias": [
         "oriental"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16150145065": {
       "nome": "Black Fury - La Rive Perfume Masculino Eau de Toilette 75ml Original",
@@ -515,7 +555,8 @@
       "genero": "M",
       "familias": [
         "oriental"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16381966602": {
       "nome": "Bloody Mary - Paris Elysees Eau De Toilette 100ml Original",
@@ -535,7 +576,8 @@
       ],
       "familias": [
         "fresco"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16186462205": {
       "nome": "Body Splash 200ML Ciclo Cosméticos Deo Colônia Spray Original Variação:Kiss",
@@ -545,7 +587,8 @@
       "intensidade": 1,
       "ocasioes": [
         "dia"
-      ]
+      ],
+      "tipo": "body-splash"
     },
     "16277645823": {
       "nome": "Brand Collection Beauty Girl Edp 30ml Para Feminino",
@@ -553,7 +596,8 @@
       "intensidade": 2,
       "ocasioes": [
         "noite"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16187852361": {
       "nome": "Brave - La Rive Eau De Toilette 100ml Original",
@@ -572,7 +616,8 @@
       "intensidade": 3,
       "ocasioes": [
         "noite"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16599559265": {
       "nome": "Ch Carolina Herrera - Eau De Parfum 100ml",
@@ -585,7 +630,8 @@
       "familias": [
         "floral",
         "amadeirado"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16416484295": {
       "nome": "Chants Tenderina - Maison Alhambra Eau De Parfum 100ml",
@@ -594,7 +640,8 @@
       "ocasioes": [
         "dia",
         "noite"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16381929187": {
       "nome": "Charisme -  La Rive Eau De Parfum 90ml Original",
@@ -613,14 +660,16 @@
       "intensidade": 1,
       "ocasioes": [
         "dia"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16150238761": {
       "nome": "Cici Zoe Ciclo Mini Ciclo Cosméticos Deo Colônia - Perfume Infantil 100ml",
       "intensidade": 1,
       "ocasioes": [
         "dia"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16186462209": {
       "nome": "Ciclo Body Splash Kiss Me More 200ml",
@@ -630,7 +679,8 @@
       "intensidade": 1,
       "ocasioes": [
         "dia"
-      ]
+      ],
+      "tipo": "body-splash"
     },
     "16579454805": {
       "nome": "Ciclo Cosméticos Jardin - Body Splash Flor de Laranjeira 250ml",
@@ -640,7 +690,8 @@
       "intensidade": 1,
       "ocasioes": [
         "dia"
-      ]
+      ],
+      "tipo": "body-splash"
     },
     "16314998642": {
       "nome": "Club de Nuit Intense Man - Armaf Eau de Toilette 105ml",
@@ -653,7 +704,8 @@
         "noite",
         "trabalho"
       ],
-      "intensidade": 3
+      "intensidade": 3,
+      "tipo": "perfume"
     },
     "16436575607": {
       "nome": "Club de Nuit Intense Woman Feminino - Armaf Eau de Toilette 105ml",
@@ -674,7 +726,8 @@
       "ocasioes": [
         "dia",
         "noite"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16145297953": {
       "nome": "Cuté La Rive Eau De Parfum - Perfume Feminino 30ml Original",
@@ -714,7 +767,8 @@
       "ocasioes": [
         "dia",
         "noite"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16187850179": {
       "nome": "Donna La Rive - Perfume Feminino - Eau De Parfum - 90ml",
@@ -723,7 +777,8 @@
       "ocasioes": [
         "dia",
         "noite"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16150248092": {
       "nome": "Dream Ciclo Cosméticos Deo Colônia Lata 100ml Original",
@@ -731,7 +786,8 @@
       "ocasioes": [
         "dia"
       ],
-      "genero": "F"
+      "genero": "F",
+      "tipo": "perfume"
     },
     "16314987999": {
       "nome": "Durrat Al Aroos - Al Wataniah Eau De Parfum 85ml Original",
@@ -743,7 +799,8 @@
       "ocasioes": [
         "noite"
       ],
-      "intensidade": 3
+      "intensidade": 3,
+      "tipo": "perfume"
     },
     "16572155668": {
       "nome": "Eclaire Pistache Eau De Parfum - Lattafa 100ml",
@@ -756,7 +813,8 @@
       "familias": [
         "doce",
         "amadeirado"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16278966265": {
       "nome": "Eftinam - Style & Scents Eau De Parfum 100ml Original",
@@ -769,7 +827,8 @@
       "ocasioes": [
         "noite",
         "dia"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16278968756": {
       "nome": "Ejlal- Style & Scents Eau De Parfum 100ml Original",
@@ -781,7 +840,8 @@
       "ocasioes": [
         "noite"
       ],
-      "intensidade": 3
+      "intensidade": 3,
+      "tipo": "perfume"
     },
     "16185881900": {
       "nome": "Elegant Woman - La Rive Eau De Parfum 100ml",
@@ -790,7 +850,8 @@
       "ocasioes": [
         "dia",
         "noite"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16277644058": {
       "nome": "Escandal - Brand Collection N° 136 Eau De Parfum 30ml Original",
@@ -803,7 +864,8 @@
         "dia",
         "noite"
       ],
-      "intensidade": 2
+      "intensidade": 2,
+      "tipo": "perfume"
     },
     "16187158262": {
       "nome": "Eternal Kiss - La Rive Eau De Parfum 90ml Original",
@@ -812,7 +874,8 @@
       "ocasioes": [
         "dia",
         "noite"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16314994937": {
       "nome": "Fakhar Black - Lattafa Eau De Parfum Masculino 100ml",
@@ -824,7 +887,8 @@
       "ocasioes": [
         "noite"
       ],
-      "intensidade": 3
+      "intensidade": 3,
+      "tipo": "perfume"
     },
     "16349340699": {
       "nome": "Fakhar Gold - Lattafa Eau De Parfum Masculino 100ml",
@@ -836,7 +900,8 @@
       "intensidade": 3,
       "ocasioes": [
         "noite"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16314996349": {
       "nome": "Fakhar Rosê - Lattafa Eau De Parfum Femino 100ml",
@@ -848,7 +913,8 @@
       "intensidade": 2,
       "ocasioes": [
         "dia"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16395334862": {
       "nome": "Fantasy - Britney Spears Eau De Toilette 100ml Original",
@@ -861,7 +927,8 @@
         "dia",
         "noite"
       ],
-      "intensidade": 2
+      "intensidade": 2,
+      "tipo": "perfume"
     },
     "16581177987": {
       "nome": "Fearless Man - La Rive Eau De Toilette 90ml Original",
@@ -869,7 +936,8 @@
       "intensidade": 1,
       "ocasioes": [
         "dia"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16581173405": {
       "nome": "Fleur Antique - La Rive Eau De Parfum 90ml Lançamento Original",
@@ -900,7 +968,8 @@
       "ocasioes": [
         "dia"
       ],
-      "genero": "F"
+      "genero": "F",
+      "tipo": "perfume"
     },
     "16416493074": {
       "nome": "Gabriela Sabatini - Gabriela Sabatini Eau De Toilette 60ml",
@@ -914,7 +983,8 @@
         "trabalho",
         "noite"
       ],
-      "intensidade": 2
+      "intensidade": 2,
+      "tipo": "perfume"
     },
     "16069026890": {
       "nome": "Givenchy - Linterdit Eau De Parfum 80ml",
@@ -927,7 +997,8 @@
         "noite",
         "trabalho"
       ],
-      "intensidade": 2
+      "intensidade": 2,
+      "tipo": "perfume"
     },
     "16345986511": {
       "nome": "Glacier Bella- Maison Alhambra Eau de Parfum 100ml",
@@ -940,7 +1011,8 @@
         "dia",
         "noite"
       ],
-      "intensidade": 2
+      "intensidade": 2,
+      "tipo": "perfume"
     },
     "16345987553": {
       "nome": "Glacier Bold - Maison Alhambra Eau de Parfum 100ml",
@@ -952,7 +1024,8 @@
       "intensidade": 2,
       "ocasioes": [
         "noite"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16375931285": {
       "nome": "Gold - Brand Collection N° 999.9 Eau De Parfum 30ml Original",
@@ -965,7 +1038,8 @@
       "ocasioes": [
         "noite",
         "dia"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16278969522": {
       "nome": "Hannah Al Nashwa - Style & Scents Eau De Parfum 100ml Original",
@@ -986,7 +1060,8 @@
       "intensidade": 2,
       "ocasioes": [
         "noite"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16355997472": {
       "nome": "Hatim - Al Absar Eau De Parfum 100ml",
@@ -995,7 +1070,8 @@
       "ocasioes": [
         "dia",
         "noite"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16412879391": {
       "nome": "Haya - Lattafa Eau de Parfum 100ml",
@@ -1008,7 +1084,8 @@
       "familias": [
         "floral",
         "doce"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16416482396": {
       "nome": "Hayaati - Lattafa Eau De Parfum 100ml",
@@ -1021,7 +1098,8 @@
       "familias": [
         "amadeirado",
         "oriental"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16375928694": {
       "nome": "Heaven - Brand Collection N° 168 Eau De Parfum 30ml Original",
@@ -1030,7 +1108,8 @@
       "ocasioes": [
         "dia",
         "noite"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16348452102": {
       "nome": "Hello Hello! Nah Cardoso Ciclo Cosméticos Deo Colônia Lata - Perfume Feminino 100ml Nova Embalagem",
@@ -1038,7 +1117,8 @@
       "ocasioes": [
         "dia"
       ],
-      "genero": "F"
+      "genero": "F",
+      "tipo": "perfume"
     },
     "16145307978": {
       "nome": "Her Choice La Rive Eau De Parfum - Perfume Feminino 30ml",
@@ -1059,7 +1139,8 @@
       "ocasioes": [
         "dia",
         "noite"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16449849280": {
       "nome": "In Love - La Rive Eau De Parfum 90ml",
@@ -1068,7 +1149,8 @@
       "ocasioes": [
         "dia",
         "noite"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16204914363": {
       "nome": "In Woman - La Rive 30ml Eau de Parfum Original",
@@ -1077,7 +1159,8 @@
       "ocasioes": [
         "dia",
         "noite"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16204915040": {
       "nome": "In Woman - La Rive Eau de Parfum 90ml Original",
@@ -1086,7 +1169,8 @@
       "ocasioes": [
         "dia",
         "noite"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16381970033": {
       "nome": "Indala - Paris Elysees Eau De Toilette 100ml Original",
@@ -1094,14 +1178,16 @@
       "intensidade": 1,
       "ocasioes": [
         "dia"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16384880268": {
       "nome": "Indalo - Paris Elysees Eau De Toilette 100ml Original",
       "intensidade": 1,
       "ocasioes": [
         "dia"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16597357039": {
       "nome": "Intense - Body Splash Ciclo Cosméticos Youly By Kéfera 200ml",
@@ -1112,7 +1198,8 @@
       "intensidade": 3,
       "ocasioes": [
         "dia"
-      ]
+      ],
+      "tipo": "body-splash"
     },
     "16599841031": {
       "nome": "Intense - Body Splash Ciclo Cosméticos Youly By Kéfera 30ml + Chaveiro",
@@ -1124,7 +1211,8 @@
       "ocasioes": [
         "dia",
         "esporte"
-      ]
+      ],
+      "tipo": "body-splash"
     },
     "16613589311": {
       "nome": "Íris - Deo Colônia Jardin Ciclo Cosméticos 100ml",
@@ -1134,7 +1222,8 @@
       "intensidade": 1,
       "ocasioes": [
         "dia"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16187857273": {
       "nome": "Ironstone Edt 100ml Para Masculino",
@@ -1142,14 +1231,16 @@
       "ocasioes": [
         "dia"
       ],
-      "genero": "M"
+      "genero": "M",
+      "tipo": "perfume"
     },
     "16359386749": {
       "nome": "Jardin Nectarina - Deo Colônia Jardin Ciclo Cosméticos 100ml",
       "intensidade": 1,
       "ocasioes": [
         "dia"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16359330269": {
       "nome": "Jasmim Sambac - Deo Colônia Jardin Ciclo Cosméticos 100ml",
@@ -1160,7 +1251,8 @@
       "intensidade": 1,
       "ocasioes": [
         "dia"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16469462036": {
       "nome": "Jasmim Sambac - Hidratante Ciclo Cosméticos Jardin 250ml",
@@ -1170,7 +1262,8 @@
       "intensidade": 2,
       "ocasioes": [
         "dia"
-      ]
+      ],
+      "tipo": "corpo"
     },
     "16412961136": {
       "nome": "Joop Homme - Joop Eau De Toilette 125ml",
@@ -1182,14 +1275,17 @@
       "intensidade": 1,
       "ocasioes": [
         "dia"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16151833453": {
       "nome": "Kiss Ciclo Cosméticos Deo Colônia Lata 100ml Original",
       "intensidade": 1,
       "ocasioes": [
         "dia"
-      ]
+      ],
+      "tipo": "perfume",
+      "genero": "F"
     },
     "16620094662": {
       "nome": "Kiss Me More Ciclo Cosméticos (Conjunto) Volume:100ml",
@@ -1197,7 +1293,8 @@
       "ocasioes": [
         "dia",
         "noite"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16620094663": {
       "nome": "Kiss Me More Ciclo Cosméticos (Conjunto) Volume:50ml",
@@ -1205,7 +1302,8 @@
       "ocasioes": [
         "dia",
         "noite"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16151834276": {
       "nome": "Kiss Me More Ciclo Cosméticos Com Lata - Perfume Feminino 100ml",
@@ -1214,28 +1312,32 @@
         "dia",
         "noite"
       ],
-      "genero": "F"
+      "genero": "F",
+      "tipo": "perfume"
     },
     "16585235876": {
       "nome": "Kiss Me More Ciclo Cosméticos Deo Colônia Lata 50ml Original",
       "intensidade": 1,
       "ocasioes": [
         "dia"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16620743971": {
       "nome": "Kit 3 Body Splashes Ciclo Cosméticos Youly By Kefera 200ml",
       "intensidade": 1,
       "ocasioes": [
         "dia"
-      ]
+      ],
+      "tipo": "kit"
     },
     "16151839791": {
       "nome": "Kit Colônia 30ml + Loção Hidratante Corporal 240ml Ciclo",
       "intensidade": 1,
       "ocasioes": [
         "dia"
-      ]
+      ],
+      "tipo": "kit"
     },
     "16664095230": {
       "nome": "La Petite Fleur Blanche - Paris Elysees Eau De Toilette 100ml",
@@ -1247,7 +1349,8 @@
       "intensidade": 1,
       "ocasioes": [
         "dia"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16615950709": {
       "nome": "La Vida Ciclo Cosméticos Deo Colônia Lata - Perfume Feminino 100ML",
@@ -1259,7 +1362,8 @@
       "ocasioes": [
         "dia"
       ],
-      "genero": "F"
+      "genero": "F",
+      "tipo": "perfume"
     },
     "16582442686": {
       "nome": "La Vie Est Belle - Lancôme Eau De Parfum 100ml",
@@ -1272,7 +1376,8 @@
       "familias": [
         "doce",
         "floral"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16345989215": {
       "nome": "La Voie - Maison Alhambra Eau de Parfum 100ml",
@@ -1285,7 +1390,8 @@
         "noite",
         "trabalho"
       ],
-      "intensidade": 2
+      "intensidade": 2,
+      "tipo": "perfume"
     },
     "16187190916": {
       "nome": "Laguna Salvador Dalí Eau de Toilette - Perfume Feminino 30ml",
@@ -1293,7 +1399,8 @@
       "ocasioes": [
         "dia"
       ],
-      "genero": "F"
+      "genero": "F",
+      "tipo": "perfume"
     },
     "16466438461": {
       "nome": "Lattafa - La Collection D' Antiquites Pride 1910 Eau De Parfum 100ml",
@@ -1301,7 +1408,8 @@
       "ocasioes": [
         "dia",
         "noite"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16069021529": {
       "nome": "Le Male - Jean Paul Gaultier Eau de toilette 125ml",
@@ -1314,7 +1422,8 @@
         "noite",
         "trabalho"
       ],
-      "intensidade": 2
+      "intensidade": 2,
+      "tipo": "perfume"
     },
     "16069027565": {
       "nome": "Le Male Le Parfum - Jean Paul Gaultier Eau De Parfum 125ml",
@@ -1326,7 +1435,8 @@
       "familias": [
         "doce",
         "oriental"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16345990968": {
       "nome": "Leonie - Maison Alhambra Eau de Parfum 100ml",
@@ -1352,7 +1462,8 @@
       "familias": [
         "floral",
         "oriental"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16375369428": {
       "nome": "Lilac - Manasik Eau De Parfum 100ml",
@@ -1365,7 +1476,8 @@
         "dia",
         "trabalho"
       ],
-      "intensidade": 2
+      "intensidade": 2,
+      "tipo": "perfume"
     },
     "16369606432": {
       "nome": "Loka Sugar Creme Hidratante - Pokoloka 240ml",
@@ -1376,7 +1488,8 @@
       ],
       "familias": [
         "doce"
-      ]
+      ],
+      "tipo": "corpo"
     },
     "16150157542": {
       "nome": "Look Of Woman - La Rive Eau de Parfum 75ML Original",
@@ -1385,14 +1498,16 @@
       "ocasioes": [
         "dia",
         "noite"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16187857028": {
       "nome": "LR Password - La Rive Eau de Toilette 75ml Original",
       "intensidade": 1,
       "ocasioes": [
         "dia"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16384775608": {
       "nome": "Lumina Gold - Stella Dustin Eau De Parfum 100ml",
@@ -1404,7 +1519,8 @@
       ],
       "familias": [
         "oriental"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16384786869": {
       "nome": "Lumina Rose - Stella Dustin Eau De Parfum 100ml",
@@ -1416,7 +1532,8 @@
       ],
       "familias": [
         "floral"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16187851104": {
       "nome": "Madame Isabelle - La Rive Eau De Parfum 90ml Original",
@@ -1425,7 +1542,8 @@
       "ocasioes": [
         "dia",
         "noite"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16567907370": {
       "nome": "Maitre De Blue - Maison Alhambra Eau De Parfum 100ml",
@@ -1437,7 +1555,8 @@
       ],
       "familias": [
         "fresco"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16299280938": {
       "nome": "Malikat Al Arab Manasik Edp Unissex 100ml",
@@ -1471,7 +1590,8 @@
       "ocasioes": [
         "dia",
         "noite"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16299275919": {
       "nome": "Manasik Malikat Al Arab Rose Edp - Perfume Feminino 100ml Volume Da Unidade 100 Ml",
@@ -1484,7 +1604,8 @@
       "familias": [
         "floral",
         "oriental"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16382035200": {
       "nome": "Metamen - Paris Elysees Eau De Toilette 100ml Original",
@@ -1492,7 +1613,8 @@
       "intensidade": 1,
       "ocasioes": [
         "dia"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16253516117": {
       "nome": "Metaphor - La Rive Eau De Parfum 90ml Original",
@@ -1501,7 +1623,8 @@
       "ocasioes": [
         "dia",
         "noite"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16187856745": {
       "nome": "Miss Dream La Rive Eau De Parfum - Perfume Feminino 100ml",
@@ -1510,7 +1633,8 @@
       "ocasioes": [
         "dia",
         "noite"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16597357517": {
       "nome": "Move - Body Splash Ciclo Cosméticos Youly By Kéfera 200ml",
@@ -1521,7 +1645,8 @@
       "intensidade": 1,
       "ocasioes": [
         "esporte"
-      ]
+      ],
+      "tipo": "body-splash"
     },
     "16599843556": {
       "nome": "Move - Body Splash Ciclo Cosmeticos Youly By Kéfera 30ml + Chaveiro",
@@ -1532,7 +1657,8 @@
       "intensidade": 1,
       "ocasioes": [
         "esporte"
-      ]
+      ],
+      "tipo": "body-splash"
     },
     "16359561100": {
       "nome": "Move On - La Rive Eau De Toilette 100ml Original",
@@ -1540,14 +1666,16 @@
       "intensidade": 1,
       "ocasioes": [
         "dia"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16187858037": {
       "nome": "Mr Sharp - La Rive Eau de Toilette 100ml Original",
       "intensidade": 1,
       "ocasioes": [
         "dia"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16355999390": {
       "nome": "Mudiyah - Al Absar Eau De Parfum 100ml",
@@ -1556,7 +1684,8 @@
       "ocasioes": [
         "dia",
         "noite"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16380508609": {
       "nome": "Musk Abiyad - Manasik Eau De Parfum 100ml Perfume Árabe",
@@ -1581,7 +1710,8 @@
       "ocasioes": [
         "noite"
       ],
-      "intensidade": 3
+      "intensidade": 3,
+      "tipo": "perfume"
     },
     "16579532564": {
       "nome": "Namal Eau De Parfum - Orygens Fragrances 100ml",
@@ -1594,7 +1724,8 @@
         "dia",
         "noite"
       ],
-      "intensidade": 2
+      "intensidade": 2,
+      "tipo": "perfume"
     },
     "16457130036": {
       "nome": "Nautica - Voyage Eau De Toilette 100ml",
@@ -1619,7 +1750,8 @@
       "intensidade": 3,
       "ocasioes": [
         "noite"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16069024529": {
       "nome": "One - Calvin Klein Eau De Toilette 100ml",
@@ -1631,7 +1763,8 @@
       "familias": [
         "citrico",
         "fresco"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16382055410": {
       "nome": "One Night Las Vegas - Paris Elysees Eau De Toilette 100ml",
@@ -1639,7 +1772,8 @@
       "intensidade": 1,
       "ocasioes": [
         "dia"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16613588645": {
       "nome": "Orquídea  - Deo Colônia Jardin Ciclo Cosméticos 100ml",
@@ -1649,7 +1783,8 @@
       "intensidade": 1,
       "ocasioes": [
         "dia"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16278963101": {
       "nome": "Oud Al Aroos - Style & Scents Eau De Parfum 100ml Original",
@@ -1661,7 +1796,8 @@
       "ocasioes": [
         "noite"
       ],
-      "intensidade": 3
+      "intensidade": 3,
+      "tipo": "perfume"
     },
     "16356001822": {
       "nome": "Oud Al Samaawat - Al absar Eau De Parfum 100ml",
@@ -1674,7 +1810,8 @@
       "ocasioes": [
         "noite",
         "dia"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16375370762": {
       "nome": "Oud Lilab - Manasik Eau De Parfum 100ml",
@@ -1686,7 +1823,8 @@
       "ocasioes": [
         "dia",
         "noite"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16277645280": {
       "nome": "Perfume 012 Tubete 30ml Brand Collection Volume Da Unidade 30 Ml",
@@ -1695,7 +1833,8 @@
       "ocasioes": [
         "dia",
         "noite"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16349323556": {
       "nome": "Perfume Al Wataniah Attar Al Wesal Masculino Eau De Parfum 100ml",
@@ -1708,7 +1847,8 @@
       "ocasioes": [
         "dia",
         "noite"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16314991807": {
       "nome": "Perfume Al Wataniah Watani Edp 100ml Feminino",
@@ -1717,7 +1857,8 @@
       "ocasioes": [
         "dia",
         "noite"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16286445613": {
       "nome": "Perfume Arabe Al Luli Abiyedh Sahari Edp 100ml Volume Da Unidade 100 Ml",
@@ -1729,7 +1870,8 @@
       ],
       "familias": [
         "oriental"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16278965666": {
       "nome": "Perfume Árabe Al Shuruq 100ml - Style & Scents Masculino Forte, Marcante, Aromático. Alta Fixação",
@@ -1740,7 +1882,8 @@
       ],
       "familias": [
         "fresco"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16314985846": {
       "nome": "Perfume Árabe Feminino Al Wataniah Sabah Al Ward Edp 100ml",
@@ -1764,7 +1907,8 @@
       "intensidade": 3,
       "ocasioes": [
         "noite"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16279974886": {
       "nome": "Perfume Árabe Masculino Namir 100ml Style & Scents Eau De Parfum",
@@ -1772,7 +1916,8 @@
       "intensidade": 2,
       "ocasioes": [
         "noite"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16605310469": {
       "nome": "Perfume Eau De Toilette La Rive Brave Masculino Cítrico 30ml",
@@ -1783,7 +1928,8 @@
       "ocasioes": [
         "dia"
       ],
-      "genero": "M"
+      "genero": "M",
+      "tipo": "perfume"
     },
     "16145304836": {
       "nome": "Perfume Masculino Extreme Story Eau De Toilette 30ml La Rive",
@@ -1792,7 +1938,8 @@
       "ocasioes": [
         "dia",
         "noite"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16286446459": {
       "nome": "Perfume Sahari Al Mas The Diamond Eau De Parfum 100ml",
@@ -1800,7 +1947,8 @@
       "intensidade": 2,
       "ocasioes": [
         "noite"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16286445156": {
       "nome": "Perfume Sahari Sultana Halima Eau De Parfum 100ml Volume Da Unidade 100 Ml",
@@ -1811,7 +1959,8 @@
       ],
       "familias": [
         "citrico"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16345992249": {
       "nome": "Perseus - Maison Alhambra Eau de Parfum 100ml",
@@ -1824,7 +1973,8 @@
         "noite",
         "trabalho"
       ],
-      "intensidade": 2
+      "intensidade": 2,
+      "tipo": "perfume"
     },
     "16069027563": {
       "nome": "Phantom Edt 100ml Masculino Original",
@@ -1836,14 +1986,16 @@
       "familias": [
         "citrico",
         "doce"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16369599240": {
       "nome": "PLOC Colônia Lata 100ml - Pokoloka",
       "intensidade": 1,
       "ocasioes": [
         "dia"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16381933290": {
       "nome": "Poetique -  La Rive Eau De Parfum 90ml Original",
@@ -1865,7 +2017,8 @@
       "familias": [
         "fresco",
         "amadeirado"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16597357983": {
       "nome": "Power - Body Splash Ciclo Cosméticos Youly By Kéfera 200ml",
@@ -1876,7 +2029,8 @@
       "intensidade": 1,
       "ocasioes": [
         "dia"
-      ]
+      ],
+      "tipo": "body-splash"
     },
     "16599838827": {
       "nome": "Power - Body Splash Ciclo Cosmeticos Youly By Kéfera 30ml + Chaveiro",
@@ -1887,7 +2041,8 @@
       "intensidade": 1,
       "ocasioes": [
         "esporte"
-      ]
+      ],
+      "tipo": "body-splash"
     },
     "16187848315": {
       "nome": "Queen of Life - La Rive Eau de Parfum 75ml Original",
@@ -1896,7 +2051,8 @@
       "ocasioes": [
         "dia",
         "noite"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16624842695": {
       "nome": "Raposete Ciclo Mini Ciclo Cosméticos Deo Colônia - Perfume Infantil 100ml",
@@ -1919,7 +2075,8 @@
       "intensidade": 3,
       "ocasioes": [
         "noite"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16194608674": {
       "nome": "Red Shine - Giverny Colônia Feminina 100ml Original",
@@ -1927,7 +2084,8 @@
       "ocasioes": [
         "dia"
       ],
-      "genero": "F"
+      "genero": "F",
+      "tipo": "perfume"
     },
     "16150210543": {
       "nome": "River Of Love - La Rive Perfume Feminino Eau De Parfum 100ml Original",
@@ -1940,7 +2098,8 @@
         "dia",
         "noite"
       ],
-      "intensidade": 2
+      "intensidade": 2,
+      "tipo": "perfume"
     },
     "16384870216": {
       "nome": "Rouge Absolu - Paris Elysees Eau De Toilette 100ml Original",
@@ -1948,7 +2107,8 @@
       "intensidade": 1,
       "ocasioes": [
         "dia"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16187191158": {
       "nome": "Rubylips - Salvador Dalí Eau de Toilette 30ml",
@@ -1956,7 +2116,8 @@
       "ocasioes": [
         "dia"
       ],
-      "genero": "F"
+      "genero": "F",
+      "tipo": "perfume"
     },
     "16345962514": {
       "nome": "Saffira -  La Rive Eau De Parfum 90ml Original",
@@ -1978,7 +2139,8 @@
         "dia",
         "noite"
       ],
-      "intensidade": 2
+      "intensidade": 2,
+      "tipo": "perfume"
     },
     "16345994616": {
       "nome": "Salvo - Maison Alhambra Eau de Parfum 100ml",
@@ -2003,7 +2165,8 @@
       "intensidade": 2,
       "ocasioes": [
         "dia"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16356003675": {
       "nome": "Saqar Platinum - Al Absar Eau De Parfum 100ml",
@@ -2015,7 +2178,8 @@
       "ocasioes": [
         "noite"
       ],
-      "intensidade": 3
+      "intensidade": 3,
+      "tipo": "perfume"
     },
     "16579533009": {
       "nome": "Sarath Eau De Parfum - Orygens Fragragrances 100ml",
@@ -2028,7 +2192,8 @@
       "ocasioes": [
         "dia",
         "noite"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16369602446": {
       "nome": "Scandy Colônia Lata 100ml - Pokoloka",
@@ -2038,7 +2203,8 @@
       ],
       "familias": [
         "doce"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16663937321": {
       "nome": "Sexy Woman Love - Paris Elysees Eau De Toilette 100ml",
@@ -2050,7 +2216,8 @@
       "intensidade": 3,
       "ocasioes": [
         "noite"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16356018928": {
       "nome": "Silver Scent -  Jacques Bogart Eau De Toilette 100ml Original",
@@ -2063,7 +2230,8 @@
         "trabalho",
         "noite"
       ],
-      "intensidade": 2
+      "intensidade": 2,
+      "tipo": "perfume"
     },
     "16069021467": {
       "nome": "Silver Scent - Eau De Toilette 100ml Masculino Original",
@@ -2075,7 +2243,8 @@
       "familias": [
         "fresco",
         "amadeirado"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16194620072": {
       "nome": "Solar - Giverny Colônia Feminina 100ml Original",
@@ -2083,7 +2252,8 @@
       "ocasioes": [
         "dia"
       ],
-      "genero": "F"
+      "genero": "F",
+      "tipo": "perfume"
     },
     "16349332119": {
       "nome": "Special Oud - Al Wataniah Eau De Parfum 100ml Original",
@@ -2095,7 +2265,8 @@
       "ocasioes": [
         "noite"
       ],
-      "intensidade": 3
+      "intensidade": 3,
+      "tipo": "perfume"
     },
     "16590620489": {
       "nome": "Spectre Ghost - French Avenue Eau De Parfum 100ml",
@@ -2103,7 +2274,8 @@
       "ocasioes": [
         "dia",
         "noite"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16399877157": {
       "nome": "Stella Dustin - Fleurs Black Dahlia Eau De Parfum 100ml",
@@ -2116,7 +2288,8 @@
       "familias": [
         "floral",
         "oriental"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16399872450": {
       "nome": "Stella Dustin - Fleurs Brunnera Eau De Parfum 100ml",
@@ -2128,7 +2301,8 @@
       ],
       "familias": [
         "floral"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16399875030": {
       "nome": "Stella Dustin - Fleurs Camellia Eau De Parfum 100ml",
@@ -2141,7 +2315,8 @@
         "dia",
         "noite"
       ],
-      "intensidade": 2
+      "intensidade": 2,
+      "tipo": "perfume"
     },
     "16399880432": {
       "nome": "Stella Dustin - Ikario Eau De Parfum 100ml",
@@ -2163,7 +2338,8 @@
         "trabalho",
         "noite"
       ],
-      "intensidade": 2
+      "intensidade": 2,
+      "tipo": "perfume"
     },
     "16381962729": {
       "nome": "Sweet Mambo - Paris Elysees Eau De Toilette 100ml Original",
@@ -2186,7 +2362,8 @@
       "intensidade": 1,
       "ocasioes": [
         "dia"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16356023227": {
       "nome": "The Icon - Antonio Banderas Eau De Toilette 100ml",
@@ -2199,7 +2376,8 @@
         "dia",
         "trabalho"
       ],
-      "intensidade": 2
+      "intensidade": 2,
+      "tipo": "perfume"
     },
     "16069023857": {
       "nome": "The Icon - Antonio Banderas Eau De Toilette 100ml Original",
@@ -2211,7 +2389,8 @@
       "intensidade": 1,
       "ocasioes": [
         "trabalho"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16582708476": {
       "nome": "The Icon Woman - Antonio Banderas Eau De Parfum 100ml",
@@ -2224,7 +2403,8 @@
       "familias": [
         "floral",
         "doce"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16580787218": {
       "nome": "The Rosê - Al Absar Eau De Parfum 100ml",
@@ -2236,7 +2416,8 @@
       "intensidade": 2,
       "ocasioes": [
         "dia"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16580755998": {
       "nome": "Tibya Eau De Parfum - Al Wataniah 100ml",
@@ -2249,7 +2430,8 @@
       "ocasioes": [
         "dia",
         "noite"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16375373413": {
       "nome": "Umri Black - Manasik Eau De Parfum 100ml",
@@ -2265,7 +2447,8 @@
       "intensidade": 1,
       "ocasioes": [
         "dia"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16664094294": {
       "nome": "Vodka Brasil Azul (Blue) - Paris Elysees Eau De Toilette 100ml",
@@ -2278,7 +2461,8 @@
       "ocasioes": [
         "noite",
         "dia"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16663936035": {
       "nome": "Vodka Brasil Yellow (Amarelo) - Paris Elysees Eau De Toilette 100ml",
@@ -2292,7 +2476,8 @@
         "esporte",
         "trabalho"
       ],
-      "intensidade": 2
+      "intensidade": 2,
+      "tipo": "perfume"
     },
     "16663938465": {
       "nome": "Vodka Limited Edition - Paris Elysees Eau De Toilette 100ml",
@@ -2304,7 +2489,8 @@
       "intensidade": 1,
       "ocasioes": [
         "dia"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16663936862": {
       "nome": "Vodka Love - Paris Elysees Eau De Toilette 100ml",
@@ -2317,7 +2503,8 @@
       "ocasioes": [
         "noite",
         "dia"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16664094431": {
       "nome": "Vodka Wild - Paris Elysees Eau De Toilette 100ml",
@@ -2329,7 +2516,8 @@
       "intensidade": 1,
       "ocasioes": [
         "dia"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16384860707": {
       "nome": "Woody Mambo - Paris Elysees Eau De Toilette 100ml Original",
@@ -2340,7 +2528,8 @@
       ],
       "familias": [
         "amadeirado"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16667462918": {
       "nome": "World Cup - Zakat Perfume Unissex Eau De Parfum 100ml",
@@ -2371,7 +2560,8 @@
         "dia",
         "noite"
       ],
-      "intensidade": 2
+      "intensidade": 2,
+      "tipo": "perfume"
     },
     "16345995901": {
       "nome": "Yeah - Maison Alhambra Eau de Parfum 100ml",
@@ -2383,7 +2573,8 @@
       "intensidade": 2,
       "ocasioes": [
         "dia"
-      ]
+      ],
+      "tipo": "perfume"
     },
     "16303204840": {
       "nome": "Elixir - La Rive Eau De Parfum 100ml Original",
@@ -2394,7 +2585,8 @@
       "ocasioes": [
         "noite"
       ],
-      "intensidade": 3
+      "intensidade": 3,
+      "tipo": "perfume"
     },
     "16187858455": {
       "nome": "Extreme Story La Rive Eau De Toilette - Perfume Masculino 75ml",
@@ -2403,15 +2595,2421 @@
         "dia"
       ],
       "intensidade": 1
+    },
+    "16708162819": {
+      "nome": "Club de Nuit Maleka - Armaf Eau De Parfum 105ml",
+      "tipo": "perfume",
+      "familias": [
+        "floral",
+        "doce"
+      ],
+      "ocasioes": [
+        "dia",
+        "trabalho",
+        "noite"
+      ],
+      "intensidade": 2
+    },
+    "16708162817": {
+      "nome": "Club de Nuit Imperiale - Armaf Eau De Parfum 105ml",
+      "tipo": "perfume",
+      "familias": [
+        "doce",
+        "floral"
+      ],
+      "ocasioes": [
+        "noite",
+        "dia",
+        "trabalho"
+      ],
+      "intensidade": 2
+    },
+    "16695635642": {
+      "nome": "Hayaati - Lattafa Deo Body Spray 200ml",
+      "tipo": "corpo",
+      "familias": [
+        "amadeirado",
+        "oriental"
+      ]
+    },
+    "16695635641": {
+      "nome": "UDV For Men - Ulric de Varens Desodorante Masculino 200ml",
+      "tipo": "corpo",
+      "genero": "M",
+      "familias": [
+        "amadeirado",
+        "citrico"
+      ]
+    },
+    "16695634309": {
+      "nome": "Body Spray Masculino e Feminino  (Escolha o seu) Fragrância:Yara (Fem)",
+      "tipo": "corpo",
+      "genero": "F"
+    },
+    "16695634308": {
+      "nome": "Body Spray Masculino e Feminino  (Escolha o seu) Fragrância:Club de Nuit Intense",
+      "tipo": "corpo",
+      "genero": "F",
+      "familias": [
+        "oriental"
+      ]
+    },
+    "16695634307": {
+      "nome": "Body Spray Masculino e Feminino  (Escolha o seu) Fragrância:Hayaati",
+      "tipo": "corpo",
+      "genero": "F",
+      "familias": [
+        "amadeirado",
+        "oriental"
+      ]
+    },
+    "16695634305": {
+      "nome": "Body Spray Masculino e Feminino  (Escolha o seu) Fragrância:Fakhar Gold",
+      "tipo": "corpo",
+      "genero": "F",
+      "familias": [
+        "oriental"
+      ]
+    },
+    "16695634304": {
+      "nome": "Body Spray Masculino e Feminino  (Escolha o seu) Fragrância:Fakhar Black",
+      "tipo": "corpo",
+      "genero": "F",
+      "familias": [
+        "oriental"
+      ]
+    },
+    "16695634303": {
+      "nome": "Body Spray Masculino e Feminino  (Escolha o seu) Fragrância:Asad",
+      "tipo": "corpo",
+      "genero": "F"
+    },
+    "16695634302": {
+      "nome": "Body Spray Masculino e Feminino  (Escolha o seu) Fragrância:UDV Blue",
+      "tipo": "corpo",
+      "genero": "F",
+      "familias": [
+        "fresco"
+      ]
+    },
+    "16695634300": {
+      "nome": "Body Spray Masculino e Feminino  (Escolha o seu) Fragrância:UDV For Men",
+      "tipo": "corpo",
+      "genero": "F"
+    },
+    "16695634296": {
+      "nome": "Body Spray Masculino e Feminino  (Escolha o seu) Fragrância:UDV Black",
+      "tipo": "corpo",
+      "genero": "F",
+      "familias": [
+        "oriental"
+      ]
+    },
+    "16695634295": {
+      "nome": "Body Spray Masculino e Feminino  (Escolha o seu) Fragrância:Animale For Men",
+      "tipo": "corpo",
+      "genero": "F"
+    },
+    "16689964477": {
+      "nome": "Loção Hidratante - Ciclo Cosméticos (Conjunto) Fragância:Hello Hello Muse",
+      "tipo": "corpo"
+    },
+    "16689964021": {
+      "nome": "Body Splash - Ciclo Cosméticos (Conjunto) Fragância:Hello Hello Muse",
+      "tipo": "body-splash",
+      "ocasioes": [
+        "dia"
+      ],
+      "intensidade": 1
+    },
+    "16689963113": {
+      "nome": "Ciclo - Hello Hello Muse Loção Hidratante 240ml",
+      "tipo": "corpo",
+      "familias": [
+        "amadeirado",
+        "doce"
+      ]
+    },
+    "16689963112": {
+      "nome": "Ciclo - Hello Hello Muse Body Splash 200ml",
+      "tipo": "body-splash",
+      "familias": [
+        "amadeirado",
+        "doce"
+      ],
+      "ocasioes": [
+        "trabalho",
+        "noite",
+        "dia"
+      ],
+      "intensidade": 1
+    },
+    "16689963111": {
+      "nome": "Ciclo - Hello Hello Muse Lata Deo Colônia 100ml",
+      "tipo": "perfume",
+      "familias": [
+        "doce",
+        "amadeirado"
+      ],
+      "ocasioes": [
+        "noite",
+        "dia",
+        "trabalho"
+      ],
+      "intensidade": 1
+    },
+    "16689117674": {
+      "nome": "Body Splash Lattafa 250ml (Escolha o seu) Fragrância:Mayar Cherry Intense",
+      "tipo": "body-splash",
+      "familias": [
+        "doce",
+        "amadeirado"
+      ],
+      "ocasioes": [
+        "noite",
+        "dia",
+        "trabalho"
+      ],
+      "intensidade": 3
+    },
+    "16689117673": {
+      "nome": "Body Splash Lattafa 250ml (Escolha o seu) Fragrância:Haya",
+      "tipo": "body-splash",
+      "familias": [
+        "floral",
+        "doce"
+      ],
+      "ocasioes": [
+        "dia",
+        "trabalho",
+        "noite"
+      ],
+      "intensidade": 1
+    },
+    "16689117671": {
+      "nome": "Body Splash Lattafa 250ml (Escolha o seu) Fragrância:Mayar Natural Intense",
+      "tipo": "body-splash",
+      "familias": [
+        "amadeirado",
+        "oriental"
+      ],
+      "ocasioes": [
+        "trabalho",
+        "noite"
+      ],
+      "intensidade": 3
+    },
+    "16689117670": {
+      "nome": "Body Splash Lattafa 250ml (Escolha o seu) Fragrância:Fakhar Woman",
+      "tipo": "body-splash",
+      "genero": "F",
+      "familias": [
+        "floral",
+        "oriental"
+      ],
+      "ocasioes": [
+        "dia",
+        "trabalho",
+        "noite"
+      ],
+      "intensidade": 1
+    },
+    "16689117669": {
+      "nome": "Body Splash Lattafa 250ml (Escolha o seu) Fragrância:Angham",
+      "tipo": "body-splash",
+      "familias": [
+        "doce",
+        "amadeirado"
+      ],
+      "ocasioes": [
+        "noite",
+        "dia",
+        "trabalho"
+      ],
+      "intensidade": 1
+    },
+    "16689117668": {
+      "nome": "Body Splash Lattafa 250ml (Escolha o seu) Fragrância:Yara",
+      "tipo": "body-splash",
+      "familias": [
+        "floral",
+        "doce"
+      ],
+      "ocasioes": [
+        "dia",
+        "trabalho",
+        "noite"
+      ],
+      "intensidade": 1
+    },
+    "16688571135": {
+      "nome": "Body Splash Al Wataniah 250ml (Escolha o seu) Fragrância:Barreq Al Dhahab",
+      "tipo": "body-splash",
+      "familias": [
+        "oriental",
+        "amadeirado"
+      ],
+      "ocasioes": [
+        "noite",
+        "trabalho"
+      ],
+      "intensidade": 1
+    },
+    "16686666222": {
+      "nome": "Body Splash Pokoloka 200ml (Escolha o seu) Fragância:Supremo Edition (Supremacy)",
+      "tipo": "body-splash",
+      "ocasioes": [
+        "dia"
+      ],
+      "intensidade": 1
+    },
+    "16686666219": {
+      "nome": "Body Splash Pokoloka 200ml (Escolha o seu) Fragância:Club de Nuit Intense",
+      "tipo": "body-splash",
+      "familias": [
+        "oriental"
+      ],
+      "ocasioes": [
+        "noite"
+      ],
+      "intensidade": 3
+    },
+    "16686666218": {
+      "nome": "Body Splash Pokoloka 200ml (Escolha o seu) Fragância:Zaarad Black(Asad Tradicional)",
+      "tipo": "body-splash",
+      "familias": [
+        "oriental"
+      ],
+      "ocasioes": [
+        "noite"
+      ],
+      "intensidade": 1
+    },
+    "16686666217": {
+      "nome": "Body Splash Pokoloka 200ml (Escolha o seu) Fragância:Zaarad Bourbon (Asad Bourbon)",
+      "tipo": "body-splash",
+      "familias": [
+        "doce",
+        "oriental"
+      ],
+      "ocasioes": [
+        "noite",
+        "dia"
+      ],
+      "intensidade": 1
+    },
+    "16686666215": {
+      "nome": "Body Splash Pokoloka 200ml (Escolha o seu) Fragância:Bleu Absolut (Chanel Bleu)",
+      "tipo": "body-splash",
+      "ocasioes": [
+        "dia"
+      ],
+      "intensidade": 1
+    },
+    "16682185107": {
+      "nome": "Pokoloka - Supremo Edition Body Splash",
+      "tipo": "body-splash",
+      "ocasioes": [
+        "dia"
+      ],
+      "intensidade": 1
+    },
+    "16677069936": {
+      "nome": "Kit Silver Scent - Body Spray + Perfume",
+      "tipo": "kit",
+      "familias": [
+        "fresco",
+        "amadeirado"
+      ]
+    },
+    "16676772468": {
+      "nome": "Pokoloka - Zaarad Black Body Splash",
+      "tipo": "body-splash",
+      "familias": [
+        "oriental"
+      ],
+      "ocasioes": [
+        "noite"
+      ],
+      "intensidade": 1
+    },
+    "16676772462": {
+      "nome": "Pokoloka - Club de Nuit Intense Body Splash",
+      "tipo": "body-splash",
+      "familias": [
+        "oriental"
+      ],
+      "ocasioes": [
+        "noite"
+      ],
+      "intensidade": 3
+    },
+    "16676772461": {
+      "nome": "Pokoloka - Zaarad Bourbon Body Splash",
+      "tipo": "body-splash",
+      "ocasioes": [
+        "dia"
+      ],
+      "intensidade": 1
+    },
+    "16676772455": {
+      "nome": "Pokoloka - Bleu Absolut Body Splash",
+      "tipo": "body-splash",
+      "ocasioes": [
+        "dia"
+      ],
+      "intensidade": 1
+    },
+    "16676772447": {
+      "nome": "Lattafa - Queen of Arabia Eau de Parfum",
+      "tipo": "perfume",
+      "familias": [
+        "doce",
+        "oriental"
+      ],
+      "ocasioes": [
+        "noite",
+        "dia"
+      ],
+      "intensidade": 2
+    },
+    "16674595731": {
+      "nome": "Kit Calvin Klein One 100ml + Shower Gel 100ml",
+      "tipo": "kit"
+    },
+    "16674555850": {
+      "nome": "UDV Blue - Ulric de Varens Desodorante Masculino 200ml",
+      "tipo": "corpo",
+      "genero": "M",
+      "familias": [
+        "fresco"
+      ]
+    },
+    "16663934961": {
+      "nome": "La Petite Fleur Secrete - Paris Elysees Eau De Toilette 100ml",
+      "tipo": "perfume",
+      "genero": "F",
+      "familias": [
+        "amadeirado",
+        "floral"
+      ],
+      "ocasioes": [
+        "trabalho",
+        "noite",
+        "dia"
+      ],
+      "intensidade": 1
+    },
+    "16648062611": {
+      "nome": "Al Wataniah - Body Splash Bareeq Al Dhahab 250ml",
+      "tipo": "body-splash",
+      "familias": [
+        "oriental",
+        "amadeirado"
+      ],
+      "ocasioes": [
+        "noite",
+        "trabalho"
+      ],
+      "intensidade": 1
+    },
+    "16641102941": {
+      "nome": "Dolce & Gabbana - Light Blue EDT 100ML",
+      "tipo": "perfume",
+      "familias": [
+        "fresco"
+      ],
+      "ocasioes": [
+        "esporte",
+        "dia"
+      ],
+      "intensidade": 1
+    },
+    "16641094600": {
+      "nome": "Lattafa - Musamam White Intense EDP 100ml",
+      "tipo": "perfume",
+      "familias": [
+        "oriental"
+      ],
+      "ocasioes": [
+        "noite"
+      ],
+      "intensidade": 3
+    },
+    "16638924437": {
+      "nome": "Pokoloka Body Splash (Conjunto) Fragância:Amora",
+      "tipo": "body-splash",
+      "ocasioes": [
+        "dia"
+      ],
+      "intensidade": 1
+    },
+    "16638924436": {
+      "nome": "Pokoloka Body Splash (Conjunto) Fragância:Loka Sugar",
+      "tipo": "body-splash",
+      "familias": [
+        "doce"
+      ],
+      "ocasioes": [
+        "noite",
+        "dia"
+      ],
+      "intensidade": 1
+    },
+    "16638924435": {
+      "nome": "Pokoloka Body Splash (Conjunto) Fragância:Morango Pop",
+      "tipo": "body-splash",
+      "familias": [
+        "doce"
+      ],
+      "ocasioes": [
+        "noite",
+        "dia"
+      ],
+      "intensidade": 1
+    },
+    "16638924433": {
+      "nome": "Pokoloka Body Splash (Conjunto) Fragância:Ploc",
+      "tipo": "body-splash",
+      "ocasioes": [
+        "dia"
+      ],
+      "intensidade": 1
+    },
+    "16638924432": {
+      "nome": "Pokoloka Body Splash (Conjunto) Fragância:Vanilla",
+      "tipo": "body-splash",
+      "ocasioes": [
+        "dia"
+      ],
+      "intensidade": 1
+    },
+    "16638924431": {
+      "nome": "Pokoloka Body Splash (Conjunto) Fragância:Amore",
+      "tipo": "body-splash",
+      "ocasioes": [
+        "dia"
+      ],
+      "intensidade": 1
+    },
+    "16638007685": {
+      "nome": "Ploc! Pokoloka Deo Colônia Lata 100ml + Ploc Loção Hidratante Corporal 240ml",
+      "tipo": "corpo"
+    },
+    "16638005630": {
+      "nome": "Athina Deo Colônia Lata 100ml + Athina Loção Hidratante Corporal 240ml",
+      "tipo": "corpo"
+    },
+    "16631122283": {
+      "nome": "Hidratante Ciclo Cosméticos Jardin 250ml (Conjunto) Fragância:Flor de Laranjeira",
+      "tipo": "corpo",
+      "familias": [
+        "floral"
+      ]
+    },
+    "16631122276": {
+      "nome": "Hidratante Ciclo Cosméticos Jardin 250ml (Conjunto) Fragância:Jasmim Sambac",
+      "tipo": "corpo",
+      "familias": [
+        "floral"
+      ]
+    },
+    "16631122271": {
+      "nome": "Hidratante Ciclo Cosméticos Jardin 250ml (Conjunto) Fragância:Bergamota",
+      "tipo": "corpo",
+      "familias": [
+        "citrico"
+      ]
+    },
+    "16631122264": {
+      "nome": "Hidratante Ciclo Cosméticos Jardin 250ml (Conjunto) Fragância:Nectarina",
+      "tipo": "corpo"
+    },
+    "16631109880": {
+      "nome": "Ciclo Cosméticos Jardin - Body Splash (Conjunto) Fragância:Flor de Laranjeira",
+      "tipo": "body-splash",
+      "familias": [
+        "floral"
+      ],
+      "ocasioes": [
+        "dia",
+        "trabalho"
+      ],
+      "intensidade": 1
+    },
+    "16631109877": {
+      "nome": "Ciclo Cosméticos Jardin - Body Splash (Conjunto) Fragância:Nectarina",
+      "tipo": "body-splash",
+      "ocasioes": [
+        "dia"
+      ],
+      "intensidade": 1
+    },
+    "16631109876": {
+      "nome": "Ciclo Cosméticos Jardin - Body Splash (Conjunto) Fragância:Jasmim Sambac",
+      "tipo": "body-splash",
+      "familias": [
+        "floral"
+      ],
+      "ocasioes": [
+        "dia",
+        "trabalho"
+      ],
+      "intensidade": 1
+    },
+    "16628339158": {
+      "nome": "Loção Hidratante - Ciclo Cosméticos (Conjunto) Fragância:Velvety",
+      "tipo": "corpo"
+    },
+    "16627549716": {
+      "nome": "Velvety - Loção Hidratante Ciclo Cosméticos Cosméticos 240ml Original",
+      "tipo": "corpo"
+    },
+    "16624857479": {
+      "nome": "Oriental Neon - Like Me Ciclo Cosméticos Deo Colônia 30ml",
+      "tipo": "perfume",
+      "familias": [
+        "oriental",
+        "doce"
+      ],
+      "ocasioes": [
+        "noite",
+        "dia"
+      ],
+      "intensidade": 1
+    },
+    "16624847201": {
+      "nome": "QuéQué Ciclo Mini Ciclo Cosméticos Deo Colônia - Perfume Infantil 100ml",
+      "tipo": "perfume",
+      "familias": [
+        "floral",
+        "amadeirado"
+      ],
+      "ocasioes": [
+        "dia",
+        "trabalho",
+        "noite"
+      ],
+      "intensidade": 1
+    },
+    "16623120471": {
+      "nome": "Loção Hidratante - Ciclo Cosméticos (Conjunto) Fragância:Sunset",
+      "tipo": "corpo",
+      "familias": [
+        "citrico"
+      ]
+    },
+    "16623120469": {
+      "nome": "Loção Hidratante - Ciclo Cosméticos (Conjunto) Fragância:Athina",
+      "tipo": "corpo"
+    },
+    "16623120466": {
+      "nome": "Loção Hidratante - Ciclo Cosméticos (Conjunto) Fragância:Kiss",
+      "tipo": "corpo"
+    },
+    "16623120464": {
+      "nome": "Loção Hidratante - Ciclo Cosméticos (Conjunto) Fragância:Kiss me More",
+      "tipo": "corpo"
+    },
+    "16623120462": {
+      "nome": "Loção Hidratante - Ciclo Cosméticos (Conjunto) Fragância:La Vida",
+      "tipo": "corpo"
+    },
+    "16623113969": {
+      "nome": "Hidratante - Pokoloka (Conjunto) Fragância:Vanilla",
+      "tipo": "corpo"
+    },
+    "16623113968": {
+      "nome": "Hidratante - Pokoloka (Conjunto) Fragância:Ploc",
+      "tipo": "corpo"
+    },
+    "16623113966": {
+      "nome": "Hidratante - Pokoloka (Conjunto) Fragância:Morango Pop",
+      "tipo": "corpo",
+      "familias": [
+        "doce"
+      ]
+    },
+    "16623113964": {
+      "nome": "Hidratante - Pokoloka (Conjunto) Fragância:Loka Sugar",
+      "tipo": "corpo",
+      "familias": [
+        "doce"
+      ]
+    },
+    "16623113961": {
+      "nome": "Hidratante - Pokoloka (Conjunto) Fragância:Amora",
+      "tipo": "corpo"
+    },
+    "16621904270": {
+      "nome": "Forever - Body Splash 200ml Ciclo Cosméticos",
+      "tipo": "body-splash",
+      "ocasioes": [
+        "dia"
+      ],
+      "intensidade": 1
+    },
+    "16621903145": {
+      "nome": "Sunset - Body Splash 200ml Ciclo Cosméticos",
+      "tipo": "body-splash",
+      "familias": [
+        "citrico"
+      ],
+      "ocasioes": [
+        "dia",
+        "esporte"
+      ],
+      "intensidade": 1
+    },
+    "16621901125": {
+      "nome": "La Vida - Body Splash 200ml Ciclo Cosméticos",
+      "tipo": "body-splash",
+      "ocasioes": [
+        "dia"
+      ],
+      "intensidade": 1
+    },
+    "16621898360": {
+      "nome": "La Luna - Body Splash 200ml Ciclo Cosméticos",
+      "tipo": "body-splash",
+      "ocasioes": [
+        "dia"
+      ],
+      "intensidade": 1
+    },
+    "16621894635": {
+      "nome": "Body Splash - Ciclo Cosméticos (Conjunto) Fragância:Forever",
+      "tipo": "body-splash",
+      "ocasioes": [
+        "dia"
+      ],
+      "intensidade": 1
+    },
+    "16621894630": {
+      "nome": "Body Splash - Ciclo Cosméticos (Conjunto) Fragância:Sunset",
+      "tipo": "body-splash",
+      "familias": [
+        "citrico"
+      ],
+      "ocasioes": [
+        "dia",
+        "esporte"
+      ],
+      "intensidade": 1
+    },
+    "16621894629": {
+      "nome": "Body Splash - Ciclo Cosméticos (Conjunto) Fragância:La Vida",
+      "tipo": "body-splash",
+      "ocasioes": [
+        "dia"
+      ],
+      "intensidade": 1
+    },
+    "16621894626": {
+      "nome": "Body Splash - Ciclo Cosméticos (Conjunto) Fragância:La Luna",
+      "tipo": "body-splash",
+      "ocasioes": [
+        "dia"
+      ],
+      "intensidade": 1
+    },
+    "16621894624": {
+      "nome": "Body Splash - Ciclo Cosméticos (Conjunto) Fragância:Kiss me More",
+      "tipo": "body-splash",
+      "ocasioes": [
+        "dia"
+      ],
+      "intensidade": 1
+    },
+    "16621894623": {
+      "nome": "Body Splash - Ciclo Cosméticos (Conjunto) Fragância:Kiss",
+      "tipo": "body-splash",
+      "ocasioes": [
+        "dia"
+      ],
+      "intensidade": 1
+    },
+    "16621894616": {
+      "nome": "Body Splash - Ciclo Cosméticos (Conjunto) Fragância:Hello Hello",
+      "tipo": "body-splash",
+      "ocasioes": [
+        "dia"
+      ],
+      "intensidade": 1
+    },
+    "16620738423": {
+      "nome": "Creme Hidratante BRAND COLLECTION 200ml Original (Conjunto) Fragância:Gold Nº 999.9",
+      "tipo": "corpo",
+      "familias": [
+        "oriental"
+      ]
+    },
+    "16620738421": {
+      "nome": "Creme Hidratante BRAND COLLECTION 200ml Original (Conjunto) Fragância:Winner Nº 116",
+      "tipo": "corpo"
+    },
+    "16620738420": {
+      "nome": "Creme Hidratante BRAND COLLECTION 200ml Original (Conjunto) Fragância:Blue Ocean Nº 070",
+      "tipo": "corpo",
+      "familias": [
+        "fresco"
+      ]
+    },
+    "16620738419": {
+      "nome": "Creme Hidratante BRAND COLLECTION 200ml Original (Conjunto) Fragância:Savage Nº 100",
+      "tipo": "corpo"
+    },
+    "16620738417": {
+      "nome": "Creme Hidratante BRAND COLLECTION 200ml Original (Conjunto) Fragância:Rose Lady Nº 034",
+      "tipo": "corpo",
+      "genero": "F",
+      "familias": [
+        "floral"
+      ]
+    },
+    "16620738416": {
+      "nome": "Creme Hidratante BRAND COLLECTION 200ml Original (Conjunto) Fragância:Escândal Nº 136",
+      "tipo": "corpo"
+    },
+    "16620738415": {
+      "nome": "Creme Hidratante BRAND COLLECTION 200ml Original (Conjunto) Fragância:Beauty Girl Nº 126",
+      "tipo": "corpo",
+      "genero": "F"
+    },
+    "16620738413": {
+      "nome": "Creme Hidratante BRAND COLLECTION 200ml Original (Conjunto) Fragância:Heaven ( Meu Anjo ) Nº 168",
+      "tipo": "corpo"
+    },
+    "16620732172": {
+      "nome": "Queen of Life - La Rive (Conjunto) Volume:75ml",
+      "tipo": "perfume",
+      "ocasioes": [
+        "dia",
+        "noite"
+      ],
+      "intensidade": 2
+    },
+    "16620729776": {
+      "nome": "Extreme Story La Rive (Conjunto) Volume:kit",
+      "tipo": "kit"
+    },
+    "16620729774": {
+      "nome": "Extreme Story La Rive (Conjunto) Volume:30ml",
+      "tipo": "perfume",
+      "ocasioes": [
+        "dia",
+        "noite"
+      ],
+      "intensidade": 2
+    },
+    "16620720851": {
+      "nome": "La Rive Brave (Conjunto) Volume:30ml",
+      "tipo": "perfume",
+      "ocasioes": [
+        "dia",
+        "noite"
+      ],
+      "intensidade": 2
+    },
+    "16620711610": {
+      "nome": "Her Choice (Conjunto) Volume:100ml",
+      "tipo": "perfume",
+      "familias": [
+        "fresco"
+      ],
+      "ocasioes": [
+        "esporte",
+        "dia"
+      ],
+      "intensidade": 2
+    },
+    "16620706187": {
+      "nome": "Body Splash Youly 200ml (Conjunto) Fragância:Power",
+      "tipo": "body-splash",
+      "ocasioes": [
+        "dia"
+      ],
+      "intensidade": 1
+    },
+    "16620706184": {
+      "nome": "Body Splash Youly 200ml (Conjunto) Fragância:Move",
+      "tipo": "body-splash",
+      "ocasioes": [
+        "dia"
+      ],
+      "intensidade": 1
+    },
+    "16620706182": {
+      "nome": "Body Splash Youly 200ml (Conjunto) Fragância:Intense",
+      "tipo": "body-splash",
+      "familias": [
+        "oriental"
+      ],
+      "ocasioes": [
+        "noite"
+      ],
+      "intensidade": 3
+    },
+    "16620303028": {
+      "nome": "Miss Dream (Conjunto) Volume:100ml",
+      "tipo": "perfume",
+      "ocasioes": [
+        "dia",
+        "noite"
+      ],
+      "intensidade": 2
+    },
+    "16620092347": {
+      "nome": "Kiss Ciclo (Variação) Volume:100ml",
+      "tipo": "perfume",
+      "ocasioes": [
+        "dia",
+        "noite"
+      ],
+      "intensidade": 2
+    },
+    "16620092346": {
+      "nome": "Kiss Ciclo (Variação) Volume:50ml",
+      "tipo": "perfume",
+      "ocasioes": [
+        "dia",
+        "noite"
+      ],
+      "intensidade": 2
+    },
+    "16620016658": {
+      "nome": "Conjunto Cuté Volume:100ml",
+      "tipo": "perfume",
+      "ocasioes": [
+        "dia",
+        "noite"
+      ],
+      "intensidade": 2
+    },
+    "16619286427": {
+      "nome": "Colônia 100ML Linha Jardin Ciclo Cosméticos Deo Colônia Original (Escolha o seu) Fragância:Bergamota Calabria",
+      "tipo": "perfume",
+      "familias": [
+        "citrico"
+      ],
+      "ocasioes": [
+        "dia",
+        "esporte"
+      ],
+      "intensidade": 1
+    },
+    "16619286425": {
+      "nome": "Colônia 100ML Linha Jardin Ciclo Cosméticos Deo Colônia Original (Escolha o seu) Fragância:Rosa Damascena",
+      "tipo": "perfume",
+      "familias": [
+        "floral"
+      ],
+      "ocasioes": [
+        "dia",
+        "trabalho"
+      ],
+      "intensidade": 1
+    },
+    "16619286420": {
+      "nome": "Colônia 100ML Linha Jardin Ciclo Cosméticos Deo Colônia Original (Escolha o seu) Fragância:Jasmim Sambac",
+      "tipo": "perfume",
+      "familias": [
+        "floral"
+      ],
+      "ocasioes": [
+        "dia",
+        "trabalho"
+      ],
+      "intensidade": 1
+    },
+    "16619286419": {
+      "nome": "Colônia 100ML Linha Jardin Ciclo Cosméticos Deo Colônia Original (Escolha o seu) Fragância:Nectarina",
+      "tipo": "perfume",
+      "ocasioes": [
+        "dia"
+      ],
+      "intensidade": 1
+    },
+    "16616522978": {
+      "nome": "Deo Colônia Nah Cardoso By Ciclo Hello Hello 50ml Volume:100",
+      "tipo": "perfume",
+      "ocasioes": [
+        "dia"
+      ],
+      "intensidade": 1
+    },
+    "16613588302": {
+      "nome": "Magnólia  - Deo Colônia Jardin Ciclo Cosméticos 100ml",
+      "tipo": "perfume",
+      "familias": [
+        "floral",
+        "fresco"
+      ],
+      "ocasioes": [
+        "dia",
+        "trabalho",
+        "esporte"
+      ],
+      "intensidade": 1
+    },
+    "16613587025": {
+      "nome": "Flor de Cerejeira  - Deo Colônia Jardin Ciclo Cosméticos 100ml",
+      "tipo": "perfume",
+      "familias": [
+        "floral",
+        "fresco"
+      ],
+      "ocasioes": [
+        "dia",
+        "trabalho",
+        "esporte"
+      ],
+      "intensidade": 1
+    },
+    "16612172634": {
+      "nome": "Skelt Hidratante Velvet Milano 200g | Hidrata O Corpo, Ceramida, Glicerina, Pele Hidratada Por 48 Horas, Rápida Absorção",
+      "tipo": "corpo",
+      "familias": [
+        "doce",
+        "citrico"
+      ]
+    },
+    "16612172621": {
+      "nome": "Calming Body Cream - Loção Hidratante Corporal Creamy Aloe Vera",
+      "tipo": "corpo",
+      "familias": [
+        "fresco"
+      ]
+    },
+    "16612172614": {
+      "nome": "Creme Brand Collection 005 - 200ml Amadeirado",
+      "tipo": "corpo",
+      "familias": [
+        "amadeirado",
+        "citrico"
+      ]
+    },
+    "16606560732": {
+      "nome": "Yara - Lattafa Body Splash Lattafa 250ml",
+      "tipo": "body-splash",
+      "familias": [
+        "floral",
+        "doce"
+      ],
+      "ocasioes": [
+        "dia",
+        "trabalho",
+        "noite"
+      ],
+      "intensidade": 1
+    },
+    "16606559967": {
+      "nome": "Mayar Natural Intense - Lattafa Body Splash Lattafa 250ml",
+      "tipo": "body-splash",
+      "familias": [
+        "amadeirado",
+        "oriental"
+      ],
+      "ocasioes": [
+        "trabalho",
+        "noite"
+      ],
+      "intensidade": 3
+    },
+    "16606558792": {
+      "nome": "Mayar Cherry Intense - Lattafa Body Splash Lattafa 250ml",
+      "tipo": "body-splash",
+      "familias": [
+        "doce",
+        "amadeirado"
+      ],
+      "ocasioes": [
+        "noite",
+        "dia",
+        "trabalho"
+      ],
+      "intensidade": 3
+    },
+    "16606557161": {
+      "nome": "Haya - Lattafa Body Splash Lattafa 250ml",
+      "tipo": "body-splash",
+      "genero": "F",
+      "familias": [
+        "floral",
+        "doce"
+      ],
+      "ocasioes": [
+        "dia",
+        "trabalho",
+        "noite"
+      ],
+      "intensidade": 1
+    },
+    "16606556308": {
+      "nome": "Fakhar Woman - Lattafa Body Splash Lattafa 250ml",
+      "tipo": "body-splash",
+      "genero": "F",
+      "familias": [
+        "floral",
+        "oriental"
+      ],
+      "ocasioes": [
+        "dia",
+        "trabalho",
+        "noite"
+      ],
+      "intensidade": 1
+    },
+    "16606551639": {
+      "nome": "Angham - Lattafa Body Splash Lattafa 250ml",
+      "tipo": "body-splash",
+      "familias": [
+        "doce",
+        "amadeirado"
+      ],
+      "ocasioes": [
+        "noite",
+        "dia",
+        "trabalho"
+      ],
+      "intensidade": 1
+    },
+    "16599566352": {
+      "nome": "Invictus - Paco Rabanne Eau De Toilette 100ml",
+      "tipo": "perfume",
+      "genero": "M",
+      "ocasioes": [
+        "dia"
+      ],
+      "intensidade": 1
+    },
+    "16594865342": {
+      "nome": "Creme para mãos Melancia - Kiss New York 30g",
+      "tipo": "corpo",
+      "familias": [
+        "doce"
+      ]
+    },
+    "16594863689": {
+      "nome": "Creme para mãos Limão - Kiss New York 30g",
+      "tipo": "corpo",
+      "familias": [
+        "citrico",
+        "fresco"
+      ]
+    },
+    "16594859137": {
+      "nome": "Creme para mãos Pêssego - Kiss New York 30g",
+      "tipo": "corpo",
+      "familias": [
+        "doce"
+      ]
+    },
+    "16594825659": {
+      "nome": "Creme para mãos Açaí - Kiss New York 30g",
+      "tipo": "corpo"
+    },
+    "16590003928": {
+      "nome": "Blue Ocean - Brand Collection Hidratante Corporal 200ml",
+      "tipo": "corpo",
+      "familias": [
+        "fresco"
+      ]
+    },
+    "16589951140": {
+      "nome": "Savage - Brand Collection Hidratante Corporal 200ml",
+      "tipo": "corpo"
+    },
+    "16589932875": {
+      "nome": "Gold - Brand Collection Hidratante Corporal 200ml",
+      "tipo": "corpo",
+      "familias": [
+        "oriental"
+      ]
+    },
+    "16589920594": {
+      "nome": "Winner - Brand Collection Hidratante Corporal 200ml",
+      "tipo": "corpo"
+    },
+    "16586525457": {
+      "nome": "Granado Pink - Base e Extra brilho fortificante 100g",
+      "tipo": "corpo"
+    },
+    "16586433922": {
+      "nome": "Coconut Creme Hidratante - Pokoloka 240ml",
+      "tipo": "corpo",
+      "familias": [
+        "doce"
+      ]
+    },
+    "16585351618": {
+      "nome": "Velvet Milano - Skelt Body Splash Spray 100ml",
+      "tipo": "body-splash",
+      "ocasioes": [
+        "dia"
+      ],
+      "intensidade": 1
+    },
+    "16582446544": {
+      "nome": "Idole - Lancôme Eau De Parfum 100ml",
+      "tipo": "perfume",
+      "genero": "F",
+      "ocasioes": [
+        "dia",
+        "noite"
+      ],
+      "intensidade": 2
+    },
+    "16582445166": {
+      "nome": "Olympea - Paco Rabanne Eau De Parfum 80ml",
+      "tipo": "perfume",
+      "genero": "F",
+      "ocasioes": [
+        "dia",
+        "noite"
+      ],
+      "intensidade": 2
+    },
+    "16582443520": {
+      "nome": "Good Girl - Carolina Herrera Eau De Parfum 80ml",
+      "tipo": "perfume",
+      "genero": "F",
+      "familias": [
+        "floral",
+        "amadeirado"
+      ],
+      "ocasioes": [
+        "dia",
+        "trabalho",
+        "noite"
+      ],
+      "intensidade": 2
+    },
+    "16581669512": {
+      "nome": "One Million - Paco Rabanne Eau De Toilette 100ml",
+      "tipo": "perfume",
+      "genero": "M",
+      "ocasioes": [
+        "dia"
+      ],
+      "intensidade": 1
+    },
+    "16581189303": {
+      "nome": "KIT Ironstone - La Rive Masculino Original",
+      "tipo": "kit",
+      "genero": "M"
+    },
+    "16581181786": {
+      "nome": "KIT Extreme Story - La Rive Masculino Original",
+      "tipo": "kit",
+      "genero": "M"
+    },
+    "16581016963": {
+      "nome": "Nautilus - Paris Elysees Eau De Toilette 100ml Original",
+      "tipo": "perfume",
+      "ocasioes": [
+        "dia"
+      ],
+      "intensidade": 1
+    },
+    "16580817942": {
+      "nome": "Club De Nuit Silage - Armaf Eau De Parfum 105ml",
+      "tipo": "perfume",
+      "genero": "M",
+      "ocasioes": [
+        "dia",
+        "noite"
+      ],
+      "intensidade": 2
+    },
+    "16579533074": {
+      "nome": "Mehsoos Eau De Parfum - Orygens Fragrances 100ml",
+      "tipo": "perfume",
+      "genero": "F",
+      "familias": [
+        "doce",
+        "oriental"
+      ],
+      "ocasioes": [
+        "noite",
+        "dia"
+      ],
+      "intensidade": 2
+    },
+    "16579456529": {
+      "nome": "Ciclo Cosméticos Jardin - Body Splash Nectarina 250ml",
+      "tipo": "body-splash",
+      "ocasioes": [
+        "dia"
+      ],
+      "intensidade": 1
+    },
+    "16579455034": {
+      "nome": "Ciclo Cosméticos Jardin - Body Splash Jasmim Sambac 250ml",
+      "tipo": "body-splash",
+      "familias": [
+        "floral"
+      ],
+      "ocasioes": [
+        "dia",
+        "trabalho"
+      ],
+      "intensidade": 1
+    },
+    "16578640499": {
+      "nome": "Oud Al Aroos - Style & Scents Eau De Parfum 100ml Original",
+      "tipo": "perfume",
+      "familias": [
+        "oriental"
+      ],
+      "ocasioes": [
+        "noite"
+      ],
+      "intensidade": 2
+    },
+    "16571805968": {
+      "nome": "Rosa Damascena - Deo Colônia Jardin Ciclo Cosméticos 100ml",
+      "tipo": "perfume",
+      "familias": [
+        "floral"
+      ],
+      "ocasioes": [
+        "dia",
+        "trabalho"
+      ],
+      "intensidade": 1
+    },
+    "16562537089": {
+      "nome": "Perfume Deo Colônia Kiss Ciclo Lata 50ml",
+      "tipo": "perfume",
+      "ocasioes": [
+        "dia"
+      ],
+      "intensidade": 1
+    },
+    "16562500999": {
+      "nome": "Grand Bahama - Skelt Body Splash Spray Desodorante 100ml",
+      "tipo": "body-splash",
+      "ocasioes": [
+        "dia"
+      ],
+      "intensidade": 1
+    },
+    "16558463481": {
+      "nome": "Essenciart Home Sabonete Líquido - Essenciart 250ml",
+      "tipo": "corpo"
+    },
+    "16469463903": {
+      "nome": "Nectarina - Hidratante Ciclo Cosméticos Jardin 250ml",
+      "tipo": "corpo"
+    },
+    "16469463596": {
+      "nome": "Bergamota Calabria - Hidratante Ciclo Cosméticos Jardin 250ml",
+      "tipo": "corpo",
+      "familias": [
+        "citrico"
+      ]
+    },
+    "16469463082": {
+      "nome": "Flor de Laranjeira - Hidratante Ciclo Cosméticos Jardin 250ml",
+      "tipo": "corpo",
+      "familias": [
+        "floral"
+      ]
+    },
+    "16467069761": {
+      "nome": "Ploc - Pokoloka Body Splash Fragrance Mist 240ml Original",
+      "tipo": "body-splash",
+      "ocasioes": [
+        "dia"
+      ],
+      "intensidade": 1
+    },
+    "16467068445": {
+      "nome": "Loka Sugar - Pokoloka Body Splash Fragrance Mist 240ml Original",
+      "tipo": "body-splash",
+      "familias": [
+        "doce"
+      ],
+      "ocasioes": [
+        "noite",
+        "dia"
+      ],
+      "intensidade": 1
+    },
+    "16467066147": {
+      "nome": "Morango Pop - Pokoloka Body Splash Fragrance Mist 240ml Original",
+      "tipo": "body-splash",
+      "familias": [
+        "doce"
+      ],
+      "ocasioes": [
+        "noite",
+        "dia"
+      ],
+      "intensidade": 1
+    },
+    "16467064424": {
+      "nome": "Vanilla - Pokoloka Body Splash Fragrance Mist 240ml Original",
+      "tipo": "body-splash",
+      "ocasioes": [
+        "dia"
+      ],
+      "intensidade": 1
+    },
+    "16467062684": {
+      "nome": "Amore - Pokoloka Body Splash Fragrance Mist 240ml Original",
+      "tipo": "body-splash",
+      "ocasioes": [
+        "dia"
+      ],
+      "intensidade": 1
+    },
+    "16467059720": {
+      "nome": "Amora - Pokoloka Body Splash Fragrance Mist 240ml Original",
+      "tipo": "body-splash",
+      "ocasioes": [
+        "dia"
+      ],
+      "intensidade": 1
+    },
+    "16461125108": {
+      "nome": "Figaro Loção Gel Pós Barba Calmante 150ml",
+      "tipo": "corpo"
+    },
+    "16461124434": {
+      "nome": "Figaro Espuma Para Barbear Sensitive 400ml",
+      "tipo": "corpo"
+    },
+    "16461124084": {
+      "nome": "Figaro Creme Para Barbear 150ml",
+      "tipo": "corpo"
+    },
+    "16454556845": {
+      "nome": "Skelt - Luva aplicadora de bronzeador (Tanning Mitt)",
+      "tipo": "corpo"
+    },
+    "16429601939": {
+      "nome": "Bronzeado Instantâneo - Skelt 120ml",
+      "tipo": "corpo"
+    },
+    "16429599098": {
+      "nome": "Summer Vibes - Skelt Acelerador De Bronze 170ml",
+      "tipo": "corpo"
+    },
+    "16429597804": {
+      "nome": "Summer Vibes - Skelt Protetor Solar FPS 30 ( Efeito Dourado e Iluminado) 170ml",
+      "tipo": "corpo"
+    },
+    "16429585094": {
+      "nome": "Unexpected Day - Skelt Body Cream Unexpected Day Hidratante Corporal 200g",
+      "tipo": "corpo"
+    },
+    "16429575498": {
+      "nome": "Urban Beat  - Skelt Perume Mist Spray Perfumado",
+      "tipo": "body-splash",
+      "ocasioes": [
+        "dia",
+        "noite"
+      ],
+      "intensidade": 2
+    },
+    "16400323894": {
+      "nome": "Maison Alhambra - Blue De Chance Body Spray",
+      "tipo": "corpo",
+      "familias": [
+        "fresco"
+      ]
+    },
+    "16398604365": {
+      "nome": "Granado Pink - Talco Cremoso Antisséptico 100g",
+      "tipo": "corpo"
+    },
+    "16398598159": {
+      "nome": "Granado Pink - Reparador Calcanhar Danificado 20g",
+      "tipo": "corpo"
+    },
+    "16398586583": {
+      "nome": "Granado Pink - Removedor De Esmalte 75ml",
+      "tipo": "corpo"
+    },
+    "16398585738": {
+      "nome": "Granado Pink - Óleo Fortalecedor Unhas 10ml",
+      "tipo": "corpo"
+    },
+    "16398582721": {
+      "nome": "Granado Pink - Gel Pés E Pernas Cansadas 120g",
+      "tipo": "corpo"
+    },
+    "16398581377": {
+      "nome": "Granado Pink - Gel Protetor Calos E Bolhas 45g",
+      "tipo": "corpo"
+    },
+    "16398578373": {
+      "nome": "Granado Pink - Cera Nutritiva Pink 7g",
+      "tipo": "corpo"
+    },
+    "16395566219": {
+      "nome": "Ciclo - Hidratante Sunset 240ml",
+      "tipo": "corpo",
+      "familias": [
+        "citrico"
+      ]
+    },
+    "16393008950": {
+      "nome": "Heaven - Brand Collection Hidratante Corporal 200ml Original",
+      "tipo": "corpo"
+    },
+    "16386248843": {
+      "nome": "Miss Dream Pink - La Rive Eau De Parfum 100ml Original",
+      "tipo": "perfume",
+      "genero": "F",
+      "ocasioes": [
+        "dia",
+        "noite"
+      ],
+      "intensidade": 2
+    },
+    "16385214486": {
+      "nome": "Morango - Labotrat Hidratante dia a dia 190ml",
+      "tipo": "corpo",
+      "familias": [
+        "doce"
+      ]
+    },
+    "16385199242": {
+      "nome": "Melancia - Labotrat Hidratante dia a dia 190ml",
+      "tipo": "corpo"
+    },
+    "16385126439": {
+      "nome": "Maracujá - Labotrat Hidratante dia a dia 190ml",
+      "tipo": "corpo",
+      "familias": [
+        "doce"
+      ]
+    },
+    "16385114446": {
+      "nome": "Pitaya - Labotrat Hidratante dia a dia 190ml",
+      "tipo": "corpo"
+    },
+    "16385083958": {
+      "nome": "Maracujá - Labotrat Esfoliante dia a dia 300g",
+      "tipo": "corpo",
+      "familias": [
+        "doce"
+      ]
+    },
+    "16385076566": {
+      "nome": "Melancia - Labotrat Esfoliante dia a dia 300g",
+      "tipo": "corpo"
+    },
+    "16385061162": {
+      "nome": "Morango - Labotrat Esfoliante dia a dia 300g",
+      "tipo": "corpo",
+      "familias": [
+        "doce"
+      ]
+    },
+    "16385052689": {
+      "nome": "Pitaya - Labotrat Esfoliante dia a dia 300g",
+      "tipo": "corpo"
+    },
+    "16384815893": {
+      "nome": "Temptation Dream Shine - Stella Dustin Body Splash 250ml",
+      "tipo": "body-splash",
+      "ocasioes": [
+        "dia"
+      ],
+      "intensidade": 1
+    },
+    "16384810804": {
+      "nome": "Champagne Dream Shine - Stella Dustin Body Splash 250ml",
+      "tipo": "body-splash",
+      "ocasioes": [
+        "dia"
+      ],
+      "intensidade": 1
+    },
+    "16384793105": {
+      "nome": "Lumina White - Stella Dustin Eau De Parfum 100ml",
+      "tipo": "perfume",
+      "genero": "F",
+      "ocasioes": [
+        "dia",
+        "noite"
+      ],
+      "intensidade": 2
+    },
+    "16384766291": {
+      "nome": "Lumina Black - Stella Dustin Eau De Parfum 100ml",
+      "tipo": "perfume",
+      "genero": "M",
+      "familias": [
+        "oriental"
+      ],
+      "ocasioes": [
+        "noite"
+      ],
+      "intensidade": 2
+    },
+    "16381936141": {
+      "nome": "Vintage Flowers -  La Rive Eau De Parfum 90ml Original",
+      "tipo": "perfume",
+      "ocasioes": [
+        "dia",
+        "noite"
+      ],
+      "intensidade": 2
+    },
+    "16376373393": {
+      "nome": "Luva De Silicone - Pokoloka 100ml",
+      "tipo": "corpo"
+    },
+    "16372354657": {
+      "nome": "19 Cream Cashmere - 3d hydra lipgloss Kiko Milano",
+      "tipo": "corpo"
+    },
+    "16369608379": {
+      "nome": "Vanilla Creme Hidratante - Pokoloka 240ml",
+      "tipo": "corpo"
+    },
+    "16369608073": {
+      "nome": "Ploc Creme Hidratante - Pokoloka 240ml",
+      "tipo": "corpo"
+    },
+    "16369607702": {
+      "nome": "Morango Pop Creme Hidratante - Pokoloka 240ml",
+      "tipo": "corpo",
+      "familias": [
+        "doce"
+      ]
+    },
+    "16369605788": {
+      "nome": "Amora Creme Hidratante - Pokoloka 240ml",
+      "tipo": "corpo"
+    },
+    "16367472562": {
+      "nome": "Watermelon - Tree Hut Shea Sugar Scrub Esfoliante Corporal 510g",
+      "tipo": "corpo",
+      "familias": [
+        "doce"
+      ]
+    },
+    "16367463497": {
+      "nome": "Vitamin C - Tree Hut Shea Sugar Scrub Esfoliante Corporal 510g",
+      "tipo": "corpo",
+      "familias": [
+        "doce"
+      ]
+    },
+    "16367457728": {
+      "nome": "Strawberry - Tree Hut Shea Sugar Scrub Esfoliante Corporal 510g",
+      "tipo": "corpo",
+      "familias": [
+        "doce"
+      ]
+    },
+    "16367454282": {
+      "nome": "Pineapple - Tree Hut Shea Sugar Scrub Esfoliante Corporal 510g",
+      "tipo": "corpo",
+      "familias": [
+        "doce"
+      ]
+    },
+    "16367451450": {
+      "nome": "Cotton Candy - Tree Hut Shea Sugar Scrub Esfoliante Corporal 510g",
+      "tipo": "corpo",
+      "familias": [
+        "doce"
+      ]
+    },
+    "16367439300": {
+      "nome": "Vanilla - Tree Hut Shea Sugar Scrub Esfoliante Corporal 510g",
+      "tipo": "corpo",
+      "familias": [
+        "doce"
+      ]
+    },
+    "16366781953": {
+      "nome": "Pear Glace Victoria's Secret - Hidratante - 236ml",
+      "tipo": "corpo"
+    },
+    "16366703153": {
+      "nome": "Verbena + Bamboo - Labotrat Kit Sens 3 Itens",
+      "tipo": "kit",
+      "familias": [
+        "fresco",
+        "citrico"
+      ]
+    },
+    "16366701663": {
+      "nome": "Morango E Ruby - Labotrat Kit Sens 3 Itens",
+      "tipo": "kit",
+      "familias": [
+        "doce",
+        "fresco"
+      ]
+    },
+    "16366685443": {
+      "nome": "Melância - Labotrat Kit Dia a Dia 2 Itens",
+      "tipo": "kit",
+      "familias": [
+        "fresco"
+      ]
+    },
+    "16366684746": {
+      "nome": "Maracujá - Labotrat Kit Dia a Dia 2 Itens",
+      "tipo": "kit",
+      "familias": [
+        "doce",
+        "fresco"
+      ]
+    },
+    "16366680374": {
+      "nome": "Maracujá - Labotrat Kit Dia a Dia Experiência de Banho 5 Itens",
+      "tipo": "kit",
+      "familias": [
+        "doce"
+      ]
+    },
+    "16363161362": {
+      "nome": "Siáge - Glow Expert Kit (PREÇO ESPECIAL)",
+      "tipo": "kit"
+    },
+    "16359542122": {
+      "nome": "Amora - Kit Pokoloka Hidratante 60ml + Body Splash 60ml",
+      "tipo": "kit",
+      "familias": [
+        "floral",
+        "doce"
+      ]
+    },
+    "16359539098": {
+      "nome": "Vanilla - Kit Pokoloka Hidratante 60ml + Body Splash 60ml",
+      "tipo": "kit",
+      "familias": [
+        "doce",
+        "amadeirado"
+      ]
+    },
+    "16356021598": {
+      "nome": "Ferrari Black - Ferrari Scuderia Eau De Toilette 125ml",
+      "tipo": "perfume",
+      "genero": "M",
+      "familias": [
+        "oriental",
+        "amadeirado"
+      ],
+      "ocasioes": [
+        "noite",
+        "trabalho"
+      ],
+      "intensidade": 1
+    },
+    "16356014932": {
+      "nome": "Yara - Lattafa Deo Body Spray 200ml",
+      "tipo": "corpo",
+      "genero": "F",
+      "familias": [
+        "doce",
+        "floral"
+      ]
+    },
+    "16356014839": {
+      "nome": "Fakhar Gold- Lattafa Deo Body Spray 200ml",
+      "tipo": "corpo",
+      "familias": [
+        "oriental",
+        "amadeirado"
+      ]
+    },
+    "16356014525": {
+      "nome": "Fakhar Black - Lattafa Deo Body Spray 200ml",
+      "tipo": "corpo",
+      "familias": [
+        "amadeirado",
+        "oriental"
+      ]
+    },
+    "16356014272": {
+      "nome": "Asad - Lattafa Deo Body Spray Masculino 200ml",
+      "tipo": "corpo",
+      "genero": "M",
+      "familias": [
+        "amadeirado",
+        "oriental"
+      ]
+    },
+    "16356002822": {
+      "nome": "Saher - Al Absar Eau De Parfum 100ml",
+      "tipo": "perfume",
+      "genero": "F",
+      "familias": [
+        "doce",
+        "floral"
+      ],
+      "ocasioes": [
+        "noite",
+        "dia",
+        "trabalho"
+      ],
+      "intensidade": 2
+    },
+    "16345965480": {
+      "nome": "Hello Hello Nah Cardoso - Body Splash 200ml Ciclo Cosméticos",
+      "tipo": "body-splash",
+      "ocasioes": [
+        "dia"
+      ],
+      "intensidade": 1
+    },
+    "16315001671": {
+      "nome": "Club de Nuit Intense Man - Armaf Body Spray 200ml",
+      "tipo": "corpo",
+      "genero": "M",
+      "familias": [
+        "amadeirado",
+        "floral"
+      ]
+    },
+    "16279966077": {
+      "nome": "Oud Al Khayali - Style & Scents Eau De Parfum 100ml Original",
+      "tipo": "perfume",
+      "genero": "F",
+      "familias": [
+        "oriental",
+        "citrico"
+      ],
+      "ocasioes": [
+        "noite",
+        "dia",
+        "esporte"
+      ],
+      "intensidade": 2
+    },
+    "16232953977": {
+      "nome": "Athina - Loção Hidratante Ciclo Cosméticos Cosméticos 240ml Original",
+      "tipo": "corpo"
+    },
+    "16213119175": {
+      "nome": "Bare Vanilla Victoria's Secret - Hidratante - 236ml",
+      "tipo": "corpo"
+    },
+    "16213118342": {
+      "nome": "Coconut Passion Victoria's Secret - Hidratante - 236ml",
+      "tipo": "corpo",
+      "familias": [
+        "doce"
+      ]
+    },
+    "16213117291": {
+      "nome": "Aqua Kiss Victoria's Secret - Hidratante - 236ml",
+      "tipo": "corpo",
+      "familias": [
+        "fresco"
+      ]
+    },
+    "16213116651": {
+      "nome": "Love Spell Victoria's Secret - Hidratante - 236ml",
+      "tipo": "corpo"
+    },
+    "16213115362": {
+      "nome": "Pure Seduction Victoria's Secret - Hidratante - 236ml",
+      "tipo": "corpo"
+    },
+    "16210714120": {
+      "nome": "Aqua Kiss Victoria's Secret - Body Splash - 250ml",
+      "tipo": "body-splash",
+      "familias": [
+        "fresco"
+      ],
+      "ocasioes": [
+        "esporte",
+        "dia"
+      ],
+      "intensidade": 1
+    },
+    "16210708802": {
+      "nome": "Pure Seduction Victoria's Secret - Body Splash - 250ml",
+      "tipo": "body-splash",
+      "ocasioes": [
+        "dia"
+      ],
+      "intensidade": 1
+    },
+    "16210705477": {
+      "nome": "Love Spell  Victoria's Secret - Body Splash - 250ml",
+      "tipo": "body-splash",
+      "ocasioes": [
+        "dia"
+      ],
+      "intensidade": 1
+    },
+    "16210704327": {
+      "nome": "Bare Vanilla Victoria's Secret - Body Splash - 250ml",
+      "tipo": "body-splash",
+      "ocasioes": [
+        "dia"
+      ],
+      "intensidade": 1
+    },
+    "16210699237": {
+      "nome": "Coconut Passion Victoria's Secret - Body Splash - 250ml",
+      "tipo": "body-splash",
+      "familias": [
+        "doce"
+      ],
+      "ocasioes": [
+        "noite",
+        "dia"
+      ],
+      "intensidade": 1
+    },
+    "16204887563": {
+      "nome": "Rose Lady - Brand Collection Hidratante Corporal 200ml Original",
+      "tipo": "corpo",
+      "genero": "F",
+      "familias": [
+        "floral"
+      ]
+    },
+    "16204884403": {
+      "nome": "Escândal - Brand Collection Hidratante Corporal 200ml Original",
+      "tipo": "corpo"
+    },
+    "16204874527": {
+      "nome": "Beauty Girl - Brand Collection Hidratante Corporal 200ml Original",
+      "tipo": "corpo",
+      "genero": "F"
+    },
+    "16194639640": {
+      "nome": "UDV Black - Ulric de Varens Desodorante Masculino 200ml",
+      "tipo": "corpo",
+      "genero": "M",
+      "familias": [
+        "oriental"
+      ]
+    },
+    "16194634639": {
+      "nome": "Animale For Men - Body Spray Masculino 200ml",
+      "tipo": "corpo",
+      "genero": "M"
+    },
+    "16187147445": {
+      "nome": "Her Choice - La Rive 100ml Eau De Parfum",
+      "tipo": "perfume",
+      "familias": [
+        "fresco"
+      ],
+      "ocasioes": [
+        "esporte",
+        "dia"
+      ],
+      "intensidade": 2
+    },
+    "16185883541": {
+      "nome": "Pokoloka Body Splash Ploc (bubbaloo) 250ml",
+      "tipo": "body-splash",
+      "ocasioes": [
+        "dia"
+      ],
+      "intensidade": 1
+    },
+    "16185883160": {
+      "nome": "Pokoloka Ploc (Body Splash 250ml + Loção Hidratante 240ml)",
+      "tipo": "body-splash",
+      "ocasioes": [
+        "dia"
+      ],
+      "intensidade": 1
+    },
+    "16185881340": {
+      "nome": "Kit River Of Love La Rive - Perfume 100ml + Desodorante 150ml",
+      "tipo": "kit"
+    },
+    "16152537665": {
+      "nome": "Esfoliante Pedra Pomes Pink 80g - Granado",
+      "tipo": "corpo"
+    },
+    "16152510585": {
+      "nome": "Granado Pink Creme Hidratante Para Cutículas 100g",
+      "tipo": "corpo"
+    },
+    "16151892794": {
+      "nome": "Pokoloka Luva de Silicone - Creme para Mãos Original 100g",
+      "tipo": "corpo"
+    },
+    "16151842630": {
+      "nome": "Billion Casino Royal Paris Elysees Eau de Toilette - Perfume Masculino 100ml",
+      "tipo": "perfume",
+      "genero": "M",
+      "familias": [
+        "amadeirado",
+        "oriental"
+      ],
+      "ocasioes": [
+        "trabalho",
+        "noite"
+      ],
+      "intensidade": 1
+    },
+    "16151840567": {
+      "nome": "Kit Colônia Kiss 30ml e Kiss You More 30ml Ciclo Cosméticos",
+      "tipo": "kit"
+    },
+    "16151839635": {
+      "nome": "Kit La Vida Colônia 30ml + Loção Hidratante Corporal 240ml",
+      "tipo": "kit"
+    },
+    "16151837360": {
+      "nome": "Kiss Body Splash - Ciclo Cosméticos 200ml",
+      "tipo": "body-splash",
+      "ocasioes": [
+        "dia"
+      ],
+      "intensidade": 1
+    },
+    "16151836436": {
+      "nome": "La Vida Loção Hidratante Corporal 240ml - Ciclo Cosméticos",
+      "tipo": "corpo"
+    },
+    "16151836071": {
+      "nome": "Kiss - Loção Hidratante Ciclo Cosméticos Cosméticos 240ml",
+      "tipo": "corpo"
+    },
+    "16151835885": {
+      "nome": "Kiss Me More - Ciclo Cosméticos Hidratante Corporal 240ml",
+      "tipo": "corpo"
+    },
+    "16151834581": {
+      "nome": "Kiss Me More Lata 100ml + Kiss Me More Loção Corporal 240ml",
+      "tipo": "corpo"
+    },
+    "16150246164": {
+      "nome": "Kiss Deo Colônia Lata 100ml + Kiss Loção Hidratante 240ml",
+      "tipo": "corpo"
+    },
+    "16069027447": {
+      "nome": "Chanel Allure Homme Sport Edt 100ml Masculino Original",
+      "tipo": "perfume",
+      "genero": "M",
+      "familias": [
+        "fresco"
+      ],
+      "ocasioes": [
+        "esporte",
+        "dia"
+      ],
+      "intensidade": 1
+    },
+    "16069027318": {
+      "nome": "212 Vip  Men Edt 50 ml Masculino Original",
+      "tipo": "perfume",
+      "genero": "M",
+      "ocasioes": [
+        "dia"
+      ],
+      "intensidade": 1
+    },
+    "16069027311": {
+      "nome": "Paco Rabanne Lady Million Edp 80ml Feminino Original",
+      "tipo": "perfume",
+      "genero": "F",
+      "ocasioes": [
+        "dia",
+        "noite"
+      ],
+      "intensidade": 2
+    },
+    "16069027236": {
+      "nome": "Dior Sauvage Edp 100ml Masculino Original",
+      "tipo": "perfume",
+      "genero": "M",
+      "ocasioes": [
+        "dia",
+        "noite"
+      ],
+      "intensidade": 2
+    },
+    "16069027169": {
+      "nome": "212 Sexy Edp 60ml Feminino Original",
+      "tipo": "perfume",
+      "genero": "F",
+      "ocasioes": [
+        "dia",
+        "noite"
+      ],
+      "intensidade": 2
+    },
+    "16069027164": {
+      "nome": "Paco Rabanne 1 Million Edt 100ml Masculino Original",
+      "tipo": "perfume",
+      "genero": "M",
+      "ocasioes": [
+        "dia"
+      ],
+      "intensidade": 1
+    },
+    "16069027123": {
+      "nome": "Paco Rabanne 1 Million 50ml Edt Masculino Original",
+      "tipo": "perfume",
+      "genero": "M",
+      "ocasioes": [
+        "dia"
+      ],
+      "intensidade": 1
+    },
+    "16069027080": {
+      "nome": "Jean Paul Gaultier Classique Edt 100ml Feminino Original",
+      "tipo": "perfume",
+      "genero": "F",
+      "ocasioes": [
+        "dia"
+      ],
+      "intensidade": 1
+    },
+    "16069027031": {
+      "nome": "Chanel Coco Mademoiselle Edp 100ml Feminino Original",
+      "tipo": "perfume",
+      "genero": "F",
+      "familias": [
+        "doce"
+      ],
+      "ocasioes": [
+        "noite",
+        "dia"
+      ],
+      "intensidade": 2
+    },
+    "16069026985": {
+      "nome": "Carolina Herrera CH Edt 100ml Feminino Original",
+      "tipo": "perfume",
+      "genero": "F",
+      "familias": [
+        "floral",
+        "amadeirado"
+      ],
+      "ocasioes": [
+        "dia",
+        "trabalho",
+        "noite"
+      ],
+      "intensidade": 1
+    },
+    "16069026945": {
+      "nome": "Lancôme La Nuit Trésor Edp 75ml Feminino Original",
+      "tipo": "perfume",
+      "genero": "F",
+      "ocasioes": [
+        "dia",
+        "noite"
+      ],
+      "intensidade": 2
+    },
+    "16069026766": {
+      "nome": "Paco Rabanne Lady Million Edp 80ml Feminino Original",
+      "tipo": "perfume",
+      "genero": "F",
+      "ocasioes": [
+        "dia",
+        "noite"
+      ],
+      "intensidade": 2
+    },
+    "16069026556": {
+      "nome": "Bad Boy Edt 150ml Masculino Original",
+      "tipo": "perfume",
+      "genero": "M",
+      "ocasioes": [
+        "dia"
+      ],
+      "intensidade": 1
+    },
+    "16069026236": {
+      "nome": "Bleu De Chanel Edp 100ml Masculino Original",
+      "tipo": "perfume",
+      "genero": "M",
+      "ocasioes": [
+        "dia",
+        "noite"
+      ],
+      "intensidade": 2
+    },
+    "16069025771": {
+      "nome": "Calvin Klein Euphoria Edp 100ml Feminino Original",
+      "tipo": "perfume",
+      "genero": "F",
+      "ocasioes": [
+        "dia",
+        "noite"
+      ],
+      "intensidade": 2
+    },
+    "16069025622": {
+      "nome": "212 Vip Black Edp 200ml Masculino Original",
+      "tipo": "perfume",
+      "genero": "M",
+      "familias": [
+        "oriental"
+      ],
+      "ocasioes": [
+        "noite"
+      ],
+      "intensidade": 2
+    },
+    "16069024632": {
+      "nome": "Carolina Herrera 212 Vip Black Edp 50ml Para Masculino",
+      "tipo": "perfume",
+      "genero": "M",
+      "familias": [
+        "oriental"
+      ],
+      "ocasioes": [
+        "noite"
+      ],
+      "intensidade": 2
+    },
+    "16069024442": {
+      "nome": "Bleu De Chanel Edp 100ml Masculino",
+      "tipo": "perfume",
+      "genero": "M",
+      "ocasioes": [
+        "dia",
+        "noite"
+      ],
+      "intensidade": 2
+    },
+    "16069024294": {
+      "nome": "Chanel Allure Homme Sport Edt 100ml Masculino",
+      "tipo": "perfume",
+      "genero": "M",
+      "familias": [
+        "fresco"
+      ],
+      "ocasioes": [
+        "esporte",
+        "dia"
+      ],
+      "intensidade": 1
+    },
+    "16069024210": {
+      "nome": "Paco Rabanne Phantom Edt 100ml Para Masculino",
+      "tipo": "perfume",
+      "genero": "M",
+      "familias": [
+        "citrico",
+        "doce"
+      ],
+      "ocasioes": [
+        "dia",
+        "esporte",
+        "noite"
+      ],
+      "intensidade": 1
+    },
+    "16069023552": {
+      "nome": "212 Heroes Edt 90ml Masculino Original",
+      "tipo": "perfume",
+      "genero": "M",
+      "ocasioes": [
+        "dia"
+      ],
+      "intensidade": 1
+    },
+    "16069023339": {
+      "nome": "Bad Boy Edt 100ml Masculino Original",
+      "tipo": "perfume",
+      "genero": "M",
+      "ocasioes": [
+        "dia"
+      ],
+      "intensidade": 1
+    },
+    "16069023084": {
+      "nome": "Good Girl Edp 80ml Feminino Original",
+      "tipo": "perfume",
+      "genero": "F",
+      "ocasioes": [
+        "dia",
+        "noite"
+      ],
+      "intensidade": 2
+    },
+    "16069023053": {
+      "nome": "Acqua Di Gio Edt 200ml Masculino Original",
+      "tipo": "perfume",
+      "genero": "M",
+      "familias": [
+        "fresco",
+        "citrico"
+      ],
+      "ocasioes": [
+        "esporte",
+        "dia"
+      ],
+      "intensidade": 1
+    },
+    "16069022898": {
+      "nome": "212 Vip Rose Edp 80ml Feminino Original",
+      "tipo": "perfume",
+      "genero": "F",
+      "familias": [
+        "doce",
+        "floral"
+      ],
+      "ocasioes": [
+        "noite",
+        "dia",
+        "trabalho"
+      ],
+      "intensidade": 2
+    },
+    "16069022763": {
+      "nome": "Calvin Klein Eternity Edp 100ml Feminino Original",
+      "tipo": "perfume",
+      "genero": "F",
+      "ocasioes": [
+        "dia",
+        "noite"
+      ],
+      "intensidade": 2
+    },
+    "16069022684": {
+      "nome": "Acqua Di Gio Edt 100ml Masculino Original",
+      "tipo": "perfume",
+      "genero": "M",
+      "familias": [
+        "fresco",
+        "citrico"
+      ],
+      "ocasioes": [
+        "esporte",
+        "dia"
+      ],
+      "intensidade": 1
+    },
+    "16069022610": {
+      "nome": "My Way Edp 90ml Feminino Original",
+      "tipo": "perfume",
+      "genero": "F",
+      "ocasioes": [
+        "dia",
+        "noite"
+      ],
+      "intensidade": 2
+    },
+    "16069022437": {
+      "nome": "212 Sexy Edp 100ml Feminino Original",
+      "tipo": "perfume",
+      "genero": "F",
+      "ocasioes": [
+        "dia",
+        "noite"
+      ],
+      "intensidade": 2
+    },
+    "16069022366": {
+      "nome": "212 Nyc Men Edt 100ml Masculino Original",
+      "tipo": "perfume",
+      "genero": "M",
+      "ocasioes": [
+        "dia"
+      ],
+      "intensidade": 1
+    },
+    "16069022074": {
+      "nome": "Scandal Edp 80ml Feminino Original",
+      "tipo": "perfume",
+      "genero": "F",
+      "ocasioes": [
+        "dia",
+        "noite"
+      ],
+      "intensidade": 2
+    },
+    "16069021978": {
+      "nome": "212 Vip Black Edp 100ml Masculino Original",
+      "tipo": "perfume",
+      "genero": "M",
+      "familias": [
+        "oriental"
+      ],
+      "ocasioes": [
+        "noite"
+      ],
+      "intensidade": 2
+    },
+    "16069021897": {
+      "nome": "212 Vip Men Edt 200ml Masculino Original",
+      "tipo": "perfume",
+      "genero": "M",
+      "ocasioes": [
+        "dia"
+      ],
+      "intensidade": 1
+    },
+    "16069021822": {
+      "nome": "212 Vip Men Edt 100ml Masculino Original",
+      "tipo": "perfume",
+      "genero": "M",
+      "ocasioes": [
+        "dia"
+      ],
+      "intensidade": 1
+    },
+    "16069021654": {
+      "nome": "Good Girl Suprême Edp 80ml Feminino Original",
+      "tipo": "perfume",
+      "genero": "F",
+      "ocasioes": [
+        "dia",
+        "noite"
+      ],
+      "intensidade": 2
     }
   },
   "_autoIncluidos": [
     "16069021467",
     "16069021529",
+    "16069021654",
+    "16069021822",
+    "16069021897",
+    "16069021978",
+    "16069022074",
+    "16069022366",
+    "16069022437",
+    "16069022610",
+    "16069022684",
+    "16069022763",
+    "16069022898",
+    "16069023053",
+    "16069023084",
+    "16069023339",
+    "16069023552",
     "16069023857",
+    "16069024210",
+    "16069024294",
+    "16069024442",
     "16069024529",
+    "16069024632",
+    "16069025622",
+    "16069025771",
+    "16069026236",
     "16069026320",
+    "16069026556",
+    "16069026766",
     "16069026890",
+    "16069026945",
+    "16069026985",
+    "16069027031",
+    "16069027080",
+    "16069027123",
+    "16069027164",
+    "16069027169",
+    "16069027236",
+    "16069027311",
+    "16069027318",
+    "16069027447",
     "16069027563",
     "16069027565",
     "16145297953",
@@ -2424,16 +5022,32 @@
     "16150210543",
     "16150235607",
     "16150238761",
+    "16150246164",
     "16150248092",
     "16150250509",
     "16151832925",
     "16151833453",
     "16151834276",
+    "16151834581",
     "16151835403",
+    "16151835885",
+    "16151836071",
+    "16151836436",
+    "16151837360",
+    "16151839635",
     "16151839791",
+    "16151840567",
+    "16151842630",
+    "16151892794",
+    "16152510585",
+    "16152537665",
+    "16185881340",
     "16185881900",
+    "16185883160",
+    "16185883541",
     "16186462205",
     "16186462209",
+    "16187147445",
     "16187158262",
     "16187190916",
     "16187191158",
@@ -2454,8 +5068,24 @@
     "16187858455",
     "16194608674",
     "16194620072",
+    "16194634639",
+    "16194639640",
+    "16204874527",
+    "16204884403",
+    "16204887563",
     "16204914363",
     "16204915040",
+    "16210699237",
+    "16210704327",
+    "16210705477",
+    "16210708802",
+    "16210714120",
+    "16213115362",
+    "16213116651",
+    "16213117291",
+    "16213118342",
+    "16213119175",
+    "16232953977",
     "16253516117",
     "16277644058",
     "16277645280",
@@ -2465,6 +5095,7 @@
     "16278966265",
     "16278968756",
     "16278969522",
+    "16279966077",
     "16279974886",
     "16286445156",
     "16286445613",
@@ -2484,7 +5115,9 @@
     "16314994937",
     "16314996349",
     "16314998642",
+    "16315001671",
     "16345962514",
+    "16345965480",
     "16345974338",
     "16345984780",
     "16345986511",
@@ -2506,48 +5139,99 @@
     "16355997472",
     "16355999390",
     "16356001822",
+    "16356002822",
     "16356003357",
     "16356003675",
+    "16356014272",
+    "16356014525",
+    "16356014839",
+    "16356014932",
     "16356018928",
+    "16356021598",
     "16356023227",
     "16356026051",
     "16359330269",
     "16359331503",
     "16359332365",
     "16359386749",
+    "16359539098",
+    "16359542122",
     "16359561100",
+    "16363161362",
+    "16366680374",
+    "16366684746",
+    "16366685443",
+    "16366701663",
+    "16366703153",
+    "16366781953",
+    "16367439300",
+    "16367451450",
+    "16367454282",
+    "16367457728",
+    "16367463497",
+    "16367472562",
     "16369599240",
     "16369600660",
     "16369602446",
+    "16369605788",
     "16369606432",
+    "16369607702",
+    "16369608073",
+    "16369608379",
     "16370481417",
     "16370482421",
     "16371327611",
     "16371366434",
+    "16372354657",
     "16375369428",
     "16375370762",
     "16375373413",
     "16375928694",
     "16375931285",
     "16375931987",
+    "16376373393",
     "16380508609",
     "16381929187",
     "16381933290",
+    "16381936141",
     "16381962729",
     "16381966602",
     "16381970033",
     "16382035200",
     "16382055410",
+    "16384766291",
     "16384775608",
     "16384786869",
+    "16384793105",
+    "16384810804",
+    "16384815893",
     "16384860707",
     "16384870216",
     "16384880268",
+    "16385052689",
+    "16385061162",
+    "16385076566",
+    "16385083958",
+    "16385114446",
+    "16385126439",
+    "16385199242",
+    "16385214486",
+    "16386248843",
+    "16393008950",
     "16395334862",
+    "16395566219",
+    "16398578373",
+    "16398581377",
+    "16398582721",
+    "16398585738",
+    "16398586583",
+    "16398598159",
+    "16398604365",
     "16399872450",
     "16399875030",
     "16399877157",
     "16399880432",
+    "16400323894",
     "16412879391",
     "16412961136",
     "16416481056",
@@ -2556,23 +5240,51 @@
     "16416489199",
     "16416489856",
     "16416493074",
+    "16429575498",
+    "16429585094",
+    "16429597804",
+    "16429599098",
+    "16429601939",
+    "16435345029",
+    "16435347210",
     "16436575607",
     "16449849280",
     "16452760946",
+    "16454556845",
     "16457130036",
+    "16461124084",
+    "16461124434",
+    "16461125108",
     "16466438461",
+    "16467059720",
+    "16467062684",
+    "16467064424",
+    "16467066147",
+    "16467068445",
+    "16467069761",
     "16469462036",
+    "16469463082",
+    "16469463596",
+    "16469463903",
     "16495521654",
     "16544812132",
+    "16558463481",
+    "16562500999",
+    "16562537089",
     "16563845996",
     "16567907370",
+    "16571805968",
     "16572155668",
+    "16578640499",
     "16579454805",
+    "16579455034",
+    "16579456529",
     "16579531072",
     "16579531474",
     "16579532564",
     "16579532756",
     "16579533009",
+    "16579533074",
     "16579533174",
     "16580755998",
     "16580766000",
@@ -2580,38 +5292,140 @@
     "16580787218",
     "16580795415",
     "16580799748",
+    "16580817942",
+    "16581016963",
     "16581173405",
     "16581177987",
+    "16581181786",
+    "16581189303",
     "16581635714",
     "16581658772",
+    "16581669512",
     "16582442019",
     "16582442686",
+    "16582443520",
+    "16582445166",
+    "16582446544",
     "16582708476",
     "16585235876",
+    "16585351618",
+    "16586433922",
+    "16586525457",
+    "16589920594",
+    "16589932875",
+    "16589951140",
+    "16590003928",
     "16590620489",
     "16590671121",
+    "16594825659",
+    "16594859137",
+    "16594863689",
+    "16594865342",
     "16597357039",
     "16597357517",
     "16597357983",
     "16599548679",
     "16599559265",
+    "16599566352",
     "16599838827",
     "16599841031",
     "16599843556",
     "16605310469",
+    "16606551639",
+    "16606556308",
+    "16606557161",
+    "16606558792",
+    "16606559967",
+    "16606560732",
     "16609201119",
     "16609219695",
+    "16612172614",
+    "16612172621",
+    "16612172634",
+    "16613587025",
     "16613587583",
+    "16613588302",
     "16613588645",
     "16613589311",
     "16615950709",
+    "16616522978",
+    "16619286419",
+    "16619286420",
+    "16619286425",
+    "16619286427",
+    "16620016658",
+    "16620092346",
+    "16620092347",
     "16620094662",
     "16620094663",
+    "16620303028",
+    "16620706182",
+    "16620706184",
+    "16620706187",
+    "16620711610",
+    "16620720851",
+    "16620729774",
+    "16620729776",
+    "16620732172",
+    "16620738413",
+    "16620738415",
+    "16620738416",
+    "16620738417",
+    "16620738419",
+    "16620738420",
+    "16620738421",
+    "16620738423",
     "16620743971",
+    "16621894616",
+    "16621894623",
+    "16621894624",
+    "16621894626",
+    "16621894629",
+    "16621894630",
+    "16621894635",
+    "16621898360",
+    "16621901125",
+    "16621903145",
+    "16621904270",
+    "16622529798",
+    "16622529805",
+    "16623113961",
+    "16623113964",
+    "16623113966",
+    "16623113968",
+    "16623113969",
+    "16623120462",
+    "16623120464",
+    "16623120466",
+    "16623120469",
+    "16623120471",
     "16624842695",
+    "16624847201",
+    "16624857479",
     "16625038451",
     "16627541776",
+    "16627549716",
+    "16628339158",
+    "16631109876",
+    "16631109877",
+    "16631109880",
+    "16631122264",
+    "16631122271",
+    "16631122276",
+    "16631122283",
+    "16638005630",
+    "16638007685",
+    "16638924431",
+    "16638924432",
+    "16638924433",
+    "16638924435",
+    "16638924436",
+    "16638924437",
     "16641092192",
+    "16641094600",
+    "16641102941",
+    "16648062611",
+    "16663934961",
     "16663936035",
     "16663936862",
     "16663937321",
@@ -2623,6 +5437,46 @@
     "16664094431",
     "16664095230",
     "16667462918",
-    "16667463611"
+    "16667463611",
+    "16674555850",
+    "16674595731",
+    "16676772447",
+    "16676772455",
+    "16676772461",
+    "16676772462",
+    "16676772468",
+    "16677069936",
+    "16682185107",
+    "16686666215",
+    "16686666217",
+    "16686666218",
+    "16686666219",
+    "16686666222",
+    "16688571135",
+    "16689117668",
+    "16689117669",
+    "16689117670",
+    "16689117671",
+    "16689117673",
+    "16689117674",
+    "16689963111",
+    "16689963112",
+    "16689963113",
+    "16689964021",
+    "16689964477",
+    "16695634295",
+    "16695634296",
+    "16695634300",
+    "16695634302",
+    "16695634303",
+    "16695634304",
+    "16695634305",
+    "16695634307",
+    "16695634308",
+    "16695634309",
+    "16695635641",
+    "16695635642",
+    "16708162817",
+    "16708162819"
   ]
 }
