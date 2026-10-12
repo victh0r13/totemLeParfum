@@ -23,6 +23,7 @@ import {
   IMAGES_DIR,
   IMAGES_MANIFEST_PATH,
 } from './env.js';
+import { aVenda } from './vitrine.js';
 
 function readJson(file, fallback) {
   try {
@@ -42,7 +43,7 @@ export function runBundle() {
   const manifest = readJson(IMAGES_MANIFEST_PATH, {});
 
   const produtos = (catalog.produtos ?? [])
-    .filter((p) => Number(p.estoque) > 0)
+    .filter(aVenda)
     .filter((p) => entries[p.id] ?? (p.codigo ? entries[p.codigo] : undefined))
     // `categoria` só serve para a curadoria automática, o app não usa: fora do bundle.
     .map(({ categoria, ...p }) => p);

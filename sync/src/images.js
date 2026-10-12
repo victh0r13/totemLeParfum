@@ -17,6 +17,7 @@ import sharp from 'sharp';
 
 import { chamadoDireto, comoScript } from './cli.js';
 import { CATALOG_PATH, ENRICHMENT_PATH, IMAGES_DIR, IMAGES_MANIFEST_PATH } from './env.js';
+import { aVenda } from './vitrine.js';
 
 /** Downloads simultâneos — as URLs são do S3, não da API do Bling (sem rate limit). */
 const CONCURRENCY = 6;
@@ -83,7 +84,7 @@ function curatedWithImages() {
   const catalog = readJson(CATALOG_PATH, { produtos: [] });
   const entries = readJson(ENRICHMENT_PATH, { produtos: {} }).produtos ?? {};
   return (catalog.produtos ?? [])
-    .filter((p) => Number(p.estoque) > 0)
+    .filter(aVenda)
     .filter((p) => entries[p.id] ?? (p.codigo ? entries[p.codigo] : undefined))
     .filter((p) => !!p.imagem);
 }

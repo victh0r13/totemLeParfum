@@ -1,5 +1,6 @@
 import fs from 'node:fs';
 import { CATALOG_PATH, ENRICHMENT_PATH } from './env.js';
+import { aVenda } from './vitrine.js';
 
 let cache = null;
 
@@ -33,7 +34,7 @@ export function getCatalog() {
   const entries = enrichmentFile.produtos ?? {};
 
   const produtos = (catalogFile.produtos ?? [])
-    .filter((p) => Number(p.estoque) > 0)
+    .filter(aVenda)
     .filter((p) => entries[p.id] ?? (p.codigo ? entries[p.codigo] : undefined))
     .map(({ categoria, ...p }) => p);
 

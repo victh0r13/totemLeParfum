@@ -14,6 +14,7 @@ import fs from 'node:fs';
 
 import { chamadoDireto, comoScript } from './cli.js';
 import { CATALOG_PATH, ENRICHMENT_PATH } from './env.js';
+import { aVenda } from './vitrine.js';
 import { inferTipo, TIPOS_NO_TOTEM } from './tipos.js';
 
 /** Intensidade e ocasião só fazem sentido para o que se usa como fragrância. */
@@ -220,7 +221,7 @@ export function runCurate() {
   const file = readJson(ENRICHMENT_PATH, { produtos: {} });
   const entries = file.produtos ?? {};
 
-  const inStock = (catalog.produtos ?? []).filter((p) => Number(p.estoque) > 0);
+  const inStock = (catalog.produtos ?? []).filter(aVenda);
   const chaveDe = (p) => (entries[p.id] ? p.id : p.codigo && entries[p.codigo] ? p.codigo : null);
 
   /**
