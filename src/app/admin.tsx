@@ -12,9 +12,10 @@ import { bundledImage } from '@/data/bundledImages';
 import { useCatalog } from '@/data/catalogStore';
 import { useLocalProducts } from '@/data/localProductsStore';
 import { usePromotions } from '@/data/promotionsStore';
+import { contarPorTipo } from '@/logic/filters';
 import { daysSince, formatAge, formatPrice } from '@/logic/format';
 import { getMetrics, resetMetrics, type MetricsData } from '@/logic/metrics';
-import { colors, familyLabels, fonts } from '@/theme/theme';
+import { colors, familyLabels, fonts, TIPOS, tipoLabels } from '@/theme/theme';
 import type { Perfume } from '@/types/catalog';
 
 const ORIGEM_LABELS: Record<string, string> = {
@@ -155,9 +156,13 @@ function AdminPanel() {
   const desde = metrics ? new Date(metrics.desde).toLocaleDateString('pt-BR') : '';
 
   const vistos = metrics ? topEntries(metrics.produtoVisto, 8) : [];
-  const amostras = metrics ? topEntries(metrics.amostraPedida, 5) : [];
   const maxVisto = vistos[0]?.[1] ?? 0;
-  const maxAmostra = amostras[0]?.[1] ?? 0;
+  const porTipo = useMemo(() => contarPorTipo(perfumes), [perfumes]);
+  const resumoTipos = TIPOS.filter((t) => porTipo[t] > 0)
+    .map((t) => `${porTipo[t]} ${tipoLabels[t].toLowerCase()}`)
+    .join(' · ');
+  // Sem servidor, o APK é a única fonte: o catálogo só muda com um APK novo.
+  const independente = !API_URL;
 
   return (
     <SafeAreaView style={styles.screen}>
@@ -168,7 +173,8 @@ function AdminPanel() {
 
         <SectionTitle>Catálogo</SectionTitle>
         <View style={styles.statusCard}>
-          <StatusRow label="Perfumes no totem" value={`${perfumes.length}`} tone="neutro" />
+          <StatusRow label="Produtos no totem" value={`${perfumes.length}`} tone="neutro" />
+          <StatusRow label="Por tipo" value={resumoTipos} tone="neutro" />
           <StatusRow
             label="Preços e estoque de"
             value={
@@ -178,39 +184,55 @@ function AdminPanel() {
             }
             tone={(daysSince(generatedAt) ?? 99) >= 2 ? 'atencao' : 'ok'}
           />
-          <StatusRow label="Origem dos dados" value={ORIGEM_LABELS[origem] ?? origem} tone="neutro" />
-          <StatusRow
-            label="Servidor da loja"
-            value={
-              !API_URL
-                ? 'não configurado (modo offline)'
-                : online
-                  ? `conectado · ${formatAge(ultimoSync)}`
-                  : `sem conexão · última ${formatAge(ultimoSync)}`
-            }
-            tone={!API_URL ? 'neutro' : online ? 'ok' : 'atencao'}
-          />
+          {!independente && (
+            <>
+              <StatusRow
+                label="Origem dos dados"
+                value={ORIGEM_LABELS[origem] ?? origem}
+                tone="neutro"
+              />
+              <StatusRow
+                label="Servidor da loja"
+                value={
+                  online
+                    ? `conectado · ${formatAge(ultimoSync)}`
+                    : `sem conexão · última ${formatAge(ultimoSync)}`
+                }
+                tone={online ? 'ok' : 'atencao'}
+              />
+            </>
+          )}
           <StatusRow
             label="Fotos dentro do app"
             value={`${fotosNoApp} de ${perfumes.length}`}
             tone={fotosNoApp >= perfumes.length - 10 ? 'ok' : 'atencao'}
           />
         </View>
-        {(daysSince(generatedAt) ?? 0) >= 2 && (
+        {independente ? (
           <Text style={styles.statusAviso}>
-            O catálogo está sendo exibido com dados de {formatAge(generatedAt)}. Confira se o PC da
-            loja está ligado, com o servidor rodando, e se o tablet está na mesma rede Wi-Fi.
+            Este tablet funciona sozinho, sem servidor: preços, produtos e fotos são os da data
+            acima. Para atualizar, instale a versão mais nova do aplicativo.
           </Text>
+        ) : (
+          <>
+            {(daysSince(generatedAt) ?? 0) >= 2 && (
+              <Text style={styles.statusAviso}>
+                O catálogo está sendo exibido com dados de {formatAge(generatedAt)}. Confira se o
+                PC da loja está ligado, com o servidor rodando, e se o tablet está na mesma rede
+                Wi-Fi.
+              </Text>
+            )}
+            <CtaButton
+              label={atualizando ? 'Atualizando...' : 'Atualizar agora'}
+              variant="secondary"
+              disabled={atualizando}
+              onPress={() => {
+                refresh();
+              }}
+              style={styles.atualizarButton}
+            />
+          </>
         )}
-        <CtaButton
-          label={atualizando ? 'Atualizando...' : 'Atualizar agora'}
-          variant="secondary"
-          disabled={atualizando || !API_URL}
-          onPress={() => {
-            refresh();
-          }}
-          style={styles.atualizarButton}
-        />
 
         <SectionTitle>Produtos da loja</SectionTitle>
         <View style={styles.statusCard}>
@@ -219,15 +241,17 @@ function AdminPanel() {
             value={`${produtosLocais.length}`}
             tone="neutro"
           />
-          <StatusRow
-            label="Aguardando envio ao servidor"
-            value={
-              pendencias.length === 0
-                ? 'nada pendente'
-                : `${pendencias.length} alteração${pendencias.length === 1 ? '' : 'ões'}`
-            }
-            tone={pendencias.length === 0 ? 'ok' : 'atencao'}
-          />
+          {!independente && (
+            <StatusRow
+              label="Aguardando envio ao servidor"
+              value={
+                pendencias.length === 0
+                  ? 'nada pendente'
+                  : `${pendencias.length} alteração${pendencias.length === 1 ? '' : 'ões'}`
+              }
+              tone={pendencias.length === 0 ? 'ok' : 'atencao'}
+            />
+          )}
         </View>
         <CtaButton
           label="Gerenciar produtos"
@@ -239,7 +263,7 @@ function AdminPanel() {
         <SectionTitle>Ofertas ativas</SectionTitle>
         {ofertas.length === 0 ? (
           <Text style={styles.empty}>
-            Nenhuma oferta ativa. Para criar uma, abra a página do perfume e toque no ícone ✎ ao
+            Nenhuma oferta ativa. Para criar uma, abra a página do produto e toque no ícone ✎ ao
             lado do preço.
           </Text>
         ) : (
@@ -266,28 +290,18 @@ function AdminPanel() {
           ))
         )}
 
-        <SectionTitle>Perfumes mais vistos</SectionTitle>
+        <SectionTitle>Mais vistos</SectionTitle>
         {vistos.length === 0 ? (
           <Text style={styles.empty}>Ainda sem visualizações registradas.</Text>
         ) : (
           vistos.map(([id, n]) => <CountRow key={id} label={nomeDe(id)} count={n} max={maxVisto} />)
         )}
 
-        <SectionTitle>Pedidos de amostra</SectionTitle>
-        {amostras.length === 0 ? (
-          <Text style={styles.empty}>Ainda sem pedidos de amostra.</Text>
-        ) : (
-          amostras.map(([id, n]) => (
-            <CountRow key={id} label={nomeDe(id)} count={n} max={maxAmostra} />
-          ))
-        )}
-
         {metrics && (
           <>
             <SectionTitle>Quiz</SectionTitle>
             <Text style={styles.statLine}>
-              {metrics.quizConcluidos} quiz concluído{metrics.quizConcluidos === 1 ? '' : 's'} ·
-              atendente chamado {metrics.atendenteChamado}x
+              {metrics.quizConcluidos} quiz concluído{metrics.quizConcluidos === 1 ? '' : 's'}
             </Text>
             {metrics.quizConcluidos > 0 && (
               <View style={styles.quizGrid}>

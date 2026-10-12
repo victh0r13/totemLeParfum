@@ -5,6 +5,7 @@ import { FadeUp } from '@/components/FadeUp';
 import { GenderBadge } from '@/components/GenderBadge';
 import { PressableScale } from '@/components/PressableScale';
 import { ProductImage } from '@/components/ProductImage';
+import { ESTOQUE_AO_VIVO } from '@/config';
 import { formatPrice, stockLabel } from '@/logic/format';
 import { colors, fonts } from '@/theme/theme';
 import type { Perfume } from '@/types/catalog';
@@ -54,14 +55,19 @@ export function PerfumeCard({ perfume, onPress, delay = 0 }: Props) {
             ) : (
               <Text style={styles.price}>{formatPrice(perfume.preco)}</Text>
             )}
-            <View style={styles.stockRow}>
-              <View
-                style={[styles.dot, { backgroundColor: stock.low ? colors.stockLow : colors.stockOk }]}
-              />
-              <Text style={[styles.stockText, stock.low && { color: colors.gold }]}>
-                {stock.label}
-              </Text>
-            </View>
+            {ESTOQUE_AO_VIVO && (
+              <View style={styles.stockRow}>
+                <View
+                  style={[
+                    styles.dot,
+                    { backgroundColor: stock.low ? colors.stockLow : colors.stockOk },
+                  ]}
+                />
+                <Text style={[styles.stockText, stock.low && { color: colors.gold }]}>
+                  {stock.label}
+                </Text>
+              </View>
+            )}
           </View>
         </View>
       </PressableScale>

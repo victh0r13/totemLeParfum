@@ -7,6 +7,14 @@
  */
 export const API_URL: string | null = process.env.EXPO_PUBLIC_API_URL ?? null;
 
+/**
+ * O estoque mostrado é confiável? Só com o servidor da loja atualizando.
+ * Sem ele, o número é o do dia em que o APK foi gerado — e "Últimas unidades"
+ * num produto que já acabou (ou foi reposto) engana a cliente. Nesse modo o
+ * totem mostra só o que está à venda, sem falar em quantidade.
+ */
+export const ESTOQUE_AO_VIVO = API_URL !== null;
+
 /** Segundos de inatividade até exibir o aviso "Ainda está aí?". */
 export const KIOSK_TIMEOUT_SECONDS = 90;
 

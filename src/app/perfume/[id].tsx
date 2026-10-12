@@ -14,6 +14,7 @@ import { PromoModal } from '@/components/PromoModal';
 import { TopBar } from '@/components/TopBar';
 import { useCatalog, usePerfume } from '@/data/catalogStore';
 import { combinaCom, similarTo } from '@/logic/filters';
+import { ESTOQUE_AO_VIVO } from '@/config';
 import { formatPrice, stockLabel } from '@/logic/format';
 import { trackProdutoVisto } from '@/logic/metrics';
 import { splitNotes, type OlfactoryNotes } from '@/logic/notes';
@@ -143,14 +144,19 @@ export default function PerfumeDetailScreen() {
             ) : (
               <Text style={styles.price}>{formatPrice(perfume.preco)}</Text>
             )}
-            <View style={styles.stockRow}>
-              <View
-                style={[styles.dot, { backgroundColor: stock.low ? colors.stockLow : colors.stockOk }]}
-              />
-              <Text style={[styles.stockText, stock.low && { color: colors.gold }]}>
-                {stock.label}
-              </Text>
-            </View>
+            {ESTOQUE_AO_VIVO && (
+              <View style={styles.stockRow}>
+                <View
+                  style={[
+                    styles.dot,
+                    { backgroundColor: stock.low ? colors.stockLow : colors.stockOk },
+                  ]}
+                />
+                <Text style={[styles.stockText, stock.low && { color: colors.gold }]}>
+                  {stock.label}
+                </Text>
+              </View>
+            )}
             <PressableScale
               scaleTo={0.9}
               onPress={() => setPinVisible(true)}
