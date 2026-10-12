@@ -1,175 +1,228 @@
-import { useRouter } from "expo-router";
-import { useEffect, useRef } from "react";
+import { useRouter } from 'expo-router';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import {
-  Animated,
   Pressable,
   ScrollView,
   StyleSheet,
   Text,
   View,
   useWindowDimensions,
-} from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+} from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
-import { FadeUp } from "@/components/FadeUp";
-import { PressableScale } from "@/components/PressableScale";
-import { colors, fonts } from "@/theme/theme";
+import { AttractMode } from '@/components/AttractMode';
+import { FadeUp } from '@/components/FadeUp';
+import { PressableScale } from '@/components/PressableScale';
+import { ProductImage } from '@/components/ProductImage';
+import { Vitrine } from '@/components/Vitrine';
+import { ATTRACT_IDLE_SECONDS } from '@/config';
+import { useCatalog } from '@/data/catalogStore';
+import { temFotoOffline } from '@/data/images';
+import { contarPorTipo, marcasPorContagem } from '@/logic/filters';
+import { capaDoTipo, destaques } from '@/logic/vitrine';
+import { colors, fonts, TIPOS, tipoLabels } from '@/theme/theme';
+import type { Perfume, TipoProduto } from '@/types/catalog';
 
-function BobbingBottle({ compact }: { compact: boolean }) {
-  const translateY = useRef(new Animated.Value(0)).current;
+/** Quantas marcas aparecem na faixa da tela inicial; o resto está no catálogo. */
+const MARCAS_NA_HOME = 14;
+
+/**
+ * Relógio do modo atração: zera a cada toque e liga o modo depois de
+ * ATTRACT_IDLE_SECONDS sem ninguém mexer na tela inicial.
+ */
+function useOcioso(segundos: number) {
+  const [ocioso, setOcioso] = useState(false);
+  const [ultimoToque, setUltimoToque] = useState(() => Date.now());
 
   useEffect(() => {
-    const loop = Animated.loop(
-      Animated.sequence([
-        Animated.timing(translateY, {
-          toValue: 10,
-          duration: 2500,
-          useNativeDriver: true,
-        }),
-        Animated.timing(translateY, {
-          toValue: 0,
-          duration: 2500,
-          useNativeDriver: true,
-        }),
-      ]),
-    );
-    loop.start();
-    return () => loop.stop();
-  }, [translateY]);
+    if (ocioso) return;
+    const timer = setTimeout(() => setOcioso(true), segundos * 1000);
+    return () => clearTimeout(timer);
+  }, [ocioso, segundos, ultimoToque]);
 
+  const tocar = useCallback(() => {
+    setUltimoToque(Date.now());
+    setOcioso(false);
+  }, []);
+
+  return { ocioso, tocar };
+}
+
+function Secao({ titulo, acao, onAcao }: { titulo: string; acao?: string; onAcao?: () => void }) {
   return (
-    <Animated.View
-      style={[
-        styles.bottle,
-        { transform: [{ translateY }] },
-        compact && { marginTop: 24 },
-      ]}
-    >
-      <View style={[styles.bottleCap, compact && { width: 18, height: 24 }]} />
-      <View
-        style={[styles.bottleBody, compact && { width: 84, height: 118 }]}
-      />
-    </Animated.View>
+    <View style={styles.secao}>
+      <Text style={styles.secaoTitulo}>{titulo}</Text>
+      {!!acao && (
+        <Pressable onPress={onAcao} hitSlop={12}>
+          <Text style={styles.secaoAcao}>{acao}</Text>
+        </Pressable>
+      )}
+    </View>
   );
 }
 
-interface OptionCardProps {
-  title: string;
-  subtitle: string;
-  gold?: boolean;
-  delay: number;
-  compact: boolean;
-  onPress: () => void;
-}
-
-function OptionCard({
-  title,
-  subtitle,
-  gold,
-  delay,
-  compact,
+function Ladrilho({
+  tipo,
+  total,
+  capa,
+  largura,
   onPress,
-}: OptionCardProps) {
+}: {
+  tipo: TipoProduto;
+  total: number;
+  capa: Perfume | null;
+  largura: number;
+  onPress: () => void;
+}) {
   return (
-    <FadeUp delay={delay}>
-      <PressableScale
-        onPress={onPress}
-        scaleTo={0.98}
-        style={[styles.card, compact && styles.cardCompact]}
-      >
-        <View style={styles.cardText}>
-          <Text style={[styles.cardTitle, compact && styles.cardTitleCompact]}>
-            {title}
-          </Text>
-          <Text
-            style={[styles.cardSubtitle, compact && styles.cardSubtitleCompact]}
-          >
-            {subtitle}
-          </Text>
-        </View>
-        <View
-          style={[styles.arrowCircle, gold && { backgroundColor: colors.gold }]}
-        >
-          <Text style={styles.arrow}>→</Text>
-        </View>
-      </PressableScale>
-    </FadeUp>
+    <PressableScale onPress={onPress} scaleTo={0.97} style={[styles.ladrilho, { width: largura }]}>
+      {capa ? (
+        <ProductImage perfume={capa} height={150} bottle="md" />
+      ) : (
+        <View style={{ height: 150 }} />
+      )}
+      <View style={styles.ladrilhoInfo}>
+        <Text style={styles.ladrilhoTitulo}>{tipoLabels[tipo]}</Text>
+        <Text style={styles.ladrilhoConta}>{total}</Text>
+      </View>
+    </PressableScale>
   );
 }
 
 export default function HomeScreen() {
   const router = useRouter();
+  const { perfumes } = useCatalog();
   const { height, width } = useWindowDimensions();
-  // Telas mais baixas (janela de navegador, tablets menores) usam o layout compacto
-  // para as duas opções continuarem visíveis sem rolar.
+  // Telas mais baixas (janela de navegador, tablets menores) encolhem a vitrine.
   const compact = height < 1000;
-  const sidePadding = Math.min(64, Math.max(24, width * 0.06));
+  const lateral = Math.min(48, Math.max(20, width * 0.05));
+  const larguraUtil = Math.min(width, 900) - lateral * 2;
+
+  const { ocioso, tocar } = useOcioso(ATTRACT_IDLE_SECONDS);
+
+  const vitrine = useMemo(() => destaques(perfumes, temFotoOffline), [perfumes]);
+  const porTipo = useMemo(() => contarPorTipo(perfumes), [perfumes]);
+  const tipos = TIPOS.filter((t) => porTipo[t] > 0);
+  const capas = useMemo(
+    () => Object.fromEntries(TIPOS.map((t) => [t, capaDoTipo(perfumes, t, temFotoOffline)])),
+    [perfumes],
+  ) as Record<TipoProduto, Perfume | null>;
+  const marcas = useMemo(() => marcasPorContagem(perfumes).slice(0, MARCAS_NA_HOME), [perfumes]);
+
+  // Dois ladrilhos por linha; com um tipo só não há o que navegar.
+  const larguraLadrilho = (larguraUtil - 16) / 2;
 
   return (
     <SafeAreaView style={styles.screen}>
-      <ScrollView
-        contentContainerStyle={styles.scroll}
-        showsVerticalScrollIndicator={false}
-        bounces={false}
+      <View
+        style={styles.screen}
+        onStartShouldSetResponderCapture={() => {
+          tocar();
+          return false;
+        }}
       >
-        <View style={[styles.hero, compact && { paddingTop: 36 }]}>
-          <Text style={styles.eyebrow}>PERFUMARIA</Text>
-          {/* Toque longo (equipe): o PIN é pedido pela própria tela do painel. */}
-          <Pressable delayLongPress={1200} onLongPress={() => router.push('/admin')}>
-            <Text style={[styles.logo, compact && styles.logoCompact]}>
-              Le Parfum
-            </Text>
-          </Pressable>
-          <View style={[styles.hairline, compact && { marginTop: 16 }]} />
-          <Text style={[styles.tagline, compact && styles.taglineCompact]}>
-            Encontre a fragrância perfeita para você ou para presentear.
-          </Text>
-        </View>
-
-        <BobbingBottle compact={compact} />
-
-        <View
-          style={[
-            styles.options,
-            { paddingHorizontal: sidePadding },
-            compact && { marginTop: 28, gap: 16 },
-          ]}
+        <ScrollView
+          contentContainerStyle={[styles.scroll, { paddingHorizontal: lateral }]}
+          showsVerticalScrollIndicator={false}
+          onScrollBeginDrag={tocar}
         >
-          <OptionCard
-            title="Já conheço meu gosto"
-            subtitle="Explore o catálogo com filtros por família olfativa, ocasião e preço."
-            delay={100}
-            compact={compact}
-            onPress={() => router.push("/catalog")}
-          />
-          <OptionCard
-            title="Quero descobrir meu gosto"
-            subtitle="Seis perguntas visuais sobre estilo, ocasião e aromas — e uma seleção feita para você."
-            gold
-            delay={220}
-            compact={compact}
-            onPress={() => router.push("/quiz")}
-          />
-        </View>
+          <View style={[styles.hero, compact && { paddingTop: 20 }]}>
+            <Text style={styles.eyebrow}>PERFUMARIA</Text>
+            {/* Toque longo (equipe): o PIN é pedido pela própria tela do painel. */}
+            <Pressable delayLongPress={1200} onLongPress={() => router.push('/admin')}>
+              <Text style={[styles.logo, compact && styles.logoCompact]}>Le Parfum</Text>
+            </Pressable>
+          </View>
 
-        <Text
-          style={[
-            styles.footer,
-            compact && { paddingTop: 24, paddingBottom: 20 },
-          ]}
-        >
-          TOQUE PARA COMEÇAR
-        </Text>
-      </ScrollView>
+          {vitrine.length > 0 && (
+            <FadeUp delay={60}>
+              <Vitrine
+                produtos={vitrine}
+                altura={compact ? 420 : 560}
+                onAbrir={(p) => router.push({ pathname: '/perfume/[id]', params: { id: p.id } })}
+              />
+            </FadeUp>
+          )}
 
+          <FadeUp delay={140}>
+            <View style={styles.ctas}>
+              <PressableScale
+                onPress={() => router.push('/quiz')}
+                scaleTo={0.98}
+                containerStyle={styles.ctaCaixa}
+                style={[styles.cta, styles.ctaOuro]}
+              >
+                <Text style={[styles.ctaTitulo, styles.ctaTituloClaro]}>Descobrir meu perfume</Text>
+                <Text style={[styles.ctaSub, styles.ctaSubClaro]}>
+                  Seis perguntas rápidas e uma seleção feita para você
+                </Text>
+              </PressableScale>
+              <PressableScale
+                onPress={() => router.push('/catalog')}
+                scaleTo={0.98}
+                containerStyle={styles.ctaCaixa}
+                style={styles.cta}
+              >
+                <Text style={styles.ctaTitulo}>Ver catálogo</Text>
+                <Text style={styles.ctaSub}>
+                  {perfumes.length} produtos com filtros por família, gênero e preço
+                </Text>
+              </PressableScale>
+            </View>
+          </FadeUp>
+
+          {tipos.length > 1 && (
+            <FadeUp delay={220}>
+              <Secao titulo="NAVEGUE POR CATEGORIA" />
+              <View style={styles.grade}>
+                {tipos.map((t) => (
+                  <Ladrilho
+                    key={t}
+                    tipo={t}
+                    total={porTipo[t]}
+                    capa={capas[t]}
+                    largura={larguraLadrilho}
+                    onPress={() => router.push({ pathname: '/catalog', params: { tipo: t } })}
+                  />
+                ))}
+              </View>
+            </FadeUp>
+          )}
+
+          {marcas.length > 0 && (
+            <FadeUp delay={300}>
+              <Secao
+                titulo="MARCAS"
+                acao="Ver todas →"
+                onAcao={() => router.push('/catalog')}
+              />
+              <View style={styles.marcas}>
+                {marcas.map(({ marca, total }) => (
+                  <PressableScale
+                    key={marca}
+                    scaleTo={0.95}
+                    onPress={() => router.push({ pathname: '/catalog', params: { marca } })}
+                    style={styles.marca}
+                  >
+                    <Text style={styles.marcaNome}>{marca}</Text>
+                    <Text style={styles.marcaConta}>{total}</Text>
+                  </PressableScale>
+                ))}
+              </View>
+            </FadeUp>
+          )}
+        </ScrollView>
+
+        {ocioso && vitrine.length > 0 && <AttractMode produtos={vitrine} onAcordar={tocar} />}
+      </View>
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   screen: { flex: 1, backgroundColor: colors.bg },
-  scroll: { flexGrow: 1 },
-  hero: { alignItems: "center", paddingTop: 80 },
+  scroll: { flexGrow: 1, paddingBottom: 48, maxWidth: 900, width: '100%', alignSelf: 'center' },
+  hero: { alignItems: 'center', paddingTop: 36, paddingBottom: 26 },
   eyebrow: {
     fontFamily: fonts.sansSemiBold,
     fontSize: 13,
@@ -178,98 +231,79 @@ const styles = StyleSheet.create({
   },
   logo: {
     fontFamily: fonts.serif,
-    fontSize: 82,
-    lineHeight: 88,
+    fontSize: 64,
+    lineHeight: 72,
     color: colors.ink,
-    marginTop: 14,
-  },
-  logoCompact: { fontSize: 58, lineHeight: 64, marginTop: 10 },
-  hairline: {
-    width: 44,
-    height: 1,
-    backgroundColor: colors.gold,
-    marginTop: 24,
-  },
-  tagline: {
-    fontFamily: fonts.sans,
-    fontSize: 19,
-    lineHeight: 29,
-    color: colors.muted,
-    textAlign: "center",
-    marginTop: 22,
-    maxWidth: 420,
-    paddingHorizontal: 32,
-  },
-  taglineCompact: { fontSize: 16, lineHeight: 24, marginTop: 14 },
-  bottle: { alignItems: "center", marginTop: 44 },
-  bottleCap: {
-    width: 26,
-    height: 34,
-    backgroundColor: colors.ink,
-    borderRadius: 2,
-  },
-  bottleBody: {
-    width: 120,
-    height: 170,
     marginTop: 6,
-    borderTopLeftRadius: 6,
-    borderTopRightRadius: 6,
-    borderBottomLeftRadius: 10,
-    borderBottomRightRadius: 10,
-    borderWidth: 1,
-    borderColor: "rgba(168,130,63,0.35)",
-    backgroundColor: "rgba(168,130,63,0.16)",
   },
-  options: { marginTop: 48, gap: 24 },
-  card: {
+  logoCompact: { fontSize: 50, lineHeight: 58 },
+  ctas: { flexDirection: 'row', gap: 16, marginTop: 26 },
+  ctaCaixa: { flex: 1 },
+  cta: {
+    flex: 1,
     backgroundColor: colors.surface,
     borderWidth: 1,
-    borderColor: "rgba(33,29,24,0.09)",
+    borderColor: 'rgba(33,29,24,0.09)',
     borderRadius: 20,
-    padding: 40,
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 28,
-    shadowColor: colors.ink,
-    shadowOpacity: 0.05,
-    shadowRadius: 14,
-    shadowOffset: { width: 0, height: 2 },
-    elevation: 3,
+    paddingVertical: 26,
+    paddingHorizontal: 26,
   },
-  cardCompact: { padding: 26, gap: 18 },
-  cardText: { flex: 1 },
-  cardTitle: {
-    fontFamily: fonts.serifSemiBold,
-    fontSize: 34,
-    lineHeight: 39,
-    color: colors.ink,
-  },
-  cardTitleCompact: { fontSize: 27, lineHeight: 32 },
-  cardSubtitle: {
+  ctaOuro: { backgroundColor: colors.ink, borderColor: colors.ink },
+  ctaTitulo: { fontFamily: fonts.serifSemiBold, fontSize: 28, lineHeight: 32, color: colors.ink },
+  ctaTituloClaro: { color: colors.cream },
+  ctaSub: {
     fontFamily: fonts.sans,
-    fontSize: 17,
-    lineHeight: 25,
-    color: colors.muted,
-    marginTop: 10,
+    fontSize: 15,
+    lineHeight: 21,
+    color: colors.inkSoft,
+    marginTop: 8,
   },
-  cardSubtitleCompact: { fontSize: 15, lineHeight: 22, marginTop: 6 },
-  arrowCircle: {
-    width: 46,
-    height: 46,
-    borderRadius: 23,
-    backgroundColor: colors.ink,
-    alignItems: "center",
-    justifyContent: "center",
+  ctaSubClaro: { color: colors.goldSoft },
+  secao: {
+    flexDirection: 'row',
+    alignItems: 'baseline',
+    justifyContent: 'space-between',
+    marginTop: 40,
+    marginBottom: 16,
   },
-  arrow: { fontSize: 19, color: colors.cream },
-  footer: {
-    fontFamily: fonts.sansMedium,
+  secaoTitulo: {
+    fontFamily: fonts.sansSemiBold,
     fontSize: 13,
-    letterSpacing: 2.5,
-    color: colors.muted,
-    textAlign: "center",
-    marginTop: "auto",
-    paddingTop: 40,
-    paddingBottom: 32,
+    letterSpacing: 2.6,
+    color: colors.inkSoft,
   },
+  secaoAcao: { fontFamily: fonts.sansSemiBold, fontSize: 15, color: colors.gold },
+  grade: { flexDirection: 'row', flexWrap: 'wrap', gap: 16 },
+  ladrilho: {
+    backgroundColor: colors.surface,
+    borderRadius: 18,
+    borderWidth: 1,
+    borderColor: 'rgba(33,29,24,0.08)',
+    overflow: 'hidden',
+  },
+  ladrilhoInfo: {
+    flexDirection: 'row',
+    alignItems: 'baseline',
+    justifyContent: 'space-between',
+    paddingHorizontal: 20,
+    paddingVertical: 16,
+    borderTopWidth: 1,
+    borderTopColor: colors.borderSoft,
+  },
+  ladrilhoTitulo: { fontFamily: fonts.serifSemiBold, fontSize: 24, color: colors.ink },
+  ladrilhoConta: { fontFamily: fonts.sansMedium, fontSize: 14, color: colors.muted },
+  marcas: { flexDirection: 'row', flexWrap: 'wrap', gap: 10 },
+  marca: {
+    flexDirection: 'row',
+    alignItems: 'baseline',
+    gap: 8,
+    paddingHorizontal: 18,
+    paddingVertical: 12,
+    borderRadius: 999,
+    borderWidth: 1,
+    borderColor: 'rgba(33,29,24,0.14)',
+    backgroundColor: colors.surface,
+  },
+  marcaNome: { fontFamily: fonts.sansSemiBold, fontSize: 16, color: colors.ink },
+  marcaConta: { fontFamily: fonts.sans, fontSize: 13, color: colors.muted },
 });

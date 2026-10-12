@@ -61,3 +61,37 @@ export function normalizeBrand(raw: string | null | undefined): string | null {
   const apelido = APELIDOS[limpo.toLowerCase()];
   return apelido ?? titulo(limpo);
 }
+
+/** Sem acento, sem caixa, só letras/números separados por um espaço. */
+function plano(texto: string): string {
+  return texto
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, ' ')
+    .trim();
+}
+
+/** Marcas que existem no cadastro mas não identificam linha nenhuma. */
+const MARCAS_GENERICAS = new Set(['diversos', 'outros', 'outras']);
+
+/**
+ * Marca deduzida do nome, para produto que chegou do Bling sem ela — é o caso
+ * de toda variação ("Body Splash - Ciclo Cosméticos (Conjunto) Fragância:Kiss").
+ * Só vale uma marca que JÁ existe no catálogo e aparece no nome como palavra
+ * inteira; entre várias, a mais longa ("Ciclo Cosméticos" antes de "Ciclo").
+ */
+export function marcaPeloNome(nome: string, marcasConhecidas: Iterable<string>): string | null {
+  const alvo = ` ${plano(nome)} `;
+  let melhor: string | null = null;
+  let tamanho = 0;
+  for (const marca of marcasConhecidas) {
+    const chave = plano(marca);
+    if (chave.length < 3 || MARCAS_GENERICAS.has(chave)) continue;
+    if (alvo.includes(` ${chave} `) && chave.length > tamanho) {
+      melhor = marca;
+      tamanho = chave.length;
+    }
+  }
+  return melhor;
+}

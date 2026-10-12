@@ -63,3 +63,12 @@ export async function prefetchPhotos(perfumes: Perfume[]): Promise<number> {
   }
   return ok;
 }
+
+/**
+ * Tem foto que aparece SEM rede (no APK ou tirada neste aparelho)? A vitrine
+ * da tela inicial só usa estas: um destaque com o degradê no lugar da foto,
+ * em tela cheia, parece defeito.
+ */
+export function temFotoOffline(p: Perfume): boolean {
+  return bundledImage(p.id) !== undefined || !!p.imagem?.startsWith('file://');
+}

@@ -68,13 +68,26 @@ function contagemLabel(n: number, tipo: TipoProduto | null): string {
 export default function CatalogScreen() {
   const router = useRouter();
   const { perfumes } = useCatalog();
-  // A tela inicial abre o catálogo já numa prateleira: /catalog?tipo=body-splash
-  const params = useLocalSearchParams<{ tipo?: string }>();
+  // A tela inicial abre o catálogo já numa prateleira ou marca:
+  // /catalog?tipo=body-splash, /catalog?marca=Lattafa
+  const params = useLocalSearchParams<{ tipo?: string; marca?: string }>();
   const tipoInicial = TIPOS.includes(params.tipo as TipoProduto)
     ? (params.tipo as TipoProduto)
     : null;
-  const [filters, setFilters] = useState<CatalogFilters>({ ...emptyFilters, tipo: tipoInicial });
-  const porTipo = useMemo(() => contarPorTipo(perfumes), [perfumes]);
+  const [filters, setFilters] = useState<CatalogFilters>({
+    ...emptyFilters,
+    tipo: tipoInicial,
+    marca: params.marca || null,
+  });
+  // As contagens das abas seguem a marca escolhida: "Tudo 38" com 38 na tela.
+  const porTipo = useMemo(
+    () =>
+      contarPorTipo(
+        filters.marca ? perfumes.filter((p) => p.marca === filters.marca) : perfumes,
+      ),
+    [perfumes, filters.marca],
+  );
+  const totalDaMarca = TIPOS.reduce((soma, t) => soma + porTipo[t], 0);
   // Só vira aba o que tem produto; com um tipo só, as abas não fazem sentido.
   const abas = TIPOS.filter((t) => porTipo[t] > 0);
   const [buscaAberta, setBuscaAberta] = useState(false);
@@ -128,7 +141,7 @@ export default function CatalogScreen() {
                   {t ? tipoLabels[t] : 'Tudo'}
                 </Text>
                 <Text style={[styles.abaConta, ativa && styles.abaTextoAtiva]}>
-                  {t ? porTipo[t] : perfumes.length}
+                  {t ? porTipo[t] : totalDaMarca}
                 </Text>
               </Pressable>
             );
@@ -217,6 +230,17 @@ export default function CatalogScreen() {
           <Text style={styles.countText}>
             {contagemLabel(results.length, filters.tipo)}
           </Text>
+
+          {filters.marca !== null && (
+            <PressableScale
+              scaleTo={0.95}
+              onPress={() => setFilters((prev) => ({ ...prev, marca: null }))}
+              style={styles.marcaPill}
+            >
+              <Text style={styles.marcaPillTexto}>{filters.marca}</Text>
+              <Text style={styles.marcaPillX}>✕</Text>
+            </PressableScale>
+          )}
 
           {active && (
             <Pressable
@@ -318,6 +342,17 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  marcaPill: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
+    paddingHorizontal: 14,
+    paddingVertical: 8,
+    borderRadius: 999,
+    backgroundColor: colors.ink,
+  },
+  marcaPillTexto: { fontFamily: fonts.sansSemiBold, fontSize: 14, color: colors.cream },
+  marcaPillX: { fontSize: 12, color: colors.goldSoft },
   countText: { flex: 1, fontFamily: fonts.sansBold, fontSize: 16, color: colors.ink },
   clearText: {
     fontFamily: fonts.sansBold,

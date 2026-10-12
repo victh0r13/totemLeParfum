@@ -143,7 +143,9 @@ function inferGenero(p) {
   if (/masculin/.test(caminho)) return 'M';
   if (/unissex|unisex/.test(caminho)) return 'U';
 
-  // 2. Nome do produto.
+  // 2. Nome do produto. "Body Spray Masculino e Feminino" é dos dois.
+  const doisGeneros = GENDER_FROM_NAME.slice(0, 2).every(([re]) => re.test(p.nome));
+  if (doisGeneros) return 'U';
   for (const [re, genero] of GENDER_FROM_NAME) {
     if (re.test(p.nome)) return genero;
   }

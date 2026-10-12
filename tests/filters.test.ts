@@ -6,6 +6,7 @@ import {
   contarPorTipo,
   emptyFilters,
   hasActiveFilters,
+  marcasPorContagem,
   matchesSearch,
   similarTo,
 } from '@/logic/filters';
@@ -253,5 +254,27 @@ describe('combinaCom sem marca', () => {
       perfume({ id: 'outro', tipo: 'body-splash', nome: 'Forever · Body Splash', marca: null }),
     ];
     expect(combinaCom(edp, lista).map((p) => p.id)).toEqual(['splash']);
+  });
+});
+
+describe('marca', () => {
+  it('filtra pela marca e conta como filtro ativo', () => {
+    const lista = [perfume({ id: 'a', marca: 'Lattafa' }), perfume({ id: 'b', marca: 'Armaf' })];
+    const f = { ...emptyFilters, marca: 'Lattafa' };
+    expect(applyFilters(lista, f).map((p) => p.id)).toEqual(['a']);
+    expect(hasActiveFilters(f)).toBe(true);
+  });
+
+  it('marcasPorContagem ordena da maior para a menor e ignora sem marca', () => {
+    const lista = [
+      perfume({ id: 'a', marca: 'Armaf' }),
+      perfume({ id: 'b', marca: 'Lattafa' }),
+      perfume({ id: 'c', marca: 'Lattafa' }),
+      perfume({ id: 'd', marca: null }),
+    ];
+    expect(marcasPorContagem(lista)).toEqual([
+      { marca: 'Lattafa', total: 2 },
+      { marca: 'Armaf', total: 1 },
+    ]);
   });
 });

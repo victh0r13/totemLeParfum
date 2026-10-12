@@ -165,3 +165,23 @@ describe('maisRecente', () => {
     expect(maisRecente(em('???'), em('2026-10-12T09:00:00Z'))).toBe(false);
   });
 });
+
+describe('marca de variação', () => {
+  it('produto sem marca herda a de um irmão citada no nome', () => {
+    const lista = mergeCatalog(
+      payload({
+        produtos: [
+          produto({ id: 'pai', nome: 'Kiss Ciclo Cosméticos 100ml', marca: 'Ciclo Cosméticos' }),
+          produto({
+            id: 'var',
+            nome: 'Body Splash - Ciclo Cosméticos (Conjunto) Fragância:Kiss',
+            marca: null,
+          }),
+        ],
+      }),
+      {},
+    );
+    expect(lista.find((p) => p.id === 'var')?.marca).toBe('Ciclo Cosméticos');
+    expect(lista.find((p) => p.id === 'var')?.nome).toBe('Kiss · Body Splash - Ciclo Cosméticos');
+  });
+});

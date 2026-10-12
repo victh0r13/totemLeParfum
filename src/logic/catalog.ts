@@ -1,4 +1,4 @@
-import { normalizeBrand } from '@/logic/brands';
+import { marcaPeloNome, normalizeBrand } from '@/logic/brands';
 import { descricaoUtil, nomeVitrine } from '@/logic/format';
 import type {
   CatalogProduct,
@@ -104,6 +104,15 @@ export function mergeCatalog(
   const daLoja = locais
     .filter((p) => p.estoque > 0 && p.preco > 0)
     .map((p) => localParaPerfume(p, promocoes));
+
+  // Variação do Bling chega sem marca: empresta a de um irmão pelo nome, para
+  // ela aparecer na navegação por marca e no "Combina com".
+  const marcas = new Set(
+    [...daLoja, ...doBling].map((p) => p.marca).filter((m): m is string => m !== null),
+  );
+  for (const p of doBling) {
+    if (p.marca === null) p.marca = marcaPeloNome(p.nome, marcas);
+  }
 
   return [...daLoja, ...doBling];
 }

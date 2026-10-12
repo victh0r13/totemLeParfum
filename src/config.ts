@@ -31,3 +31,12 @@ export const PRICE_BUCKETS = [
   { key: 1, label: 'R$ 250 – 450', min: 250, max: 450 },
   { key: 2, label: 'Acima de R$ 450', min: 450, max: Infinity },
 ] as const;
+
+/**
+ * Segundos parada na tela inicial até entrar o modo atração (vitrine em tela
+ * cheia). Um totem parado e estático passa despercebido na loja.
+ */
+export const ATTRACT_IDLE_SECONDS = 45;
+
+/** Segundos que cada destaque fica na vitrine antes de trocar. */
+export const VITRINE_INTERVALO_SECONDS = 5;

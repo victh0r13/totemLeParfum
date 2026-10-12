@@ -5,6 +5,8 @@ import type { Familia, Genero, Perfume, TipoProduto } from '@/types/catalog';
 export interface CatalogFilters {
   /** Prateleira escolhida (null = tudo). É navegação, não filtro: "Limpar" não mexe nela. */
   tipo: TipoProduto | null;
+  /** Marca escolhida na tela inicial (null = todas). */
+  marca: string | null;
   familias: Familia[];
   genero: Genero | null;
   priceBucket: number | null;
@@ -14,6 +16,7 @@ export interface CatalogFilters {
 
 export const emptyFilters: CatalogFilters = {
   tipo: null,
+  marca: null,
   familias: [],
   genero: null,
   priceBucket: null,
@@ -22,6 +25,7 @@ export const emptyFilters: CatalogFilters = {
 
 export function hasActiveFilters(f: CatalogFilters): boolean {
   return (
+    f.marca !== null ||
     f.familias.length > 0 ||
     f.genero !== null ||
     f.priceBucket !== null ||
@@ -68,6 +72,7 @@ export function matchesSearch(p: Perfume, termo: string): boolean {
 export function applyFilters(perfumes: Perfume[], f: CatalogFilters): Perfume[] {
   return perfumes.filter((p) => {
     if (f.tipo !== null && p.tipo !== f.tipo) return false;
+    if (f.marca !== null && p.marca !== f.marca) return false;
     if (f.familias.length > 0 && !f.familias.every((fam) => p.familias.includes(fam))) return false;
     if (f.genero !== null && p.genero !== f.genero) return false;
     if (!matchesSearch(p, f.busca)) return false;
@@ -87,6 +92,17 @@ export function contarPorTipo(perfumes: Perfume[]): Record<TipoProduto, number> 
   const contagem: Record<TipoProduto, number> = { perfume: 0, 'body-splash': 0, corpo: 0, kit: 0 };
   for (const p of perfumes) contagem[p.tipo]++;
   return contagem;
+}
+
+/** Marcas com quantos produtos cada, da maior para a menor. */
+export function marcasPorContagem(perfumes: Perfume[]): { marca: string; total: number }[] {
+  const contagem = new Map<string, number>();
+  for (const p of perfumes) {
+    if (p.marca) contagem.set(p.marca, (contagem.get(p.marca) ?? 0) + 1);
+  }
+  return [...contagem]
+    .map(([marca, total]) => ({ marca, total }))
+    .sort((a, b) => b.total - a.total || a.marca.localeCompare(b.marca));
 }
 
 /**
