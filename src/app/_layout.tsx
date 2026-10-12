@@ -49,11 +49,14 @@ export default function RootLayout() {
     }
   }, []);
 
-  useEffect(() => {
-    if (fontsLoaded) SplashScreen.hideAsync();
-  }, [fontsLoaded]);
+  // Fonte que falhou não pode prender o totem na splash: segue com a do sistema.
+  const pronto = fontsLoaded || fontError !== null;
 
-  if (!fontsLoaded) return null;
+  useEffect(() => {
+    if (pronto) SplashScreen.hideAsync();
+  }, [pronto]);
+
+  if (!pronto) return null;
 
   return (
     <PromotionsProvider>

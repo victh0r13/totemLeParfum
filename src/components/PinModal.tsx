@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Modal, StyleSheet, Text, View } from 'react-native';
 
 import { NumericPad } from '@/components/NumericPad';
@@ -19,26 +19,31 @@ export function PinModal({ visible, title = 'Área da equipe', onClose, onSucces
   const [pin, setPin] = useState('');
   const [error, setError] = useState(false);
 
-  useEffect(() => {
-    if (!visible) {
-      setPin('');
-      setError(false);
-    }
-  }, [visible]);
+  // Tudo nos handlers, e não em efeitos: o modal sempre reabre limpo porque
+  // quem o fecha (cancelar ou acertar o PIN) já zera o estado na saída.
+  const fechar = () => {
+    setPin('');
+    setError(false);
+    onClose();
+  };
 
-  useEffect(() => {
-    if (pin.length < 4) return;
-    if (pin === ADMIN_PIN) {
+  const digitar = (d: string) => {
+    if (pin.length >= 4) return;
+    const novo = pin + d;
+    setError(false);
+    if (novo.length < 4) {
+      setPin(novo);
+    } else if (novo === ADMIN_PIN) {
       setPin('');
       onSuccess();
     } else {
-      setError(true);
       setPin('');
+      setError(true);
     }
-  }, [pin, onSuccess]);
+  };
 
   return (
-    <Modal visible={visible} transparent animationType="fade" onRequestClose={onClose}>
+    <Modal visible={visible} transparent animationType="fade" onRequestClose={fechar}>
       <View style={styles.backdrop}>
         <View style={styles.card}>
           <Text style={styles.eyebrow}>{title.toUpperCase()}</Text>
@@ -52,14 +57,11 @@ export function PinModal({ visible, title = 'Área da equipe', onClose, onSucces
           <Text style={[styles.error, !error && { opacity: 0 }]}>PIN incorreto — tente novamente</Text>
 
           <NumericPad
-            onKey={(d) => {
-              setError(false);
-              setPin((p) => (p.length < 4 ? p + d : p));
-            }}
+            onKey={digitar}
             onBackspace={() => setPin((p) => p.slice(0, -1))}
           />
 
-          <PressableScale scaleTo={0.96} onPress={onClose} style={styles.cancel}>
+          <PressableScale scaleTo={0.96} onPress={fechar} style={styles.cancel}>
             <Text style={styles.cancelLabel}>Cancelar</Text>
           </PressableScale>
         </View>

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Animated, StyleProp, ViewStyle } from 'react-native';
 
 interface Props {
@@ -9,8 +9,9 @@ interface Props {
 
 /** Entrada suave (fade + deslize para cima), como no design. */
 export function FadeUp({ delay = 0, style, children }: Props) {
-  const opacity = useRef(new Animated.Value(0)).current;
-  const translateY = useRef(new Animated.Value(14)).current;
+  // useState, e não useRef: os valores animados são lidos no render.
+  const [opacity] = useState(() => new Animated.Value(0));
+  const [translateY] = useState(() => new Animated.Value(14));
 
   useEffect(() => {
     Animated.parallel([

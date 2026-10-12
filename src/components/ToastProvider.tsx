@@ -12,7 +12,7 @@ const ToastContext = createContext<ToastState | null>(null);
 /** Toast em pílula escura na base da tela (avisos de atendente/amostra). */
 export function ToastProvider({ children }: { children: React.ReactNode }) {
   const [message, setMessage] = useState<string | null>(null);
-  const opacity = useRef(new Animated.Value(0)).current;
+  const [opacity] = useState(() => new Animated.Value(0));
   const hideTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const showToast = useCallback(

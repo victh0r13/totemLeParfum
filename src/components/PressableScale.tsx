@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useState } from 'react';
 import { Animated, Pressable, StyleProp, ViewStyle } from 'react-native';
 
 interface Props {
@@ -24,7 +24,8 @@ export function PressableScale({
   containerStyle,
   children,
 }: Props) {
-  const scale = useRef(new Animated.Value(1)).current;
+  // useState, e não useRef: o valor animado é lido no render.
+  const [scale] = useState(() => new Animated.Value(1));
 
   const animateTo = (value: number) =>
     Animated.spring(scale, {

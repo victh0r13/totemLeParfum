@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { Modal, StyleSheet, Text, View } from 'react-native';
 
 import { CtaButton } from '@/components/CtaButton';
@@ -28,9 +28,11 @@ export function PromoModal({ visible, perfume, onClose }: Props) {
   const { showToast } = useToast();
   const [text, setText] = useState('');
 
-  useEffect(() => {
-    if (!visible) setText('');
-  }, [visible]);
+  // Quem fecha o modal limpa o campo na saída: ele sempre reabre vazio.
+  const fechar = () => {
+    setText('');
+    onClose();
+  };
 
   const parsed = useMemo(() => parsePrice(text), [text]);
   const valido = parsed !== null && parsed > 0 && parsed < perfume.preco;
@@ -46,7 +48,7 @@ export function PromoModal({ visible, perfume, onClose }: Props) {
   };
 
   return (
-    <Modal visible={visible} transparent animationType="fade" onRequestClose={onClose}>
+    <Modal visible={visible} transparent animationType="fade" onRequestClose={fechar}>
       <View style={styles.backdrop}>
         <View style={styles.card}>
           <Text style={styles.eyebrow}>OFERTA</Text>
@@ -80,7 +82,7 @@ export function PromoModal({ visible, perfume, onClose }: Props) {
                 if (parsed === null) return;
                 setPromocao(perfume.id, parsed);
                 showToast(`Oferta ativada: ${formatPrice(parsed)}`);
-                onClose();
+                fechar();
               }}
             />
             {perfume.precoPromocional !== null && (
@@ -91,13 +93,13 @@ export function PromoModal({ visible, perfume, onClose }: Props) {
                 onPress={() => {
                   setPromocao(perfume.id, null);
                   showToast('Oferta removida.');
-                  onClose();
+                  fechar();
                 }}
               />
             )}
           </View>
 
-          <PressableScale scaleTo={0.96} onPress={onClose} style={styles.cancel}>
+          <PressableScale scaleTo={0.96} onPress={fechar} style={styles.cancel}>
             <Text style={styles.cancelLabel}>Cancelar</Text>
           </PressableScale>
         </View>
