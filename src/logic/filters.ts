@@ -56,10 +56,15 @@ export function matchesSearch(p: Perfume, termo: string): boolean {
  * Filtros combináveis do catálogo. Um produto sem família/gênero registrado
  * na curadoria continua visível na listagem completa, mas sai do resultado
  * quando o filtro correspondente está ativo — nunca deduzimos o dado aqui.
+ *
+ * Famílias combinam com E: "amadeirado + doce" traz o amadeirado adocicado,
+ * não a soma das duas prateleiras. É o que o cliente quer dizer ao marcar as
+ * duas. O preço é o resultado curto — a curadoria dá no máximo 2 famílias por
+ * perfume, então qualquer par fora do que está cadastrado devolve zero.
  */
 export function applyFilters(perfumes: Perfume[], f: CatalogFilters): Perfume[] {
   return perfumes.filter((p) => {
-    if (f.familias.length > 0 && !f.familias.some((fam) => p.familias.includes(fam))) return false;
+    if (f.familias.length > 0 && !f.familias.every((fam) => p.familias.includes(fam))) return false;
     if (f.genero !== null && p.genero !== f.genero) return false;
     if (!matchesSearch(p, f.busca)) return false;
     if (f.priceBucket !== null) {

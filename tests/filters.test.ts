@@ -10,14 +10,24 @@ describe('applyFilters', () => {
     expect(applyFilters(lista, emptyFilters)).toHaveLength(2);
   });
 
-  it('família casa quando o perfume tem QUALQUER uma das escolhidas', () => {
+  it('família casa só quando o perfume tem TODAS as escolhidas', () => {
     const lista = [
-      perfume({ id: 'floral', familias: ['floral'] }),
-      perfume({ id: 'ambos', familias: ['amadeirado', 'oriental'] }),
-      perfume({ id: 'nenhuma', familias: ['citrico'] }),
+      perfume({ id: 'soFloral', familias: ['floral'] }),
+      perfume({ id: 'osDois', familias: ['floral', 'doce'] }),
+      perfume({ id: 'soDoce', familias: ['doce'] }),
     ];
-    const r = applyFilters(lista, { ...emptyFilters, familias: ['floral', 'oriental'] });
-    expect(r.map((p) => p.id)).toEqual(['floral', 'ambos']);
+    const r = applyFilters(lista, { ...emptyFilters, familias: ['floral', 'doce'] });
+    expect(r.map((p) => p.id)).toEqual(['osDois']);
+  });
+
+  it('uma família só continua trazendo todo mundo que a tem', () => {
+    const lista = [
+      perfume({ id: 'soFloral', familias: ['floral'] }),
+      perfume({ id: 'osDois', familias: ['floral', 'doce'] }),
+      perfume({ id: 'outra', familias: ['citrico'] }),
+    ];
+    const r = applyFilters(lista, { ...emptyFilters, familias: ['floral'] });
+    expect(r.map((p) => p.id)).toEqual(['soFloral', 'osDois']);
   });
 
   it('produto sem família registrada some quando o filtro de família está ativo', () => {
