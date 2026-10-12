@@ -13,7 +13,7 @@ import { API_URL, CATALOG_REFRESH_MS } from '@/config';
 import { prefetchPhotos } from '@/data/images';
 import { useLocalProducts } from '@/data/localProductsStore';
 import { usePromotions } from '@/data/promotionsStore';
-import { mergeCatalog } from '@/logic/catalog';
+import { maisRecente, mergeCatalog } from '@/logic/catalog';
 import type { Perfume, TotemPayload } from '@/types/catalog';
 
 import bundledCatalog from '../../data/catalog.bundle.json';
@@ -111,7 +111,9 @@ export function CatalogProvider({ children }: { children: React.ReactNode }) {
         if (cancelled) return;
         if (cached) {
           const parsed = JSON.parse(cached) as TotemPayload;
-          if (parsed?.produtos?.length) {
+          // Um APK novo traz catálogo novo: o cache gravado pelo APK anterior
+          // só vale se for mais recente que o que veio empacotado.
+          if (parsed?.produtos?.length && maisRecente(parsed, bundledCatalog as TotemPayload)) {
             setPayload(parsed);
             setOrigem('cache');
           }

@@ -133,7 +133,9 @@ export function scorePerfume(p: Perfume, a: QuizAnswers): number {
 
 /** Ranqueia o catálogo (apenas itens com estoque) e retorna 3–5 sugestões reais. */
 export function rankPerfumes(perfumes: Perfume[], answers: QuizAnswers): Perfume[] {
+  // O quiz é de perfume: body splash e hidratante têm outra lógica de compra.
   const inStock = perfumes
+    .filter((p) => p.tipo === 'perfume')
     .filter((p) => p.estoque > 0)
     .filter((p) => matchesGender(p, answers.genero));
   const scored = inStock

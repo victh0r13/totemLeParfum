@@ -48,3 +48,4 @@ example
 
 # log da tarefa agendada do sync
 sync/last-sync.log
+.playwright-mcp/

@@ -1,6 +1,14 @@
 import { describe, expect, it } from 'vitest';
 
-import { applyFilters, emptyFilters, hasActiveFilters, matchesSearch, similarTo } from '@/logic/filters';
+import {
+  applyFilters,
+  combinaCom,
+  contarPorTipo,
+  emptyFilters,
+  hasActiveFilters,
+  matchesSearch,
+  similarTo,
+} from '@/logic/filters';
 
 import { perfume } from './helpers';
 
@@ -157,5 +165,93 @@ describe('matchesSearch (a lupa)', () => {
 
   it('aguenta produto sem marca', () => {
     expect(matchesSearch(perfume({ nome: 'Vodka Wild', marca: null }), 'vodka')).toBe(true);
+  });
+});
+
+describe('tipo de produto', () => {
+  it('a aba filtra por tipo; null mostra tudo', () => {
+    const lista = [
+      perfume({ id: 'edp', tipo: 'perfume' }),
+      perfume({ id: 'splash', tipo: 'body-splash' }),
+    ];
+    expect(applyFilters(lista, { ...emptyFilters, tipo: 'body-splash' }).map((p) => p.id)).toEqual([
+      'splash',
+    ]);
+    expect(applyFilters(lista, emptyFilters)).toHaveLength(2);
+  });
+
+  it('a aba não conta como filtro ativo ("Limpar filtros" não aparece só por ela)', () => {
+    expect(hasActiveFilters({ ...emptyFilters, tipo: 'kit' })).toBe(false);
+  });
+
+  it('contarPorTipo conta cada prateleira', () => {
+    const lista = [
+      perfume({ id: 'a', tipo: 'perfume' }),
+      perfume({ id: 'b', tipo: 'perfume' }),
+      perfume({ id: 'c', tipo: 'kit' }),
+    ];
+    expect(contarPorTipo(lista)).toEqual({ perfume: 2, 'body-splash': 0, corpo: 0, kit: 1 });
+  });
+
+  it('similares são do mesmo tipo', () => {
+    const base = perfume({ id: 'base', tipo: 'perfume', familias: ['floral'] });
+    const lista = [
+      base,
+      perfume({ id: 'outroPerfume', tipo: 'perfume', familias: ['floral'] }),
+      perfume({ id: 'splash', tipo: 'body-splash', familias: ['floral'] }),
+    ];
+    expect(similarTo(base, lista).map((p) => p.id)).toEqual(['outroPerfume']);
+  });
+});
+
+describe('combinaCom', () => {
+  const edp = perfume({
+    id: 'edp',
+    tipo: 'perfume',
+    nome: 'Kiss Me More - Ciclo Cosméticos Eau de Parfum 100ml',
+    marca: 'Ciclo Cosméticos',
+    familias: ['doce'],
+  });
+
+  it('a mesma linha da mesma marca vem primeiro, e nunca o mesmo tipo', () => {
+    const lista = [
+      edp,
+      perfume({ id: 'outroEdp', tipo: 'perfume', marca: 'Ciclo Cosméticos', familias: ['doce'] }),
+      perfume({
+        id: 'mesmaMarca',
+        tipo: 'corpo',
+        nome: 'Velvety - Ciclo Cosméticos Hidratante 240ml',
+        marca: 'Ciclo Cosméticos',
+        preco: 50,
+      }),
+      perfume({
+        id: 'mesmaLinha',
+        tipo: 'body-splash',
+        nome: 'Ciclo Body Splash Kiss Me More 200ml',
+        marca: 'Ciclo Cosméticos',
+        preco: 90,
+      }),
+    ];
+    expect(combinaCom(edp, lista).map((p) => p.id)).toEqual(['mesmaLinha', 'mesmaMarca']);
+  });
+
+  it('só a família em comum, de outra marca, não basta', () => {
+    const lista = [
+      edp,
+      perfume({ id: 'estranho', tipo: 'corpo', marca: 'Outra', familias: ['doce'] }),
+    ];
+    expect(combinaCom(edp, lista)).toEqual([]);
+  });
+});
+
+describe('combinaCom sem marca', () => {
+  it('variação do Bling sem marca ainda casa pela linha', () => {
+    const edp = perfume({ id: 'edp', tipo: 'perfume', nome: 'Kiss Me More 100ml', marca: null });
+    const lista = [
+      edp,
+      perfume({ id: 'splash', tipo: 'body-splash', nome: 'Kiss me More · Body Splash', marca: null }),
+      perfume({ id: 'outro', tipo: 'body-splash', nome: 'Forever · Body Splash', marca: null }),
+    ];
+    expect(combinaCom(edp, lista).map((p) => p.id)).toEqual(['splash']);
   });
 });

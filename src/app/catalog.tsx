@@ -1,4 +1,4 @@
-import { useRouter } from 'expo-router';
+import { useLocalSearchParams, useRouter } from 'expo-router';
 import React, { useMemo, useRef, useState } from 'react';
 import {
   FlatList,
@@ -19,9 +19,15 @@ import { SearchIcon } from '@/components/SearchIcon';
 import { TopBar } from '@/components/TopBar';
 import { PRICE_BUCKETS } from '@/config';
 import { useCatalog } from '@/data/catalogStore';
-import { applyFilters, emptyFilters, hasActiveFilters, type CatalogFilters } from '@/logic/filters';
-import { colors, familyLabels, fonts } from '@/theme/theme';
-import type { Familia, Genero, Perfume } from '@/types/catalog';
+import {
+  applyFilters,
+  contarPorTipo,
+  emptyFilters,
+  hasActiveFilters,
+  type CatalogFilters,
+} from '@/logic/filters';
+import { colors, familyLabels, fonts, TIPOS, tipoLabels } from '@/theme/theme';
+import type { Familia, Genero, Perfume, TipoProduto } from '@/types/catalog';
 
 const FAMILIES = Object.keys(familyLabels) as Familia[];
 const GENDERS: { key: Genero; label: string }[] = [
@@ -46,10 +52,31 @@ function FilterRow({ label, children }: { label: string; children: React.ReactNo
   );
 }
 
+/** Rótulo do contador: "12 body splash", "1 kit", "40 produtos". */
+function contagemLabel(n: number, tipo: TipoProduto | null): string {
+  const [um, varios] = tipo
+    ? {
+        perfume: ['perfume', 'perfumes'],
+        'body-splash': ['body splash', 'body splash'],
+        corpo: ['produto de corpo & banho', 'produtos de corpo & banho'],
+        kit: ['kit', 'kits'],
+      }[tipo]
+    : ['produto', 'produtos'];
+  return n === 1 ? `1 ${um}` : `${n} ${varios}`;
+}
+
 export default function CatalogScreen() {
   const router = useRouter();
   const { perfumes } = useCatalog();
-  const [filters, setFilters] = useState<CatalogFilters>(emptyFilters);
+  // A tela inicial abre o catálogo já numa prateleira: /catalog?tipo=body-splash
+  const params = useLocalSearchParams<{ tipo?: string }>();
+  const tipoInicial = TIPOS.includes(params.tipo as TipoProduto)
+    ? (params.tipo as TipoProduto)
+    : null;
+  const [filters, setFilters] = useState<CatalogFilters>({ ...emptyFilters, tipo: tipoInicial });
+  const porTipo = useMemo(() => contarPorTipo(perfumes), [perfumes]);
+  // Só vira aba o que tem produto; com um tipo só, as abas não fazem sentido.
+  const abas = TIPOS.filter((t) => porTipo[t] > 0);
   const [buscaAberta, setBuscaAberta] = useState(false);
   const inputRef = useRef<TextInput>(null);
 
@@ -80,6 +107,34 @@ export default function CatalogScreen() {
   return (
     <SafeAreaView style={styles.screen}>
       <TopBar title="Catálogo" onBack={() => router.replace('/')} />
+
+      {abas.length > 1 && (
+        <ScrollView
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          style={styles.abasScroll}
+          contentContainerStyle={styles.abas}
+        >
+          {[null, ...abas].map((t) => {
+            const ativa = filters.tipo === t;
+            return (
+              <Pressable
+                key={t ?? 'todos'}
+                onPress={() => setFilters((prev) => ({ ...prev, tipo: t }))}
+                style={[styles.aba, ativa && styles.abaAtiva]}
+                hitSlop={6}
+              >
+                <Text style={[styles.abaTexto, ativa && styles.abaTextoAtiva]}>
+                  {t ? tipoLabels[t] : 'Tudo'}
+                </Text>
+                <Text style={[styles.abaConta, ativa && styles.abaTextoAtiva]}>
+                  {t ? porTipo[t] : perfumes.length}
+                </Text>
+              </Pressable>
+            );
+          })}
+        </ScrollView>
+      )}
 
       <View style={styles.filters}>
         <FilterRow label="FAMÍLIA">
@@ -137,7 +192,7 @@ export default function CatalogScreen() {
             style={styles.buscaInput}
             value={filters.busca}
             onChangeText={(t) => setFilters((prev) => ({ ...prev, busca: t }))}
-            placeholder="Nome do perfume ou marca"
+            placeholder="Nome do produto ou marca"
             placeholderTextColor={colors.muted}
             autoFocus
             autoCorrect={false}
@@ -160,11 +215,14 @@ export default function CatalogScreen() {
           </PressableScale>
 
           <Text style={styles.countText}>
-            {results.length === 1 ? '1 perfume encontrado' : `${results.length} perfumes encontrados`}
+            {contagemLabel(results.length, filters.tipo)}
           </Text>
 
           {active && (
-            <Pressable onPress={() => setFilters(emptyFilters)} hitSlop={12}>
+            <Pressable
+              onPress={() => setFilters((prev) => ({ ...emptyFilters, tipo: prev.tipo }))}
+              hitSlop={12}
+            >
               <Text style={styles.clearText}>Limpar filtros ✕</Text>
             </Pressable>
           )}
@@ -176,7 +234,7 @@ export default function CatalogScreen() {
           <Text style={styles.emptyTitle}>
             {filters.busca.trim()
               ? `Nada encontrado para “${filters.busca.trim()}”`
-              : 'Nenhum perfume com esses filtros'}
+              : 'Nada com esses filtros'}
           </Text>
           <Text style={styles.emptySubtitle}>
             Experimente outro termo ou remova algum filtro para ver mais opções.
@@ -185,7 +243,7 @@ export default function CatalogScreen() {
             label="Limpar tudo"
             variant="secondary"
             onPress={() => {
-              setFilters(emptyFilters);
+              setFilters((prev) => ({ ...emptyFilters, tipo: prev.tipo }));
               setBuscaAberta(false);
             }}
             style={styles.emptyButton}
@@ -209,6 +267,23 @@ export default function CatalogScreen() {
 
 const styles = StyleSheet.create({
   screen: { flex: 1, backgroundColor: colors.bg },
+  // Sem o flexShrink: 0 a lista, que é flex: 1, esmaga a faixa de abas.
+  abasScroll: { flexGrow: 0, flexShrink: 0, borderBottomWidth: 1, borderBottomColor: colors.borderSoft },
+  abas: { paddingHorizontal: 24, gap: 6 },
+  aba: {
+    flexDirection: 'row',
+    alignItems: 'baseline',
+    gap: 7,
+    paddingHorizontal: 14,
+    paddingTop: 16,
+    paddingBottom: 13,
+    borderBottomWidth: 2,
+    borderBottomColor: 'transparent',
+  },
+  abaAtiva: { borderBottomColor: colors.gold },
+  abaTexto: { fontFamily: fonts.sansSemiBold, fontSize: 17, color: colors.inkSoft },
+  abaTextoAtiva: { color: colors.ink },
+  abaConta: { fontFamily: fonts.sans, fontSize: 13, color: colors.muted },
   filters: {
     paddingHorizontal: 24,
     paddingTop: 14,

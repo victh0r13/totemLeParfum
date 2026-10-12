@@ -4,8 +4,9 @@
  * Gênero, família olfativa, ocasião e intensidade não existem no Bling. Este
  * script deduz o que dá para deduzir com segurança (categoria do Bling, nome
  * do produto e notas da descrição) e NUNCA sobrescreve um valor já existente
- * — o que foi curado à mão continua valendo. Também inclui os perfumes novos
- * que entraram em estoque desde a última rodada.
+ * — o que foi curado à mão continua valendo. Também inclui os produtos novos
+ * que entraram em estoque desde a última rodada, de qualquer tipo que o totem
+ * mostra (perfume, body splash, corpo & banho, kit — ver tipos.js).
  *
  * Uso: cd sync && npm run curar
  */
@@ -13,9 +14,10 @@ import fs from 'node:fs';
 
 import { chamadoDireto, comoScript } from './cli.js';
 import { CATALOG_PATH, ENRICHMENT_PATH } from './env.js';
+import { inferTipo, TIPOS_NO_TOTEM } from './tipos.js';
 
-/** Só entra no totem o que o Bling classifica como perfume. */
-const CATEGORIA_PERFUME = /perfume/i;
+/** Intensidade e ocasião só fazem sentido para o que se usa como fragrância. */
+const TIPOS_FRAGRANCIA = new Set(['perfume', 'body-splash']);
 
 /**
  * Convenções de nome do mercado de perfumaria: quando a descrição do Bling
@@ -208,7 +210,7 @@ function inferOcasioes(familias, intensidade) {
 }
 
 /**
- * Completa lacunas da curadoria e inclui perfumes novos que entraram em estoque.
+ * Completa lacunas da curadoria e inclui produtos novos que entraram em estoque.
  * @returns {{novos: number, generos: number, familias: number}}
  */
 export function runCurate() {
@@ -235,18 +237,21 @@ export function runCurate() {
   let semGenero = 0;
   let semFamilia = 0;
 
-  // 1. Perfumes que entraram em estoque e ainda não estão na curadoria.
+  // 1. Produtos que entraram em estoque e ainda não estão na curadoria.
   for (const p of inStock) {
     if (chaveDe(p)) continue;
-    if (!CATEGORIA_PERFUME.test(p.categoria?.caminho ?? '')) continue;
+    const tipo = inferTipo(p);
+    if (!TIPOS_NO_TOTEM.has(tipo)) continue;
     if (autoIncluidos.has(p.id)) continue; // tirado do totem pela equipe
     const fam = inferFamilias(p);
-    const intensidade = inferIntensidade(p);
+    const fragrancia = TIPOS_FRAGRANCIA.has(tipo);
+    const intensidade = fragrancia ? inferIntensidade(p) : undefined;
     entries[p.id] = {
       nome: p.nome,
+      tipo,
       genero: inferGenero(p) ?? undefined,
       familias: fam.length ? fam : undefined,
-      ocasioes: inferOcasioes(fam, intensidade),
+      ocasioes: fragrancia ? inferOcasioes(fam, intensidade) : undefined,
       intensidade,
     };
     // Remove os campos indefinidos para o JSON ficar limpo.
@@ -263,6 +268,9 @@ export function runCurate() {
     if (!chave) continue;
     const entry = entries[chave];
 
+    // Quem entrou na curadoria antes de existir o campo veio pela categoria
+    // "perfume" do Bling — na dúvida, continua perfume.
+    if (!entry.tipo) entry.tipo = inferTipo(p) ?? 'perfume';
     if (!entry.genero) {
       const g = inferGenero(p);
       if (g) {
@@ -281,9 +289,11 @@ export function runCurate() {
         semFamilia++;
       }
     }
-    if (!entry.intensidade) entry.intensidade = inferIntensidade(p);
-    if (!entry.ocasioes?.length) {
-      entry.ocasioes = inferOcasioes(entry.familias ?? [], entry.intensidade);
+    if (TIPOS_FRAGRANCIA.has(entry.tipo)) {
+      if (!entry.intensidade) entry.intensidade = inferIntensidade(p);
+      if (!entry.ocasioes?.length) {
+        entry.ocasioes = inferOcasioes(entry.familias ?? [], entry.intensidade);
+      }
     }
     if (!entry.nome) entry.nome = p.nome;
   }
@@ -293,7 +303,17 @@ export function runCurate() {
   fs.writeFileSync(ENRICHMENT_PATH, JSON.stringify(file, null, 2), 'utf8');
 
   const curados = inStock.filter((p) => chaveDe(p));
-  console.log(`[ok] ${novos} perfume(s) novo(s) incluído(s) na curadoria.`);
+  const porTipo = {};
+  for (const p of curados) {
+    const t = entries[chaveDe(p)].tipo;
+    porTipo[t] = (porTipo[t] ?? 0) + 1;
+  }
+  console.log(`[ok] ${novos} produto(s) novo(s) incluído(s) na curadoria.`);
+  console.log(
+    `[info] Por tipo: ${Object.entries(porTipo)
+      .map(([t, n]) => `${t} ${n}`)
+      .join(' · ')}`,
+  );
   if (removidosPelaEquipe.length > 0) {
     console.log(
       `[ok] ${removidosPelaEquipe.length} produto(s) removido(s) pela equipe continuam fora do totem.`,

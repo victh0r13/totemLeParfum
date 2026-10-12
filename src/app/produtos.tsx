@@ -32,7 +32,7 @@ import {
   type ErrosProduto,
   type RascunhoProduto,
 } from '@/logic/produtosLocais';
-import { colors, familyLabels, fonts } from '@/theme/theme';
+import { colors, ehFragrancia, familyLabels, fonts, TIPOS, tipoLabels } from '@/theme/theme';
 import type { Familia, Genero, Intensidade, Ocasiao, ProdutoLocal } from '@/types/catalog';
 
 const GENEROS: [Genero, string][] = [
@@ -352,6 +352,18 @@ function ProdutosPanel() {
                 </Text>
               </View>
 
+              <Grupo titulo="Tipo">
+                {TIPOS.map((valor) => (
+                  <Chip
+                    key={valor}
+                    label={tipoLabels[valor]}
+                    size="sm"
+                    selected={rascunho.tipo === valor}
+                    onPress={() => set('tipo', valor)}
+                  />
+                ))}
+              </Grupo>
+
               <Grupo titulo="Gênero">
                 {GENEROS.map(([valor, label]) => (
                   <Chip
@@ -376,35 +388,39 @@ function ProdutosPanel() {
                 ))}
               </Grupo>
 
-              <Grupo titulo="Ocasiões">
-                {OCASIOES.map(([valor, label]) => (
-                  <Chip
-                    key={valor}
-                    label={label}
-                    size="sm"
-                    selected={rascunho.ocasioes.includes(valor)}
-                    onPress={() => set('ocasioes', alternar(rascunho.ocasioes, valor))}
-                  />
-                ))}
-              </Grupo>
+              {ehFragrancia(rascunho.tipo) && (
+                <>
+                <Grupo titulo="Ocasiões">
+                  {OCASIOES.map(([valor, label]) => (
+                    <Chip
+                      key={valor}
+                      label={label}
+                      size="sm"
+                      selected={rascunho.ocasioes.includes(valor)}
+                      onPress={() => set('ocasioes', alternar(rascunho.ocasioes, valor))}
+                    />
+                  ))}
+                </Grupo>
 
-              <Grupo titulo="Intensidade">
-                {INTENSIDADES.map(([valor, label]) => (
-                  <Chip
-                    key={valor}
-                    label={label}
-                    size="sm"
-                    selected={rascunho.intensidade === valor}
-                    onPress={() =>
-                      set('intensidade', rascunho.intensidade === valor ? null : valor)
-                    }
-                  />
-                ))}
-              </Grupo>
+                <Grupo titulo="Intensidade">
+                  {INTENSIDADES.map(([valor, label]) => (
+                    <Chip
+                      key={valor}
+                      label={label}
+                      size="sm"
+                      selected={rascunho.intensidade === valor}
+                      onPress={() =>
+                        set('intensidade', rascunho.intensidade === valor ? null : valor)
+                      }
+                    />
+                  ))}
+                </Grupo>
+                </>
+              )}
 
               <Text style={styles.dica}>
-                Gênero, famílias e ocasiões alimentam os filtros e o quiz. Deixar em branco não
-                impede o cadastro, mas o produto não será sugerido no quiz.
+                Tipo, gênero e famílias alimentam as abas e os filtros do catálogo. Só perfume
+                entra no quiz — e só quando tem família ou ocasião preenchida.
               </Text>
 
               <View style={styles.formBotoes}>

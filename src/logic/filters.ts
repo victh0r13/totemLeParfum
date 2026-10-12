@@ -1,8 +1,10 @@
 import { PRICE_BUCKETS } from '@/config';
 import { effectivePrice } from '@/logic/format';
-import type { Familia, Genero, Perfume } from '@/types/catalog';
+import type { Familia, Genero, Perfume, TipoProduto } from '@/types/catalog';
 
 export interface CatalogFilters {
+  /** Prateleira escolhida (null = tudo). É navegação, não filtro: "Limpar" não mexe nela. */
+  tipo: TipoProduto | null;
   familias: Familia[];
   genero: Genero | null;
   priceBucket: number | null;
@@ -11,6 +13,7 @@ export interface CatalogFilters {
 }
 
 export const emptyFilters: CatalogFilters = {
+  tipo: null,
   familias: [],
   genero: null,
   priceBucket: null,
@@ -64,6 +67,7 @@ export function matchesSearch(p: Perfume, termo: string): boolean {
  */
 export function applyFilters(perfumes: Perfume[], f: CatalogFilters): Perfume[] {
   return perfumes.filter((p) => {
+    if (f.tipo !== null && p.tipo !== f.tipo) return false;
     if (f.familias.length > 0 && !f.familias.every((fam) => p.familias.includes(fam))) return false;
     if (f.genero !== null && p.genero !== f.genero) return false;
     if (!matchesSearch(p, f.busca)) return false;
@@ -78,11 +82,24 @@ export function applyFilters(perfumes: Perfume[], f: CatalogFilters): Perfume[] 
   });
 }
 
-/** Perfumes similares: mesma família olfativa, priorizando o mesmo gênero. */
+/** Quantos produtos há em cada prateleira — as abas vazias nem aparecem. */
+export function contarPorTipo(perfumes: Perfume[]): Record<TipoProduto, number> {
+  const contagem: Record<TipoProduto, number> = { perfume: 0, 'body-splash': 0, corpo: 0, kit: 0 };
+  for (const p of perfumes) contagem[p.tipo]++;
+  return contagem;
+}
+
+/**
+ * Similares: mesmo tipo e mesma família olfativa, priorizando o mesmo gênero.
+ * Quem olha um perfume quer comparar com perfume, não com hidratante.
+ */
 export function similarTo(perfume: Perfume, all: Perfume[], limit = 4): Perfume[] {
   if (perfume.familias.length === 0) return [];
   const candidates = all.filter(
-    (p) => p.id !== perfume.id && p.familias.some((f) => perfume.familias.includes(f)),
+    (p) =>
+      p.id !== perfume.id &&
+      p.tipo === perfume.tipo &&
+      p.familias.some((f) => perfume.familias.includes(f)),
   );
   candidates.sort((a, b) => {
     const ag = a.genero === perfume.genero ? 1 : 0;
@@ -90,4 +107,56 @@ export function similarTo(perfume: Perfume, all: Perfume[], limit = 4): Perfume[
     return bg - ag;
   });
   return candidates.slice(0, limit);
+}
+
+/**
+ * Palavras que dizem o TIPO ou a embalagem, não a linha: "Body Splash Kiss Me
+ * More" e "Hidratante Kiss Me More" são da mesma linha por causa de "kiss" e
+ * "more", não por causa de "body".
+ */
+const PALAVRAS_GENERICAS = new Set([
+  'body', 'splash', 'mist', 'spray', 'hidratante', 'corporal', 'locao', 'creme', 'perfume',
+  'colonia', 'lata', 'original', 'feminino', 'masculino', 'cosmeticos', 'conjunto',
+  'fragancia', 'fragrancia', 'volume', 'parfum', 'toilette', 'escolha', 'variacao', 'unissex',
+]);
+
+function palavrasDaLinha(nome: string): Set<string> {
+  return new Set(
+    comparavel(nome)
+      .split(' ')
+      // Palavras curtas e medidas ("de", "200ml") não dizem nada sobre a linha.
+      .filter((w) => w.length >= 4 && !/\d/.test(w) && !PALAVRAS_GENERICAS.has(w)),
+  );
+}
+
+/**
+ * "Combina com": produtos de OUTRO tipo para completar o ritual — o body splash
+ * ou o hidratante que acompanham o perfume. A mesma linha (palavras do nome em
+ * comum) vem antes, depois a mesma marca e, por fim, a mesma família olfativa.
+ *
+ * A linha conta mesmo sem marca: as variações do Bling ("Body Splash (Conjunto)
+ * Fragância:Kiss me More") chegam sem marca nenhuma.
+ */
+export function combinaCom(produto: Perfume, all: Perfume[], limit = 4): Perfume[] {
+  const minhas = palavrasDaLinha(produto.nome);
+  const marca = produto.marca ? comparavel(produto.marca) : null;
+
+  const pontuados: { p: Perfume; pontos: number }[] = [];
+  for (const p of all) {
+    if (p.id === produto.id || p.tipo === produto.tipo) continue;
+    const mesmaMarca = marca !== null && p.marca !== null && comparavel(p.marca) === marca;
+    let emComum = 0;
+    for (const w of palavrasDaLinha(p.nome)) {
+      if (minhas.has(w) && !(marca ?? '').split(' ').includes(w)) emComum++;
+    }
+    // Só a família em comum é pouco: sem marca nem linha, não é "combina", é sorteio.
+    // Uma palavra só, sem a marca para confirmar, também é coincidência demais.
+    if (!mesmaMarca && emComum < 2) continue;
+    let pontos = emComum * 3 + (mesmaMarca ? 2 : 0);
+    if (p.familias.some((f) => produto.familias.includes(f))) pontos += 1;
+    if (produto.genero && p.genero === produto.genero) pontos += 1;
+    pontuados.push({ p, pontos });
+  }
+  pontuados.sort((a, b) => b.pontos - a.pontos || a.p.preco - b.p.preco);
+  return pontuados.slice(0, limit).map(({ p }) => p);
 }

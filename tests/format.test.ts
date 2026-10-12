@@ -3,6 +3,7 @@ import { afterEach, describe, expect, it, vi } from 'vitest';
 import {
   daysSince,
   descricaoUtil,
+  nomeVitrine,
   effectivePrice,
   formatAge,
   formatPrice,
@@ -108,5 +109,28 @@ describe('formatAge / daysSince', () => {
     congelar('2026-07-30T12:00:00Z');
     expect(daysSince('2026-07-30T00:00:00Z')).toBe(0);
     expect(daysSince('2026-07-28T00:00:00Z')).toBe(2);
+  });
+});
+
+describe('nomeVitrine', () => {
+  it('variação de fragrância: o que diferencia vem na frente', () => {
+    expect(nomeVitrine('Body Splash Lattafa 250ml (Escolha o seu) Fragrância:Yara')).toBe(
+      'Yara · Body Splash Lattafa 250ml',
+    );
+    expect(nomeVitrine('Hidratante - Pokoloka (Conjunto) Fragância:Vanilla')).toBe(
+      'Vanilla · Hidratante - Pokoloka',
+    );
+  });
+
+  it('variação de volume vira sufixo', () => {
+    expect(nomeVitrine('Miss Dream (Conjunto) Volume:100ml')).toBe('Miss Dream 100ml');
+    expect(nomeVitrine('Kiss Ciclo (Variação) Volume:100ml')).toBe('Kiss Ciclo 100ml');
+    expect(nomeVitrine('Extreme Story La Rive (Conjunto) Volume:kit')).toBe('Extreme Story La Rive · Kit');
+  });
+
+  it('nome comum passa intacto, inclusive com parênteses', () => {
+    expect(nomeVitrine('Vodka Brasil Azul (Blue) - Paris Elysees Eau De Toilette 100ml')).toBe(
+      'Vodka Brasil Azul (Blue) - Paris Elysees Eau De Toilette 100ml',
+    );
   });
 });

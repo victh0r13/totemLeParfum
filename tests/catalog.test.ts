@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { mergeCatalog } from '@/logic/catalog';
+import { maisRecente, mergeCatalog } from '@/logic/catalog';
 import type { ProdutoLocal, TotemPayload } from '@/types/catalog';
 
 const payload = (over: Partial<TotemPayload> = {}): TotemPayload => ({
@@ -147,5 +147,21 @@ describe('mergeCatalog com produtos cadastrados na loja', () => {
   it('sem produtos locais o resultado é idêntico ao de antes', () => {
     const antes = mergeCatalog(payload({ produtos: [produto()] }), {});
     expect(mergeCatalog(payload({ produtos: [produto()] }), {}, [])).toEqual(antes);
+  });
+});
+
+describe('maisRecente', () => {
+  const em = (generatedAt: string) => payload({ generatedAt });
+
+  it('cache gravado por um APK anterior perde para o catálogo empacotado mais novo', () => {
+    expect(maisRecente(em('2026-09-03T12:00:00Z'), em('2026-10-12T09:00:00Z'))).toBe(false);
+  });
+
+  it('cache mais novo (veio do servidor depois do APK) continua valendo', () => {
+    expect(maisRecente(em('2026-10-13T09:00:00Z'), em('2026-10-12T09:00:00Z'))).toBe(true);
+  });
+
+  it('data ilegível no cache: fica o empacotado', () => {
+    expect(maisRecente(em('???'), em('2026-10-12T09:00:00Z'))).toBe(false);
   });
 });

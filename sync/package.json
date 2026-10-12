@@ -14,7 +14,7 @@
     "images": "node src/images.js",
     "bundle": "node src/bundle.js",
     "curar": "node src/curate.js",
-    "atualizar": "npm run sync && npm run images && npm run bundle",
+    "atualizar": "npm run sync && npm run curar && npm run images && npm run bundle",
     "server": "node src/server.js"
   },
   "dependencies": {

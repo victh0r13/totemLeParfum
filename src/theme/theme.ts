@@ -1,4 +1,4 @@
-import type { Familia } from '@/types/catalog';
+import type { Familia, TipoProduto } from '@/types/catalog';
 
 export const colors = {
   bg: '#faf7f2',
@@ -48,6 +48,22 @@ export const familyLabels: Record<Familia, string> = {
   oriental: 'Oriental',
   fresco: 'Fresco',
 };
+
+/** Ordem em que os tipos aparecem na navegação. */
+export const TIPOS: TipoProduto[] = ['perfume', 'body-splash', 'corpo', 'kit'];
+
+/** Nome da prateleira (plural), usado em abas e títulos. */
+export const tipoLabels: Record<TipoProduto, string> = {
+  perfume: 'Perfumes',
+  'body-splash': 'Body Splash',
+  corpo: 'Corpo & Banho',
+  kit: 'Kits & Presentes',
+};
+
+/** Perfume e body splash têm intensidade, pirâmide e entram no quiz. */
+export function ehFragrancia(tipo: TipoProduto): boolean {
+  return tipo === 'perfume' || tipo === 'body-splash';
+}
 
 export const intensityLabels: Record<1 | 2 | 3, string> = {
   1: 'Intensidade leve',

@@ -1,5 +1,5 @@
 import { normalizeBrand } from '@/logic/brands';
-import { descricaoUtil } from '@/logic/format';
+import { descricaoUtil, nomeVitrine } from '@/logic/format';
 import type {
   CatalogProduct,
   EnrichmentEntry,
@@ -23,6 +23,7 @@ function localParaPerfume(p: ProdutoLocal, promocoes: Record<string, number>): P
     id: p.id,
     codigo: null,
     nome: p.nome,
+    tipo: p.tipo ?? 'perfume',
     marca: normalizeBrand(p.marca),
     preco: p.preco,
     estoque: p.estoque,
@@ -38,6 +39,18 @@ function localParaPerfume(p: ProdutoLocal, promocoes: Record<string, number>): P
     ocasioes: p.ocasioes,
     intensidade: p.intensidade,
   };
+}
+
+/**
+ * O payload `a` foi gerado depois de `b`? Data ilegível conta como antiga —
+ * na dúvida, fica o catálogo empacotado, que sempre está íntegro.
+ */
+export function maisRecente(a: TotemPayload, b: TotemPayload): boolean {
+  const ta = Date.parse(a.generatedAt);
+  const tb = Date.parse(b.generatedAt);
+  if (Number.isNaN(ta)) return false;
+  if (Number.isNaN(tb)) return true;
+  return ta >= tb;
 }
 
 /**
@@ -69,7 +82,9 @@ export function mergeCatalog(
       return {
         id: p.id,
         codigo: p.codigo ?? null,
-        nome: p.nome,
+        nome: nomeVitrine(p.nome),
+        // Entrada antiga, de quando a curadoria só tinha perfume.
+        tipo: entry.tipo ?? 'perfume',
         marca: normalizeBrand(p.marca),
         preco: p.preco,
         estoque: p.estoque,

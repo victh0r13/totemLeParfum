@@ -2,6 +2,11 @@ export type Familia = 'floral' | 'citrico' | 'amadeirado' | 'doce' | 'oriental' 
 export type Ocasiao = 'trabalho' | 'dia' | 'noite' | 'esporte';
 export type Genero = 'F' | 'M' | 'U';
 export type Intensidade = 1 | 2 | 3;
+/**
+ * O que o produto é. Deduzido pelo `curate.js` a partir do nome e da categoria
+ * do Bling (ver sync/src/tipos.js); maquiagem e capilar não entram no totem.
+ */
+export type TipoProduto = 'perfume' | 'body-splash' | 'corpo' | 'kit';
 
 /** Produto como vem do catalog.json gerado pelo sync do Bling. */
 export interface CatalogProduct {
@@ -39,6 +44,8 @@ export interface TotemPayload {
 export interface EnrichmentEntry {
   /** Nome do produto, somente para leitura humana ao editar o JSON — o app ignora. */
   nome?: string;
+  /** Ausente nas entradas antigas, de quando o totem só tinha perfume. */
+  tipo?: TipoProduto;
   genero?: Genero;
   familias?: Familia[];
   ocasioes?: Ocasiao[];
@@ -49,11 +56,17 @@ export interface EnrichmentFile {
   produtos: Record<string, EnrichmentEntry>;
 }
 
-/** Produto do catálogo já combinado com o enriquecimento manual. */
+/**
+ * Produto do catálogo já combinado com o enriquecimento manual.
+ *
+ * O nome ficou da época em que o totem só vendia perfume; hoje é qualquer
+ * produto da vitrine — o `tipo` diz o que ele é.
+ */
 export interface Perfume {
   id: string;
   codigo: string | null;
   nome: string;
+  tipo: TipoProduto;
   /** Marca normalizada; null quando o Bling não tem marca cadastrada. */
   marca: string | null;
   preco: number;
@@ -84,6 +97,8 @@ export interface Perfume {
 export interface ProdutoLocal {
   id: string;
   nome: string;
+  /** Ausente nos cadastros feitos antes de existir o campo: valem como perfume. */
+  tipo?: TipoProduto;
   marca: string | null;
   preco: number;
   estoque: number;

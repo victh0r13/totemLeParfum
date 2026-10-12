@@ -65,3 +65,25 @@ export function stockLabel(p: Perfume): { label: string; low: boolean } {
   if (p.estoque <= LOW_STOCK_THRESHOLD) return { label: 'Últimas unidades', low: true };
   return { label: 'Disponível', low: false };
 }
+
+/**
+ * Variação do Bling chega com o nome do "pai" + o atributo no fim:
+ * "Body Splash Lattafa 250ml (Escolha o seu) Fragrância:Yara". No card, o
+ * "..." engole justamente o que diferencia um do outro. A vitrine mostra
+ * "Yara · Body Splash Lattafa 250ml" — ou, quando a variação é de tamanho,
+ * "Miss Dream 100ml".
+ */
+const VARIACAO = /^(.*?)\s*\(\s*(?:escolha o seu|conjunto|varia[çc][ãa]o)\s*\)\s*([^:]+):\s*(.+)$/i;
+
+export function nomeVitrine(nome: string): string {
+  const m = VARIACAO.exec(nome.trim());
+  if (!m) return nome;
+  const base = m[1].replace(/\s+/g, ' ').replace(/\s*-\s*$/, '').trim();
+  const atributo = m[2].trim().toLowerCase();
+  const valor = m[3].trim();
+  if (!base || !valor) return nome;
+  if (/^(volume|tamanho)$/.test(atributo)) {
+    return /^kit$/i.test(valor) ? `${base} · Kit` : `${base} ${valor}`;
+  }
+  return `${valor} · ${base}`;
+}

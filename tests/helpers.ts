@@ -9,6 +9,7 @@ export function perfume(over: Partial<Perfume> = {}): Perfume {
     id: 'p1',
     codigo: null,
     nome: 'Perfume Teste',
+    tipo: 'perfume',
     marca: 'Marca Teste',
     preco: 300,
     estoque: 10,

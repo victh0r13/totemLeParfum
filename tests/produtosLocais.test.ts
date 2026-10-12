@@ -28,6 +28,7 @@ const rascunho = (over: Partial<RascunhoProduto> = {}): RascunhoProduto => ({
 const produto = (over: Partial<ProdutoLocal> = {}): ProdutoLocal => ({
   id: 'local:abc',
   nome: 'Âmbar Noturno',
+  tipo: 'perfume',
   marca: 'Le Parfum',
   preco: 199.9,
   estoque: 5,

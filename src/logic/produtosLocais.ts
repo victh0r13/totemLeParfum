@@ -5,6 +5,7 @@ import type {
   Ocasiao,
   Pendencia,
   ProdutoLocal,
+  TipoProduto,
 } from '@/types/catalog';
 
 /**
@@ -49,6 +50,7 @@ export function nomeArquivoFoto(id: string): string {
 /** O que o formulário produz: tudo texto, porque vem de TextInput. */
 export interface RascunhoProduto {
   nome: string;
+  tipo: TipoProduto;
   marca: string;
   preco: string;
   estoque: string;
@@ -63,6 +65,7 @@ export interface RascunhoProduto {
 
 export const RASCUNHO_VAZIO: RascunhoProduto = {
   nome: '',
+  tipo: 'perfume',
   marca: '',
   preco: '',
   estoque: '',
@@ -135,6 +138,7 @@ export function rascunhoParaProduto(
   return {
     id: base?.id ?? novoId(),
     nome: rascunho.nome.trim(),
+    tipo: rascunho.tipo,
     marca: marca || null,
     preco: Math.round((parsePreco(rascunho.preco) ?? 0) * 100) / 100,
     estoque: Math.trunc(parsePreco(rascunho.estoque) ?? 0),
@@ -155,6 +159,7 @@ export function rascunhoParaProduto(
 export function produtoParaRascunho(produto: ProdutoLocal): RascunhoProduto {
   return {
     nome: produto.nome,
+    tipo: produto.tipo ?? 'perfume',
     marca: produto.marca ?? '',
     // Vírgula na edição pelo mesmo motivo que a aceitamos na entrada.
     preco: String(produto.preco).replace('.', ','),

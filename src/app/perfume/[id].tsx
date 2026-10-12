@@ -13,11 +13,19 @@ import { ProductImage } from '@/components/ProductImage';
 import { PromoModal } from '@/components/PromoModal';
 import { TopBar } from '@/components/TopBar';
 import { useCatalog, usePerfume } from '@/data/catalogStore';
-import { similarTo } from '@/logic/filters';
+import { combinaCom, similarTo } from '@/logic/filters';
 import { formatPrice, stockLabel } from '@/logic/format';
 import { trackProdutoVisto } from '@/logic/metrics';
 import { splitNotes, type OlfactoryNotes } from '@/logic/notes';
-import { colors, familyLabels, fonts, intensityLabels } from '@/theme/theme';
+import {
+  colors,
+  ehFragrancia,
+  familyLabels,
+  fonts,
+  intensityLabels,
+  tipoLabels,
+} from '@/theme/theme';
+import type { Perfume } from '@/types/catalog';
 
 const NOTE_LABELS: Record<keyof OlfactoryNotes, string> = {
   topo: 'TOPO',
@@ -34,6 +42,31 @@ function NoteRow({ section, items }: { section: keyof OlfactoryNotes; items: str
   );
 }
 
+/** Faixa horizontal de mini-cards (similares, combina com). Vazia, não aparece. */
+function Vitrine({ titulo, produtos }: { titulo: string; produtos: Perfume[] }) {
+  const router = useRouter();
+  if (produtos.length === 0) return null;
+  return (
+    <>
+      <Text style={styles.similarLabel}>{titulo}</Text>
+      <ScrollView
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        contentContainerStyle={styles.similarRow}
+      >
+        {produtos.map((s) => (
+          <MiniCard
+            key={s.id}
+            perfume={s}
+            width={170}
+            onPress={() => router.push({ pathname: '/perfume/[id]', params: { id: s.id } })}
+          />
+        ))}
+      </ScrollView>
+    </>
+  );
+}
+
 export default function PerfumeDetailScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const router = useRouter();
@@ -47,6 +80,11 @@ export default function PerfumeDetailScreen() {
     [perfume, perfumes],
   );
 
+  const combina = useMemo(
+    () => (perfume ? combinaCom(perfume, perfumes) : []),
+    [perfume, perfumes],
+  );
+
   const { notas, resto } = useMemo(() => splitNotes(perfume?.descricao), [perfume?.descricao]);
 
   useEffect(() => {
@@ -56,9 +94,9 @@ export default function PerfumeDetailScreen() {
   if (!perfume) {
     return (
       <SafeAreaView style={styles.screen}>
-        <TopBar title="Perfume" />
+        <TopBar title="Produto" />
         <View style={styles.notFound}>
-          <Text style={styles.notFoundTitle}>Este perfume não está mais disponível</Text>
+          <Text style={styles.notFoundTitle}>Este produto não está mais disponível</Text>
           <CtaButton
             label="Voltar ao catálogo"
             variant="secondary"
@@ -74,7 +112,7 @@ export default function PerfumeDetailScreen() {
 
   return (
     <SafeAreaView style={styles.screen}>
-      <TopBar title={perfume.marca ?? 'Perfume'} />
+      <TopBar title={perfume.marca ?? tipoLabels[perfume.tipo]} />
       <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.scroll}>
         <ProductImage perfume={perfume} height={360} bottle="lg" />
 
@@ -124,12 +162,14 @@ export default function PerfumeDetailScreen() {
 
           <View style={styles.hairline} />
 
-          {(perfume.familias.length > 0 || perfume.intensidade !== null) && (
+          {/* Intensidade é de quem se usa como fragrância; num hidratante, ruído. */}
+          {(perfume.familias.length > 0 ||
+            (perfume.intensidade !== null && ehFragrancia(perfume.tipo))) && (
             <View style={styles.tagRow}>
               {perfume.familias.map((f) => (
                 <Chip key={f} label={familyLabels[f]} />
               ))}
-              {perfume.intensidade !== null && (
+              {perfume.intensidade !== null && ehFragrancia(perfume.tipo) && (
                 <Chip label={intensityLabels[perfume.intensidade]} />
               )}
             </View>
@@ -146,27 +186,11 @@ export default function PerfumeDetailScreen() {
 
           {!!resto && <Text style={styles.description}>{resto}</Text>}
 
-          {similares.length > 0 && (
-            <>
-              <Text style={styles.similarLabel}>PERFUMES SIMILARES</Text>
-              <ScrollView
-                horizontal
-                showsHorizontalScrollIndicator={false}
-                contentContainerStyle={styles.similarRow}
-              >
-                {similares.map((s) => (
-                  <MiniCard
-                    key={s.id}
-                    perfume={s}
-                    width={170}
-                    onPress={() =>
-                      router.push({ pathname: '/perfume/[id]', params: { id: s.id } })
-                    }
-                  />
-                ))}
-              </ScrollView>
-            </>
-          )}
+          <Vitrine
+            titulo={perfume.tipo === 'perfume' ? 'PERFUMES SIMILARES' : 'SIMILARES'}
+            produtos={similares}
+          />
+          <Vitrine titulo="COMBINA COM" produtos={combina} />
         </View>
       </ScrollView>
 
