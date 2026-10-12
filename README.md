@@ -77,6 +77,33 @@ $env:EXPO_PUBLIC_API_URL = "http://192.168.0.10:3001"; npx expo start
 
 > Sem `EXPO_PUBLIC_API_URL`, o app funciona 100% offline com o catálogo e as fotos empacotados.
 
+### No emulador: `dev.ps1`
+
+O `.\dev.ps1` sobe de uma vez o emulador, os túneis `adb reverse`, o servidor da loja e o Metro — cada serviço na sua janela. É idempotente: o que já estiver de pé é reaproveitado.
+
+| Comando | O que faz |
+| ------- | --------- |
+| `.\dev.ps1` | Sobe tudo (emulador `Medium_Tablet`, portas 3001 e 8081) |
+| `.\dev.ps1 -Avd Pixel_8` | Outro emulador |
+| `.\dev.ps1 -ApiUrl http://10.0.2.2:3002 -PortaMetro 8082` | Portas próprias, para conviver com outro projeto |
+| `.\dev.ps1 -Parar` | Derruba servidor e Metro **deste** projeto e remove os túneis |
+
+### Convivendo com outros projetos
+
+As portas 3001 e 8081 são as mesmas que qualquer projeto Expo/Node usa. Se outro projeto as ocupar, o app fala com o servidor errado e falha **em silêncio**: o painel só mostra "sem conexão" e a sincronização não acontece. O `dev.ps1` sobe a árvore de processos para descobrir de quem é a porta e **para em vermelho** em vez de seguir por cima — mas ele só sabe avisar. Dois caminhos:
+
+**Alternar** — rode `.\dev.ps1 -Parar` antes de ir para o outro projeto. Libera as duas portas e remove os `adb reverse`. O emulador continua ligado de propósito: é compartilhado e demora demais para subir (`adb emu kill` derruba, se quiser).
+
+**Coexistir** — dê portas próprias a este projeto e deixe os dois de pé:
+
+```powershell
+.\dev.ps1 -ApiUrl http://10.0.2.2:3002 -PortaMetro 8082
+```
+
+Dentro do aparelho o Metro continua sendo o 8081 — é onde o dev client procura o bundle; quem traduz é o túnel (`8081 do aparelho → 8082 do PC`). Como o script mira o emulador pelo serial do AVD (`adb -s`), dois emuladores rodam lado a lado sem um roubar os túneis do outro.
+
+> Se os dois apps rodarem no **mesmo** emulador, os servidores e Metros convivem sem problema, mas a porta 8081 *do aparelho* só aponta para um Metro por vez — rode o `dev.ps1` do projeto que quer usar para reapontar o túnel (é instantâneo, não reinicia nada).
+
 Para gerar o APK do totem, veja **[docs/BUILD-ANDROID.md](docs/BUILD-ANDROID.md)**.
 
 ## Sincronização em tempo real
