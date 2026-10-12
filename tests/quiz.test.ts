@@ -1,6 +1,13 @@
 import { describe, expect, it } from 'vitest';
 
-import { emptyAnswers, rankPerfumes, scorePerfume } from '@/logic/quiz';
+import {
+  emptyAnswers,
+  motivosDaEscolha,
+  rankPerfumes,
+  respostasDoParam,
+  respostasParaParam,
+  scorePerfume,
+} from '@/logic/quiz';
 import type { QuizAnswers } from '@/types/catalog';
 
 import { perfume } from './helpers';
@@ -118,5 +125,56 @@ describe('rankPerfumes', () => {
   it('não repete o mesmo perfume', () => {
     const r = rankPerfumes(catalogo, respostas({ familias: ['oriental'] }));
     expect(new Set(r.map((p) => p.id)).size).toBe(r.length);
+  });
+});
+
+describe('motivosDaEscolha', () => {
+  const respostas = {
+    ...emptyAnswers,
+    quem: 'presente' as const,
+    ocasiao: 'noite' as const,
+    intensidade: 3 as const,
+    familias: ['oriental' as const, 'doce' as const],
+  };
+
+  it('lista o que o perfume atende, família primeiro', () => {
+    const p = perfume({
+      familias: ['doce', 'oriental'],
+      ocasioes: ['noite'],
+      intensidade: 3,
+      genero: 'U',
+    });
+    expect(motivosDaEscolha(p, respostas)).toEqual(['Doce e Oriental', 'Para a noite', 'Marcante']);
+  });
+
+  it('não inventa motivo: perfume que não atende nada volta vazio', () => {
+    expect(motivosDaEscolha(perfume({ familias: ['fresco'] }), respostas)).toEqual([]);
+  });
+
+  it('presente + unissex vira motivo quando sobra espaço', () => {
+    const p = perfume({ genero: 'U', familias: ['doce'] });
+    expect(motivosDaEscolha(p, respostas)).toEqual(['Doce', 'Unissex, ótimo para presente']);
+  });
+});
+
+describe('respostas na URL', () => {
+  it('ida e volta preservam as respostas', () => {
+    const a = { ...emptyAnswers, genero: 'F' as const, familias: ['floral' as const] };
+    expect(respostasDoParam(respostasParaParam(a))).toEqual(a);
+  });
+
+  it('parâmetro adulterado não derruba a tela', () => {
+    expect(respostasDoParam('{quebrado')).toEqual(emptyAnswers);
+    expect(respostasDoParam(undefined)).toEqual(emptyAnswers);
+  });
+});
+
+describe('duas famílias', () => {
+  it('quem bate as duas famílias pedidas fica na frente de quem bate uma', () => {
+    const a = respostas({ familias: ['oriental', 'doce'] });
+    const umaSo = perfume({ id: 'uma', familias: ['doce'], preco: 50 });
+    const asDuas = perfume({ id: 'duas', familias: ['oriental', 'doce'], preco: 300 });
+    expect(scorePerfume(asDuas, a)).toBeGreaterThan(scorePerfume(umaSo, a));
+    expect(rankPerfumes([umaSo, asDuas], a)[0].id).toBe('duas');
   });
 });

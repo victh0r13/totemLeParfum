@@ -116,7 +116,10 @@ const styleFamilies: Record<NonNullable<QuizAnswers['estilo']>, Familia[]> = {
  */
 export function scorePerfume(p: Perfume, a: QuizAnswers): number {
   let score = 0;
-  if (a.familias.length > 0 && p.familias.some((f) => a.familias.includes(f))) score += 3;
+  // Bater as duas famílias pedidas vale mais que bater uma: "oriental + doce"
+  // quer o oriental adocicado, não qualquer doce.
+  const familiasEmComum = p.familias.filter((f) => a.familias.includes(f)).length;
+  if (familiasEmComum > 0) score += 3 + (familiasEmComum - 1) * 2;
   if (a.ocasiao && p.ocasioes.includes(a.ocasiao)) score += 2;
   if (a.intensidade && p.intensidade !== null) {
     score += Math.max(0, 2 - Math.abs(p.intensidade - a.intensidade));
@@ -153,4 +156,60 @@ export function rankPerfumes(perfumes: Perfume[], answers: QuizAnswers): Perfume
     }
   }
   return results;
+}
+
+const OCASIAO_FRASE: Record<NonNullable<QuizAnswers['ocasiao']>, string> = {
+  trabalho: 'Para o trabalho',
+  dia: 'Para o dia a dia',
+  noite: 'Para a noite',
+  esporte: 'Para esporte e ar livre',
+};
+
+const FAMILIA_NOME: Record<Familia, string> = {
+  floral: 'Floral',
+  citrico: 'Cítrico',
+  amadeirado: 'Amadeirado',
+  doce: 'Doce',
+  oriental: 'Oriental',
+  fresco: 'Fresco',
+};
+
+const INTENSIDADE_FRASE = { 1: 'Leve', 2: 'Intensidade moderada', 3: 'Marcante' } as const;
+
+/**
+ * Por que este perfume apareceu: as respostas que ele de fato atende, na
+ * ordem do peso que tiveram na pontuação. É o que transforma a lista do quiz
+ * em conversa — o cliente (e o vendedor ao lado) vê o motivo de cada sugestão.
+ * No máximo 3, para caber no card; sem motivo nenhum, lista vazia.
+ */
+export function motivosDaEscolha(p: Perfume, a: QuizAnswers): string[] {
+  const motivos: string[] = [];
+  const familias = p.familias.filter((f) => a.familias.includes(f));
+  if (familias.length > 0) motivos.push(familias.map((f) => FAMILIA_NOME[f]).join(' e '));
+  if (a.ocasiao && p.ocasioes.includes(a.ocasiao)) motivos.push(OCASIAO_FRASE[a.ocasiao]);
+  if (a.intensidade && p.intensidade === a.intensidade) {
+    motivos.push(INTENSIDADE_FRASE[p.intensidade]);
+  }
+  if (a.quem === 'presente' && p.genero === 'U') motivos.push('Unissex, ótimo para presente');
+  return motivos.slice(0, 3);
+}
+
+/** Respostas viajam para a tela de resultado como texto na URL. */
+export function respostasParaParam(a: QuizAnswers): string {
+  return JSON.stringify(a);
+}
+
+/** O inverso, tolerante: parâmetro ausente ou adulterado vira "sem respostas". */
+export function respostasDoParam(texto: string | undefined): QuizAnswers {
+  if (!texto) return emptyAnswers;
+  try {
+    const bruto = JSON.parse(texto) as Partial<QuizAnswers>;
+    return {
+      ...emptyAnswers,
+      ...bruto,
+      familias: Array.isArray(bruto.familias) ? bruto.familias : [],
+    };
+  } catch {
+    return emptyAnswers;
+  }
 }

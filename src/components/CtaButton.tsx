@@ -12,18 +12,39 @@ interface Props {
   style?: StyleProp<ViewStyle>;
 }
 
+/**
+ * Propriedades que decidem o tamanho do botão NO PAI. O PressableScale aplica
+ * `style` numa view interna; sem levar estas para o Pressable de fora, um
+ * `flex: 1` não divide a barra entre dois botões.
+ */
+const LAYOUT_EXTERNO = ['flex', 'flexGrow', 'flexShrink', 'flexBasis', 'width', 'alignSelf'] as const;
+
+function separarLayout(style: StyleProp<ViewStyle>) {
+  const plano = { ...(StyleSheet.flatten(style) ?? {}) } as Record<string, unknown>;
+  const externo: Record<string, unknown> = {};
+  for (const k of LAYOUT_EXTERNO) {
+    if (k in plano) {
+      externo[k] = plano[k];
+      delete plano[k];
+    }
+  }
+  return { externo: externo as ViewStyle, interno: plano as ViewStyle };
+}
+
 /** Botão de ação em pílula: primário (tinta escura) ou secundário (contorno). */
 export function CtaButton({ label, onPress, variant = 'primary', disabled, style }: Props) {
   const primary = variant === 'primary';
+  const { externo, interno } = separarLayout(style);
   return (
     <PressableScale
       onPress={disabled ? undefined : onPress}
       scaleTo={0.97}
+      containerStyle={externo}
       style={[
         styles.base,
         primary ? styles.primary : styles.secondary,
         disabled && styles.disabled,
-        style,
+        interno,
       ]}
     >
       <Text style={[styles.label, primary ? styles.labelPrimary : styles.labelSecondary]}>
