@@ -173,6 +173,11 @@ cd /c/dev/lp-build && npm ci
 export JAVA_HOME="/c/Program Files/Microsoft/jdk-17.0.20.8-hotspot"
 export ANDROID_HOME="$LOCALAPPDATA/Android/Sdk" NODE_ENV=production
 unset EXPO_PUBLIC_API_URL            # APK sem servidor (tablet avulso)
+# Sync direto com o Bling (preço e estoque a cada 5 min, sem servidor).
+# Antes, renove a autorização: cd sync && npm run auth (ver nota abaixo).
+export EXPO_PUBLIC_BLING_CLIENT_ID="$(grep '^BLING_CLIENT_ID=' "$OLDPWD/sync/.env" | cut -d= -f2- | tr -d '\r"')"
+export EXPO_PUBLIC_BLING_CLIENT_SECRET="$(grep '^BLING_CLIENT_SECRET=' "$OLDPWD/sync/.env" | cut -d= -f2- | tr -d '\r"')"
+export EXPO_PUBLIC_BLING_REFRESH_TOKEN="$(node -p "require('$OLDPWD/sync/.tokens.json').refresh_token")"
 npx expo prebuild -p android --no-install
 rm -f android/gradle/gradle-daemon-jvm.properties   # pin do JDK, ver nota abaixo
 cd android && ./gradlew.bat assembleRelease
@@ -182,6 +187,7 @@ cd android && ./gradlew.bat assembleRelease
 Para gerar o próximo APK, basta atualizar a cópia: `git -C /c/dev/lp-build checkout --detach <commit>` e repetir a partir do `npm ci`. Para apagá-la, use `git worktree remove /c/dev/lp-build`.
 
 - **JDK 17, sempre.** O `gradle-daemon-jvm.properties` gerado pelo prebuild pode fixar outro JDK e passar por cima do `JAVA_HOME`; o JBR 25 do Android Studio quebra o CMake. Apagar o arquivo faz o Gradle usar o `JAVA_HOME`.
+- **Token do Bling: o tablet passa a ser o dono.** O refresh token do PC entra no APK só como semente; a partir da primeira sincronização o tablet renova e guarda o próprio par. Por isso, depois de gerar o APK, **não rode `npm run sync`/`quick` no PC com o mesmo token** — e, para o próximo APK, rode `npm run auth` antes do build: o app reconhece a semente nova e passa a usá-la. Se o painel mostrar "O acesso ao Bling expirou", é esse o caminho.
 - **O primeiro build leva ~18 min**, porque compila o C++ do React Native para as 4 arquiteturas. Os seguintes reaproveitam o cache.
 - **Atualizar por cima.** Todo APK deste caminho é assinado com a mesma chave de debug do template do React Native, então o Android aceita instalar uma versão nova sobre a antiga e mantém os dados do tablet (ofertas, produtos cadastrados, métricas). Um APK do EAS tem **outra** chave: trocar de caminho exige desinstalar antes, e os dados se perdem.
 

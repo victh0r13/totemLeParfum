@@ -7,7 +7,7 @@ import { CtaButton } from '@/components/CtaButton';
 import { PinGate } from '@/components/PinGate';
 import { PressableScale } from '@/components/PressableScale';
 import { TopBar } from '@/components/TopBar';
-import { API_URL } from '@/config';
+import { API_URL, BLING_DIRETO } from '@/config';
 import { bundledImage } from '@/data/bundledImages';
 import { useCatalog } from '@/data/catalogStore';
 import { useLocalProducts } from '@/data/localProductsStore';
@@ -22,6 +22,7 @@ const ORIGEM_LABELS: Record<string, string> = {
   bundle: 'Catálogo de fábrica (dentro do app)',
   cache: 'Última cópia salva neste tablet',
   servidor: 'Servidor da loja',
+  bling: 'Bling, direto do tablet',
 };
 
 /** Linha "rótulo → valor" do bloco de status, com bolinha de estado opcional. */
@@ -118,7 +119,8 @@ export default function AdminScreen() {
 
 function AdminPanel() {
   const router = useRouter();
-  const { perfumes, generatedAt, origem, ultimoSync, online, atualizando, refresh } = useCatalog();
+  const { perfumes, generatedAt, origem, ultimoSync, online, erroSync, atualizando, refresh } =
+    useCatalog();
   const { promocoes, setPromocao } = usePromotions();
   const { produtos: produtosLocais, pendencias } = useLocalProducts();
   const [metrics, setMetrics] = useState<MetricsData | null>(null);
@@ -162,7 +164,7 @@ function AdminPanel() {
     .map((t) => `${porTipo[t]} ${tipoLabels[t].toLowerCase()}`)
     .join(' · ');
   // Sem servidor, o APK é a única fonte: o catálogo só muda com um APK novo.
-  const independente = !API_URL;
+  const independente = !API_URL && !BLING_DIRETO;
 
   return (
     <SafeAreaView style={styles.screen}>
@@ -192,7 +194,7 @@ function AdminPanel() {
                 tone="neutro"
               />
               <StatusRow
-                label="Servidor da loja"
+                label={BLING_DIRETO ? 'Sincronização com o Bling' : 'Servidor da loja'}
                 value={
                   online
                     ? `conectado · ${formatAge(ultimoSync)}`
@@ -215,7 +217,8 @@ function AdminPanel() {
           </Text>
         ) : (
           <>
-            {(daysSince(generatedAt) ?? 0) >= 2 && (
+            {BLING_DIRETO && !!erroSync && <Text style={styles.statusAviso}>{erroSync}</Text>}
+            {!BLING_DIRETO && (daysSince(generatedAt) ?? 0) >= 2 && (
               <Text style={styles.statusAviso}>
                 O catálogo está sendo exibido com dados de {formatAge(generatedAt)}. Confira se o
                 PC da loja está ligado, com o servidor rodando, e se o tablet está na mesma rede

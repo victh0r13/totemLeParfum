@@ -116,3 +116,30 @@ export function mergeCatalog(
 
   return [...daLoja, ...doBling];
 }
+
+/**
+ * Aplica no payload o preço e o estoque que vieram do Bling — a mesma regra do
+ * `sync/src/quick.js`: preço só muda se vier maior que zero (zero é cadastro
+ * incompleto) e produto ausente da resposta fica como estava.
+ *
+ * `generatedAt` vira o momento da conferência mesmo sem mudança: é a data que o
+ * painel mostra como "preços e estoque de".
+ */
+export function atualizarPrecoEstoque(
+  payload: TotemPayload,
+  precos: Map<string, number>,
+  estoques: Map<string, number>,
+  agora: string,
+): { payload: TotemPayload; mudancas: number } {
+  let mudancas = 0;
+  const produtos = (payload.produtos ?? []).map((p) => {
+    const preco = precos.get(p.id);
+    const estoque = estoques.get(p.id);
+    const novoPreco = preco !== undefined && preco > 0 ? preco : p.preco;
+    const novoEstoque = estoque ?? p.estoque;
+    if (novoPreco === p.preco && novoEstoque === p.estoque) return p;
+    mudancas++;
+    return { ...p, preco: novoPreco, estoque: novoEstoque };
+  });
+  return { payload: { ...payload, produtos, generatedAt: agora }, mudancas };
+}

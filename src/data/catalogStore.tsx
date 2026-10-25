@@ -9,7 +9,8 @@ import React, {
   useState,
 } from 'react';
 
-import { API_URL, CATALOG_REFRESH_MS } from '@/config';
+import { API_URL, BLING_DIRETO, BLING_SYNC_MS, CATALOG_REFRESH_MS } from '@/config';
+import { BlingAuthError, sincronizarComBling } from '@/data/bling';
 import { prefetchPhotos } from '@/data/images';
 import { useLocalProducts } from '@/data/localProductsStore';
 import { usePromotions } from '@/data/promotionsStore';
@@ -23,7 +24,7 @@ const LAST_SYNC_KEY = 'leparfum:ultimoSync:v1';
 const FETCH_TIMEOUT_MS = 6000;
 
 /** De onde vieram os dados que estão na tela agora. */
-export type CatalogOrigin = 'bundle' | 'cache' | 'servidor';
+export type CatalogOrigin = 'bundle' | 'cache' | 'servidor' | 'bling';
 
 interface CatalogState {
   /** Curadoria do totem, já enriquecida e com ofertas aplicadas. */
@@ -36,6 +37,8 @@ interface CatalogState {
   ultimoSync: string | null;
   /** false depois de uma tentativa de atualização que falhou. */
   online: boolean;
+  /** Motivo da última falha do sync direto com o Bling, para o painel. */
+  erroSync: string | null;
   atualizando: boolean;
   refresh: () => Promise<void>;
 }
@@ -61,6 +64,8 @@ async function fetchJson<T>(url: string): Promise<T> {
  *                  e fotos mesmo num tablet recém-formatado e sem rede;
  *   2. cache     — última versão que o aparelho baixou do servidor da loja;
  *   3. servidor  — atualização em segundo plano, de hora em hora.
+ *                  Sem servidor, o próprio tablet busca preço e estoque no
+ *                  Bling a cada 5 minutos (ver data/bling.ts).
  *
  * A rede nunca bloqueia a interface: falha de atualização só muda o indicador
  * de status no painel da loja.
@@ -72,19 +77,56 @@ export function CatalogProvider({ children }: { children: React.ReactNode }) {
   const [origem, setOrigem] = useState<CatalogOrigin>('bundle');
   const [ultimoSync, setUltimoSync] = useState<string | null>(null);
   const [online, setOnline] = useState(true);
+  const [erroSync, setErroSync] = useState<string | null>(null);
   const [atualizando, setAtualizando] = useState(false);
   const [loading, setLoading] = useState(true);
   const prefetched = useRef(false);
+  // O sync direto parte do payload em uso; o ref evita refazer o `refresh` a
+  // cada atualização (e com ele o intervalo e o WebSocket).
+  const payloadAtual = useRef<TotemPayload>(bundledCatalog as TotemPayload);
+
+  const aplicar = useCallback((novo: TotemPayload, de: CatalogOrigin) => {
+    payloadAtual.current = novo;
+    setPayload(novo);
+    setOrigem(de);
+  }, []);
+
+  const sincronizarBling = useCallback(async () => {
+    setAtualizando(true);
+    try {
+      const { payload: novo } = await sincronizarComBling(payloadAtual.current);
+      const agora = new Date().toISOString();
+      aplicar(novo, 'bling');
+      setUltimoSync(agora);
+      setOnline(true);
+      setErroSync(null);
+      await AsyncStorage.multiSet([
+        [PAYLOAD_KEY, JSON.stringify(novo)],
+        [LAST_SYNC_KEY, agora],
+      ]);
+    } catch (err) {
+      setOnline(false);
+      setErroSync(
+        err instanceof BlingAuthError
+          ? 'O acesso ao Bling expirou. Instale a versão mais nova do aplicativo.'
+          : 'Sem conexão com o Bling. Confira a internet do tablet.',
+      );
+    } finally {
+      setAtualizando(false);
+    }
+  }, [aplicar]);
 
   const refresh = useCallback(async () => {
-    if (!API_URL) return;
+    if (!API_URL) {
+      if (BLING_DIRETO) await sincronizarBling();
+      return;
+    }
     setAtualizando(true);
     try {
       const remoto = await fetchJson<TotemPayload>(`${API_URL}/api/totem`);
       if (remoto?.produtos?.length) {
         const agora = new Date().toISOString();
-        setPayload(remoto);
-        setOrigem('servidor');
+        aplicar(remoto, 'servidor');
         setUltimoSync(agora);
         setOnline(true);
         await AsyncStorage.multiSet([
@@ -98,7 +140,7 @@ export function CatalogProvider({ children }: { children: React.ReactNode }) {
     } finally {
       setAtualizando(false);
     }
-  }, []);
+  }, [aplicar, sincronizarBling]);
 
   useEffect(() => {
     let cancelled = false;
@@ -114,8 +156,7 @@ export function CatalogProvider({ children }: { children: React.ReactNode }) {
           // Um APK novo traz catálogo novo: o cache gravado pelo APK anterior
           // só vale se for mais recente que o que veio empacotado.
           if (parsed?.produtos?.length && maisRecente(parsed, bundledCatalog as TotemPayload)) {
-            setPayload(parsed);
-            setOrigem('cache');
+            aplicar(parsed, 'cache');
           }
         }
         if (lastSync) setUltimoSync(lastSync);
@@ -127,12 +168,12 @@ export function CatalogProvider({ children }: { children: React.ReactNode }) {
       await refresh();
     })();
     // O totem fica ligado o dia todo: busca o catálogo novo periodicamente.
-    const interval = setInterval(refresh, CATALOG_REFRESH_MS);
+    const interval = setInterval(refresh, BLING_DIRETO ? BLING_SYNC_MS : CATALOG_REFRESH_MS);
     return () => {
       cancelled = true;
       clearInterval(interval);
     };
-  }, [refresh]);
+  }, [refresh, aplicar]);
 
   // Tempo real: o servidor avisa quando o catálogo muda, em vez de o totem
   // ficar perguntando. A janela de 1 hora abaixo vira só uma rede de segurança
@@ -197,10 +238,21 @@ export function CatalogProvider({ children }: { children: React.ReactNode }) {
       origem,
       ultimoSync,
       online,
+      erroSync,
       atualizando,
       refresh,
     }),
-    [perfumes, loading, payload.generatedAt, origem, ultimoSync, online, atualizando, refresh],
+    [
+      perfumes,
+      loading,
+      payload.generatedAt,
+      origem,
+      ultimoSync,
+      online,
+      erroSync,
+      atualizando,
+      refresh,
+    ],
   );
 
   return <CatalogContext.Provider value={value}>{children}</CatalogContext.Provider>;

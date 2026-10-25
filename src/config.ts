@@ -13,7 +13,38 @@ export const API_URL: string | null = process.env.EXPO_PUBLIC_API_URL ?? null;
  * num produto que já acabou (ou foi reposto) engana a cliente. Nesse modo o
  * totem mostra só o que está à venda, sem falar em quantidade.
  */
-export const ESTOQUE_AO_VIVO = API_URL !== null;
+export const ESTOQUE_AO_VIVO = API_URL !== null || blingDireto();
+
+/**
+ * Credenciais do app do Bling para o tablet sincronizar sozinho, sem servidor.
+ * Entram no APK pelo ambiente na hora do build (lidas de sync/.env e
+ * sync/.tokens.json) e nunca vão para o git. O refresh token é só a SEMENTE:
+ * a cada renovação o tablet guarda o par novo no próprio aparelho.
+ */
+export const BLING_CLIENT_ID: string | null = process.env.EXPO_PUBLIC_BLING_CLIENT_ID ?? null;
+export const BLING_CLIENT_SECRET: string | null =
+  process.env.EXPO_PUBLIC_BLING_CLIENT_SECRET ?? null;
+export const BLING_REFRESH_TOKEN: string | null =
+  process.env.EXPO_PUBLIC_BLING_REFRESH_TOKEN ?? null;
+
+/** Com servidor da loja configurado, é ele quem fala com o Bling. */
+function blingDireto(): boolean {
+  return (
+    API_URL === null &&
+    !!process.env.EXPO_PUBLIC_BLING_CLIENT_ID &&
+    !!process.env.EXPO_PUBLIC_BLING_CLIENT_SECRET &&
+    !!process.env.EXPO_PUBLIC_BLING_REFRESH_TOKEN
+  );
+}
+
+/** O tablet busca preço e estoque direto no Bling. */
+export const BLING_DIRETO = blingDireto();
+
+/**
+ * Intervalo do sync direto: só preço e estoque (~25 requisições, ~10 s), o
+ * mesmo ritmo do sync rápido que rodava no PC.
+ */
+export const BLING_SYNC_MS = 5 * 60 * 1000;
 
 /** Segundos de inatividade até exibir o aviso "Ainda está aí?". */
 export const KIOSK_TIMEOUT_SECONDS = 90;
