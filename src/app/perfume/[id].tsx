@@ -13,7 +13,7 @@ import { ProductImage } from '@/components/ProductImage';
 import { PromoModal } from '@/components/PromoModal';
 import { TopBar } from '@/components/TopBar';
 import { useCatalog, usePerfume } from '@/data/catalogStore';
-import { combinaCom, similarTo } from '@/logic/filters';
+import { similarTo } from '@/logic/filters';
 import { ESTOQUE_AO_VIVO } from '@/config';
 import { formatPrice, stockLabel } from '@/logic/format';
 import { trackProdutoVisto } from '@/logic/metrics';
@@ -78,11 +78,6 @@ export default function PerfumeDetailScreen() {
 
   const similares = useMemo(
     () => (perfume ? similarTo(perfume, perfumes) : []),
-    [perfume, perfumes],
-  );
-
-  const combina = useMemo(
-    () => (perfume ? combinaCom(perfume, perfumes) : []),
     [perfume, perfumes],
   );
 
@@ -196,7 +191,6 @@ export default function PerfumeDetailScreen() {
             titulo={perfume.tipo === 'perfume' ? 'PERFUMES SIMILARES' : 'SIMILARES'}
             produtos={similares}
           />
-          <Vitrine titulo="COMBINA COM" produtos={combina} />
         </View>
       </ScrollView>
 

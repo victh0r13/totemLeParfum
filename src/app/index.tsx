@@ -18,13 +18,10 @@ import { Vitrine } from '@/components/Vitrine';
 import { ATTRACT_IDLE_SECONDS } from '@/config';
 import { useCatalog } from '@/data/catalogStore';
 import { temFotoOffline } from '@/data/images';
-import { contarPorTipo, marcasPorContagem } from '@/logic/filters';
+import { contarPorTipo } from '@/logic/filters';
 import { capaDoTipo, destaques } from '@/logic/vitrine';
 import { colors, fonts, TIPOS, tipoLabels } from '@/theme/theme';
 import type { Perfume, TipoProduto } from '@/types/catalog';
-
-/** Quantas marcas aparecem na faixa da tela inicial; o resto está no catálogo. */
-const MARCAS_NA_HOME = 14;
 
 /**
  * Relógio do modo atração: zera a cada toque e liga o modo depois de
@@ -48,15 +45,10 @@ function useOcioso(segundos: number) {
   return { ocioso, tocar };
 }
 
-function Secao({ titulo, acao, onAcao }: { titulo: string; acao?: string; onAcao?: () => void }) {
+function Secao({ titulo }: { titulo: string }) {
   return (
     <View style={styles.secao}>
       <Text style={styles.secaoTitulo}>{titulo}</Text>
-      {!!acao && (
-        <Pressable onPress={onAcao} hitSlop={12}>
-          <Text style={styles.secaoAcao}>{acao}</Text>
-        </Pressable>
-      )}
     </View>
   );
 }
@@ -107,7 +99,6 @@ export default function HomeScreen() {
     () => Object.fromEntries(TIPOS.map((t) => [t, capaDoTipo(perfumes, t, temFotoOffline)])),
     [perfumes],
   ) as Record<TipoProduto, Perfume | null>;
-  const marcas = useMemo(() => marcasPorContagem(perfumes).slice(0, MARCAS_NA_HOME), [perfumes]);
 
   // Dois ladrilhos por linha; com um tipo só não há o que navegar.
   const larguraLadrilho = (larguraUtil - 16) / 2;
@@ -138,7 +129,8 @@ export default function HomeScreen() {
             <FadeUp delay={60}>
               <Vitrine
                 produtos={vitrine}
-                altura={compact ? 420 : 560}
+                altura={compact ? 380 : 520}
+                largura={larguraUtil}
                 onAbrir={(p) => router.push({ pathname: '/perfume/[id]', params: { id: p.id } })}
               />
             </FadeUp>
@@ -150,24 +142,17 @@ export default function HomeScreen() {
                 onPress={() => router.push('/quiz')}
                 scaleTo={0.98}
                 containerStyle={styles.ctaCaixa}
-                style={[styles.cta, styles.ctaOuro]}
-              >
-                <Text style={[styles.ctaTitulo, styles.ctaTituloClaro]}>Descobrir meu perfume</Text>
-                <Text style={[styles.ctaSub, styles.ctaSubClaro]}>
-                  Seis perguntas rápidas e uma seleção feita para você
-                </Text>
-              </PressableScale>
-              <PressableScale
-                onPress={() => router.push('/catalog')}
-                scaleTo={0.98}
-                containerStyle={styles.ctaCaixa}
                 style={styles.cta}
               >
-                <Text style={styles.ctaTitulo}>Ver catálogo</Text>
-                <Text style={styles.ctaSub}>
-                  {perfumes.length} produtos com filtros por família, gênero e preço
-                </Text>
+                <Text style={styles.ctaTexto}>Descobrir meu perfume</Text>
+                <Text style={styles.ctaSeta}>→</Text>
               </PressableScale>
+              <Pressable onPress={() => router.push('/catalog')} hitSlop={12}>
+                <Text style={styles.catalogoLink}>
+                  ou explore o catálogo ·{' '}
+                  <Text style={styles.catalogoConta}>{perfumes.length} produtos →</Text>
+                </Text>
+              </Pressable>
             </View>
           </FadeUp>
 
@@ -189,28 +174,6 @@ export default function HomeScreen() {
             </FadeUp>
           )}
 
-          {marcas.length > 0 && (
-            <FadeUp delay={300}>
-              <Secao
-                titulo="MARCAS"
-                acao="Ver todas →"
-                onAcao={() => router.push('/catalog')}
-              />
-              <View style={styles.marcas}>
-                {marcas.map(({ marca, total }) => (
-                  <PressableScale
-                    key={marca}
-                    scaleTo={0.95}
-                    onPress={() => router.push({ pathname: '/catalog', params: { marca } })}
-                    style={styles.marca}
-                  >
-                    <Text style={styles.marcaNome}>{marca}</Text>
-                    <Text style={styles.marcaConta}>{total}</Text>
-                  </PressableScale>
-                ))}
-              </View>
-            </FadeUp>
-          )}
         </ScrollView>
 
         {ocioso && vitrine.length > 0 && <AttractMode produtos={vitrine} onAcordar={tocar} />}
@@ -237,28 +200,21 @@ const styles = StyleSheet.create({
     marginTop: 6,
   },
   logoCompact: { fontSize: 50, lineHeight: 58 },
-  ctas: { flexDirection: 'row', gap: 16, marginTop: 26 },
-  ctaCaixa: { flex: 1 },
+  ctas: { alignItems: 'center', gap: 18, marginTop: 30 },
+  ctaCaixa: { alignSelf: 'stretch' },
   cta: {
-    flex: 1,
-    backgroundColor: colors.surface,
-    borderWidth: 1,
-    borderColor: 'rgba(33,29,24,0.09)',
-    borderRadius: 20,
-    paddingVertical: 26,
-    paddingHorizontal: 26,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 12,
+    height: 68,
+    borderRadius: 34,
+    backgroundColor: colors.ink,
   },
-  ctaOuro: { backgroundColor: colors.ink, borderColor: colors.ink },
-  ctaTitulo: { fontFamily: fonts.serifSemiBold, fontSize: 28, lineHeight: 32, color: colors.ink },
-  ctaTituloClaro: { color: colors.cream },
-  ctaSub: {
-    fontFamily: fonts.sans,
-    fontSize: 15,
-    lineHeight: 21,
-    color: colors.inkSoft,
-    marginTop: 8,
-  },
-  ctaSubClaro: { color: colors.goldSoft },
+  ctaTexto: { fontFamily: fonts.sansSemiBold, fontSize: 18, letterSpacing: 0.3, color: colors.cream },
+  ctaSeta: { fontFamily: fonts.sansSemiBold, fontSize: 18, color: colors.goldSoft },
+  catalogoLink: { fontFamily: fonts.sansSemiBold, fontSize: 16, color: colors.inkSoft },
+  catalogoConta: { color: colors.gold },
   secao: {
     flexDirection: 'row',
     alignItems: 'baseline',
@@ -272,7 +228,6 @@ const styles = StyleSheet.create({
     letterSpacing: 2.6,
     color: colors.inkSoft,
   },
-  secaoAcao: { fontFamily: fonts.sansSemiBold, fontSize: 15, color: colors.gold },
   grade: { flexDirection: 'row', flexWrap: 'wrap', gap: 16 },
   ladrilho: {
     backgroundColor: colors.surface,
@@ -292,18 +247,4 @@ const styles = StyleSheet.create({
   },
   ladrilhoTitulo: { fontFamily: fonts.serifSemiBold, fontSize: 24, color: colors.ink },
   ladrilhoConta: { fontFamily: fonts.sansMedium, fontSize: 14, color: colors.muted },
-  marcas: { flexDirection: 'row', flexWrap: 'wrap', gap: 10 },
-  marca: {
-    flexDirection: 'row',
-    alignItems: 'baseline',
-    gap: 8,
-    paddingHorizontal: 18,
-    paddingVertical: 12,
-    borderRadius: 999,
-    borderWidth: 1,
-    borderColor: 'rgba(33,29,24,0.14)',
-    backgroundColor: colors.surface,
-  },
-  marcaNome: { fontFamily: fonts.sansSemiBold, fontSize: 16, color: colors.ink },
-  marcaConta: { fontFamily: fonts.sans, fontSize: 13, color: colors.muted },
 });

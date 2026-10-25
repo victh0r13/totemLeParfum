@@ -11,7 +11,6 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-import { Chip } from '@/components/Chip';
 import { CtaButton } from '@/components/CtaButton';
 import { PerfumeCard } from '@/components/PerfumeCard';
 import { PressableScale } from '@/components/PressableScale';
@@ -36,18 +35,36 @@ const GENDERS: { key: Genero; label: string }[] = [
   { key: 'U', label: 'Unissex' },
 ];
 
-/** Linha compacta de filtro: rótulo fixo à esquerda, chips deslizando na horizontal. */
-function FilterRow({ label, children }: { label: string; children: React.ReactNode }) {
+/** Seletor segmentado de escolha única: tocar no ativo desmarca. */
+function Segmentos<T extends string | number>({
+  opcoes,
+  ativo,
+  onChange,
+  peso = 1,
+}: {
+  opcoes: readonly { key: T; label: string }[];
+  ativo: T | null;
+  onChange: (key: T | null) => void;
+  peso?: number;
+}) {
   return (
-    <View style={styles.filterRow}>
-      <Text style={styles.filterLabel}>{label}</Text>
-      <ScrollView
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        contentContainerStyle={styles.filterChips}
-      >
-        {children}
-      </ScrollView>
+    <View style={[styles.segmentos, { flex: peso }]}>
+      {opcoes.map((o) => {
+        const on = ativo === o.key;
+        return (
+          <Pressable
+            key={o.key}
+            onPress={() => onChange(on ? null : o.key)}
+            accessibilityRole="button"
+            accessibilityState={{ selected: on }}
+            style={[styles.segmento, on && styles.segmentoAtivo]}
+          >
+            <Text style={[styles.segmentoTexto, on && styles.segmentoTextoAtivo]} numberOfLines={1}>
+              {o.label}
+            </Text>
+          </Pressable>
+        );
+      })}
     </View>
   );
 }
@@ -150,51 +167,44 @@ export default function CatalogScreen() {
       )}
 
       <View style={styles.filters}>
-        <FilterRow label="FAMÍLIA">
-          {FAMILIES.map((f) => (
-            <Chip
-              key={f}
-              size="sm"
-              label={familyLabels[f]}
-              selected={filters.familias.includes(f)}
-              onPress={() => toggleFamily(f)}
-            />
-          ))}
-        </FilterRow>
+        <ScrollView
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={styles.familias}
+        >
+          {FAMILIES.map((f) => {
+            const on = filters.familias.includes(f);
+            return (
+              <Pressable
+                key={f}
+                onPress={() => toggleFamily(f)}
+                accessibilityRole="button"
+                accessibilityState={{ selected: on }}
+                style={styles.familia}
+                hitSlop={4}
+              >
+                <Text style={[styles.familiaTexto, on && styles.familiaTextoAtiva]}>
+                  {familyLabels[f]}
+                </Text>
+                <View style={[styles.familiaTraco, on && styles.familiaTracoAtivo]} />
+              </Pressable>
+            );
+          })}
+        </ScrollView>
 
-        <FilterRow label="GÊNERO">
-          {GENDERS.map((g) => (
-            <Chip
-              key={g.key}
-              size="sm"
-              label={g.label}
-              selected={filters.genero === g.key}
-              onPress={() =>
-                setFilters((prev) => ({
-                  ...prev,
-                  genero: prev.genero === g.key ? null : g.key,
-                }))
-              }
-            />
-          ))}
-        </FilterRow>
-
-        <FilterRow label="PREÇO">
-          {PRICE_BUCKETS.map((b) => (
-            <Chip
-              key={b.key}
-              size="sm"
-              label={b.label}
-              selected={filters.priceBucket === b.key}
-              onPress={() =>
-                setFilters((prev) => ({
-                  ...prev,
-                  priceBucket: prev.priceBucket === b.key ? null : b.key,
-                }))
-              }
-            />
-          ))}
-        </FilterRow>
+        <View style={styles.segmentosLinha}>
+          <Segmentos
+            opcoes={GENDERS}
+            ativo={filters.genero}
+            onChange={(genero) => setFilters((prev) => ({ ...prev, genero }))}
+          />
+          <Segmentos
+            opcoes={PRICE_BUCKETS}
+            peso={1.35}
+            ativo={filters.priceBucket}
+            onChange={(priceBucket) => setFilters((prev) => ({ ...prev, priceBucket }))}
+          />
+        </View>
       </View>
 
       {buscaAberta ? (
@@ -310,21 +320,43 @@ const styles = StyleSheet.create({
   abaConta: { fontFamily: fonts.sans, fontSize: 13, color: colors.muted },
   filters: {
     paddingHorizontal: 24,
-    paddingTop: 14,
-    paddingBottom: 12,
+    paddingTop: 8,
+    paddingBottom: 14,
     gap: 10,
     borderBottomWidth: 1,
     borderBottomColor: colors.borderSoft,
   },
-  filterRow: { flexDirection: 'row', alignItems: 'center', gap: 12 },
-  filterLabel: {
-    width: 74,
-    fontFamily: fonts.sansSemiBold,
-    fontSize: 10.5,
-    letterSpacing: 1.6,
-    color: colors.muted,
+  familias: { flexGrow: 1, justifyContent: 'center', gap: 6 },
+  familia: { alignItems: 'center', justifyContent: 'center', gap: 6, paddingHorizontal: 12, height: 48 },
+  familiaTexto: { fontFamily: fonts.sansMedium, fontSize: 16, color: colors.muted },
+  familiaTextoAtiva: { fontFamily: fonts.sansBold, color: colors.ink },
+  familiaTraco: { width: 20, height: 2, borderRadius: 1, backgroundColor: 'transparent' },
+  familiaTracoAtivo: { backgroundColor: colors.gold },
+  segmentosLinha: { flexDirection: 'row', gap: 12 },
+  segmentos: {
+    flexDirection: 'row',
+    padding: 3,
+    borderRadius: 12,
+    backgroundColor: colors.cream,
   },
-  filterChips: { flexDirection: 'row', gap: 8, paddingRight: 12 },
+  segmento: {
+    flex: 1,
+    height: 42,
+    borderRadius: 9,
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingHorizontal: 6,
+  },
+  segmentoAtivo: {
+    backgroundColor: colors.surface,
+    shadowColor: colors.ink,
+    shadowOpacity: 0.12,
+    shadowRadius: 4,
+    shadowOffset: { width: 0, height: 1 },
+    elevation: 2,
+  },
+  segmentoTexto: { fontFamily: fonts.sansSemiBold, fontSize: 14, color: colors.inkSoft },
+  segmentoTextoAtivo: { color: colors.ink },
   countRow: {
     flexDirection: 'row',
     alignItems: 'center',
